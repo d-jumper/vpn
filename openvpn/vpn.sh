@@ -29,7 +29,7 @@ apt install openssl iptables iptables-persistent -y
 mkdir -p /etc/openvpn/server/easy-rsa/
 mkdir -p /etc/openvpn/client/
 cd /etc/openvpn/
-wget "https://${github}/ssh/vpn.zip"
+wget "https://${github}/openvpn/vpn.zip"
 unzip vpn.zip
 rm -f vpn.zip
 chown -R root:root /etc/openvpn/server/easy-rsa/
