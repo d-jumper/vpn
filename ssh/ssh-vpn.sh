@@ -38,7 +38,7 @@ red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
 # ==================================================
 # Link Hosting Kalian
-github="raw.githubusercontent.com/arfprsty810/vpn/main/ssh"
+github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 # initializing var
 export DEBIAN_FRONTEND=noninteractive
