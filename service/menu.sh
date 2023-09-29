@@ -153,7 +153,8 @@ update-xray
 clear
 #update
 echo " Sorry .."
-echo " Update Maintenance"
+echo " Update Script Comming Soon :)"
+sleep 3
 ;;
 
 9)
@@ -201,9 +202,8 @@ exit
 
 *)
 clear
-invalid selected !
-sleep 2
-clear
+echo " Command not found! "
+sleep 3
 menu
 ;;
 

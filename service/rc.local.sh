@@ -15,6 +15,7 @@ clear
 cd
 #remove file
 rm -rvf /etc/rc.local
+
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
 # rc.local
