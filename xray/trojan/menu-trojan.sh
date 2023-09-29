@@ -34,12 +34,17 @@ export NC='\033[0m'
 
 clear
 echo -e "${BICyan} ┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "       ${BIWhite}${UWhite}Trojan ${NC}"
+echo -e "       ${BIWhite}${UWhite}Trojan-WS/-GO ${NC}"
 echo -e ""
 echo -e "     ${BICyan}[${BIWhite}1${BICyan}] Add Account Trojan      "
 echo -e "     ${BICyan}[${BIWhite}2${BICyan}] Delete Account Trojan      "
 echo -e "     ${BICyan}[${BIWhite}3${BICyan}] Renew Account Trojan      "
-echo -e "     ${BICyan}[${BIWhite}4${BICyan}] Cek User Trojan-/GO     "
+echo -e "     ${BICyan}[${BIWhite}4${BICyan}] Cek User Trojan     "
+echo -e ""
+echo -e "     ${BICyan}[${BIWhite}5${BICyan}] Add Account Trojan-Go     "
+echo -e "     ${BICyan}[${BIWhite}6${BICyan}] Delete Account Trojan-Go      "
+echo -e "     ${BICyan}[${BIWhite}7${BICyan}] Renew Account Trojan-Go      "
+echo -e "     ${BICyan}[${BIWhite}8${BICyan}] Cek User Trojan-Go     "
 echo -e "     ${BICyan}[${BIWhite}0${BICyan}] Back to Menu"
 echo -e " ${BICyan}└─────────────────────────────────────────────────────┘${NC}"
 echo ""
@@ -48,8 +53,12 @@ echo -e ""
 case $opt in
 1) clear ; add-tr ;;
 2) clear ; del-tr ;;
-3) clear ; renew-tr;;
+3) clear ; renew-tr ;;
 4) clear ; cek-tr ;;
+5) clear ; add-trgo ;;
+6) clear ; del-trgo ;;
+7) clear ; renew-trgo ;;
+8) clear ; cek-trgo ;;
 0) clear ; menu ;;
 x) exit ;;
 *) echo -e "" ; echo "Press any key to back on menu" ; sleep 1 ; menu ;;

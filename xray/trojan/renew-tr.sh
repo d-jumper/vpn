@@ -14,8 +14,6 @@ clear
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 logxray="/var/log/xray"
-trgo="/etc/arfvpn/trojan-go"
-logtrgo="/var/log/arfvpn/trojan-go"
 ipvps="/var/lib/arfvpn"
 source ${ipvps}/ipvps.conf
 if [[ "${IP}" = "" ]]; then
@@ -62,7 +60,6 @@ menu-trojan
     exp3=$((${exp2} + ${masaaktif}))
     exp4=`date -d "${exp3} days" +"%Y-%m-%d"`
     sed -i "/#tr# ${user}/c\#tr# ${user} ${exp4}" ${xray}/config.json
-    sed -i "s/#trgo# ${user} ${exp}/#trgo# ${user} ${exp4}/g" ${trgo}/akun.conf
     systemctl restart xray > /dev/null 2>&1
     clear
     echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"

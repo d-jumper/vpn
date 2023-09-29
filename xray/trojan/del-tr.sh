@@ -14,8 +14,6 @@ clear
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 logxray="/var/log/xray"
-trgo="/etc/arfvpn/trojan-go"
-logtrgo="/var/log/arfvpn/trojan-go"
 ipvps="/var/lib/arfvpn"
 source ${ipvps}/ipvps.conf
 if [[ "${IP}" = "" ]]; then
@@ -55,8 +53,6 @@ menu-trojan
     else
     exp=$(grep -wE "^#tr# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
     sed -i "/^#tr# ${user} ${exp}/,/^},{/d" ${xray}/config.json
-    sed -i "/^#trgo# ${user} ${exp}/d" ${trgo}/akun.conf
-    sed -i '/^,"'"${user}"'"$/d' ${trgo}/config.json
     systemctl restart xray > /dev/null 2>&1
     clear
     echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
