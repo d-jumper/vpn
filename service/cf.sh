@@ -25,8 +25,6 @@ set -euo pipefail
 mkdir -p ${arfvpn}
 mkdir -p ${ipvps}
 echo "IP=" >> ${ipvps}/ipvps.conf
-curl -s ipinfo.io/org/ > ${arfvpn}/ISP
-curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
 IP=$(cat ${arfvpn}/IP);
 clear
 

@@ -111,7 +111,9 @@ clear
 #ovpnws_info="$(systemctl show edu-proxyovpn.service --no-page)"
 #ovpnws_status=$(echo "${ovpnws_info}" | grep 'ActiveState=' | cut -f2 -d=)  
 #status_openvp=$(/etc/init.d/openvpn status | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
-ohq=$(systemctl status openvpn-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+#ohq=$(systemctl status openvpn-ohp | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+ovpn_ohq="$(systemctl show openvpn-ohp --no-page)"
+status_ohq=$(echo "${ovpn_ohq}" | grep 'ActiveState=' | cut -f2 -d=)  
 clear
 
 # DROPBEAR
@@ -173,7 +175,7 @@ clear
 #if [[ $trojangfw_server == "running" ]]; then 
 #   status_virus_trojangfw=" ${GREEN}Running ${NC}( No Error )${NC}"
 #else
-   status_virus_trojangfw="${RED}  Not Running ${NC}  ( Error )${NC}"
+#   status_virus_trojangfw="${RED}  Not Running ${NC}  ( Error )${NC}"
 #fi
 #clear
 
@@ -186,7 +188,7 @@ fi
 clear
 
 # STATUS SERVICE OPENVPN
-if [[ $ohq == "active" ]]; then
+if [[ $status_ohq == "active" ]]; then
   status_openohp=" ${GREEN}Running ${NC}( No Error )"
 else
   status_openohp="${RED}  Not Running ${NC}  ( Error )"

@@ -32,13 +32,6 @@ export BOLD="\e[1m"
 export WARNING="${RED}\e[5m"
 export UNDERLINE="\e[4m"
 
-# // Exporting URL Host
-export Server_URL="https://github.com/arfprsty810/lite"
-export Server_Port="443"
-export Server_IP="underfined"
-export Script_Mode="Stable"
-export Auther="@arf.prsty_"
-
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
@@ -50,6 +43,13 @@ arfvpn="/etc/arfvpn"
 IP=$(cat ${arfvpn}/IP)
 ISP=$(cat ${arfvpn}/ISP)
 DOMAIN=$(cat ${arfvpn}/domain)
+
+# // Exporting URL Host
+export Server_URL="${DOMAIN}"
+export Server_Port="8443"
+export Server_IP="${IP}"
+export Script_Mode="Stable"
+export Auther="@arf.prsty_"
 
 # // nginx
 nginx=$( systemctl status nginx | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
