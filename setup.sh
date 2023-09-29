@@ -47,8 +47,6 @@ trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
 nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
-MYISP=$(curl -s ipinfo.io/org/);
-MYIP=$(curl -s https://ipinfo.io/ip/);
 success="${GREEN}[SUCCESS]${NC}"
 start=$(date +%s)
 
@@ -72,9 +70,12 @@ touch $arfvpn/IP
 touch $arfvpn/ISP
 touch $arfvpn/domain
 touch $arfvpn/scdomain
+curl -s ipinfo.io/org/ > ${arfvpn}/ISP
+curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
 mkdir -p $ipvps
 touch ${ipvps}/ipvps.conf
 touch ${ipvps}/cfndomain
+echo "none" > ${ipvps}/cfndomain
 mkdir -p $xray
 mkdir -p $trgo
 mkdir -p $nginx
@@ -104,12 +105,11 @@ read -rp "Input ur domain / sub-domain : " -e domain
 	echo "${domain}" > ${arfvpn}/domain
 	echo "${domain}" > ${arfvpn}/scdomain
     echo "IP=${domain}" > ${ipvps}/ipvps.conf
-    echo "none" > ${ipvps}/cfndomain
-    curl -s ipinfo.io/org/ > ${arfvpn}/ISP
-    curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
     fi
     sleep 1
 
+cd
+clear
 # ==========================================
 #install Xray
 wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
@@ -131,51 +131,8 @@ wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && ./ohp.sh
 wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
 
 # =========================================
-# Update Menu
-wget "https://${github}/update/getupdate.sh" && chmod +x getupdate.sh && ./getupdate.sh
-
-# =========================================
 # sslh fix
-wget "https://${github}/sslh-fix/sslh-fix.sh" && chmod +x sslh-fix.sh && ./sslh-fix.sh
-
-# =========================================
-#restart service
-clear
-echo -e ""
-echo -e "Starting Restart All Service"
-sleep 2
-#systemctl restart ssrmu
-systemctl daemon-reload
-systemctl restart ws-tls
-systemctl restart ws-nontls
-#systemctl restart xray.service
-#systemctl restart shadowsocks-libev
-#systemctl restart xl2tpd
-#systemctl restart pptpd
-#systemctl restart ipsec
-#systemctl restart accel-ppp
-systemctl restart ws-ovpn
-#systemctl restart wg-quick@wg0
-systemctl restart ssh-ohp
-systemctl restart dropbear-ohp
-systemctl restart openvpn-ohp
-#systemctl restart trojan-go
-#/etc/init.d/ssrmu restart
-/etc/init.d/ssh restart
-/etc/init.d/dropbear restart
-/etc/init.d/sslh restart
-/etc/init.d/stunnel5 restart
-/etc/init.d/openvpn restart
-/etc/init.d/fail2ban restart
-/etc/init.d/cron restart
-/etc/init.d/nginx restart
-#/etc/init.d/squid restart
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
-echo -e "Restart All Service Berhasil"
-sleep 2
-clear
+wget "https://${github}/service/rc.local.sh" && chmod +x rc.local.sh && ./rc.local.sh
 
 # =========================================
 cat <<EOF> /etc/systemd/system/autosett.service
@@ -199,73 +156,88 @@ wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 chmod +x /etc/set.sh
 
 # =========================================
-echo -e "Restarting All Service Please Wait..."
+sleep 1
+echo -e "[ ${green}INFO$NC ] Restart All Service ..."
+echo ""
 sleep 15
-systemctl stop ws-tls 
-pkill python
-systemctl stop sslh
-systemctl daemon-reload
-systemctl disable ws-tls
-systemctl disable sslh
-systemctl disable squid
-systemctl daemon-reload
-systemctl enable sslh
-systemctl enable squid
-systemctl enable ws-tls
-systemctl start sslh 
-systemctl start squid
-/etc/init.d/sslh start 
-/etc/init.d/sslh restart 
-systemctl start ws-tls
-systemctl restart ws-tls
+systemctl stop ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Stopping Websocket "
+pkill python >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Stopping Python "
+systemctl stop sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Stopping Sslh "
+systemctl daemon-reload >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
+systemctl disable ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Disabled Websocket "
+systemctl disable sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Disabled Sslh "
+systemctl disable squid >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Disabled Squid "
+systemctl daemon-reload >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
+systemctl enable sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Enable Sslh "
+systemctl enable squid >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Enable Squid "
+systemctl enable ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Enable Websocket "
+systemctl start sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
+systemctl start squid >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Squid "
+/etc/init.d/sslh start >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
+/etc/init.d/sslh restart >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Sslh "
+systemctl start ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Websocket "
+systemctl restart ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
 sleep 15
-clear
-echo -e ""
-echo -e "Starting Restart All Service"
+systemctl daemon-reload >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
+systemctl restart ws-tls >/dev/null 2>&1
+systemctl restart ws-nontls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
+systemctl restart ws-ovpn >/dev/null 2>&1
+systemctl restart ssh-ohp >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart OpenVPN "
+systemctl restart dropbear-ohp >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Dropbear "
+systemctl restart openvpn-ohp >/dev/null 2>&1
+/etc/init.d/ssh restart >/dev/null 2>&1
+/etc/init.d/dropbear restart >/dev/null 2>&1
+/etc/init.d/sslh restart >/dev/null 2>&1
+/etc/init.d/stunnel5 restart >/dev/null 2>&1
+/etc/init.d/openvpn restart >/dev/null 2>&1
+/etc/init.d/fail2ban restart >/dev/null 2>&1
+/etc/init.d/cron restart >/dev/null 2>&1
+/etc/init.d/nginx restart >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart all.service "
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 >/dev/null 2>&1
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 >/dev/null 2>&1
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Setting BADVPN.UDPGW "
+echo ""
+echo "      All Service/s Successfully Restarted         "
+echo ""
 sleep 2
-#systemctl restart ssrmu
-systemctl daemon-reload
-systemctl restart ws-tls
-systemctl restart ws-nontls
-#systemctl restart xray.service
-#systemctl restart shadowsocks-libev
-#systemctl restart xl2tpd
-#systemctl restart pptpd
-#systemctl restart ipsec
-#systemctl restart accel-ppp
-systemctl restart ws-ovpn
-#systemctl restart wg-quick@wg0
-systemctl restart ssh-ohp
-systemctl restart dropbear-ohp
-systemctl restart openvpn-ohp
-#systemctl restart trojan-go
-#/etc/init.d/ssrmu restart
-/etc/init.d/ssh restart
-/etc/init.d/dropbear restart
-/etc/init.d/sslh restart
-/etc/init.d/stunnel5 restart
-/etc/init.d/openvpn restart
-/etc/init.d/fail2ban restart
-/etc/init.d/cron restart
-/etc/init.d/nginx restart
-#/etc/init.d/squid restart
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
-echo -e "Restart All Service Berhasil"
-sleep 2
-clear
 
+wget -q -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
+wget -q -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
+wget -q -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
 wget -q -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr/bin/restart
 wget -q -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr/bin/running
 wget -q -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
 wget -q -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-wget -q -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
 wget -q -O /usr/bin/speedtest "https://${github}/service/speedtest_cli.py" && chmod +x /usr/bin/speedtest
 wget -q -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/bin/update
 wget -q -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -q -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 sed -i -e 's/\r$//' /usr/bin/menu
+sed -i -e 's/\r$//' /usr/bin/menu-backup
+sed -i -e 's/\r$//' /usr/bin/menu-setting
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
 sed -i -e 's/\r$//' /usr/bin/wbmn
 sed -i -e 's/\r$//' /usr/bin/update
@@ -307,7 +279,6 @@ rm -rvf /root/domain
 clear
 
 # =========================================
-
 echo " "
 echo "Installation has been completed!!"
 echo " "
