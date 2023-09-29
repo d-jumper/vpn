@@ -59,30 +59,46 @@ http="$((lastport2+1))"
 fi
 method="aes-256-cfb"
 clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
 until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-		read -rp "Password : " -e user
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-		CLIENT_EXISTS=$(grep -w ${user} /etc/shadowsocks-libev/akun.conf | wc -l)
+
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+	read -rp "User: " -e user
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    
+    # Username already exist
+	CLIENT_EXISTS=$(grep -w ${user} /etc/shadowsocks-libev/akun.conf | wc -l)
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
+    clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "  ${RED}•${NC} ${CYAN}A client with the specified name was already created, please choose another name. $NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-ss
+	    fi
+	    done
+	clear
+	
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "               ⇱ \e[32;1m✶ Add Xray Vmess Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "${NC}${CYAN}User: ${user} $NC"
+    read -p "Expired (days): " masaaktif
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    
 clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-echo -e "  ${RED}•${NC} ${CYAN}A client with the specified name was already created, please choose another name. $NC"
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-sleep 3
-addss
-		fi
-	done
-read -p "Expired (Days) : " masaaktif
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
 cat > /etc/shadowsocks-libev/${user}-tls.json<<END

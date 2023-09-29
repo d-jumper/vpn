@@ -38,40 +38,67 @@ if [ "${EUID}" -ne 0 ]; then
 fi
 clear
 
-NUMBER_OF_CLIENTS=$(grep -c -E "^#ss# " "/etc/shadowsocks-libev/akun.conf")
-	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
-		clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-sleep 3
-        menu-ss
-	fi
-clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-grep -E "^#ss# " "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-echo -e ""
-echo -e "${NC}${CYAN}──────────────────── $NC"
-read -rp "Input Username : " user
-    if [ -z ${user} ]; then
-echo -e "${NC}${CYAN}User Not Found ! ${NC}"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
+    NUMBER_OF_CLIENTS=$(grep -c -E "^#ss# " "/etc/shadowsocks-libev/akun.conf")
+    	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+	clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "  ${RED}•${NC} ${CYAN}You have no existing Shadowsocks clients! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    sleep 3
+    clear
     menu-ss
-    else
-echo -e "${NC}${CYAN}Renewed user : ${user} ! ${NC}"
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-sleep 2
+    	else
+	clear
+	
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}User       Expired ${NC}"
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+	grep -E "^#ss# " "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+    echo -e " "
+    read -rp "Input Username : " user
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+        fi
+        
+    # Username not found
+	USERNAME_DOES_NOT_EXIST=$(grep -w ${user} /etc/shadowsocks-libev/akun.conf | wc -l)
+		if [[ ${USERNAME_DOES_NOT_EXIST} == '0' ]]; then
+	clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Username does not exist ! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-ss
+	    else
+	clear
+
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}User: ${user} $NC"
+    read -p "Expired (days): " masaaktif
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+        fi
+            
+    clear
     exp=$(grep -wE "^#ss# ${user}" "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -80,19 +107,20 @@ sleep 2
     exp3=$((${exp2} + ${masaaktif}))
     exp4=`date -d "${exp3} days" +"%Y-%m-%d"`
     sed -i "s/#ss# ${user} ${exp}/#ss# ${user} ${exp4}/g" /etc/shadowsocks-libev/akun.conf
-    systemctl restart xray > /dev/null 2>&1
+    service cron restart
+    systemctl restart shadowsocks-libev-server@${user}-tls.service
+    systemctl restart shadowsocks-libev-server@${user}-http.service
     clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-echo -e "${NC}${CYAN}Client Name : ${user} $NC" 
-echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
-echo -e "${NC}${CYAN}Renew : ${user} Successfully !!!$NC" 
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo ""
-    fi
-echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
-menu
+    
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Renew Client Successfully !!!$NC"
+    echo -e "${NC}${CYAN}Client Name : ${user} $NC"
+    echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo ""
+    read -n 1 -s -r -p "Press any key to back on menu"
+    menu
