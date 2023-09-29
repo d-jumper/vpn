@@ -41,42 +41,55 @@ arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 clear 
 
-NUMBER_OF_CLIENTS=$(grep -c -E "^#vm# " "${xray}/config.json")
-	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+    # Client is nothing
+    NUMBER_OF_CLIENTS=$(grep -c -E "^#vm# " "${xray}/config.json")
+    	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "               ⇱ \e[32;1m✶ Renew Xray Vmess Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
-    echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
+    echo -e "  ${RED}•${NC} ${CYAN}You have no existing Vmess clients! ${NC}"
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
     sleep 3
+    clear
     menu-vmess
-	fi
+    	else
 	clear
 	
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "               ⇱ \e[32;1m✶ Renew Xray Vmess Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    echo -e ""
-  	grep -E "^#vm# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-    echo -e ""
+    echo -e " "
+    echo -e "${NC}${CYAN}User       Expired ${NC}"
     echo -e "${NC}${CYAN}──────────────────── $NC"
+	grep -E "^#vm# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+    echo -e " "
     read -rp "Input Username : " user
-    if [ -z ${user} ]; then
-    echo -e "${NC}${CYAN}User Not Found ! ${NC}"
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    menu-vmess
-    else
-    echo -e "${NC}${CYAN}Renew user : ${user} ! ${NC}"
+    echo -e " "
+        fi
+        
+    # Username not found
+	USERNAME_DOES_NOT_EXIST=$(grep -w ${user} ${xray}/config.json | wc -l)
+		if [[ ${USERNAME_DOES_NOT_EXIST} == '0' ]]; then
+	clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "               ⇱ \e[32;1m✶ Renew Xray Vmess Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Username does not exist ! ${NC}"
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
+    sleep 3
     clear
-    
+    menu-vmess
+	    else
+	clear
+
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "               ⇱ \e[32;1m✶ Renew Xray Vmess Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -86,7 +99,9 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#vm# " "${xray}/config.json")
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
-    
+        fi
+            
+    clear
     exp=$(grep -wE "^#vm# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -102,12 +117,11 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#vm# " "${xray}/config.json")
     echo -e "               ⇱ \e[32;1m✶ Renew Xray Vmess Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
+    echo -e "${NC}${CYAN}Renew Client Successfully !!!$NC"
     echo -e "${NC}${CYAN}Client Name : ${user} $NC"
     echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
-    echo -e "${NC}${CYAN}Renew : ${user} Successfully !!!$NC"
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    fi
     echo ""
     read -n 1 -s -r -p "Press any key to back on menu"
     menu
