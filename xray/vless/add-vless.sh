@@ -57,11 +57,11 @@ clear
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
-
+    
+    # Username already exist
 	CLIENT_EXISTS=$(grep -w ${user} ${xray}/config.json | wc -l)
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
     clear
-    
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "              ⇱ \e[32;1m✶ Add Xray Vless Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -70,11 +70,12 @@ clear
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     sleep 3
-    add-vless
-	    fi
-	done
+    clear
+    menu-vless
+        fi
+	    done
 	clear
-
+	
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "              ⇱ \e[32;1m✶ Add Xray Vless Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -85,6 +86,7 @@ clear
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
     
+clear
 exp=`date -d "${masaaktif} days" +"%Y-%m-%d"`
 sed -i '/#vless$/a\#vl# '"${user} ${exp}"'\
 },{"id": "'""${uuid}""'","email": "'""${user}""'"' ${xray}/config.json

@@ -41,42 +41,55 @@ arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 clear 
 
-NUMBER_OF_CLIENTS=$(grep -c -E "^#vl# " "${xray}/config.json")
-	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+    # Client is nothing
+    NUMBER_OF_CLIENTS=$(grep -c -E "^#vl# " "${xray}/config.json")
+    	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
-    echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
+    echo -e "  ${RED}•${NC} ${CYAN}You have no existing Vless clients! ${NC}"
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
     sleep 3
+    clear
     menu-vless
-	fi
+    	else
 	clear
 	
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
-  	grep -E "^#vl# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-    echo -e ""
+    echo -e "${NC}${CYAN}User       Expired ${NC}"
     echo -e "${NC}${CYAN}──────────────────── $NC"
+	grep -E "^#vl# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+    echo -e " "
     read -rp "Input Username : " user
-    if [ -z ${user} ]; then
-    echo -e "${NC}${CYAN}User Not Found ! ${NC}"
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    menu-vless
-    else
-    echo -e "${NC}${CYAN}Renew user : ${user} ! ${NC}"
+    echo -e " "
+        fi
+        
+    # Username not found
+	USERNAME_DOES_NOT_EXIST=$(grep -w ${user} ${xray}/config.json | wc -l)
+		if [[ ${USERNAME_DOES_NOT_EXIST} == '0' ]]; then
+	clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Username does not exist ! ${NC}"
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
+    sleep 3
     clear
-    
+    menu-vless
+	    else
+	clear
+
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -86,7 +99,9 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#vl# " "${xray}/config.json")
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
-    
+        fi
+            
+    clear
     exp=$(grep -wE "^#vl# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -99,15 +114,14 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#vl# " "${xray}/config.json")
     clear
     
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-    echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "               ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e ""
+    echo -e "${NC}${CYAN}Renew Client Successfully !!!$NC"
     echo -e "${NC}${CYAN}Client Name : ${user} $NC"
     echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
-    echo -e "${NC}${CYAN}Renew : ${user} Successfully !!!$NC"
     echo -e ""
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    fi
     echo ""
     read -n 1 -s -r -p "Press any key to back on menu"
     menu
