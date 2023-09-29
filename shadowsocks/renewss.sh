@@ -1,41 +1,68 @@
 #!/bin/bash
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
+# // Exporting Language to UTF-8
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
+export LC_CTYPE='en_US.utf8'
+
+# // Export Color & Information
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export PURPLE='\033[0;35m'
+export CYAN='\033[0;36m'
+export LIGHT='\033[0;37m'
+export NC='\033[0m'
+
+# // Export Banner Status Information
+export EROR="[${RED} EROR ${NC}]"
+export INFO="[${YELLOW} INFO ${NC}]"
+export OKEY="[${GREEN} OKEY ${NC}]"
+export PENDING="[${YELLOW} PENDING ${NC}]"
+export SEND="[${YELLOW} SEND ${NC}]"
+export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+
+# / letssgoooo
+
+# // Export Align
+export BOLD="\e[1m"
+export WARNING="${RED}\e[5m"
+export UNDERLINE="\e[4m"
+
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
 clear
+
 NUMBER_OF_CLIENTS=$(grep -c -E "^#ss# " "/etc/shadowsocks-libev/akun.conf")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
 		clear
-        echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo -e "           Renew Shadowsocks             "
-        echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-		echo ""
-		echo "You have no existing clients!"
-		echo ""
-		echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-        echo ""
-        sleep 2
+echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
+echo -e ""
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
         menu-ss
 	fi
-
-	clear
-	echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo -e "           Renew Shadowsocks             "
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-  	grep -E "^#ss# " "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-    echo ""
-    red "tap enter to go back"
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	read -rp "Input Username : " user
+clear
+echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+grep -E "^#ss# " "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+echo -e ""
+echo -e "${NC}${CYAN}──────────────────── $NC"
+echo -e ""
+read -rp -e "${NC}${CYAN}Input Username : $NC" user
+echo -e ""
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     if [ -z ${user} ]; then
     menu-ss
     else
@@ -50,15 +77,15 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#ss# " "/etc/shadowsocks-libev/akun.conf")
     sed -i "s/#ss# ${user} ${exp}/#ss# ${user} ${exp4}/g" /etc/shadowsocks-libev/akun.conf
     systemctl restart xray > /dev/null 2>&1
     clear
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo " Shadowsocks Account Was Successfully Renewed"
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-    echo " Client Name : ${user}"
-    echo " Expired On  : ${exp4}"
-    echo ""
-    echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
+echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+read -rp -e "${NC}${CYAN}Client Name : ${user} $NC" 
+read -rp -e "${NC}${CYAN}Expired On  : ${exp4} $NC" 
+echo -e ""
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo ""
     read -n 1 -s -r -p "Press any key to back on menu"
     menu
     fi
