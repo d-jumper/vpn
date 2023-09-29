@@ -404,6 +404,7 @@ netfilter-persistent reload
 
 # download script
 cd /usr/bin
+wget -O menu-ssh "https://${github}/ssh/menu-ssh.sh"
 wget -O addssh "https://${github}/ssh/addssh.sh"
 wget -O trialssh "https://${github}/ssh/trialssh.sh"
 wget -O delssh "https://${github}/ssh/delssh.sh"
@@ -442,15 +443,13 @@ wget -O portsquid "https://${github}/service/port/portsquid.sh"
 wget -O portvlm "https://${github}/service/port/portvlm.sh"
 
 chmod +x addhost
-chmod +x menu
+chmod +x menu-ssh
 chmod +x addssh
 chmod +x trialssh
 chmod +x delssh
 chmod +x member
 chmod +x delexp
 chmod +x cekssh
-chmod +x restart
-chmod +x speedtest
 chmod +x info
 chmod +x about
 chmod +x autokill
@@ -466,7 +465,6 @@ chmod +x porttrojan
 chmod +x portsstp
 chmod +x portsquid
 chmod +x portvlm
-chmod +x wbmn
 chmod +x swapkvm
 chmod +x portsshws
 chmod +x portsshnontls
