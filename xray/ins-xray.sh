@@ -553,16 +553,16 @@ sleep 1
 sed -i -e 's/\r$//' /usr/bin/xp
 
 sed -i -e 's/\r$//' /usr/bin/menu-vmess
-sed -i -e 's/\r$//' /usr/bin/add-ws
-sed -i -e 's/\r$//' /usr/bin/cek-ws
-sed -i -e 's/\r$//' /usr/bin/del-vmess
-sed -i -e 's/\r$//' /usr/bin/renew-ws
+sed -i -e 's/\r$//' /usr/bin/add-vm
+sed -i -e 's/\r$//' /usr/bin/cek-vm
+sed -i -e 's/\r$//' /usr/bin/del-vm
+sed -i -e 's/\r$//' /usr/bin/renew-vm
 
 sed -i -e 's/\r$//' /usr/bin/menu-vless
 sed -i -e 's/\r$//' /usr/bin/add-vless
 sed -i -e 's/\r$//' /usr/bin/cek-vless
 sed -i -e 's/\r$//' /usr/bin/del-vless
-sed -i -e 's/\r$//' /usr/bin/renew-ws
+sed -i -e 's/\r$//' /usr/bin/renew-vless
 
 sed -i -e 's/\r$//' /usr/bin/menu-trojan
 sed -i -e 's/\r$//' /usr/bin/add-tr
@@ -570,9 +570,8 @@ sed -i -e 's/\r$//' /usr/bin/cek-tr
 sed -i -e 's/\r$//' /usr/bin/del-tr
 sed -i -e 's/\r$//' /usr/bin/renew-tr
 
-
 #Instal Trojan-GO
-wget https://${github}/xray/trojan/trojan-go.sh && chmod +x trojan-go.sh && sed -i -e 's/\r$//' trojan-go.sh && ./trojan-go.sh
+wget https://${github}/trojan-go/trojan-go.sh && chmod +x trojan-go.sh && sed -i -e 's/\r$//' trojan-go.sh && ./trojan-go.sh
 
 sleep 2
 
