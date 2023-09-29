@@ -40,49 +40,59 @@ clear
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 trgo="/etc/arfvpn/trojan-go"
-ipvps="/var/lib/arfvpn"
 uuid=$(cat /proc/sys/kernel/random/uuid)
 uuidtrgo=$(cat ${trgo}/uuid)
 IP=$(cat ${arfvpn}/IP)
-source ${ipvps}/ipvps.conf
-if [[ "${IP}" = "" ]]; then
-DOMAIN=$(cat ${arfvpn}/domain)
-else
-DOMAIN=${IP}
-fi
+domain=$(cat ${arfvpn}/domain)
 clear 
 
 trgo="$(cat ~/log-install.txt | grep -w "Trojan GO " | cut -d: -f2|sed 's/ //g')"
 until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "               ⇱ \e[32;1m✶ Add Trojan-Go Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-		read -rp "User: " -e user
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-		CLIENT_EXISTS=$(grep -w ${user} ${xray}/config.json | wc -l)
 
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "               ⇱ \e[32;1m✶ Add Trojan-Go Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+	read -rp "User: " -e user
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    
+    # Username already exist
+	CLIENT_EXISTS=$(grep -w ${user} /etc/arfvpn/trojan-go/akun.conf | wc -l)
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
+    clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "               ⇱ \e[32;1m✶ Add Trojan-Go Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "  ${RED}•${NC} ${CYAN}A client with the specified name was already created, please choose another name. $NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-trgo
+	    fi
+	    done
+	clear
+	
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "               ⇱ \e[32;1m✶ Add Trojan-Go Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "${NC}${CYAN}User: ${user} $NC"
+    read -p "Expired (days): " masaaktif
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+
 clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "               ⇱ \e[32;1m✶ Add Trojan-Go Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-echo -e "  ${RED}•${NC} ${CYAN}A client with the specified name was already created, please choose another name. $NC"
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-sleep 2
-add-trgo
-		fi
-	done
- 
 read -p "Expired (days): " masaaktif
 exp=`date -d "${masaaktif} days" +"%Y-%m-%d"`
 sed -i '/"'""${uuidtrgo}""'"$/a\,"'""${user}""'"' /etc/arfvpn/trojan-go/config.json
 echo -e "#trgo# ${user} ${exp}" >>  /etc/arfvpn/trojan-go/akun.conf
 systemctl restart trojan-go.service
-trojangolink="trojan-go://${user}@${DOMAIN}:${trgo}/?sni=${DOMAIN}&type=ws&host=${DOMAIN}&path=/trojango&encryption=none#${user}"
+trojangolink="trojan-go://${user}@${domain}:${trgo}/?sni=${domain}&type=ws&host=${domain}&path=/trojango&encryption=none#${user}"
 clear
 
 echo -e "" | tee -a /etc/log-create-user.log
@@ -93,7 +103,7 @@ echo -e "\033[0;34m└───────────────────�
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Remarks   : ${user} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}IP/Host   : ${IP} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Domain    : ${DOMAIN} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Domain    : ${domain} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Password  : ${user} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Port GO   : ${trgo} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Path GO   : /trojango $NC" | tee -a /etc/log-create-user.log

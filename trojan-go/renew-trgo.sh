@@ -36,75 +36,93 @@ if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
 		exit 1
 fi
-clear
+
 arfvpn="/etc/arfvpn"
 trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
-ipvps="/var/lib/arfvpn"
-source ${ipvps}/ipvps.conf
-if [[ "${IP}" = "" ]]; then
-domain=$(cat ${arfvpn}/domain)
-else
-domain=${IP}
-fi
 clear 
 
-NUMBER_OF_CLIENTS=$(grep -c -E "^#trgo# " "${trgo}/akun.conf")
+    NUMBER_OF_CLIENTS=$(grep -c -E "^#trgo# " "/etc/arfvpn/trojan-go/akun.conf")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
-		clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-sleep 3
-        menu-trojan
-	fi
 	clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-grep -E "^#tr# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-echo -e ""
-echo -e "${NC}${CYAN}──────────────────── $NC"
-	read -rp "Input Username : " user
-    if [ -z ${user} ]; then
-echo -e "${NC}${CYAN}User Not Found ! ${NC}"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    menu-trojan
-    else
-echo -e "${NC}${CYAN}Renewed user : ${user} ! ${NC}"
-read -p "Expired (days): " masaaktif
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-    exp=$(grep -wE "^#trgo# ${user}" "${trgo}/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "  ${RED}•${NC} ${CYAN}You have no existing Trojan-GO clients! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    sleep 3
+    clear
+    menu-trgo
+    	else
+	clear
+	
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}User       Expired ${NC}"
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+	grep -E "^#trgo# " "/etc/arfvpn/trojan-go/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+    echo -e " "
+    read -rp "Input Username : " user
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+        fi
+        
+    # Username not found
+	USERNAME_DOES_NOT_EXIST=$(grep -w ${user} /etc/arfvpn/trojan-go/akun.conf | wc -l)
+		if [[ ${USERNAME_DOES_NOT_EXIST} == '0' ]]; then
+	clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Username does not exist ! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-trgo
+	    else
+	clear
+
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}User: ${user} $NC"
+    read -p "Expired (days): " masaaktif
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+        fi
+            
+    clear
+    exp=$(grep -wE "^#trgo# ${user}" "/etc/arfvpn/trojan-go/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
     d2=$(date -d "${now}" +%s)
     exp2=$(( (d1 - d2) / 86400 ))
     exp3=$((${exp2} + ${masaaktif}))
     exp4=`date -d "${exp3} days" +"%Y-%m-%d"`
-    sed -i "s/#trgo# ${user} ${exp}/#trgo# ${user} ${exp4}/g" ${trgo}/akun.conf
+    sed -i "s/#trgo# ${user} ${exp}/#trgo# ${user} ${exp4}/g" /etc/arfvpn/trojan-go/akun.conf
     systemctl restart trojan-go > /dev/null 2>&1
     clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-echo -e "${NC}${CYAN}Client Name : ${user} $NC" 
-echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
-echo -e "${NC}${CYAN}Renew : ${user} Successfully !!!$NC" 
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo ""
-    fi
-echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
-menu
+    
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Renew Client Successfully !!!$NC"
+    echo -e "${NC}${CYAN}Client Name : ${user} $NC"
+    echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo ""
+    read -n 1 -s -r -p "Press any key to back on menu"
+    menu

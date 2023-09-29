@@ -36,71 +36,73 @@ if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
 		exit 1
 fi
-clear
+
 arfvpn="/etc/arfvpn"
 trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
-ipvps="/var/lib/arfvpn"
-source ${ipvps}/ipvps.conf
-if [[ "${IP}" = "" ]]; then
-domain=$(cat ${arfvpn}/domain)
-else
-domain=${IP}
-fi
-clear 
-
 clear
-NUMBER_OF_CLIENTS=$(grep -c -E "^#tr# " "${xray}/config.json")
-	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! ${NC}"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-sleep 2
-menu-trojan
-	fi
 
+    NUMBER_OF_CLIENTS=$(grep -c -E "^#trgo# " "/etc/arfvpn/trojan-go/akun.conf")
+	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "  ${RED}•${NC} ${CYAN}You have no existing Trojan-GO clients! ${NC}"
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-trgo
+	    else
 	clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-echo -e "${NC}${CYAN}User       Expired ${NC}"
-echo -e "${NC}${CYAN}──────────────────── $NC"
-grep -E "^#trgo# " "${trgo}/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-echo -e " "
-echo -e "${NC}${CYAN}──────────────────── $NC"
-read -rp "Input Username : " user
-    if [ -z ${user} ]; then
-echo -e "${NC}${CYAN}User Not Found ! ${NC}"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    menu-trojan
-    else
-echo -e "${NC}${CYAN}Deleting user : ${user} ! ${NC}"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    exp=$(grep -wE "^#trgo# ${user}" "${trgo}/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
+	
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "${NC}${CYAN}User       Expired ${NC}"
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+	grep -E "^#trgo# " "/etc/arfvpn/trojan-go/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+    echo -e " "
+    read -rp "Input Username : " user
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+        fi
+        
+    # Username not found
+	USERNAME_DOES_NOT_EXIST=$(grep -w ${user} /etc/arfvpn/trojan-go/akun.conf | wc -l)
+		if [[ ${USERNAME_DOES_NOT_EXIST} == '0' ]]; then
+	clear
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "${NC}${CYAN}Username does not exist ! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-trgo
+	    else
+	    
+	clear
+    exp=$(grep -wE "^#trgo# ${user}" "/etc/arfvpn/trojan-go/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     sed -i "/^#trgo# ${user} ${exp}/d" ${trgo}/akun.conf
-    sed -i '/^,"'"${user}"'"$/d' ${trgo}/config.json
+    sed -i '/^,"'"${user}"'"$/d' /etc/arfvpn/trojan-go/config.json
     systemctl restart trojan-go > /dev/null 2>&1
     clear
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e ""
-echo -e "${NC}${CYAN}Client Name : ${user} ${NC}"
-echo -e "${NC}${CYAN}Expired On  : ${exp} ${NC}"
-echo -e "${NC}${CYAN}Deleted : ${user} Successfully !!! ${NC}"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo ""
-fi
-echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
-menu
+        fi
+    
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "             ⇱ \e[32;1m✶ Delete Trojan-GO Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Deleted Client ${user} Successfully !!! ${NC}"
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo ""
+    read -n 1 -s -r -p "Press any key to back on menu"
+    menu
