@@ -42,7 +42,7 @@ clear
 NUMBER_OF_CLIENTS=$(grep -c -E "^#ss# " "/etc/shadowsocks-libev/akun.conf")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Delete ShadowSocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "            ⇱ \e[32;1m✶ Delete ShadowSocks Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! ${NC}"
@@ -54,7 +54,7 @@ echo -e "\033[0;34m└───────────────────�
 	clear
 
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Delete ShadowSocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "            ⇱ \e[32;1m✶ Delete ShadowSocks Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 echo -e "${NC}${CYAN}User       Expired ${NC}"
@@ -62,12 +62,18 @@ echo -e "${NC}${CYAN}───────────────────�
 grep -E "^#ss# " "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
 echo -e " "
 echo -e "${NC}${CYAN}──────────────────── $NC"
-read -rp "${NC}${CYAN}Input Username :${NC}" user
+read -rp "Input Username : " user
+    if [ -z ${user} ]; then
+echo -e "${NC}${CYAN}User Not Found ! ${NC}"
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    if [ -z ${user} ]; then
-    menu-ss
+    sleep 2
+    delss
     else
+echo -e "${NC}${CYAN}Deleting user : ${user} ! ${NC}"
+echo -e " "
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 2
     exp=$(grep -wE "^#ss# ${user}" "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     sed -i "/^#ss# ${user} ${exp}/,/^port_http/d" "/etc/shadowsocks-libev/akun.conf"
 service cron restart
@@ -78,18 +84,18 @@ systemctl stop shadowsocks-libev-server@${user}-http.service
 rm -f "/etc/shadowsocks-libev/${user}-tls.json"
 rm -f "/etc/shadowsocks-libev/${user}-http.json"
 clear
-    clear
 
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Delete ShadowSocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "            ⇱ \e[32;1m✶ Delete ShadowSocks Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 echo -e "${NC}${CYAN}Client Name : ${user} ${NC}"
 echo -e "${NC}${CYAN}Expired On  : ${exp} ${NC}"
+echo -e "${NC}${CYAN}Deleted : ${user} Successfully !!! ${NC}"
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    echo ""
-    read -n 1 -s -r -p "Press any key to back on menu"
-    
-    menu
-    fi
+echo ""
+fi
+echo ""
+read -n 1 -s -r -p "Press any key to back on menu"
+menu

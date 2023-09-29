@@ -41,7 +41,7 @@ clear
 echo -e ""
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Shadowsocks Menu ✶\e[0m ⇲ ${NC}"
+echo -e "                 ⇱ \e[32;1m✶ Shadowsocks Menu ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 echo -e "  ${BICyan}[${BIWhite}01${BICyan}]${RED} •${NC} ${CYAN}Add Account Shadowsocks $NC"
@@ -58,7 +58,7 @@ case $menu in
 2) clear ; delss ;;
 3) clear ; renewss ;;
 4) clear ; cekss ;;
-0) clear ; menu ;;
+5) clear ; menu ;;
 *) 
 clear
 echo " Command not found! "

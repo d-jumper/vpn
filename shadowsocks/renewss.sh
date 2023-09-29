@@ -42,13 +42,14 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#ss# " "/etc/shadowsocks-libev/akun.conf")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
 		clear
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
+echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
+sleep 3
         menu-ss
 	fi
 clear
@@ -59,14 +60,18 @@ echo -e ""
 grep -E "^#ss# " "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 2-3 | column -t | sort | uniq
 echo -e ""
 echo -e "${NC}${CYAN}──────────────────── $NC"
-echo -e ""
-read -rp -e "${NC}${CYAN}Input Username : $NC" user
-echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+read -rp "Input Username : " user
     if [ -z ${user} ]; then
+echo -e "${NC}${CYAN}User Not Found ! ${NC}"
+echo -e " "
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 2
     menu-ss
     else
-    read -p "Expired (days): " masaaktif
+echo -e "${NC}${CYAN}Renewed user : ${user} ! ${NC}"
+echo -e ""
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+sleep 2
     exp=$(grep -wE "^#ss# ${user}" "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -81,11 +86,13 @@ echo -e "\033[0;34m┌───────────────────�
 echo -e "         ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -rp -e "${NC}${CYAN}Client Name : ${user} $NC" 
-read -rp -e "${NC}${CYAN}Expired On  : ${exp4} $NC" 
+echo -e "${NC}${CYAN}Client Name : ${user} $NC" 
+echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
+echo -e "${NC}${CYAN}Renew : ${user} Successfully !!!$NC" 
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo ""
-    read -n 1 -s -r -p "Press any key to back on menu"
-    menu
     fi
+echo ""
+read -n 1 -s -r -p "Press any key to back on menu"
+menu

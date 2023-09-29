@@ -41,7 +41,7 @@ fi
 clear
 # ==========================================
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ SS - OBFS User Login ✶\e[0m ⇲ ${NC}"
+echo -e "               ⇱ \e[32;1m✶ SS - OBFS User Login ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 data=( `cat /etc/shadowsocks-libev/akun.conf | grep '^#ss#' | cut -d ' ' -f 2`);
@@ -78,10 +78,11 @@ else
 echo -e "  ${RED}•${NC} ${CYAN}${akun} - ${port} $NC"
 echo -e "${NC} ${CYAN}${jum} $NC";
 echo -e "${NC}${CYAN}──────────────────── $NC"
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 fi
 x=$(( "$x" + 1 ))
 done
+echo -e " "
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e " "
 read -n 1 -s -r -p "Press any key to back on menu"
 menu

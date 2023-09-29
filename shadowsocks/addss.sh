@@ -60,23 +60,25 @@ fi
 method="aes-256-cfb"
 clear
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
+echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
-
 until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 		read -rp "Password : " -e user
+echo -e " "
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e " "
 		CLIENT_EXISTS=$(grep -w ${user} /etc/shadowsocks-libev/akun.conf | wc -l)
 		if [[ ${CLIENT_EXISTS} == '1' ]]; then
 clear
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
+echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 echo -e "  ${RED}•${NC} ${CYAN}A client with the specified name was already created, please choose another name. $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-sleep 2
+sleep 3
 addss
 		fi
 	done
@@ -138,14 +140,14 @@ clear
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
-echo -e "         ⇱ \e[32;1m✶ Shadowsocks Account ✶\e[0m ⇲ ${NC}" | tee -a /etc/log-create-user.log
+echo -e "            ⇱ \e[32;1m✶ Shadowsocks Result Account ✶\e[0m ⇲ ${NC}" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Remarks   : ${user} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}IP/Host   : ${IP} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Domain    : ${DOMAIN} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Port TLS  : ${tls} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Port NTLS  : ${http} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Port NTLS : ${http} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Method    : ${method} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Link TLS : ${linkss1} $NC" | tee -a /etc/log-create-user.log
@@ -157,6 +159,6 @@ echo -e "  ${RED}•${NC} ${CYAN}───────────────�
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 echo "" | tee -a /etc/log-create-user.log
-
+echo "" | tee -a /etc/log-create-user.log 
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
