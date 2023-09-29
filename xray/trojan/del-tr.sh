@@ -40,9 +40,11 @@ fi
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 clear 
-
+    
+    # Client is nothing
     NUMBER_OF_CLIENTS=$(grep -c -E "^#tr# " "${xray}/config.json")
-	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+    	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
+    clear
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "            ⇱ \e[32;1m✶ Delete Xray Trojan Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -51,10 +53,11 @@ clear
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     sleep 3
+    clear
     menu-trojan
-	fi
-
+	    else
 	clear
+	
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "            ⇱ \e[32;1m✶ Delete Xray Trojan Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -63,35 +66,43 @@ clear
     echo -e "${NC}${CYAN}──────────────────── $NC"
 	grep -E "^#tr# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
     echo -e "${NC}${CYAN}──────────────────── $NC"
+    echo -e " "
     read -rp "Input Username : " user
-    if [ -z ${user} ]; then
-    echo -e "${NC}${CYAN}User Not Found ! ${NC}"
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    menu-trojan
-    else
-    echo -e "${NC}${CYAN}Deleting user : ${user} ! ${NC}"
     echo -e " "
-    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    sleep 2
-    exp=$(grep -wE "^#tr# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
-    sed -i "/^#tr# ${user} ${exp}/,/^},{/d" ${xray}/config.json
-    systemctl restart xray > /dev/null 2>&1
-    clear
-    
+        fi
+        
+    # Username not found
+	USERNAME_DOES_NOT_EXIST=$(grep -w ${user} ${xray}/config.json | wc -l)
+		if [[ ${USERNAME_DOES_NOT_EXIST} == '0' ]]; then
+	clear
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "            ⇱ \e[32;1m✶ Delete Xray Trojan Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
-    echo -e "${NC}${CYAN}Client Name : ${user} ${NC}"
-    echo -e "${NC}${CYAN}Expired On  : ${exp} ${NC}"
-    echo -e "${NC}${CYAN}Deleted : ${user} Successfully !!! ${NC}"
+    echo -e "${NC}${CYAN}Username does not exist ! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    clear
+    menu-trojan
+	    else
+	clear
+	
+    exp=$(grep -wE "^#tr# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
+    sed -i "/^#tr# ${user} ${exp}/,/^},{/d" ${xray}/config.json
+    systemctl restart xray > /dev/null 2>&1
+    clear
+        fi
+        
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "            ⇱ \e[32;1m✶ Delete Xray Trojan Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "${NC}${CYAN}Deleted Client ${user} Successfully !!! ${NC}"
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-    echo ""
-    fi
-    
     echo ""
     read -n 1 -s -r -p "Press any key to back on menu"
     menu

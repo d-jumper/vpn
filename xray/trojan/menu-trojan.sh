@@ -51,16 +51,14 @@ echo -e "  ${BICyan}[${BIWhite}01${BICyan}]${RED} •${NC} ${CYAN}Add Account Tr
 echo -e "  ${BICyan}[${BIWhite}02${BICyan}]${RED} •${NC} ${CYAN}Delete Account Trojan $NC"
 echo -e "  ${BICyan}[${BIWhite}03${BICyan}]${RED} •${NC} ${CYAN}Renew Account Trojan $NC"
 echo -e "  ${BICyan}[${BIWhite}04${BICyan}]${RED} •${NC} ${CYAN}Cek User Login Trojan $NC"
-echo -e ""
-echo -e "  ${BICyan}[${BIWhite}06${BICyan}]${RED} •${NC} ${CYAN}Add Account Trojan-GO $NC"
-echo -e "  ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}Delete Account Trojan-GO $NC"
-echo -e "  ${BICyan}[${BIWhite}08${BICyan}]${RED} •${NC} ${CYAN}Renew Account Trojan-GO $NC"
-echo -e "  ${BICyan}[${BIWhite}09${BICyan}]${RED} •${NC} ${CYAN}Cek User Login Trojan-GO $NC"
-echo -e ""
-echo -e "  ${BICyan}[${BIWhite}00${BICyan}]${RED} •${NC} ${CYAN}Back to Menu $NC"
+echo -e "  ${BICyan}[${BIWhite}05${BICyan}]${RED} •${NC} ${CYAN}Add Account Trojan-GO $NC"
+echo -e "  ${BICyan}[${BIWhite}06${BICyan}]${RED} •${NC} ${CYAN}Delete Account Trojan-GO $NC"
+echo -e "  ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}Renew Account Trojan-GO $NC"
+echo -e "  ${BICyan}[${BIWhite}08${BICyan}]${RED} •${NC} ${CYAN}Cek User Login Trojan-GO $NC"
+echo -e "  ${BICyan}[${BIWhite}09${BICyan}]${RED} •${NC} ${CYAN}Back to Menu $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-read -p " ➣ Select From Options [ 1 - 10 ] : " menu
+read -p " ➣ Select From Options [ 1 - 9 ] : " menu
 echo -e ""
 case $menu in
 1) clear ; add-tr ;;
