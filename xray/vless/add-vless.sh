@@ -1,52 +1,90 @@
 #!/bin/bash
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
-clear
-arfvpn="/etc/arfvpn"
-xray="/etc/xray"
-ipvps="/var/lib/arfvpn"
-source ${ipvps}/ipvps.conf
-if [[ "${IP}" = "" ]]; then
-domain=$(cat ${xray}/domain)
-else
-domain=${IP}
+# // Exporting Language to UTF-8
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
+export LC_CTYPE='en_US.utf8'
+
+# // Export Color & Information
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export PURPLE='\033[0;35m'
+export CYAN='\033[0;36m'
+export LIGHT='\033[0;37m'
+export NC='\033[0m'
+
+# // Export Banner Status Information
+export EROR="[${RED} EROR ${NC}]"
+export INFO="[${YELLOW} INFO ${NC}]"
+export OKEY="[${GREEN} OKEY ${NC}]"
+export PENDING="[${YELLOW} PENDING ${NC}]"
+export SEND="[${YELLOW} SEND ${NC}]"
+export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+
+# / letssgoooo
+
+# // Export Align
+export BOLD="\e[1m"
+export WARNING="${RED}\e[5m"
+export UNDERLINE="\e[4m"
+
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
 fi
 
-tls="$(cat ~/log-install.txt | grep -w "Vless TLS" | cut -d: -f2|sed 's/ //g')"
-none="$(cat ~/log-install.txt | grep -w "Vless None TLS" | cut -d: -f2|sed 's/ //g')"
-until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "\\E[0;41;36m      Add Xray/Vless Account      \E[0m"
-echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-
-		read -rp "User: " -e user
-		CLIENT_EXISTS=$(grep -w ${user} ${xray}/config.json | wc -l)
-
-		if [[ ${CLIENT_EXISTS} == '1' ]]; then
-clear
-            echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-            echo -e "\\E[0;41;36m      Add Xray/Vless Account      \E[0m"
-            echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-			echo ""
-			echo "A client with the specified name was already created, please choose another name."
-			echo ""
-			echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-sleep 2
-add-vless
-		fi
-	done
-
+arfvpn="/etc/arfvpn"
+xray="/etc/xray"
 uuid=$(cat /proc/sys/kernel/random/uuid)
-read -p "Expired (days): " masaaktif
+domain=$(cat ${arfvpn}/domain)
+IP=$(cat ${arfvpn}/IP)
+clear 
+
+tls="$(cat ~/log-install.txt | grep -w "Xray WS TLS" | cut -d: -f2|sed 's/ //g')"
+none="$(cat ~/log-install.txt | grep -w "Xray WS NONE TLS" | cut -d: -f2|sed 's/ //g')"
+until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
+clear
+
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Add Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+	read -rp "User: " -e user
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+
+	CLIENT_EXISTS=$(grep -w ${user} ${xray}/config.json | wc -l)
+		if [[ ${CLIENT_EXISTS} == '1' ]]; then
+    clear
+    
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Add Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "  ${RED}•${NC} ${CYAN}A client with the specified name was already created, please choose another name. $NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 3
+    add-vless
+	    fi
+	done
+	clear
+
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Add Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    echo -e "${NC}${CYAN}User: ${user} $NC"
+    read -p "Expired (days): " masaaktif
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    
 exp=`date -d "${masaaktif} days" +"%Y-%m-%d"`
 sed -i '/#vless$/a\#vl# '"${user} ${exp}"'\
 },{"id": "'""${uuid}""'","email": "'""${user}""'"' ${xray}/config.json
@@ -57,30 +95,37 @@ vlesslink2="vless://${uuid}@${domain}:$none?path=/vless&encryption=none&type=ws#
 vlesslink3="vless://${uuid}@${domain}:${tls}?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#${user}"
 systemctl restart xray
 clear
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "\\E[0;41;36m        Xray/Vless Account        \E[0m" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Remarks   : ${user}" | tee -a /etc/log-create-user.log
-echo -e "Domain    : ${domain}" | tee -a /etc/log-create-user.log
-echo -e "Port TLS  : ${tls}" | tee -a /etc/log-create-user.log
-echo -e "Port NTLS : ${none}" | tee -a /etc/log-create-user.log
-echo -e "Port GRPC : ${tls}" | tee -a /etc/log-create-user.log
-echo -e "Id        : ${uuid}" | tee -a /etc/log-create-user.log
-echo -e "alterId   : 0" | tee -a /etc/log-create-user.log
-echo -e "Security  : auto" | tee -a /etc/log-create-user.log
-echo -e "Network   : ws/grpc" | tee -a /etc/log-create-user.log
-echo -e "Path WS   : /vless" | tee -a /etc/log-create-user.log
-echo -e "Path GRPC : /vless-grpc" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link TLS       : ${vlesslink1}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link none TLS  : ${vlesslink2}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Link GRPC      : ${vlesslink3}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo -e "Expired On : ${exp}" | tee -a /etc/log-create-user.log
-echo -e "----------------------------------" | tee -a /etc/log-create-user.log
-echo "" | tee -a /etc/log-create-user.log
-read -n 1 -s -r -p "Press any key to back on menu"
-
-menu
+    
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
+    echo -e "               ⇱ \e[32;1m✶ Result Xray Vless Account ✶\e[0m ⇲ ${NC}" | tee -a /etc/log-create-user.log
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Remarks   : ${user} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}IP/Host   : ${IP} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Domain    : ${domain} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Uuid      : ${uuid} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port TLS  : ${tls} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port NTLS : ${none} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port GRPC : ${tls} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}alterid   : 0 $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Security  : auto $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Network   : ws / grpc $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Path WS   : /vless $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Path GRPC : /vless-grpc $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link TLS : ${vlesslink1} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link NTLS : ${vlesslink2} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link GRPC : ${vlesslink3} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Expired On : ${exp} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
+    echo "" | tee -a /etc/log-create-user.log
+    echo "" | tee -a /etc/log-create-user.log 
+    read -n 1 -s -r -p "Press any key to back on menu"
+    menu

@@ -1,49 +1,92 @@
 #!/bin/bash
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+
+# // Exporting Language to UTF-8
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export LANGUAGE='en_US.UTF-8'
+export LC_CTYPE='en_US.utf8'
+
+# // Export Color & Information
+export RED='\033[0;31m'
+export GREEN='\033[0;32m'
+export YELLOW='\033[0;33m'
+export BLUE='\033[0;34m'
+export PURPLE='\033[0;35m'
+export CYAN='\033[0;36m'
+export LIGHT='\033[0;37m'
+export NC='\033[0m'
+
+# // Export Banner Status Information
+export EROR="[${RED} EROR ${NC}]"
+export INFO="[${YELLOW} INFO ${NC}]"
+export OKEY="[${GREEN} OKEY ${NC}]"
+export PENDING="[${YELLOW} PENDING ${NC}]"
+export SEND="[${YELLOW} SEND ${NC}]"
+export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+
+# / letssgoooo
+
+# // Export Align
+export BOLD="\e[1m"
+export WARNING="${RED}\e[5m"
+export UNDERLINE="\e[4m"
+
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
 
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
-logxray="/var/log/xray"
+clear 
 
-clear
 NUMBER_OF_CLIENTS=$(grep -c -E "^#vl# " "${xray}/config.json")
 	if [[ ${NUMBER_OF_CLIENTS} == '0' ]]; then
-		clear
-        echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-        echo -e "\\E[0;41;36m            Renew Vless            \E[0m"
-        echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-		echo ""
-		echo "You have no existing clients!"
-		echo ""
-		echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-        echo ""
-        sleep 2
-        menu-vless
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "  ${RED}•${NC} ${CYAN}You have no existing clients! $NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    sleep 3
+    menu-vless
 	fi
-
 	clear
-	echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo -e "\\E[0;41;36m            Renew Vless            \E[0m"
-    echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo ""
+	
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
   	grep -E "^#vl# " "${xray}/config.json" | cut -d ' ' -f 2-3 | column -t | sort | uniq
-    echo ""
-    red "tap enter to go back"
-    echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-	read -rp "Input Username : " user
+    echo -e ""
+    echo -e "${NC}${CYAN}──────────────────── $NC"
+    read -rp "Input Username : " user
     if [ -z ${user} ]; then
+    echo -e "${NC}${CYAN}User Not Found ! ${NC}"
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 2
     menu-vless
     else
+    echo -e "${NC}${CYAN}Renew user : ${user} ! ${NC}"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    sleep 2
+    clear
+    
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}User: ${user} $NC"
     read -p "Expired (days): " masaaktif
+    echo -e " "
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e " "
+    
     exp=$(grep -wE "^#vl# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -54,15 +97,17 @@ NUMBER_OF_CLIENTS=$(grep -c -E "^#vl# " "${xray}/config.json")
     sed -i "/#vl# ${user}/c\#vl# ${user} ${exp4}" ${xray}/config.json
     systemctl restart xray > /dev/null 2>&1
     clear
-    echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo " VLESS Account Was Successfully Renewed"
-    echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-    echo ""
-    echo " Client Name : ${user}"
-    echo " Expired On  : ${exp4}"
-    echo ""
-    echo -e "\033[0;34m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+    
+    echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+    echo -e "              ⇱ \e[32;1m✶ Renew Xray Vless Account ✶\e[0m ⇲ ${NC}"
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    echo -e ""
+    echo -e "${NC}${CYAN}Client Name : ${user} $NC"
+    echo -e "${NC}${CYAN}Expired On  : ${exp4} $NC"
+    echo -e "${NC}${CYAN}Renew : ${user} Successfully !!!$NC"
+    echo -e ""
+    echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+    fi
     echo ""
     read -n 1 -s -r -p "Press any key to back on menu"
     menu
-    fi
