@@ -70,8 +70,6 @@ touch $arfvpn/IP
 touch $arfvpn/ISP
 touch $arfvpn/domain
 touch $arfvpn/scdomain
-curl -s ipinfo.io/org/ > ${arfvpn}/ISP
-curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
 mkdir -p $ipvps
 touch ${ipvps}/ipvps.conf
 touch ${ipvps}/cfndomain
@@ -82,6 +80,8 @@ mkdir -p $nginx
 
 # ==========================================
 apt install curl jq -y
+curl -s ipinfo.io/org/ > ${arfvpn}/ISP
+curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
 clear
 echo ""
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
