@@ -68,6 +68,8 @@ echo -e "${NC}${CYAN}Note : ~Don't use space!! $NC"
 echo -e "${NC}${CYAN}────────────────────────────────── $NC"
 echo -e " "
 read -p "Username : " user
+read -p "Password : " pass
+read -p "Expired (Days): " hari
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 clear
@@ -87,34 +89,6 @@ clear
 menu-ssh
 else
 
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ \e[32;1m✶ Add SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-echo -e "${NC}${CYAN}Note : ~Don't use space!! $NC"
-echo -e "${NC}${CYAN}────────────────────────────────── $NC"
-echo -e " "
-echo -e "${NC}${CYAN}Username : ${user} $NC"
-read -p "Password : " pass
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-clear
-fi
-
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ \e[32;1m✶ Add SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e " "
-echo -e "${NC}${CYAN}Note : ~Don't use space!! $NC"
-echo -e "${NC}${CYAN}────────────────────────────────── $NC"
-echo -e " "
-echo -e "${NC}${CYAN}Username : ${user} $NC"
-echo -e "${NC}${CYAN}Password : ${pass} $NC"
-read -p "Expired (Days): " hari
-echo -e " "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-clear
-
 useradd -e `date -d "${hari} days" +"%Y-%m-%d"` -s /bin/false -M ${user}
 expi="$(chage -l ${user} | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "${pass}\n${pass}\n" | passwd ${user} &> /dev/null
@@ -123,7 +97,9 @@ expi=`date -d "${hari} days" +"%Y-%m-%d"`
 echo -e  "${success} Menambahkan User Please Wait.."
 sleep 5
 clear
+fi
 
+clear
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}" | tee -a /etc/log-create-user.log
