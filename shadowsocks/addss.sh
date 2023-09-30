@@ -89,7 +89,7 @@ until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
 	clear
 	
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-    echo -e "               ⇱ \e[32;1m✶ Add Xray Vmess Account ✶\e[0m ⇲ ${NC}"
+    echo -e "           ⇱ \e[32;1m✶ Add Shadowsocks OBFS Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
     echo -e "${NC}${CYAN}User: ${user} $NC"
