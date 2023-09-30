@@ -10,7 +10,6 @@ yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
-
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
@@ -65,29 +64,6 @@ touch ${logxray}/error2.log
 
 # Install Xray Core << Every >> Lastest Version
 wget https://${github}/service/update-xray.sh && chmod +x update-xray.sh && ./update-xray.sh
-
-## make a crt xray $domain
-#systemctl stop nginx
-sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
-mkdir -p ${arfvpn}/cert/
-mkdir -p /root/.acme.sh
-curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-chmod +x /root/.acme.sh/acme.sh
-/root/.acme.sh/acme.sh --upgrade --auto-upgrade
-/root/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-/root/.acme.sh/acme.sh --issue --force -d ${domain} --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath ${arfvpn}/cert/ca.crt --keypath ${arfvpn}/cert/ca.key --ecc
-sleep 3
-sudo openssl dhparam -out ${arfvpn}/cert/dh.pem 2048
-echo -e "[ ${green}INFO$NC ] RENEW CERT SSL"
-# nginx renew ssl
-echo -n '#!/bin/bash
-/etc/init.d/nginx stop
-"/root/.acme.sh"/acme.sh --cron --home "/root/.acme.sh" &> /root/renew_ssl.log
-/etc/init.d/nginx start
-' > /usr/bin/ssl_renew.sh
-chmod +x /usr/bin/ssl_renew.sh
-if ! grep -q 'ssl_renew.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "15 03 */3 * * /usr/bin/ssl_renew.sh") | crontab;fi
 
 # NGINX-SERVER
 wget https://${github}/nginx/nginx-server.sh && chmod +x nginx-server.sh && sed -i -e 's/\r$//' nginx-server.sh && ./nginx-server.sh
@@ -543,14 +519,8 @@ wget -q -O /usr/bin/cek-tr "https://${github}/xray/trojan/cek-tr.sh" && chmod +x
 wget -q -O /usr/bin/del-tr "https://${github}/xray/trojan/del-tr.sh" && chmod +x /usr/bin/del-tr
 wget -q -O /usr/bin/renew-tr "https://${github}/xray/trojan/renew-tr.sh" && chmod +x /usr/bin/renew-tr
 
-#--
-wget -q -O /usr/bin/xp "https://${github}/xray/xp.sh" && chmod +x /usr/bin/xp
-sleep 1
-
-
 echo -e "[ ${green}INFO$NC ] INSTALL SCRIPT ..."
 sleep 1
-sed -i -e 's/\r$//' /usr/bin/xp
 
 sed -i -e 's/\r$//' /usr/bin/menu-vmess
 sed -i -e 's/\r$//' /usr/bin/add-vm
