@@ -65,51 +65,13 @@ fi
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 # ==========================================
-mkdir -p $arfvpn
-touch $arfvpn/IP
-touch $arfvpn/ISP
-touch $arfvpn/domain
-touch $arfvpn/scdomain
-mkdir -p $ipvps
-touch ${ipvps}/ipvps.conf
-touch ${ipvps}/cfndomain
-echo "none" > ${ipvps}/cfndomain
-mkdir -p $xray
-mkdir -p $trgo
-mkdir -p $nginx
+apt install wget curl jq -y
+#install host
+wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
+chmod +x /usr/bin/hostvps
+sed -i -e 's/\r$//' /usr/bin/hostvps
+/usr/bin/hostvps
 
-# ==========================================
-apt install curl jq -y
-curl -s ipinfo.io/org/ > ${arfvpn}/ISP
-curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
-clear
-echo ""
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green      Add Domain for Server VPN $NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo " "
-echo -e "[ ${green}INFO$NC ]* BLANK INPUT FOR RANDOM SUB-DOMAIN ! "
-read -rp "Input ur domain / sub-domain : " -e domain
-    if [ -z ${domain} ]; then
-    echo -e "
-    Nothing input for domain!
-    Then a random sub-domain will be created"
-    sleep 2
-    
-    wget -O /usr/bin/cf "https://${github}/service/cf.sh"
-    chmod +x /usr/bin/cf
-    sed -i -e 's/\r$//' /usr/bin/cf
-    cf
-    else
-    echo -e "${success} Please wait..."
-	echo "${domain}" > ${arfvpn}/domain
-	echo "${domain}" > ${arfvpn}/scdomain
-    echo "IP=${domain}" > ${ipvps}/ipvps.conf
-    fi
-    sleep 1
-
-cd
-clear
 # ==========================================
 #install Xray
 wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
@@ -120,7 +82,7 @@ wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-
 
 # =========================================
 # Websocket
-wget "https://${github}/ssh/websocket/edu.sh" && chmod +x edu.sh && ./edu.sh
+/use/bin/wsedu
 
 # =========================================
 # OphvServer
@@ -133,6 +95,64 @@ wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
 # =========================================
 # sslh fix
 wget "https://${github}/service/rc.local.sh" && chmod +x rc.local.sh && ./rc.local.sh
+
+# =========================================
+wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
+#wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
+#wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
+wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
+#wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
+wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
+wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
+wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
+wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
+wget -O /usr/bin/renew-domain "https://${github}/service/renew-domain.sh" && chmod +x /usr/bin/renew-domain
+wget -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr/bin/restart
+wget -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr/bin/running
+wget -O /usr/bin/speedtest "https://${github}/service/speedtest_cli.py" && chmod +x /usr/bin/speedtest
+wget -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/bin/update
+wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
+wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
+wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
+sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
+#sed -i -e 's/\r$//' /usr/bin/cert
+#sed -i -e 's/\r$//' /usr/bin/cf
+sed -i -e 's/\r$//' /usr/bin/cfnhost
+#sed -i -e 's/\r$//' /usr/bin/hostvps
+sed -i -e 's/\r$//' /usr/bin/menu
+sed -i -e 's/\r$//' /usr/bin/menu-backup
+sed -i -e 's/\r$//' /usr/bin/menu-setting
+sed -i -e 's/\r$//' /usr/bin/fixssh
+sed -i -e 's/\r$//' /usr/bin/renew-domain
+sed -i -e 's/\r$//' /usr/bin/restart
+sed -i -e 's/\r$//' /usr/bin/running
+sed -i -e 's/\r$//' /usr/bin/update
+sed -i -e 's/\r$//' /usr/bin/update-xray
+sed -i -e 's/\r$//' /usr/bin/wbmn
+sed -i -e 's/\r$//' /usr/bin/xp
+
+wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
+wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
+wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh"
+wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
+wget -O /usr/bin/porttrojan "https://${github}/service/port/porttrojan.sh"
+wget -O /usr/bin/portvlm "https://${github}/service/port/portvlm.sh"
+wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh"
+chmod +x /usr/bin/changeport
+chmod +x /usr/bin/portovpn
+chmod +x /usr/bin/portsquid
+chmod +x /usr/bin/portsstp
+chmod +x /usr/bin/porttrojan
+chmod +x /usr/bin/portvlm
+chmod +x /usr/bin/portwg
+sed -i -e 's/\r$//' /usr/bin/changeport
+sed -i -e 's/\r$//' /usr/bin/portovpn
+sed -i -e 's/\r$//' /usr/bin/portsquid
+sed -i -e 's/\r$//' /usr/bin/portsstp
+sed -i -e 's/\r$//' /usr/bin/porttrojan
+sed -i -e 's/\r$//' /usr/bin/portvlm
+sed -i -e 's/\r$//' /usr/bin/portwg
+clear
 
 # =========================================
 cat <<EOF> /etc/systemd/system/autosett.service
@@ -150,102 +170,11 @@ WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 systemctl enable autosett
+/etc/set.sh
 
 # =========================================
-wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
-chmod +x /etc/set.sh
+/usr/bin/fixssh
 
-# =========================================
-sleep 1
-echo -e "[ ${green}INFO$NC ] Restart All Service ..."
-echo ""
-sleep 15
-systemctl stop ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Stopping Websocket "
-pkill python >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Stopping Python "
-systemctl stop sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Stopping Sslh "
-systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
-systemctl disable ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Disabled Websocket "
-systemctl disable sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Disabled Sslh "
-systemctl disable squid >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Disabled Squid "
-systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
-systemctl enable sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Enable Sslh "
-systemctl enable squid >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Enable Squid "
-systemctl enable ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Enable Websocket "
-systemctl start sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
-systemctl start squid >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Squid "
-/etc/init.d/sslh start >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
-/etc/init.d/sslh restart >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Sslh "
-systemctl start ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Websocket "
-systemctl restart ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
-sleep 15
-systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
-systemctl restart ws-tls >/dev/null 2>&1
-systemctl restart ws-nontls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
-systemctl restart ws-ovpn >/dev/null 2>&1
-systemctl restart ssh-ohp >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart OpenVPN "
-systemctl restart dropbear-ohp >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Dropbear "
-systemctl restart openvpn-ohp >/dev/null 2>&1
-/etc/init.d/ssh restart >/dev/null 2>&1
-/etc/init.d/dropbear restart >/dev/null 2>&1
-/etc/init.d/sslh restart >/dev/null 2>&1
-/etc/init.d/stunnel5 restart >/dev/null 2>&1
-/etc/init.d/openvpn restart >/dev/null 2>&1
-/etc/init.d/fail2ban restart >/dev/null 2>&1
-/etc/init.d/cron restart >/dev/null 2>&1
-/etc/init.d/nginx restart >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart all.service "
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 >/dev/null 2>&1
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 >/dev/null 2>&1
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Setting BADVPN.UDPGW "
-echo ""
-echo "      All Service/s Successfully Restarted         "
-echo ""
-sleep 2
-
-wget -q -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
-wget -q -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
-wget -q -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
-wget -q -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr/bin/restart
-wget -q -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr/bin/running
-wget -q -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
-wget -q -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-wget -q -O /usr/bin/speedtest "https://${github}/service/speedtest_cli.py" && chmod +x /usr/bin/speedtest
-wget -q -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/bin/update
-wget -q -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
-wget -q -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
-sed -i -e 's/\r$//' /usr/bin/menu
-sed -i -e 's/\r$//' /usr/bin/menu-backup
-sed -i -e 's/\r$//' /usr/bin/menu-setting
-sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
-sed -i -e 's/\r$//' /usr/bin/wbmn
-sed -i -e 's/\r$//' /usr/bin/update
-sed -i -e 's/\r$//' /usr/bin/update-xray
-sed -i -e 's/\r$//' /usr/bin/restart
-sed -i -e 's/\r$//' /usr/bin/running
-sed -i -e 's/\r$//' /usr/bin/cf
-clear
 # =========================================
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
@@ -261,7 +190,6 @@ mesg n || true
 menu
 END
 chmod 644 /root/.profile
-
 
 history -c
 # Reboot VPS Every At 00:00 Mid-Night
@@ -313,7 +241,7 @@ echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
 echo "   - IPtables                : [ON]"  | tee -a log-install.txt
 echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
 echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
-echo "   - Autoreboot On 00.00 GMT +7" | tee -a log-install.txt
+echo "   - Autoreboot On 04.00 GMT +7 WIB" | tee -a log-install.txt
 echo "   - Autobackup Data" | tee -a log-install.txt
 echo "   - Restore Data" | tee -a log-install.txt
 echo "   - Auto Delete Expired Account" | tee -a log-install.txt
