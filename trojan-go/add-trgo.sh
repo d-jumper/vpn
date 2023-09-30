@@ -87,7 +87,6 @@ until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     echo -e " "
 
 clear
-read -p "Expired (days): " masaaktif
 exp=`date -d "${masaaktif} days" +"%Y-%m-%d"`
 sed -i '/"'""${uuidtrgo}""'"$/a\,"'""${user}""'"' /etc/arfvpn/trojan-go/config.json
 echo -e "#trgo# ${user} ${exp}" >>  /etc/arfvpn/trojan-go/akun.conf
