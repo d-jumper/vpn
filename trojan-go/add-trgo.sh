@@ -71,7 +71,7 @@ until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     sleep 3
     clear
-    menu-trgo
+    menu-trojan
 	    fi
 	    done
 	clear

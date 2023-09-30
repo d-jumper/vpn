@@ -9,9 +9,7 @@ tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-clear
-clear
-clear
+
 arfvpn="/etc/arfvpn"
 trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
@@ -20,7 +18,7 @@ github="raw.githubusercontent.com/arfprsty810/vpn/main"
 uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
 sleep 1
-clear
+
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green          INSTALLING TROJAN-GO $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -39,7 +37,6 @@ chmod +x /usr/local/bin/trojan-go
 mkdir -p ${logtrgo}
 touch ${trgo}/akun.conf
 touch ${logtrgo}/trojan-go.log
-clear
 
 # Buat Config Trojan Go
 echo -e "[ ${green}INFO$NC ] MEMBUAT CONFIG TROJAN-GO"
@@ -107,7 +104,6 @@ cat > ${trgo}/config.json << END
   }
 }
 END
-clear
 
 # Installing Trojan Go Service
 cat > /etc/systemd/system/trojan-go.service << END
@@ -128,13 +124,11 @@ RestartPreventExitStatus=23
 [Install]
 WantedBy=multi-user.target
 END
-clear
 
 # Trojan Go Uuid
 cat > ${trgo}/uuid << END
 ${uuid}
 END
-clear
 
 echo -e "[ ${green}INFO$NC ] INSTALL SCRIPT ..."
 sleep 1
@@ -147,8 +141,6 @@ sed -i -e 's/\r$//' /bin/add-trgo
 sed -i -e 's/\r$//' /bin/cek-trgo
 sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
-clear
 
 echo -e "[ ${green}INFO$NC ] SETTING TROJAN-GO SUKSES !!!"
 sleep 1
-clear

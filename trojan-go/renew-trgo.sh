@@ -55,7 +55,7 @@ clear
     echo -e ""
     sleep 3
     clear
-    menu-trgo
+    menu-trojan
     	else
 	clear
 	
@@ -87,7 +87,7 @@ clear
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     sleep 3
     clear
-    menu-trgo
+    menu-trojan
 	    else
 	clear
 
