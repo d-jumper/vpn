@@ -37,12 +37,7 @@ apt-get remove --purge apache apache* -y
 rm ${nginx}/sites-enabled/*
 rm ${nginx}/sites-available/*
 wget -O ${nginx}/nginx.conf "${github}/nginx/nginx.conf"
-#wget -O ${nginx}/nginx2.conf "${github}/nginx/nginx.conf"
 wget -O ${nginx}/conf.d/vps.conf "${github}/nginx/vps.conf"
-#ls /etc/php > /root/php-version.txt
-#phpv=$(cat /root/php-version.txt)
-#sed -i "s/listen = \/run\/php\/php${phpv}-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/${phpv}/fpm/pool.d/www.conf
-#rm -rvf /root/php-version.txt
 sed -i "s/listen = \/run\/php\/php-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/fpm/pool.d/www.conf
 useradd -m vps;
 mkdir -p ${vps}
@@ -62,5 +57,13 @@ sed -i "${MYIP2}" ${nginx}/sites-available/${domain}.conf
 sed -i "${DOMAIN2}" ${nginx}/sites-available/${domain}.conf
 sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
 
+wget -O /usr/bin/cert "${github}/service/cert.sh"
+chmod +x /usr/bin/cert
+sed -i -e 's/\r$//' /usr/bin/cert
+cert
+
+systemctl enable nginx
+systemctl start nginx
+systemctl restart nginx
 sudo nginx -t && sudo systemctl reload nginx
 sleep 5
