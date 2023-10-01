@@ -82,7 +82,7 @@ wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-
 
 # =========================================
 # Websocket
-/use/bin/wsedu
+/usr/bin/wsedu
 
 # =========================================
 # OphvServer
@@ -193,11 +193,11 @@ chmod 644 /root/.profile
 
 history -c
 # Reboot VPS Every At 00:00 Mid-Night
-if ! grep -q 'reboot' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * reboot") | crontab;fi
-# Restart Service Every At 00:05 Mid-Night
-if ! grep -q '/usr/bin/restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "5 0 * * * /usr/bin/restart") | crontab;fi
-# Check & Delete Expired User Every At 00:10 Mid-Night
-if ! grep -q '/usr/bin/xp' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 0 * * * /usr/bin/xp") | crontab;fi
+if ! grep -q '/ur/bin/clearlog && reboot' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /ur/bin/clearlog && reboot") | crontab;fi
+# Check & Delete Expired User & restart service Every At 03:00 - 03:10 am
+if ! grep -q '/usr/bin/xp' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 3 * * * /usr/bin/xp") | crontab;fi
+if ! grep -q '/usr/bin/xpssh' /var/spool/cron/crontabs/root;then (crontab -l;echo "5 3 * * * /usr/bin/xpssh") | crontab;fi
+if ! grep -q '/usr/bin/delexp && restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 3 * * * /usr/bin/delexp") | crontab;fi
 
 history -c
 echo "1.2" > /home/ver
@@ -241,7 +241,7 @@ echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
 echo "   - IPtables                : [ON]"  | tee -a log-install.txt
 echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
 echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
-echo "   - Autoreboot On 04.00 GMT +7 WIB" | tee -a log-install.txt
+echo "   - Autoreboot On 00.00 GMT +7 WIB" | tee -a log-install.txt
 echo "   - Autobackup Data" | tee -a log-install.txt
 echo "   - Restore Data" | tee -a log-install.txt
 echo "   - Auto Delete Expired Account" | tee -a log-install.txt
