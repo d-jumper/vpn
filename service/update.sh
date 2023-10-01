@@ -302,71 +302,7 @@ sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
 clear
 
-echo -e "[ ${green}INFO$NC ] Restart All Service ..."
-echo ""
-sleep 15
-systemctl stop ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Stopping Websocket "
-pkill python >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Stopping Python "
-systemctl stop sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Stopping Sslh "
-systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
-systemctl disable ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Disabled Websocket "
-systemctl disable sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Disabled Sslh "
-systemctl disable squid >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Disabled Squid "
-systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
-systemctl enable sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Enable Sslh "
-systemctl enable squid >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Enable Squid "
-systemctl enable ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Enable Websocket "
-systemctl start sslh >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
-systemctl start squid >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Squid "
-/etc/init.d/sslh start >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
-/etc/init.d/sslh restart >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Sslh "
-systemctl start ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Starting Websocket "
-systemctl restart ws-tls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
-sleep 15
-systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
-systemctl restart ws-tls >/dev/null 2>&1
-systemctl restart ws-nontls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
-systemctl restart ws-ovpn >/dev/null 2>&1
-systemctl restart ssh-ohp >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart OpenVPN "
-systemctl restart dropbear-ohp >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Dropbear "
-systemctl restart openvpn-ohp >/dev/null 2>&1
-/etc/init.d/ssh restart >/dev/null 2>&1
-/etc/init.d/dropbear restart >/dev/null 2>&1
-/etc/init.d/sslh restart >/dev/null 2>&1
-/etc/init.d/stunnel5 restart >/dev/null 2>&1
-/etc/init.d/openvpn restart >/dev/null 2>&1
-/etc/init.d/fail2ban restart >/dev/null 2>&1
-/etc/init.d/cron restart >/dev/null 2>&1
-/etc/init.d/nginx restart >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart all.service "
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 >/dev/null 2>&1
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 >/dev/null 2>&1
-screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Setting BADVPN.UDPGW "
-echo ""
-
-echo -e "[ ${green}INFO$NC ] Update Successfully!"
+echo -e "[ ${green}INFO$NC ] Update Sxript Successfully!"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
