@@ -22,8 +22,9 @@ github="raw.githubusercontent.com/arfprsty810/vpn/main"
 domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";
 MYIP=$(cat $arfvpn/IP)
-MYISP=$(cat $arfvpn/ISP)
+MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$domain/g";
+MYISP=$(cat $arfvpn/ISP)
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green        UPDATE / RENEW DOMAIN SERVER $NC"
