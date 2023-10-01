@@ -18,7 +18,7 @@ source /etc/os-release
 arfvpn="/etc/arfvpn"
 nginx="/etc/nginx"
 vps="/home/vps/public_html"
-github="https://raw.githubusercontent.com/arfprsty810/vpn/main"
+github="raw.githubusercontent.com/arfprsty810/vpn/main"
 domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";
 MYIP=$(cat $arfvpn/IP)
@@ -56,11 +56,11 @@ systemctl restart nginx
 sudo nginx -t && sudo systemctl reload nginx
 sleep 5
 systemctl stop squid
+rm -rvf /etc/squid/squid.conf
 wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 sed -i $MYHOST /etc/squid/squid.conf
 systemctl start squid
-wget https://${github}/openvpn/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 /etc/set.sh
 /usr/bin/fixssh
 

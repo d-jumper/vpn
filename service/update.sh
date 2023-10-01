@@ -15,14 +15,14 @@ github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 cd /usr/bin
 
-echo -e "[ ${green}INFO$NC ] Remove old file ..."
+echo -e "[ ${green}INFO$NC ] Removing old file ..."
 sleep 1
 #vmess
 rm -rvf /usr/bin/cek-bandwidth
-#rm -rvf /usr/bin/cert
-#rm -rvf /usr/bin/cf
+rm -rvf /usr/bin/cert
+rm -rvf /usr/bin/cf
 rm -rvf /usr/bin/cfnhost
-#rm -rvf /usr/bin/hostvps
+rm -rvf /usr/bin/hostvps
 rm -rvf /usr/bin/menu
 rm -rvf /usr/bin/menu-backup
 rm -rvf /usr/bin/menu-setting
@@ -34,6 +34,7 @@ rm -rvf /usr/bin/update
 rm -rvf /usr/bin/update-xray
 rm -rvf /usr/bin/wbmn
 rm -rvf /usr/bin/xp
+
 rm -rvf /usr/bin/changeport
 rm -rvf /usr/bin/portovpn
 rm -rvf /usr/bin/portsquid
@@ -57,34 +58,40 @@ rm -rvf /usr/bin/about
 #rm -rvf bbr.sh && ./bbr.sh
 rm -rvf /usr/bin/clearlog
 rm -rvf /usr/bin/info
-#rm -rvf /usr/bin/issue.net
+rm -rvf /etc/issue.net
 #rm -rvf /etc/pam.d/common-password
 rm -rvf /usr/bin/ram
 rm -rvf /etc/set.sh
 #rm -rvf /etc/squid/squid.conf
 rm -rvf /usr/bin/swapkvm
-rm -rvf /usr/bin/wsedu.sh
+#rm -rvf /usr/bin/wsedu
+
 rm -rvf /usr/bin/portsshws
 rm -rvf /usr/bin/portsshnontls
+
 rm -rvf /usr/bin/menu-vmess
 rm -rvf /usr/bin/add-vm
 rm -rvf /usr/bin/cek-vm
 rm -rvf /usr/bin/del-vm
 rm -rvf /usr/bin/renew-vm
+
 rm -rvf /usr/bin/menu-vless
 rm -rvf /usr/bin/add-vless
 rm -rvf /usr/bin/cek-vless
 rm -rvf /usr/bin/del-vless
 rm -rvf /usr/bin/renew-vless
+
 rm -rvf /usr/bin/menu-trojan
 rm -rvf /usr/bin/add-tr
 rm -rvf /usr/bin/cek-tr
 rm -rvf /usr/bin/del-tr
 rm -rvf /usr/bin/renew-tr
+
 rm -rvf /bin/add-trgo
 rm -rvf /bin/cek-trgo
 rm -rvf /bin/del-trgo
 rm -rvf /bin/renew-trgo
+
 rm -rvf /usr/bin/menu-ss
 rm -rvf /usr/bin/addss
 rm -rvf /usr/bin/cekss
@@ -96,10 +103,10 @@ echo -e "[ ${green}INFO$NC ] Update New Script ..."
 sleep 1
 #vmess
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-#wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
-#wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
+wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
+wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
-#wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
+wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
 wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
 wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
 wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
@@ -113,10 +120,10 @@ wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod
 wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
-#sed -i -e 's/\r$//' /usr/bin/cert
-#sed -i -e 's/\r$//' /usr/bin/cf
+sed -i -e 's/\r$//' /usr/bin/cert
+sed -i -e 's/\r$//' /usr/bin/cf
 sed -i -e 's/\r$//' /usr/bin/cfnhost
-#sed -i -e 's/\r$//' /usr/bin/hostvps
+sed -i -e 's/\r$//' /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/menu
 sed -i -e 's/\r$//' /usr/bin/menu-backup
 sed -i -e 's/\r$//' /usr/bin/menu-setting
@@ -189,21 +196,22 @@ sed -i -e 's/\r$//' /usr/bin/trialssh
 sed -i -e 's/\r$//' /usr/bin/expssh
 
 wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
-wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/badvpn-udpgw64"
+#wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/badvpn-udpgw64"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
 wget -O /usr/bin/info "https://${github}/ssh/archive/info.sh"
-#wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
+wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
 #wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
 wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
 chmod +x /usr/bin/about
+#chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
 chmod +x /usr/bin/info
-#chmod +x /usr/bin/issue.net
+chmod +x /usr/bin/issue.net
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
 chmod +x /etc/set.sh
@@ -213,7 +221,7 @@ sed -i -e 's/\r$//' /usr/bin/about
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
 sed -i -e 's/\r$//' /usr/bin/clearlog
 sed -i -e 's/\r$//' /usr/bin/info
-#sed -i -e 's/\r$//' /usr/bin/issue.net
+sed -i -e 's/\r$//' /usr/bin/issue.net
 #sed -i -e 's/\r$//' /etc/pam.d/common-password
 sed -i -e 's/\r$//' /usr/bin/ram
 sed -i -e 's/\r$//' /etc/set.sh
@@ -224,13 +232,13 @@ sed -i -e 's/\r$//' /usr/bin/swapkvm
 #wget -O /etc/init.d/stunnel5 "https://${github}/ssh/archive/stunnel5.init"
 #chmod +x /etc/init.d/stunnel5
 
-wget -O /usr/bin/wsedu "https://${github}/ssh/websocket/edu.sh"
+#wget -O /usr/bin/wsedu "https://${github}/ssh/websocket/edu.sh"
 wget -O /usr/bin/portsshws "https://${github}/ssh/websocket/portsshws.sh"
 wget -O /usr/bin/portsshnontls "https://${github}/ssh/websocket/portsshnontls.sh"
-chmod +x /usr/bin/wsedu.sh
+#chmod +x /usr/bin/wsedu
 chmod +x /usr/bin/portsshws
 chmod +x /usr/bin/portsshnontls
-sed -i -e 's/\r$//' /usr/bin/wsedu.sh
+#sed -i -e 's/\r$//' /usr/bin/wsedu
 sed -i -e 's/\r$//' /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/portsshnontls
 
@@ -292,23 +300,71 @@ sed -i -e 's/\r$//' /bin/add-trgo
 sed -i -e 's/\r$//' /bin/cek-trgo
 sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
-
-sleep 1
-cat> /root/.profile << END
-# ~/.profile: executed by Bourne-compatible login shells.
-
-if [ "$BASH" ]; then
-  if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-  fi
-fi
-
-mesg n || true
 clear
-menu
-END
-chmod 644 /root/.profile
-rm -rvf /root/*.sh
+
+echo -e "[ ${green}INFO$NC ] Restart All Service ..."
+echo ""
+sleep 15
+systemctl stop ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Stopping Websocket "
+pkill python >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Stopping Python "
+systemctl stop sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Stopping Sslh "
+systemctl daemon-reload >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
+systemctl disable ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Disabled Websocket "
+systemctl disable sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Disabled Sslh "
+systemctl disable squid >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Disabled Squid "
+systemctl daemon-reload >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
+systemctl enable sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Enable Sslh "
+systemctl enable squid >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Enable Squid "
+systemctl enable ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Enable Websocket "
+systemctl start sslh >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
+systemctl start squid >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Squid "
+/etc/init.d/sslh start >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Sslh "
+/etc/init.d/sslh restart >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Sslh "
+systemctl start ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Starting Websocket "
+systemctl restart ws-tls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
+sleep 15
+systemctl daemon-reload >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
+systemctl restart ws-tls >/dev/null 2>&1
+systemctl restart ws-nontls >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
+systemctl restart ws-ovpn >/dev/null 2>&1
+systemctl restart ssh-ohp >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart OpenVPN "
+systemctl restart dropbear-ohp >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart Dropbear "
+systemctl restart openvpn-ohp >/dev/null 2>&1
+/etc/init.d/ssh restart >/dev/null 2>&1
+/etc/init.d/dropbear restart >/dev/null 2>&1
+/etc/init.d/sslh restart >/dev/null 2>&1
+/etc/init.d/stunnel5 restart >/dev/null 2>&1
+/etc/init.d/openvpn restart >/dev/null 2>&1
+/etc/init.d/fail2ban restart >/dev/null 2>&1
+/etc/init.d/cron restart >/dev/null 2>&1
+/etc/init.d/nginx restart >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Restart all.service "
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 >/dev/null 2>&1
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 >/dev/null 2>&1
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 >/dev/null 2>&1
+echo -e "[ ${GREEN}ok${NC} ] Setting BADVPN.UDPGW "
+echo ""
 
 echo -e "[ ${green}INFO$NC ] Update Successfully!"
 echo ""
