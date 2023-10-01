@@ -480,16 +480,13 @@ sed -i -e 's/\r$//' /usr/bin/swapkvm
 wget -O /usr/bin/wsedu "https://${github}/ssh/websocket/edu.sh"
 wget -O /usr/bin/portsshws "https://${github}/ssh/websocket/portsshws.sh"
 wget -O /usr/bin/portsshnontls "https://${github}/ssh/websocket/portsshnontls.sh"
-chmod +x /usr/bin/wsedu.sh
+chmod +x /usr/bin/wsedu
 chmod +x /usr/bin/portsshws
 chmod +x /usr/bin/portsshnontls
-sed -i -e 's/\r$//' /usr/bin/wsedu.sh
+sed -i -e 's/\r$//' /usr/bin/wsedu
 sed -i -e 's/\r$//' /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/portsshnontls
 
-echo "0 5 * * * root clearlog && reboot" >> /etc/crontab
-echo "0 0 * * * root xpssh" >> /etc/crontab
-echo "5 0 * * * root delexp && restart " >> /etc/crontab
 # remove unnecessary files
 cd
 apt autoclean -y
