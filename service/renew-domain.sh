@@ -12,7 +12,6 @@ red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 clear
 
 cd /root
-systemctl stop nginx
 /usr/bin/hostvps
 source /etc/os-release
 arfvpn="/etc/arfvpn"
@@ -32,6 +31,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 date
 sleep 3
 cd ${nginx}
+systemctl stop nginx
 mkdir -p $arfvpn/backup/
 cp ${nginx}/sites-available/*.conf $arfvpn/backup/${domain}.conf
 rm ${nginx}/sites-enabled/*

@@ -18,7 +18,7 @@ clear
 apt install jq curl -y
 DOMAIN=d-jumper.me
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=${sub}.sg.${DOMAIN}
+SUB_DOMAIN=${sub}.arfvpn.${DOMAIN}
 CF_ID=arief.prsty@gmail.com
 CF_KEY=3a3ac5ccc9e764de9129fbbb177c161b9dfbd
 set -euo pipefail

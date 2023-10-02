@@ -46,7 +46,6 @@ rm -rvf /usr/bin/addssh
 rm -rvf /usr/bin/autokill
 rm -rvf /usr/bin/ceklim
 rm -rvf /usr/bin/cekssh
-rm -rvf /usr/bin/delexp
 rm -rvf /usr/bin/delssh
 rm -rvf /usr/bin/member
 rm -rvf /usr/bin/menu-ssh
@@ -162,7 +161,6 @@ wget -O /usr/bin/addssh "https://${github}/ssh/addssh.sh"
 wget -O /usr/bin/autokill "https://${github}/ssh/autokill.sh"
 wget -O /usr/bin/ceklim "https://${github}/ssh/ceklim.sh"
 wget -O /usr/bin/cekssh "https://${github}/ssh/cekssh.sh"
-wget -O /usr/bin/delexp "https://${github}/ssh/delexp.sh"
 wget -O /usr/bin/delssh "https://${github}/ssh/delssh.sh"
 wget -O /usr/bin/member "https://${github}/ssh/member.sh"
 wget -O /usr/bin/menu-ssh "https://${github}/ssh/menu-ssh.sh"
@@ -174,7 +172,6 @@ chmod +x /usr/bin/addssh
 chmod +x /usr/bin/autokill
 chmod +x /usr/bin/ceklim
 chmod +x /usr/bin/cekssh
-chmod +x /usr/bin/delexp
 chmod +x /usr/bin/delssh
 chmod +x /usr/bin/member
 chmod +x /usr/bin/menu-ssh
@@ -186,7 +183,6 @@ sed -i -e 's/\r$//' /usr/bin/addssh
 sed -i -e 's/\r$//' /usr/bin/autokill
 sed -i -e 's/\r$//' /usr/bin/ceklim
 sed -i -e 's/\r$//' /usr/bin/cekssh
-sed -i -e 's/\r$//' /usr/bin/delexp
 sed -i -e 's/\r$//' /usr/bin/delssh
 sed -i -e 's/\r$//' /usr/bin/member
 sed -i -e 's/\r$//' /usr/bin/menu-ssh
@@ -302,7 +298,7 @@ sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
 clear
 
-echo -e "[ ${green}INFO$NC ] Update Sxript Successfully!"
+echo -e "[ ${green}INFO$NC ] Update Successfully!"
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
