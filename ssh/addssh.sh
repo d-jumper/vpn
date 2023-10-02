@@ -106,39 +106,41 @@ echo -e "\033[0;34m┌───────────────────�
 echo -e "           ⇱ \e[32;1m✶ Result SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 echo -e " " | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}───✶ SSH & OpenVPN Account ✶─── $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Remarks       : ${user} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}IP/Host       : ${IP} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Domain        : ${domain} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Cfn           : ${cfn} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Username      : ${user} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Password      : ${pass} $NC" | tee -a /etc/log-create-user.log
+echo -e "${NC}${CYAN}            ───✶ SSH & OpenVPN Account ✶─── $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Remarks           : ${user} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}IP/Host           : ${IP} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Domain            : ${domain} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Cfn               : ${cfn} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Username          : ${user} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Password          : ${pass} $NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}───✶ Service Running Port ✶─── $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Dropbear      : 109, 143 $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}SSL/TLS       :$ssl $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}SSH WS No SSL : $ws2 $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Ovpn Ws       : 2086 $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Port TCP      : $ovpn $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Port UDP      : $ovpn2 $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Port SSL      : 990 $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}UDPGW         : 7100-7200-7300 $NC" | tee -a /etc/log-create-user.log
+echo -e "${NC}${CYAN}            ───✶ Service Running Port ✶─── $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Dropbear          : 109, 143 $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}SSL/TLS           :$ssl $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}SSH WS NONE SSL   : $ws2 $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Ovpn WS           : 2086 $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Port TCP          : $ovpn $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Port UDP          : $ovpn2 $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Port SSL          : 990 $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}UDPGW             : 7100-7200-7300 $NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}───✶ OpenVPN Config ✶─── $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}OVPN TCP      : http://${IP}:${nginx}/tcp.ovpn $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}OVPN UDP      : http://${IP}:${nginx}/udp.ovpn $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}OVPN SSL      : http://${IP}:${nginx}/ssl.ovp $NC" | tee -a /etc/log-create-user.log
+echo -e "${NC}${CYAN}               ───✶ OpenVPN Config ✶─── $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}OVPN TCP          ➣ http://${IP}:${nginx}/tcp.ovpn$NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}OVPN UDP          ➣ http://${IP}:${nginx}/udp.ovpn$NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}OVPN SSL          ➣ http://${IP}:${nginx}/ssl.ovpn$NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}───✶ PAYLOAD CONFIG ✶─── $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}PAYLOAD WS TLS  ➣ $NC" | tee -a /etc/log-create-user.log
+echo -e "${NC}${CYAN}               ───✶ PAYLOAD CONFIG ✶─── $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}PAYLOAD WS TLS               ➣ $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}GET wss://bug.com [protocol][crlf]Host: ${domain}[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf] \n $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}PAYLOAD WEBSOCKET CLOUDFRONT ➣ $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}GET / HTTP/1.1[crlf]Host: [host_port][crlf]Connection: Upgrade[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf] \n $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Created       : ${hariini} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Expired On    : ${expi} $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+echo -e "" | tee -a /etc/log-create-user.log
+echo -e "${NC}${CYAN}              ───✶ Created - Expired ✶─── $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Created           : ${hariini} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Expired On        : ${exp} $NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
