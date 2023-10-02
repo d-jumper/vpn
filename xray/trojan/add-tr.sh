@@ -92,7 +92,7 @@ sed -i '/#trojanws$/a\#tr# '"${user} ${exp}"'\
 },{"password": "'""${uuid}""'","email": "'""${user}""'"' ${xray}/config.json
 sed -i '/#trojangrpc$/a\#tr# '"${user} ${exp}"'\
 },{"password": "'""${uuid}""'","email": "'""${user}""'"' ${xray}/config.json
-systemctl restart xray
+#systemctl restart xray
 trojanlink1="trojan://${uuid}@${domain}:${tls}?path=%2Ftrojan-ws&security=tls&host=bug.com&type=ws&sni=bug.com#${user}"
 trojanlink2="trojan://${uuid}@${domain}:${none}?path=%2Ftrojan-ws&host=bug.com&type=ws#${user}"
 trojanlink3="trojan://${uuid}@${domain}:${tls}?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"

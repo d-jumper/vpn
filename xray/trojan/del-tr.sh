@@ -92,7 +92,7 @@ clear
 	
     exp=$(grep -wE "^#tr# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)
     sed -i "/^#tr# ${user} ${exp}/,/^},{/d" ${xray}/config.json
-    systemctl restart xray > /dev/null 2>&1
+ #   systemctl restart xray > /dev/null 2>&1
     clear
         fi
         
