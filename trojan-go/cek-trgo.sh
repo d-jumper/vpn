@@ -40,13 +40,8 @@ clear
 arfvpn="/etc/arfvpn"
 trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
-ipvps="/var/lib/arfvpn"
-source ${ipvps}/ipvps.conf
-if [[ "$IP" = "" ]]; then
+ip=$(cat ${arfvpn}/IP)
 domain=$(cat ${arfvpn}/domain)
-else
-domain=$IP
-fi
 clear 
 
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
@@ -74,28 +69,22 @@ jum2=$(cat /tmp/iptrojango.txt)
 sed -i "/$jum2/d" /tmp/other.txt > /dev/null 2>&1
 done
 jum=$(cat /tmp/iptrojango.txt)
-if [[ -z "$jum" ]]; then
+if [[ -z "${jum}" ]]; then
 echo > /dev/null
 else
 jum2=$(cat /tmp/iptrojango.txt | nl)
+lastlogin=$(cat ${logtrgo}/access.log | grep -w "${akun}" | tail -n 500 | cut -d " " -f 2 | tail -1)
+
 echo -e "  ${RED}•${NC} ${CYAN}Info Login : $NC"
 echo -e "${NC} ${CYAN}User : ${akun} $NC";
-echo -e "${NC} ${CYAN}Ip Login : ${jum2} $NC";
-#echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
+echo -e "${NC} ${CYAN}Ip Login : ${jum} $NC";
+echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
 echo -e "${NC}${CYAN}──────────────────── $NC"
-fi
-rm -rf /tmp/iptrojango.txt
-done
-oth=$(cat /tmp/other.txt | sort | uniq | nl)
-echo -e "  ${RED}•${NC} ${CYAN}Info Login : $NC"
-#echo -e "${NC} ${CYAN}User : ${akun} $NC";
-#echo -e "${NC} ${CYAN}Ip Login : ${jum} $NC";
-#echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
-echo -e "${NC} ${CYAN}Other : ${akun} $NC";
-echo -e "${NC} ${CYAN}${oth} $NC";
-echo -e "${NC}${CYAN}──────────────────── $NC"
-rm -rf /tmp/other.txt
 
+fi
+done
+rm -rf /tmp/iptrojango.txt
+rm -rf /tmp/other.txt
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
