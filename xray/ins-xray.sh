@@ -69,7 +69,7 @@ wget https://${github}/service/update-xray.sh && chmod +x update-xray.sh && ./up
 wget https://${github}/nginx/nginx-server.sh && chmod +x nginx-server.sh && sed -i -e 's/\r$//' nginx-server.sh && ./nginx-server.sh
 
 # Random Port Xray
-trojanws=$((RANDOM + 10000))
+trojan=$((RANDOM + 10000))
 vless=$((RANDOM + 10000))
 vlessgrpc=$((RANDOM + 10000))
 vmess=$((RANDOM + 10000))
@@ -101,7 +101,7 @@ cat > /etc/xray/config.json << END
     },
     {
       "listen": "127.0.0.1",
-      "port": "${trojanws}",
+      "port": "${trojan}",
       "protocol": "trojan",
       "settings": {
           "decryption":"none",		
@@ -461,7 +461,7 @@ sed -i '$ i}' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ ilocation = /trojan' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i{' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ iproxy_redirect off;' /etc/nginx/sites-available/${domain}.conf
-sed -i '$ iproxy_pass http://127.0.0.1:'"${trojanws}"';' /etc/nginx/sites-available/${domain}.conf
+sed -i '$ iproxy_pass http://127.0.0.1:'"${trojan}"';' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ iproxy_http_version 1.1;' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ iproxy_set_header X-Real-IP \$remote_addr;' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ iproxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;' /etc/nginx/sites-available/${domain}.conf
