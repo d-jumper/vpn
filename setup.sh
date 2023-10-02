@@ -195,9 +195,8 @@ history -c
 # Reboot VPS Every At 00:00 Mid-Night
 if ! grep -q '/ur/bin/clearlog && reboot' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /ur/bin/clearlog && reboot") | crontab;fi
 # Check & Delete Expired User & restart service Every At 03:00 - 03:10 am
-if ! grep -q '/usr/bin/xp' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 3 * * * /usr/bin/xp") | crontab;fi
-if ! grep -q '/usr/bin/xpssh' /var/spool/cron/crontabs/root;then (crontab -l;echo "5 3 * * * /usr/bin/xpssh") | crontab;fi
-if ! grep -q '/usr/bin/delexp && restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 3 * * * /usr/bin/delexp") | crontab;fi
+if ! grep -q '/usr/bin/xp && restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 3 * * * /usr/bin/xp && restart") | crontab;fi
+#if ! grep -q '/usr/bin/xpssh' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 3 * * * /usr/bin/xpssh") | crontab;fi
 
 history -c
 echo "1.2" > /home/ver
