@@ -57,40 +57,47 @@ echo -n > /tmp/other.txt
 data=( `cat ${trgo}/akun.conf | grep '^#trgo#' | cut -d ' ' -f 2`);
 for akun in "${data[@]}"
 do
-if [[ -z "${akun}" ]]; then
+if [[ -z "$akun" ]]; then
 akun="tidakada"
 fi
 echo -n > /tmp/iptrojango.txt
 data2=( `netstat -anp | grep ESTABLISHED | grep tcp6 | grep trojan-go | awk '{print $5}' | cut -d: -f1 | sort | uniq`);
 for ip in "${data2[@]}"
 do
-jum=$(cat ${logtrgo}/trojan-go.log | grep -w ${akun} | awk '{print $3}' | cut -d: -f1 | grep -w ${ip} | sort | uniq)
-if [[ "${jum}" = "${ip}" ]]; then
-echo "${jum}" >> /tmp/iptrojango.txt
+jum=$(cat /var/log/arfvpn/trojan-go/trojan-go.log | grep -w $akun | awk '{print $3}' | cut -d: -f1 | grep -w $ip | sort | uniq)
+if [[ "$jum" = "$ip" ]]; then
+echo "$jum" >> /tmp/iptrojango.txt
 else
-echo "${ip}" >> /tmp/other.txt
+echo "$ip" >> /tmp/other.txt
 fi
 jum2=$(cat /tmp/iptrojango.txt)
-sed -i "/${jum2}/d" /tmp/other.txt > /dev/null 2>&1
+sed -i "/$jum2/d" /tmp/other.txt > /dev/null 2>&1
 done
 jum=$(cat /tmp/iptrojango.txt)
-oth=$(cat /tmp/other.txt | sort | uniq | nl)
-lastlogin=$(cat ${logtrgo}/trojan-go.log | grep -w "${akun}" | tail -n 500 | cut -d " " -f 2 | tail -1)
-if [[ -z "${jum}" ]]; then
+if [[ -z "$jum" ]]; then
 echo > /dev/null
-#else
+else
 jum2=$(cat /tmp/iptrojango.txt | nl)
-echo -e "  ${RED}•${NC} ${CYAN}user : ${akun} $NC"
-echo -e "${NC} ${CYAN}${oth} | ${lastlogin} $NC";
+echo -e "  ${RED}•${NC} ${CYAN}Info Login : $NC"
+echo -e "${NC} ${CYAN}User : ${akun} $NC";
+echo -e "${NC} ${CYAN}Ip Login : ${jum2} $NC";
+#echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
 echo -e "${NC}${CYAN}──────────────────── $NC"
 fi
-done
-
 rm -rf /tmp/iptrojango.txt
+done
+oth=$(cat /tmp/other.txt | sort | uniq | nl)
+echo -e "  ${RED}•${NC} ${CYAN}Info Login : $NC"
+#echo -e "${NC} ${CYAN}User : ${akun} $NC";
+#echo -e "${NC} ${CYAN}Ip Login : ${jum} $NC";
+#echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
+echo -e "${NC} ${CYAN}Other : ${akun} $NC";
+echo -e "${NC} ${CYAN}${oth} $NC";
+echo -e "${NC}${CYAN}──────────────────── $NC"
 rm -rf /tmp/other.txt
 
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 read -n 1 -s -r -p "Press any key to back on menu"
-menu
+menu-tr
