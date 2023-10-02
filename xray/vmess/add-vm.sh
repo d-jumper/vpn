@@ -200,7 +200,7 @@ vmesslink3="vmess://$(echo ${worry} | base64 -w 0)"
 vmesslink4="vmess://$(echo ${flex} | base64 -w 0)"
 vmesslink5="vmess://$(echo ${grpc} | base64 -w 0)"
 vmesslink6="vmess://$(echo ${kuota} | base64 -w 0)"
-systemctl restart xray > /dev/null 2>&1
+# systemctl restart xray > /dev/null 2>&1
 service cron restart > /dev/null 2>&1
 clear
 
