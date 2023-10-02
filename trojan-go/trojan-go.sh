@@ -87,7 +87,7 @@ cat > ${trgo}/config.json << END
   },
   "websocket": {
     "enabled": true,
-    "path": "/trojango",
+    "path": "/trojan-go",
     "host": "${domain}"
   },
     "api": {
