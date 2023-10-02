@@ -108,7 +108,7 @@ cat > /etc/xray/config.json << END
            "clients": [
               {
                  "password": "${uuid}"
-#trojanws
+#trojan
               }
           ],
          "udp": true
@@ -116,7 +116,7 @@ cat > /etc/xray/config.json << END
        "streamSettings":{
            "network": "ws",
            "wsSettings": {
-               "path": "/trojan-ws"
+               "path": "/trojan"
             }
          }
      },
@@ -458,7 +458,7 @@ sed -i '$ iproxy_set_header Connection "upgrade";' /etc/nginx/sites-available/${
 sed -i '$ iproxy_set_header Host \$http_host;' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i}' /etc/nginx/sites-available/${domain}.conf
 
-sed -i '$ ilocation = /trojan-ws' /etc/nginx/sites-available/${domain}.conf
+sed -i '$ ilocation = /trojan' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i{' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ iproxy_redirect off;' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ iproxy_pass http://127.0.0.1:'"${trojanws}"';' /etc/nginx/sites-available/${domain}.conf
