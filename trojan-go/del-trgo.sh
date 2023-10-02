@@ -90,7 +90,7 @@ clear
 	    
 	clear
     exp=$(grep -wE "^#trgo# ${user}" "/etc/arfvpn/trojan-go/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
-    sed -i "/^#trgo# ${user} ${exp}/d" ${trgo}/akun.conf
+    sed -i "/^#trgo# ${user} ${exp}/d" /etc/arfvpn/trojan-go/akun.conf
     sed -i '/^,"'"${user}"'"$/d' /etc/arfvpn/trojan-go/config.json
     systemctl restart trojan-go > /dev/null 2>&1
     clear
