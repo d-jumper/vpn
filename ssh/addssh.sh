@@ -132,10 +132,10 @@ echo -e "" | tee -a /etc/log-create-user.log
 echo -e "${NC}${CYAN}               ───✶ PAYLOAD CONFIG ✶─── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}PAYLOAD WS TLS               ➣ $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}GET wss://bug.com [protocol][crlf]Host: ${domain}[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf] \n $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${NC}${CYAN}GET wss://bug.com [protocol][crlf]Host: ${domain}[crlf]Connection: Upgrade[crlf]Upgrade: websocket[crlf][crlf] \n $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}PAYLOAD WEBSOCKET CLOUDFRONT ➣ $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}GET / HTTP/1.1[crlf]Host: [host_port][crlf]Connection: Upgrade[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf] \n $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${NC}${CYAN}GET / HTTP/1.1[crlf]Host: [host_port][crlf]Connection: Upgrade[crlf]User-Agent: [ua][crlf]Upgrade: websocket[crlf][crlf] \n $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "${NC}${CYAN}              ───✶ Created - Expired ✶─── $NC" | tee -a /etc/log-create-user.log
