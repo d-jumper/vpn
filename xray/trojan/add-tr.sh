@@ -88,13 +88,13 @@ clear
     
 clear
 exp=`date -d "${masaaktif} days" +"%Y-%m-%d"`
-sed -i '/#trojanws$/a\#tr# '"${user} ${exp}"'\
+sed -i '/#trojan$/a\#tr# '"${user} ${exp}"'\
 },{"password": "'""${uuid}""'","email": "'""${user}""'"' ${xray}/config.json
 sed -i '/#trojangrpc$/a\#tr# '"${user} ${exp}"'\
 },{"password": "'""${uuid}""'","email": "'""${user}""'"' ${xray}/config.json
 #systemctl restart xray
-trojanlink1="trojan://${uuid}@${domain}:${tls}?path=%2Ftrojan-ws&security=tls&host=bug.com&type=ws&sni=bug.com#${user}"
-trojanlink2="trojan://${uuid}@${domain}:${none}?path=%2Ftrojan-ws&host=bug.com&type=ws#${user}"
+trojanlink1="trojan://${uuid}@${domain}:${tls}?path=%2Ftrojan&security=tls&host=bug.com&type=ws&sni=bug.com#${user}"
+trojanlink2="trojan://${uuid}@${domain}:${none}?path=%2Ftrojan&host=bug.com&type=ws#${user}"
 trojanlink3="trojan://${uuid}@${domain}:${tls}?mode=gun&security=tls&type=grpc&serviceName=trojan-grpc&sni=bug.com#${user}"
 clear
     
@@ -110,11 +110,11 @@ clear
     echo -e "  ${RED}•${NC} ${CYAN}Password  : ${uuid} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Port TLS  : ${tls} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Port NTLS : ${none} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Port GRPC : ${tr_tls} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port GRPC : ${tls} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}alterid   : 0 $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Security  : auto $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Network   : ws / grpc $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Path WS   : /trojan-ws $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Path WS   : /trojan $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Path GRPC : /trojan-grpc $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Link TLS  : ${trojanlink1} $NC" | tee -a /etc/log-create-user.log
