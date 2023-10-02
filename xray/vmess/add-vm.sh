@@ -87,6 +87,7 @@ clear
     echo -e " "
     
 clear
+hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "${masaaktif} days" +"%Y-%m-%d"`
 sed -i '/#vmess$/a\#vm# '"${user} ${exp}"'\
 },{"id": "'""${uuid}""'","alterId": '"0"',"email": "'""${user}""'"' ${xray}/config.json
@@ -210,30 +211,43 @@ clear
     echo -e "               ⇱ \e[32;1m✶ Result Xray Vmess Account ✶\e[0m ⇲ ${NC}" | tee -a /etc/log-create-user.log
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
     echo -e "" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Remarks   : ${user} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}IP/Host   : ${IP} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Domain    : ${domain} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Uuid      : ${uuid} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Port TLS  : ${tls} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Port NTLS : ${none} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Port GRPC : ${tls} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}alterid   : 0 $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Security  : auto $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Network   : ws / grpc $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Path WS   : /vmess $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Path GRPC : /vmess-grpc $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Path TSEL : /worryfree $NC" | tee -a /etc/log-create-user.log
+    echo -e "${NC}${CYAN}            ───✶ Xray - Trojan Account ✶─── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Remarks           : ${user} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}IP/Host           : ${IP} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Domain            : ${domain} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Password          : ${uuid} $NC" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "${NC}${CYAN}            ───✶ Service Running Port ✶─── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port WS TLS       : ${tls} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port WS NONE NTLS : ${none} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Port GRPC         : ${tls} $NC" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "${NC}${CYAN}           ───✶ Path & Network Setting ✶─── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}alterid           : 0 $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Security          : auto $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Network           : ws / grpc $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Path WS           : /vmess $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Path GRPC         : /vmess-grpc $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Path TSEL         : /worryfree $NC" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "${NC}${CYAN}            ───✶ Example Config & Link ✶─── $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Link TLS  : ${vmesslink1} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link WS TLS       ➣ $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}${vmesslink1} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Link NTLS : ${vmesslink2} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link WS NONE TLS ➣ $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}${vmesslink2} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Link GRPC : ${vmesslink5} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link GRPC ➣ $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}${vmesslink5} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Link TSEL : ${vmesslink3} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Link TSEL ➣ $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}${vmesslink3} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Expired On : ${exp} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
+    echo -e "" | tee -a /etc/log-create-user.log
+    echo -e "${NC}${CYAN}              ───✶ Created - Expired ✶─── $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Created           : ${hariini} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Expired On        : ${exp} $NC" | tee -a /etc/log-create-user.log
     echo -e "" | tee -a /etc/log-create-user.log
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
     echo "" | tee -a /etc/log-create-user.log
