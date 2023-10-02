@@ -112,7 +112,7 @@ echo -e "" | tee -a /etc/log-create-user.log
 echo -e "${NC}${CYAN}            ───✶ Example Config & Link ✶─── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Link GO           ➣ $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}${trojangolink} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${NC}${CYAN}${trojangolink} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "${NC}${CYAN}              ───✶ Created - Expired ✶─── $NC" | tee -a /etc/log-create-user.log
