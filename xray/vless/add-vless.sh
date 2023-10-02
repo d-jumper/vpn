@@ -95,7 +95,7 @@ sed -i '/#vlessgrpc$/a\#vl# '"${user} ${exp}"'\
 vlesslink1="vless://${uuid}@${domain}:${tls}?path=/vless&security=tls&encryption=none&type=ws#${user}"
 vlesslink2="vless://${uuid}@${domain}:$none?path=/vless&encryption=none&type=ws#${user}"
 vlesslink3="vless://${uuid}@${domain}:${tls}?mode=gun&security=tls&encryption=none&type=grpc&serviceName=vless-grpc&sni=bug.com#${user}"
-systemctl restart xray
+# systemctl restart xray
 clear
     
     echo -e "" | tee -a /etc/log-create-user.log
