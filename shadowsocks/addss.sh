@@ -171,10 +171,10 @@ echo -e "" | tee -a /etc/log-create-user.log
 echo -e "${NC}${CYAN}            ───✶ Example Config & Link ✶─── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Link TLS          ➣ $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}${linkss1} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${NC}${CYAN}${linkss1} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Link NONE TLS     ➣ $NC" | tee -a /etc/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}${linkss2} $NC" | tee -a /etc/log-create-user.log
+echo -e "  ${NC}${CYAN}${linkss2} $NC" | tee -a /etc/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}────────────────────────────────── $NC" | tee -a /etc/log-create-user.log
 echo -e "" | tee -a /etc/log-create-user.log
 echo -e "${NC}${CYAN}              ───✶ Created - Expired ✶─── $NC" | tee -a /etc/log-create-user.log
