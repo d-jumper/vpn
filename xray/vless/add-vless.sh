@@ -109,7 +109,7 @@ clear
     echo -e "  ${RED}•${NC} ${CYAN}Remarks           : ${user} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}IP/Host           : ${IP} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Domain            : ${domain} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Password          : ${uuid} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Uuid              : ${uuid} $NC" | tee -a /etc/log-create-user.log
     echo -e "" | tee -a /etc/log-create-user.log
     echo -e "${NC}${CYAN}            ───✶ Service Running Port ✶─── $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Port WS TLS       : ${tls} $NC" | tee -a /etc/log-create-user.log
