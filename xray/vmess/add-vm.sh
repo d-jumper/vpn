@@ -211,11 +211,11 @@ clear
     echo -e "               ⇱ \e[32;1m✶ Result Xray Vmess Account ✶\e[0m ⇲ ${NC}" | tee -a /etc/log-create-user.log
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/log-create-user.log
     echo -e "" | tee -a /etc/log-create-user.log
-    echo -e "${NC}${CYAN}            ───✶ Xray - Trojan Account ✶─── $NC" | tee -a /etc/log-create-user.log
+    echo -e "${NC}${CYAN}             ───✶ Xray - Vmess Account ✶─── $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Remarks           : ${user} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}IP/Host           : ${IP} $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Domain            : ${domain} $NC" | tee -a /etc/log-create-user.log
-    echo -e "  ${RED}•${NC} ${CYAN}Password          : ${uuid} $NC" | tee -a /etc/log-create-user.log
+    echo -e "  ${RED}•${NC} ${CYAN}Uuid              : ${uuid} $NC" | tee -a /etc/log-create-user.log
     echo -e "" | tee -a /etc/log-create-user.log
     echo -e "${NC}${CYAN}            ───✶ Service Running Port ✶─── $NC" | tee -a /etc/log-create-user.log
     echo -e "  ${RED}•${NC} ${CYAN}Port WS TLS       : ${tls} $NC" | tee -a /etc/log-create-user.log
