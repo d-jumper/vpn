@@ -193,9 +193,9 @@ exit
 ;;
 
 x)
-exit
 clear
 neofetch
+exit
 ;;
 
 *)
