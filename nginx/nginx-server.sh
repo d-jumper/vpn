@@ -37,8 +37,12 @@ apt-get remove --purge apache apache* -y
 rm ${nginx}/sites-enabled/*
 rm ${nginx}/sites-available/*
 wget -O ${nginx}/nginx.conf "https://${github}/nginx/nginx.conf"
-wget -O ${nginx}/conf.d/arfvps.conf "https://${github}/nginx/arfvps.conf"
-sed -i "s/listen = \/run\/php\/php-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/fpm/pool.d/www.conf
+#wget -O ${nginx}/conf.d/arfvps.conf "https://${github}/nginx/arfvps.conf"
+ls /etc/php > phpversion
+phpv=$(cat /root/phpversion)
+sed -i "s/listen = \/run\/php\/php${phpv}-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/${phpv}/fpm/pool.d/www.conf
+rm /root/phpversion
+#sed -i "s/listen = \/run\/php\/php-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/fpm/pool.d/www.conf
 useradd -m arfvps;
 mkdir -p ${vps}/
 echo "<?php phpinfo() ?>" > ${vps}/info.php
@@ -51,8 +55,9 @@ cd ${vps}/
 wget -O ${vps}/index.html "https://${github}/nginx/index.html"
 
 cd ${nginx}
-wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/domain.conf"
-#sed -i 's/443/8443/g' /etc/nginx/sites-available/${domain}.conf
+#wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/domain.conf"
+wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/arfvps.conf"
+sed -i 's/443/8443/g' ${nginx}/sites-available/${domain}.conf
 sed -i "${MYIP2}" ${nginx}/sites-available/${domain}.conf
 sed -i "${DOMAIN2}" ${nginx}/sites-available/${domain}.conf
 sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
@@ -60,7 +65,7 @@ sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
 wget -O /usr/bin/cert "https://${github}/service/cert.sh"
 chmod +x /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cert
-./cert
+/usr/bin/cert
 
 systemctl enable nginx
 systemctl start nginx
