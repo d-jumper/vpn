@@ -65,8 +65,8 @@ fi
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 # ==========================================
-apt install wget curl jq -y
 #install host
+apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
@@ -208,48 +208,46 @@ clear
 echo " "
 echo "Installation has been completed!!"
 echo " "
-echo "=================================-™D-JumPer™ Project-===========================" | tee -a log-install.txt
-echo "" | tee -a log-install.txt
-echo "----------------------------------------------------------------------------" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Service & Port"  | tee -a log-install.txt
-echo "   - OpenSSH                 : 443, 22"  | tee -a log-install.txt
-echo "   - OpenVPN                 : TCP 1194, UDP 2200, SSL 990"  | tee -a log-install.txt
-echo "   - Websocket TLS           : 443"  | tee -a log-install.txt
-echo "   - Websocket None TLS      : 8880"  | tee -a log-install.txt
-echo "   - Websocket Ovpn          : 2086"  | tee -a log-install.txt
-echo "   - OHP SSH                 : 8181"  | tee -a log-install.txt
-echo "   - OHP Dropbear            : 8282"  | tee -a log-install.txt
-echo "   - OHP OpenVPN             : 8383"  | tee -a log-install.txt
-echo "   - Stunnel5                : 443, 445, 777"  | tee -a log-install.txt
-echo "   - Dropbear                : 443, 109, 143"  | tee -a log-install.txt
-echo "   - Squid Proxy             : 3128, 8080"  | tee -a log-install.txt
-echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a log-install.txt
-echo "   - Nginx                   : 89"  | tee -a log-install.txt
-echo "   - Xray WS TLS             : 8443"  | tee -a log-install.txt
-echo "   - Xray WS NONE TLS        : 80"  | tee -a log-install.txt
-echo "   - Trojan GO               : 2087"  | tee -a log-install.txt
-echo "   - Shadowsocks-Libev TLS   : 2443 - 3442" | tee -a log-install.txt
-echo "   - Shadowsocks-Libev NTLS  : 3443 - 4442" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "   >>> Server Information & Other Features"  | tee -a log-install.txt
-#echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a log-install.txt
-echo "   - Fail2Ban                : [ON]"  | tee -a log-install.txt
-echo "   - Dflate                  : [ON]"  | tee -a log-install.txt
-echo "   - IPtables                : [ON]"  | tee -a log-install.txt
-echo "   - Auto-Reboot             : [ON]"  | tee -a log-install.txt
-echo "   - IPv6                    : [OFF]"  | tee -a log-install.txt
-echo "   - Autoreboot On 00.00 GMT +7 WIB" | tee -a log-install.txt
-echo "   - Autobackup Data" | tee -a log-install.txt
-echo "   - Restore Data" | tee -a log-install.txt
-echo "   - Auto Delete Expired Account" | tee -a log-install.txt
-echo "   - Full Orders For Various Services" | tee -a log-install.txt
-echo "   - White Label" | tee -a log-install.txt
-echo "   - Installation Log --> /root/log-install.txt"  | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a log-install.txt
-echo ""  | tee -a log-install.txt
-secs_to_human "$(($(date +%s) - ${start}))" | tee -a log-install.txt
+echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a /etc/arfvpn/log-install.txt
+echo "" | tee -a /etc/arfvpn/log-install.txt
+echo "   >>> Service & Port"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - OpenSSH                 : 8443, 22"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - OpenVPN                 : TCP 1194, UDP 2200, SSL 990"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Websocket TLS           : 8443"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Websocket None TLS      : 8880"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Websocket Ovpn          : 2086"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - OHP SSH                 : 8181"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - OHP Dropbear            : 8282"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - OHP OpenVPN             : 8383"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Stunnel5                : 8443, 445, 777"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Dropbear                : 443, 109, 143"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Squid Proxy             : 3128, 8080"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Nginx                   : 89"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Xray WS TLS             : 443"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Xray WS NONE TLS        : 80"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Trojan GO               : 2087"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Shadowsocks-Libev TLS   : 2443 - 3442" | tee -a /etc/arfvpn/log-install.txt
+echo "   - Shadowsocks-Libev NTLS  : 3443 - 4442" | tee -a /etc/arfvpn/log-install.txt
+echo ""  | tee -a /etc/arfvpn/log-install.txt
+echo "   >>> Server Information & Other Features"  | tee -a /etc/arfvpn/log-install.txt
+#echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Fail2Ban                : [ON]"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Dflate                  : [ON]"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - IPtables                : [ON]"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Auto-Reboot             : [ON]"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - IPv6                    : [OFF]"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Autoreboot On 00.00 GMT +7 WIB" | tee -a /etc/arfvpn/log-install.txt
+echo "   - Autobackup Data" | tee -a /etc/arfvpn/log-install.txt
+echo "   - Restore Data" | tee -a /etc/arfvpn/log-install.txt
+echo "   - Auto Delete Expired Account" | tee -a /etc/arfvpn/log-install.txt
+echo "   - Full Orders For Various Services" | tee -a /etc/arfvpn/log-install.txt
+echo "   - White Label" | tee -a /etc/arfvpn/log-install.txt
+echo "   - Installation Log --> /root/log-install.txt"  | tee -a /etc/arfvpn/log-install.txt
+echo ""  | tee -a /etc/arfvpn/log-install.txt
+echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a /etc/arfvpn/log-install.txt
+echo ""  | tee -a /etc/arfvpn/log-install.txt
+secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo ""
 
 echo -ne "[ ${yell}WARNING${NC} ] Reboot ur VPS ? (y/n)? "
