@@ -82,7 +82,7 @@ wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-
 
 # =========================================
 # Websocket
-./wsedu
+/usr/bin/wsedu
 
 # =========================================
 #OhpServer
@@ -93,6 +93,7 @@ wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && ./ohp.sh
 wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
 
 # =========================================
+wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
 #wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
 #wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
@@ -211,15 +212,15 @@ echo " "
 echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a /etc/arfvpn/log-install.txt
 echo "" | tee -a /etc/arfvpn/log-install.txt
 echo "   >>> Service & Port"  | tee -a /etc/arfvpn/log-install.txt
-echo "   - OpenSSH                 : 8443, 22"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - OpenSSH                 : 443, 22"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OpenVPN                 : TCP 1194, UDP 2200, SSL 990"  | tee -a /etc/arfvpn/log-install.txt
-echo "   - Websocket TLS           : 8443"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Websocket TLS           : 443"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Websocket None TLS      : 8880"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Websocket Ovpn          : 2086"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OHP SSH                 : 8181"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OHP Dropbear            : 8282"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OHP OpenVPN             : 8383"  | tee -a /etc/arfvpn/log-install.txt
-echo "   - Stunnel5                : 8443, 445, 777"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Stunnel5                : 443, 445, 777"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Dropbear                : 443, 109, 143"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Squid Proxy             : 3128, 8080"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a /etc/arfvpn/log-install.txt
