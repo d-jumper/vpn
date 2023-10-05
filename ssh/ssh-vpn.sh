@@ -51,22 +51,11 @@ MYHOST="s/xxhostnamexx/$DOMAIN/g";
 NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 source /etc/os-release
 ver=$VERSION_ID
-
-#detail nama perusahaan
-country=ID
-state=Indonesia
-locality=Indonesia
-organization=arfvpn
-organizationalunit=arfvpn
-commonname=${DOMAIN}
-email=arfprsty@d-jumper.me
+cd
 
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 chmod +x /etc/pam.d/common-password
-
-# go to root
-cd
 
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
@@ -154,26 +143,6 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 # install
 apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl git lsof
 
-# install webserver
-#apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
-#rm /etc/nginx/sites-enabled/default
-#rm /etc/nginx/sites-available/default
-#curl https://${github}/ssh/nginx.conf > /etc/nginx/nginx.conf
-#curl https://${github}/ssh/vps.conf > /etc/nginx/conf.d/vps.conf
-#ls /etc/php > /root/php-version.txt
-#phpv=$(cat /root/php-version.txt)
-#sed -i "s/listen = \/run\/php\/php${phpv}-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/${phpv}/fpm/pool.d/www.conf
-#rm -rvf /root/php-version.txt
-#useradd -m vps;
-#mkdir -p /home/vps/public_html
-#echo "<?php phpinfo() ?>" > /home/vps/public_html/info.php
-#chown -R www-data:www-data /home/vps/public_html
-#chmod -R g+rw /home/vps/public_html
-#cd /home/vps/public_html
-#wget -O /home/vps/public_html/index.html "https://${github}/ssh/index.html1"
-#/etc/init.d/nginx restart
-#cd
-
 # install badvpn
 cd
 #wget -O /usr/bin/badvpn-udpgw "https://${github}/ssh/archive/badvpn-udpgw64"
@@ -231,25 +200,10 @@ rm -f /etc/default/sslh
 
 # Settings SSLH
 cat > /etc/default/sslh <<-END
-# Default options for sslh initscript
-# sourced by /etc/init.d/sslh
-
-# Disabled by default, to force yourself
-# to read the configuration:
-# - /usr/share/doc/sslh/README.Debian (quick start)
-# - /usr/share/doc/sslh/README, at "Configuration" section
-# - sslh(8) via "man sslh" for more configuration details.
-# Once configuration ready, you *must* set RUN to yes here
-# and try to start sslh (standalone mode only)
-
 RUN=yes
 
-# binary to use: forked (sslh) or single-thread (sslh-select) version
-# systemd users: don't forget to modify /lib/systemd/system/sslh.service
 DAEMON=/usr/sbin/sslh
-
-DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
-
+DAEMON_OPTS="--user sslh --listen 0.0.0.0:443 --ssl 127.0.0.1:443 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
 END
 
 # Restart Service SSLH
@@ -311,14 +265,7 @@ connect = 127.0.0.1:443
 [openvpn]
 accept = 990
 connect = 127.0.0.1:1194
-
 END
-
-# make a certificate
-#openssl genrsa -out key.pem 2048
-#openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
-#-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
-#cat key.pem cert.pem >> /etc/stunnel5/stunnel5.pem
 
 # Service Stunnel5 systemctl restart stunnel5
 cat > /etc/systemd/system/stunnel5.service << END
@@ -387,8 +334,7 @@ wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
 chmod 0755 /usr/local/ddos/ddos.sh
 cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 echo '...done'
-#echo; echo -n 'Creating cron to run script every minute.....(Default setting)'
-#/usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
+# Creating cron to run script every minute.....(Default setting)
 if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
 echo '.....done'
 echo; echo 'Installation has completed.'
@@ -424,7 +370,6 @@ netfilter-persistent save
 netfilter-persistent reload
 
 # download script
-
 wget -O /usr/bin/addssh "https://${github}/ssh/addssh.sh"
 wget -O /usr/bin/autokill "https://${github}/ssh/autokill.sh"
 wget -O /usr/bin/ceklim "https://${github}/ssh/ceklim.sh"
@@ -463,7 +408,6 @@ wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
 #wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
-wget -O /usr/bin/info "https://${github}/ssh/archive/info.sh"
 #wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
 #wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
@@ -474,7 +418,6 @@ chmod +x /usr/bin/about
 #chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
-chmod +x /usr/bin/info
 #chmod +x /etc/issue.net
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
@@ -484,7 +427,6 @@ chmod +x /usr/bin/swapkvm
 sed -i -e 's/\r$//' /usr/bin/about
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
 sed -i -e 's/\r$//' /usr/bin/clearlog
-sed -i -e 's/\r$//' /usr/bin/info
 #sed -i -e 's/\r$//' /usr/bin/issue.net
 #sed -i -e 's/\r$//' /etc/pam.d/common-password
 sed -i -e 's/\r$//' /usr/bin/ram
@@ -515,9 +457,10 @@ apt-get -y --purge remove apache2*;
 apt-get -y --purge remove bind9*;
 apt-get -y remove sendmail*
 apt autoremove -y
+
 # finishing
 cd
-chown -R www-data:www-data /home/vps/public_html
+chown -R www-data:www-data /home/arfvps/public_html
 /etc/init.d/nginx restart
 /etc/init.d/openvpn restart
 /etc/init.d/cron restart
