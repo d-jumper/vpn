@@ -44,14 +44,10 @@ echo -e "$green          INSTALLING XRAY $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 date
 sleep 2
-# install xray
-echo -e "[ ${green}INFO$NC ] INSTALLING XRAY VMESS - VLESS"
-sleep 1
 domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
 
 # Make Folder XRay
-echo -e "[ ${green}INFO$NC ] MEMBUAT FOLDER XRAY"
 mkdir -p /usr/bin/xray
 mkdir -p ${xray}
 mkdir -p ${logxray}
@@ -497,8 +493,6 @@ sed -i '$ igrpc_set_header Host \$http_host;' /etc/nginx/sites-available/${domai
 sed -i '$ igrpc_pass grpc://127.0.0.1:'"${trojangrpc}"';' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i}' /etc/nginx/sites-available/${domain}.conf
 
-echo -e "[ ${green}INFO$NC ] DOWNLOAD SCRIPT ..."
-sleep 1
 wget -q -O /usr/bin/menu-vmess "https://${github}/xray/vmess/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
 wget -q -O /usr/bin/add-vm "https://${github}/xray/vmess/add-vm.sh" && chmod +x /usr/bin/add-vm
 wget -q -O /usr/bin/cek-vm "https://${github}/xray/vmess/cek-vm.sh" && chmod +x /usr/bin/cek-vm
@@ -518,9 +512,6 @@ wget -q -O /usr/bin/add-tr "https://${github}/xray/trojan/add-tr.sh" && chmod +x
 wget -q -O /usr/bin/cek-tr "https://${github}/xray/trojan/cek-tr.sh" && chmod +x /usr/bin/cek-tr
 wget -q -O /usr/bin/del-tr "https://${github}/xray/trojan/del-tr.sh" && chmod +x /usr/bin/del-tr
 wget -q -O /usr/bin/renew-tr "https://${github}/xray/trojan/renew-tr.sh" && chmod +x /usr/bin/renew-tr
-
-echo -e "[ ${green}INFO$NC ] INSTALL SCRIPT ..."
-sleep 1
 
 sed -i -e 's/\r$//' /usr/bin/menu-vmess
 sed -i -e 's/\r$//' /usr/bin/add-vm
@@ -564,4 +555,4 @@ systemctl restart xray
 systemctl restart trojan-go
 systemctl restart shadowsocks-libev.service
 
-echo -e "[ ${green}INFO$NC ] SETTING XRAY VMESS & VLESS  SUKSES !!!"
+echo -e "[ ${green}INFO$NC ] INSTALLING XRAY SUCCESSFULLY !!!"
