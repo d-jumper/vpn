@@ -11,12 +11,9 @@ tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-clear
 
 now_version=$(xray --version | grep 'Xray' | cut -d ' ' -f 2 | sort)
-clear
 lastest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
-clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green          XRAY CORE UPDATE $NC"
@@ -67,4 +64,5 @@ echo -e " Your Xray Version is :"
 echo -e " Xray v${lastest_version}"
 sleep 5
 fi
-clear
+neofetch
+sleep 5
