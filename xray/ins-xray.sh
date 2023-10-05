@@ -25,6 +25,7 @@ IP=$(cat ${arfvpn}/IP)
 #apete
 #wget https://${github}/service/apete.sh && chmod +x apete.sh && sed -i -e 's/\r$//' apete.sh && ./apete.sh
 #
+apt install neofetch -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
 apt install socat cron bash-completion ntpdate -y
 ntpdate 0.id.pool.ntp.org
