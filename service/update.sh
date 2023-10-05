@@ -56,7 +56,6 @@ rm -rvf /usr/bin/expssh
 rm -rvf /usr/bin/about
 #rm -rvf bbr.sh && ./bbr.sh
 rm -rvf /usr/bin/clearlog
-rm -rvf /usr/bin/info
 rm -rvf /etc/issue.net
 #rm -rvf /etc/pam.d/common-password
 rm -rvf /usr/bin/ram
@@ -195,7 +194,6 @@ wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
 wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
-wget -O /usr/bin/info "https://${github}/ssh/archive/info.sh"
 wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
 #wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
@@ -206,7 +204,6 @@ chmod +x /usr/bin/about
 chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
-chmod +x /usr/bin/info
 chmod +x /etc/issue.net
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
@@ -216,7 +213,6 @@ chmod +x /usr/bin/swapkvm
 sed -i -e 's/\r$//' /usr/bin/about
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
 sed -i -e 's/\r$//' /usr/bin/clearlog
-sed -i -e 's/\r$//' /usr/bin/info
 sed -i -e 's/\r$//' /usr/bin/issue.net
 #sed -i -e 's/\r$//' /etc/pam.d/common-password
 sed -i -e 's/\r$//' /usr/bin/ram

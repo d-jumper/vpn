@@ -181,7 +181,7 @@ wbmn
 
 14)
 clear
-cat /root/log-install.txt
+cat /etc/arfvpn/log-install.txt
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu

@@ -16,7 +16,7 @@ cd /root
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 nginx="/etc/nginx"
-vps="/home/vps/public_html"
+vps="/home/arfvps/public_html"
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";

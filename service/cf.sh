@@ -26,9 +26,8 @@ mkdir -p ${arfvpn}
 mkdir -p ${ipvps}
 echo "IP=" >> ${ipvps}/ipvps.conf
 IP=$(cat ${arfvpn}/IP);
-clear
 
-echo "Updating DNS for ${SUB_DOMAIN}..."
+#echo "Updating DNS for ${SUB_DOMAIN}..."
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
@@ -80,8 +79,7 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 #     -H "X-Auth-Key: ${CF_KEY}" \
 #     -H "Content-Type: application/json" \
 #     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-clear
-echo "Your Sub-Domain : ${SUB_DOMAIN}"
+echo "Your Default Sub-Domain : ${SUB_DOMAIN}"
 sleep 5
 #echo "${SUB_DOMAIN}" > ${arfvpn}/domain_cf
 echo "${SUB_DOMAIN}" > ${arfvpn}/domain

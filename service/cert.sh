@@ -16,10 +16,9 @@ red() { echo -e "\\033[31;1m${*}\\033[0m"; }
 # Getting
 arfvpn="/etc/arfvpn"
 domain=$(cat $arfvpn/domain)
-clear
 
 ## make a crt xray $domain
-#systemctl stop nginx
+systemctl stop nginx
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
 rm -rvf ${arfvpn}/cert/
 rm -rvf /root/.acme.sh
