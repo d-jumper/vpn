@@ -28,6 +28,9 @@ apt install openvpn easy-rsa unzip -y
 apt install openssl iptables iptables-persistent -y
 mkdir -p /etc/openvpn/server/easy-rsa/
 mkdir -p /etc/openvpn/client/
+#mkdir -p /etc/arfvpn/cert/
+#mkdir -p /etc/arfvpn/cert/client/
+#mkdir -p /etc/arfvpn/cert/server/
 cd /etc/openvpn/
 wget "https://${github}/openvpn/vpn.zip"
 unzip vpn.zip
@@ -146,21 +149,21 @@ echo '<ca>' >> /etc/openvpn/client/tcp.ovpn
 cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/tcp.ovpn
 echo '</ca>' >> /etc/openvpn/client/tcp.ovpn
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( TCP 1194 )
-cp /etc/openvpn/client/tcp.ovpn /home/vps/public_html/tcp.ovpn
+cp /etc/openvpn/client/tcp.ovpn /home/arfvps/public_html/tcp.ovpn
 
 # masukkan certificatenya ke dalam config client UDP 2200
 echo '<ca>' >> /etc/openvpn/client/udp.ovpn
 cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/udp.ovpn
 echo '</ca>' >> /etc/openvpn/client/udp.ovpn
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( UDP 2200 )
-cp /etc/openvpn/client/udp.ovpn /home/vps/public_html/udp.ovpn
+cp /etc/openvpn/client/udp.ovpn /home/arfvps/public_html/udp.ovpn
 
 # masukkan certificatenya ke dalam config client UDP 990
 echo '<ca>' >> /etc/openvpn/client/ssl.ovpn
 cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/ssl.ovpn
 echo '</ca>' >> /etc/openvpn/client/ssl.ovpn
 # Copy config OpenVPN client ke home directory root agar mudah didownload ( UDP 2200 )
-cp /etc/openvpn/client/ssl.ovpn /home/vps/public_html/ssl.ovpn
+cp /etc/openvpn/client/ssl.ovpn /home/arfvps/public_html/ssl.ovpn
 
 #IPTABLES untuk memperbolehkan akses UDP dan akses jalur TCP
 iptables -t nat -I POSTROUTING -s 10.6.0.0/24 -o $NET -j MASQUERADE
