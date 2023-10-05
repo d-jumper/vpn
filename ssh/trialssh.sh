@@ -61,8 +61,8 @@ clear
 
 # data trial
 user=arfvpn-`</dev/urandom tr -dc X-Z0-9 | head -c4`
-hari="7"
-Pass=123
+hari="3"
+pas=0987654321
 clear
 
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
@@ -72,19 +72,19 @@ echo -e " "
 echo -e "${NC}${CYAN}Random username & default password for Trial SSH has been created.$NC"
 echo -e "${NC}${CYAN}────────────────────────────────── $NC"
 echo -e " "
-echo -e "${NC}${CYAN}Username : $user $NC"
-echo -e "${NC}${CYAN}Password : $pass $NC"
+echo -e "${NC}${CYAN}Username : ${user} $NC"
+echo -e "${NC}${CYAN}Password : ${pass} $NC"
 echo -e "${NC}${CYAN}Expired (Days): $hari $NC"
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 sleep 5
 clear
 
-useradd --expiredate `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M $user
-exp="$(chage -l $user | grep "Account expires" | awk -F": " '{print $2}')"
+useradd --expiredate `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M ${user}
+exp="$(chage -l ${user} | grep "Account expires" | awk -F": " '{print $2}')"
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 expi=`date -d "$hari days" +"%Y-%m-%d"`
-echo -e "$Pass\n$Pass\n"|passwd $user &> /dev/null
+echo -e "${pass}\n${pass}\n"|passwd ${user} &> /dev/null
 history -c
 clear
 
