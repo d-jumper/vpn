@@ -17,7 +17,7 @@ MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
 
 clear
-tr="$(cat ~/log-install.txt | grep -w "Trojan" | cut -d: -f2|sed 's/ //g')"
+tr="$(cat /etc/arfvpn/log-install.txt | grep -w "Xray WS TLS" | cut -d: -f2|sed 's/ //g')"
 echo -e "======================================"
 echo -e ""
 echo -e "Change Port $tr"
@@ -31,7 +31,7 @@ fi
 cek=$(netstat -nutlp | grep -w $tr2)
 if [[ -z $cek ]]; then
 sed -i "s/$tr/$tr2/g" /etc/xray/config.json
-sed -i "s/   - XRAYS Trojan         : $tr/   - XRAYS Trojan         : $tr2/g" /root/log-install.txt
+sed -i "s/   - Xray WS TLS             : $tr/   - Xray WS TLS             : $tr2/g" /etc/arfvpn/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $tr -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $tr -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $tr2 -j ACCEPT

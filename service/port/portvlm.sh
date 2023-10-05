@@ -16,8 +16,8 @@ MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
 
 clear
-tls="$(cat ~/log-install.txt | grep -w "Vmess TLS" | cut -d: -f2|sed 's/ //g')"
-none="$(cat ~/log-install.txt | grep -w "Vmess None TLS" | cut -d: -f2|sed 's/ //g')"
+tls="$(cat /etc/arfvpn/log-install.txt | grep -w "Xray WS TLS" | cut -d: -f2|sed 's/ //g')"
+none="$(cat /etc/arfvpn/log-install.txt | grep -w "Xray WS NONE TLS" | cut -d: -f2|sed 's/ //g')"
 echo -e "======================================"
 echo -e ""
 echo -e "[1]. Change Port Vmess TLS $tls"
@@ -38,8 +38,8 @@ fi
 cek=$(netstat -nutlp | grep -w $tls1)
 if [[ -z $cek ]]; then
 sed -i "s/$tls/$tls1/g" /etc/xray/config.json
-sed -i "s/   - XRAYS Vmess TLS         : $tls/   - XRAYS Vmess TLS         : $tls1/g" /root/log-install.txt
-sed -i "s/   - XRAYS Vless TLS         : $tls/   - XRAYS Vless TLS         : $tls1/g" /root/log-install.txt
+sed -i "s/   - Xray WS TLS             : $tls/   - Xray WS TLS             : $tls1/g" /etc/arfvpn/log-install.txt
+sed -i "s/   - Xray WS TLS             : $tls/   - Xray WS TLS             : $tls1/g" /etc/arfvpn/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $tls -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $tls -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $tls1 -j ACCEPT
@@ -64,8 +64,8 @@ fi
 cek=$(netstat -nutlp | grep -w $none1)
 if [[ -z $cek ]]; then
 sed -i "s/$none/$none1/g" /etc/xray/config.json
-sed -i "s/   - XRAYS Vmess None TLS    : $none/   - XRAYS Vmess None TLS    : $none1/g" /root/log-install.txt
-sed -i "s/   - XRAYS Vless None TLS    : $none/   - XRAYS Vless None TLS    : $none1/g" /root/log-install.txt
+sed -i "s/   - Xray WS NONE TLS        : $none/   - Xray WS NONE TLS        : $none1/g" /etc/arfvpn/log-install.txt
+sed -i "s/   - Xray WS NONE TLS        : $none/   - Xray WS NONE TLS        : $none1/g" /etc/arfvpn/log-install.txt
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $none -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $none -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $none1 -j ACCEPT

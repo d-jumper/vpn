@@ -37,16 +37,16 @@ fi
 cek=$(netstat -nutlp | grep -w $vpn)
 if [[ -z $cek ]]; then
 rm -f /etc/openvpn/server/server-tcp.conf
-rm -f /etc/openvpn/tcp.ovpn
-rm -f /home/vps/public_html/tcp.ovpn
+rm -f /etc/openvpn/client/tcp.ovpn
+rm -f /home/arfvps/public_html/tcp.ovpn
 cat > /etc/openvpn/server/server-tcp.conf<<END
 port $vpn
 proto tcp
 dev tun
-ca ca.crt
-cert server.crt
-key server.key
-dh dh.pem
+ca /etc/openvpn/server/ca.crt
+cert /etc/openvpn/server/server.crt
+key /etc/openvpn/server/server.key
+dh /etc/openvpn/server/dh.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
 username-as-common-name
@@ -62,7 +62,7 @@ persist-tun
 status openvpn-tcp.log
 verb 3
 END
-cat > /etc/openvpn/tcp.ovpn <<-END
+cat > /etc/openvpn/client/tcp.ovpn <<-END
 client
 dev tun
 proto tcp
@@ -76,13 +76,13 @@ auth-user-pass
 comp-lzo
 verb 3
 END
-echo '<ca>' >> /etc/openvpn/tcp.ovpn
-cat /etc/openvpn/server/ca.crt >> /etc/openvpn/tcp.ovpn
-echo '</ca>' >> /etc/openvpn/tcp.ovpn
-cp /etc/openvpn/tcp.ovpn /home/vps/public_html/tcp.ovpn
+echo '<ca>' >> /etc/openvpn/client/tcp.ovpn
+cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/tcp.ovpn
+echo '</ca>' >> /etc/openvpn/client/tcp.ovpn
+cp /etc/openvpn/client/tcp.ovpn /home/arfvps/public_html/tcp.ovpn
 systemctl disable --now openvpn-server@server-tcp > /dev/null
 systemctl enable --now openvpn-server@server-tcp > /dev/null
-sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 442/   - OpenVPN                 : TCP $vpn, UDP $ovpn2, SSL 442/g" /root/log-install.txt
+sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 442/   - OpenVPN                 : TCP $vpn, UDP $ovpn2, SSL 442/g" /etc/arfvpn/log-install.txt
 sed -i "s/$ovpn/$vpn/g" /etc/stunnel/stunnel.conf
 echo -e "\e[032;1mPort $vpn modified successfully\e[0m"
 else
@@ -99,15 +99,15 @@ cek=$(netstat -nutlp | grep -w $vpn)
 if [[ -z $cek ]]; then
 rm -f /etc/openvpn/server/server-udp.conf
 rm -f /etc/openvpn/udp.ovpn
-rm -f /home/vps/public_html/udp.ovpn
+rm -f /home/arfvps/public_html/udp.ovpn
 cat > /etc/openvpn/server/server-udp.conf<<END
 port $vpn
 proto udp
 dev tun
-ca ca.crt
-cert server.crt
-key server.key
-dh dh.pem
+ca /etc/openvpn/server/ca.crt
+cert /etc/openvpn/server/server.crt
+key /etc/openvpn/server/server.key
+dh /etc/openvpn/server/dh.pem
 plugin /usr/lib/openvpn/openvpn-plugin-auth-pam.so login
 verify-client-cert none
 username-as-common-name
@@ -124,7 +124,7 @@ status openvpn-udp.log
 verb 3
 explicit-exit-notify
 END
-cat > /etc/openvpn/udp.ovpn <<-END
+cat > /etc/openvpn/client/udp.ovpn <<-END
 client
 dev tun
 proto udp
@@ -138,13 +138,13 @@ auth-user-pass
 comp-lzo
 verb 3
 END
-echo '<ca>' >> /etc/openvpn/udp.ovpn
-cat /etc/openvpn/server/ca.crt >> /etc/openvpn/udp.ovpn
-echo '</ca>' >> /etc/openvpn/udp.ovpn
-cp /etc/openvpn/udp.ovpn /home/vps/public_html/udp.ovpn
+echo '<ca>' >> /etc/openvpn/client/udp.ovpn
+cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/udp.ovpn
+echo '</ca>' >> /etc/openvpn/client/udp.ovpn
+cp /etc/openvpn/client/udp.ovpn /home/arfvps/public_html/udp.ovpn
 systemctl disable --now openvpn-server@server-udp > /dev/null
 systemctl enable --now openvpn-server@server-udp > /dev/null
-sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 442/   - OpenVPN                 : TCP $ovpn, UDP $vpn, SSL 442/g" /root/log-install.txt
+sed -i "s/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 442/   - OpenVPN                 : TCP $ovpn, UDP $vpn, SSL 442/g" /etc/arfvpn/log-install.txt
 echo -e "\e[032;1mPort $vpn modified successfully\e[0m"
 else
 echo "Port $vpn is used"
