@@ -62,7 +62,7 @@ clear
 # data trial
 user=arfvpn-`</dev/urandom tr -dc X-Z0-9 | head -c4`
 hari="3"
-pas=0987654321
+pass=0987654321
 clear
 
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
