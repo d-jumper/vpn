@@ -22,9 +22,6 @@ uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
 IP=$(cat ${arfvpn}/IP)
 
-#apete
-#wget https://${github}/service/apete.sh && chmod +x apete.sh && sed -i -e 's/\r$//' apete.sh && ./apete.sh
-#
 apt install neofetch -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
 apt install socat cron bash-completion ntpdate -y
@@ -60,10 +57,17 @@ touch ${logxray}/access2.log
 touch ${logxray}/error2.log
 
 # Install Xray Core << Every >> Lastest Version
-wget https://${github}/service/update-xray.sh && chmod +x update-xray.sh && ./update-xray.sh
+wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh"
+chmod +x /usr/bin/update-xray
+sed -i -e 's/\r$//' /usr/bin/update-xray
+/usr/bin/update-xray
 
 # NGINX-SERVER
-wget https://${github}/nginx/nginx-server.sh && chmod +x nginx-server.sh && sed -i -e 's/\r$//' nginx-server.sh && ./nginx-server.sh
+cd
+wget https://${github}/nginx/nginx-server.sh
+chmod +x nginx-server.sh
+sed -i -e 's/\r$//' nginx-server.sh
+./nginx-server.sh
 
 # Random Port Xray
 trojan=$((RANDOM + 10000))
