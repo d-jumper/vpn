@@ -15,8 +15,8 @@ cd /root
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 nginx="/etc/nginx"
-vps="/home/vps/public_html"
-github="https://raw.githubusercontent.com/arfprsty810/vpn/main"
+arfvps="/home/arfvps/public_html"
+github="raw.githubusercontent.com/arfprsty810/vpn/main"
 domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";
 IP=$(cat ${arfvpn}/IP)
@@ -36,31 +36,31 @@ systemctl stop nginx
 apt-get remove --purge apache apache* -y
 rm ${nginx}/sites-enabled/*
 rm ${nginx}/sites-available/*
-wget -O ${nginx}/nginx.conf "${github}/nginx/nginx.conf"
-wget -O ${nginx}/conf.d/vps.conf "${github}/nginx/vps.conf"
+wget -O ${nginx}/nginx.conf "https://${github}/nginx/nginx.conf"
+wget -O ${nginx}/conf.d/arfvps.conf "https://${github}/nginx/arfvps.conf"
 sed -i "s/listen = \/run\/php\/php-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/fpm/pool.d/www.conf
-useradd -m vps;
-mkdir -p ${vps}
+useradd -m arfvps;
+mkdir -p ${vps}/
 echo "<?php phpinfo() ?>" > ${vps}/info.php
 chown -R www-data:www-data ${vps}
 chmod -R g+rw ${vps}
 chmod +x /home/
-chmod +x /home/vps/
+chmod +x /home/arfvps/
 chmod +x ${vps}/
-cd ${vps}
-wget -O ${vps}/index.html "${github}/nginx/index.html"
+cd ${vps}/
+wget -O ${vps}/index.html "https://${github}/nginx/index.html"
 
 cd ${nginx}
-wget -O ${nginx}/sites-available/${domain}.conf "${github}/nginx/domain.conf"
-sed -i 's/443/8443/g' /etc/nginx/sites-available/${domain}.conf
+wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/domain.conf"
+#sed -i 's/443/8443/g' /etc/nginx/sites-available/${domain}.conf
 sed -i "${MYIP2}" ${nginx}/sites-available/${domain}.conf
 sed -i "${DOMAIN2}" ${nginx}/sites-available/${domain}.conf
 sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
 
-wget -O /usr/bin/cert "${github}/service/cert.sh"
+wget -O /usr/bin/cert "https://${github}/service/cert.sh"
 chmod +x /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cert
-cert
+./cert
 
 systemctl enable nginx
 systemctl start nginx
