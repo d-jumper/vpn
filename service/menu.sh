@@ -193,8 +193,9 @@ exit
 ;;
 
 x)
-clear
 exit
+clear
+neofetch
 ;;
 
 *)

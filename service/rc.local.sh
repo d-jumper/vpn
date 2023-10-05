@@ -10,11 +10,10 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
 # ==========================================
-clear
-#change directory
+
 cd
-#remove file
-rm -rvf /etc/rc.local
+clear
+rm -rvf /etc/rc.local > /dev/null 2>&1
 
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
@@ -68,8 +67,5 @@ chmod +x /etc/rc.local
 # enable rc local
 systemctl enable rc-local
 systemctl start rc-local.service
-
-# disable ipv6
-echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
-sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
-sleep 3
+echo -e " Successfully Fix SSH "
+sleep 5

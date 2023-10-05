@@ -192,7 +192,7 @@ sed -i -e 's/\r$//' /usr/bin/trialssh
 sed -i -e 's/\r$//' /usr/bin/expssh
 
 wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
-#wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/badvpn-udpgw64"
+wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
 wget -O /usr/bin/info "https://${github}/ssh/archive/info.sh"
@@ -203,11 +203,11 @@ wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
 chmod +x /usr/bin/about
-#chmod +x /usr/bin/badvpn-udpgw64
+chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
 chmod +x /usr/bin/info
-chmod +x /usr/bin/issue.net
+chmod +x /etc/issue.net
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
 chmod +x /etc/set.sh
@@ -300,5 +300,5 @@ clear
 
 echo -e "[ ${green}INFO$NC ] Update Successfully!"
 echo ""
-read -n 1 -s -r -p "Press any key to back on menu"
-menu
+read -n 1 -s -r -p "Press any key to Restart service"
+restart

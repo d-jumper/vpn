@@ -51,7 +51,7 @@ echo -e "  ${BICyan}[${BIWhite}03${BICyan}]${RED} •${NC} ${CYAN}Change Port SS
 echo -e "  ${BICyan}[${BIWhite}04${BICyan}]${RED} •${NC} ${CYAN}Change Port SSH WS Non-TLS $NC"
 echo -e "  ${BICyan}[${BIWhite}05${BICyan}]${RED} •${NC} ${CYAN}Change Port OVPN $NC"
 echo -e "  ${BICyan}[${BIWhite}06${BICyan}]${RED} •${NC} ${CYAN}Set Limit Speed $NC"
-echo -e "  ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}Rennew Cert $NC"
+echo -e "  ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}Rennew Domain & Cert $NC"
 echo -e "  ${BICyan}[${BIWhite}08${BICyan}]${RED} •${NC} ${CYAN}Speed-Test $NC"
 echo -e "  ${BICyan}[${BIWhite}09${BICyan}]${RED} •${NC} ${CYAN}Back To Menu $NC"
 echo -e ""
@@ -60,7 +60,7 @@ read -p " ➣ Select From Options [ 1 - 9 ] : " menu
 echo -e ""
 case $menu in
 1)
-addhost
+hostvps
 ;;
 2)
 cfnhost
