@@ -130,8 +130,6 @@ cat > ${trgo}/uuid << END
 ${uuid}
 END
 
-echo -e "[ ${green}INFO$NC ] INSTALL SCRIPT ..."
-sleep 1
 wget -q -O /usr/bin/add-trgo "https://${github}/trojan-go/add-trgo.sh" && chmod +x /usr/bin/add-trgo
 wget -q -O /usr/bin/cek-trgo "https://${github}/trojan-go/cek-trgo.sh" && chmod +x /usr/bin/cek-trgo
 wget -q -O /usr/bin/del-trgo "https://${github}/trojan-go/del-trgo.sh" && chmod +x /usr/bin/del-trgo
@@ -142,5 +140,5 @@ sed -i -e 's/\r$//' /bin/cek-trgo
 sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
 
-echo -e "[ ${green}INFO$NC ] SETTING TROJAN-GO SUKSES !!!"
-sleep 1
+echo -e "[ ${green}INFO$NC ] INSTALLING TROJAN-GO SUCCESSFULLY !!!"
+sleep 5
