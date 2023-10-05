@@ -20,9 +20,8 @@ domain=$(cat $arfvpn/domain)
 ## make a crt xray $domain
 systemctl stop nginx
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
-rm -rvf ${arfvpn}/cert/
+rm -rvf ${arfvpn}/cert/ca.crt ${arfvpn}/cert/ca.key ${arfvpn}/cert/dh.pem
 rm -rvf /root/.acme.sh
-mkdir -p ${arfvpn}/cert/
 mkdir -p /root/.acme.sh/
 curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh

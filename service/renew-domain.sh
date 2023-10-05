@@ -9,16 +9,15 @@ tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
 yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
 green() { echo -e "\\033[32;1m${*}\\033[0m"; }
 red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-clear
 
-cd /root
-/usr/bin/hostvps
 source /etc/os-release
+cd /root
 arfvpn="/etc/arfvpn"
 nginx="/etc/nginx"
+domain=$(cat ${arfvpn}/domain)
+DOMAIN3="s/${domain}/domainxxx/g";
 vps="/home/arfvps/public_html"
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
-domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";
 MYIP=$(cat $arfvpn/IP)
 MYIP2="s/xxxxxxxxx/$MYIP/g";
@@ -29,23 +28,27 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "$green        UPDATE / RENEW DOMAIN SERVER $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 date
-sleep 3
+sleep 5
+sed -i $DOMAIN3 ${nginx}/sites-available/${domain}.conf
+/usr/bin/hostvps
 cd ${nginx}
 systemctl stop nginx
 mkdir -p $arfvpn/backup/
 cp ${nginx}/sites-available/*.conf $arfvpn/backup/${domain}.conf
 rm ${nginx}/sites-enabled/*
 rm ${nginx}/sites-available/*
-
+mkdir -p ${vps}/
 cd ${vps}
 chown -R www-data:www-data ${vps}
 chmod -R g+rw ${vps}
 chmod +x /home/
-chmod +x /home/vps/
+chmod +x /home/arfvps/
 chmod +x ${vps}/
+wget -O ${vps}/index.html "${github}/nginx/index.html"
 
 cd ${nginx}
 cp $arfvpn/backup/${domain}.conf ${nginx}/sites-available/${domain}.conf
+sed -i $DOMAIN2 ${nginx}/sites-available/${domain}.conf
 rm -rvf $arfvpn/backup/${domain}.conf
 sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
 
@@ -56,16 +59,16 @@ systemctl start nginx
 systemctl restart nginx
 sudo nginx -t && sudo systemctl reload nginx
 sleep 5
+echo " Re-installing Squid ..."
 systemctl stop squid
 rm -rvf /etc/squid/squid.conf
 wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 sed -i $MYHOST /etc/squid/squid.conf
 systemctl start squid
-/etc/set.sh
 /usr/bin/fixssh
 
-echo -e "[ ${green}INFO$NC ] Update / Renew Domain Successfully!"
+echo -e "[ ${green}INFO$NC ] Update / Renew Domain Server Successfully!"
 echo ""
 echo -ne "[ ${yell}WARNING${NC} ] Please Reboot ur VPS !!! (y/n)? "
 read answer

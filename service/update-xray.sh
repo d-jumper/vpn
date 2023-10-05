@@ -64,5 +64,8 @@ echo -e " Your Xray Version is :"
 echo -e " Xray v${lastest_version}"
 sleep 5
 fi
+echo ""
+echo ""
 neofetch
-sleep 5
+echo ""
+echo ""

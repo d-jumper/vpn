@@ -80,7 +80,6 @@ mkdir -p $trgo
 mkdir -p $nginx
 
 # ==========================================
-apt install wget curl jq -y
 curl -s ipinfo.io/org/ > ${arfvpn}/ISP
 curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
 clear
@@ -100,7 +99,7 @@ read -rp "Input ur domain / sub-domain : " -e domain
     wget -O /usr/bin/cf "https://${github}/service/cf.sh"
     chmod +x /usr/bin/cf
     sed -i -e 's/\r$//' /usr/bin/cf
-    cf
+    /usr/bin/cf
     else
     echo -e "${success} Please wait..."
 	echo "${domain}" > ${arfvpn}/domain

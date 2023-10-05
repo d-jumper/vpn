@@ -14,8 +14,6 @@ LIGHT='\033[0;37m'
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 ipvps="/var/lib/arfvpn"
-clear
-apt install jq curl -y
 DOMAIN=d-jumper.me
 sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
 SUB_DOMAIN=${sub}.arfvpn.${DOMAIN}
@@ -79,9 +77,8 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 #     -H "X-Auth-Key: ${CF_KEY}" \
 #     -H "Content-Type: application/json" \
 #     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-echo "Your Default Sub-Domain : ${SUB_DOMAIN}"
+echo "Your Sub-Domain has been created : ${SUB_DOMAIN}"
 sleep 5
-#echo "${SUB_DOMAIN}" > ${arfvpn}/domain_cf
 echo "${SUB_DOMAIN}" > ${arfvpn}/domain
 echo "${SUB_DOMAIN}" > ${arfvpn}/scdomain
 echo "IP=${SUB_DOMAIN}" > ${ipvps}/ipvps.conf

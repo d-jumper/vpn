@@ -50,6 +50,7 @@ export Server_Port="8443"
 export Server_IP="${IP}"
 export Script_Mode="Stable"
 export Auther="@arf.prsty_"
+export Version=$(cat ${arfvpn}/Version)
 
 # // nginx
 nginx=$( systemctl status nginx | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
@@ -69,7 +70,8 @@ echo -e "  ❇️ \e[32;1m Operating System\e[0m : $( cat /etc/os-release | grep
 echo -e "  ❇️ \e[32;1m Current Domain\e[0m   : ${DOMAIN} "
 echo -e "  ❇️ \e[32;1m Current Isp Name\e[0m : ${ISP} "
 echo -e "  ❇️ \e[32;1m Server IP\e[0m        : ${IP} "
-echo -e "  ❇️ \e[32;1m Time Reboot VPS\e[0m  : 00:00 ( Jam 12 Malam ) "
+echo -e "  ❇️ \e[32;1m Time Reboot VPS\e[0m  : 00:00 ( Jam 12 Mid-Night ) "
+echo -e "  ❇️ \e[32;1m VPN Version\e[0m      : ${Version} "
 echo -e ""
 echo -e "      🟢🟡🔴  SERVER STATUS     :    ${status_nginx}  🔴🟡🟢"
 echo -e ""
