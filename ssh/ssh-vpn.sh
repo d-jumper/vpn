@@ -133,7 +133,6 @@ apt install apt-transport-https -y
 apt install build-essential -y
 apt install dirmngr -y
 apt install libxml-parser-perl -y
-apt install neofetch -y
 apt install git -y
 apt install lsof -y
 apt install libsqlite3-dev -y
