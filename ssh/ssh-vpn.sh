@@ -58,7 +58,7 @@ state=Indonesia
 locality=Indonesia
 organization=arfvpn
 organizationalunit=arfvpn
-commonname=arfvpn
+commonname=${DOMAIN}
 email=arfprsty@d-jumper.me
 
 # simple password minimal
@@ -153,9 +153,7 @@ ln -fs /usr/share/zoneinfo/Asia/Manila /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 
 # install
-apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl neofetch git lsof
-echo "clear" >> .profile
-echo "neofetch" >> .profile
+apt-get --reinstall --fix-missing install -y bzip2 gzip coreutils wget screen rsyslog iftop htop net-tools zip unzip wget net-tools curl nano sed screen gnupg gnupg1 bc apt-transport-https build-essential dirmngr libxml-parser-perl git lsof
 
 # install webserver
 #apt -y install nginx php php-fpm php-cli php-mysql libxml-parser-perl
@@ -179,8 +177,29 @@ echo "neofetch" >> .profile
 
 # install badvpn
 cd
-wget -O /usr/bin/badvpn-udpgw "https://${github}/ssh/archive/badvpn-udpgw64"
+#wget -O /usr/bin/badvpn-udpgw "https://${github}/ssh/archive/badvpn-udpgw64"
+wget -O /usr/bin/badvpn-udpgw "https://${github}/ssh/archive/newudpgw"
 chmod +x /usr/bin/badvpn-udpgw
+tesmatch=`screen -list | awk  '{print $1}' | grep -ow "badvpn" | sort | uniq`
+if [ "$tesmatch" = "badvpn" ]; then
+sleep 1
+echo -e "[ ${GREEN}INFO$NC ] Screen badvpn detected"
+rm /root/screenlog > /dev/null 2>&1
+    runningscreen=( `screen -list | awk  '{print $1}' | grep -w "badvpn"` ) # sed 's/\.[^ ]*/ /g'
+    for actv in "${runningscreen[@]}"
+    do
+        cek=( `screen -list | awk  '{print $1}' | grep -w "badvpn"` )
+        if [ "$cek" = "$actv" ]; then
+        for sama in "${cek[@]}"; do
+            sleep 1
+            screen -XS $sama quit > /dev/null 2>&1
+            echo -e "[ ${red}CLOSE$NC ] Closing screen $sama"
+        done 
+        fi
+    done
+else
+echo -ne
+fi
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500' /etc/rc.local
 sed -i '$ i\screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500' /etc/rc.local
@@ -343,6 +362,7 @@ systemctl restart stunnel5
 /etc/init.d/stunnel5 restart
 
 #OpenVPN
+cd
 wget https://${github}/openvpn/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
 # install fail2ban
@@ -353,7 +373,7 @@ if [ -d '/usr/local/ddos' ]; then
 	echo; echo; echo "Please un-install the previous version first"
 	exit 0
 else
-	mkdir /usr/local/ddos
+	mkdir -p /usr/local/ddos/
 fi
 clear
 echo; echo 'Installing DOS-Deflate 0.6'; echo
@@ -368,8 +388,9 @@ wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
 chmod 0755 /usr/local/ddos/ddos.sh
 cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 echo '...done'
-echo; echo -n 'Creating cron to run script every minute.....(Default setting)'
-/usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
+#echo; echo -n 'Creating cron to run script every minute.....(Default setting)'
+#/usr/local/ddos/ddos.sh --cron > /dev/null 2>&1
+if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
 echo '.....done'
 echo; echo 'Installation has completed.'
 echo 'Config file is at /usr/local/ddos/ddos.conf'
@@ -380,6 +401,7 @@ echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
 
 # Install BBR
+cd
 wget https://${github}/ssh/archive/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 
 # Ganti Banner
@@ -439,7 +461,7 @@ sed -i -e 's/\r$//' /usr/bin/trialssh
 sed -i -e 's/\r$//' /usr/bin/expssh
 
 wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
-wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/badvpn-udpgw64"
+#wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
 wget -O /usr/bin/info "https://${github}/ssh/archive/info.sh"
@@ -450,10 +472,11 @@ wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
 chmod +x /usr/bin/about
+#chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
 chmod +x /usr/bin/info
-#chmod +x /usr/bin/issue.net
+#chmod +x /etc/issue.net
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
 chmod +x /etc/set.sh
@@ -510,10 +533,6 @@ chown -R www-data:www-data /home/vps/public_html
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
-history -c
-echo "unset HISTFILE" >> /etc/profile
 
 cd
-rm -f /root/key.pem
-rm -f /root/cert.pem
-rm -f /root/ssh-vpn.sh
+sleep 3

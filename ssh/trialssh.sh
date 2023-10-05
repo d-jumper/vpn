@@ -61,7 +61,7 @@ clear
 
 # data trial
 user=arfvpn-`</dev/urandom tr -dc X-Z0-9 | head -c4`
-hari="1"
+hari="7"
 Pass=123
 clear
 
