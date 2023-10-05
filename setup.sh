@@ -82,19 +82,15 @@ wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-
 
 # =========================================
 # Websocket
-/usr/bin/wsedu
+./wsedu
 
 # =========================================
-# OphvServer
+#OhpServer
 wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && ./ohp.sh
 
 # =========================================
 #Setting Backup
 wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
-
-# =========================================
-# sslh fix
-wget "https://${github}/service/rc.local.sh" && chmod +x rc.local.sh && ./rc.local.sh
 
 # =========================================
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
@@ -111,7 +107,7 @@ wget -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr
 wget -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr/bin/running
 wget -O /usr/bin/speedtest "https://${github}/service/speedtest_cli.py" && chmod +x /usr/bin/speedtest
 wget -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/bin/update
-wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
+#wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
 wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
@@ -127,7 +123,7 @@ sed -i -e 's/\r$//' /usr/bin/renew-domain
 sed -i -e 's/\r$//' /usr/bin/restart
 sed -i -e 's/\r$//' /usr/bin/running
 sed -i -e 's/\r$//' /usr/bin/update
-sed -i -e 's/\r$//' /usr/bin/update-xray
+#sed -i -e 's/\r$//' /usr/bin/update-xray
 sed -i -e 's/\r$//' /usr/bin/wbmn
 sed -i -e 's/\r$//' /usr/bin/xp
 
@@ -189,20 +185,23 @@ mesg n || true
 
 menu
 END
+#echo "clear" >> .profile
+#echo "neofetch" >> .profile
 chmod 644 /root/.profile
 
 history -c
-# Reboot VPS Every At 00:00 Mid-Night
-if ! grep -q '/ur/bin/clearlog && reboot' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /ur/bin/clearlog && reboot") | crontab;fi
-# Check & Delete Expired User & restart service Every At 03:00 - 03:10 am
-if ! grep -q '/usr/bin/xp && restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 3 * * * /usr/bin/xp && restart") | crontab;fi
+# Set Cron Reboot VPS Every At 00:00 Mid-Night
+if ! grep -q '/usr/bin/clearlog && reboot' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /usr/bin/clearlog && reboot") | crontab;fi
+# Set Cron Check & Delete Expired User & restart service Every At 00:10
+if ! grep -q '/usr/bin/xp && /usr/bin/restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 0 * * * /usr/bin/xp && /usr/bin/restart") | crontab;fi
 #if ! grep -q '/usr/bin/xpssh' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 3 * * * /usr/bin/xpssh") | crontab;fi
+/etc/init.d/cron start
+/etc/init.d/cron reload
 
 history -c
+echo "unset HISTFILE" >> /etc/profile
 echo "1.2" > /home/ver
 rm -f /root/*.sh
-rm -f /root/newhost.sh
-rm -rvf /root/domain
 clear
 
 # =========================================
