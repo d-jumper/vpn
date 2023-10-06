@@ -26,28 +26,6 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 #Server konfigurasi
 echo -e "[ ${green}INFO$NC ] MENGINSTALL SAHDOWSOCKS-LIBEV"
 sleep 2
-
-apt-get install --no-install-recommends build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake -y
-if [[ $OS == 'ubuntu' ]]; then
-apt install shadowsocks-libev -y
-apt install simple-obfs -y
-
-elif [[ $OS == 'debian' ]]; then
-if [[ "$ver" = "9" ]]; then
-echo "deb http://deb.debian.org/debian stretch-backports main" | tee /etc/apt/sources.list.d/stretch-backports.list
-apt update
-apt -t stretch-backports install shadowsocks-libev -y
-apt -t stretch-backports install simple-obfs -y
-
-elif [[ "$ver" = "10" ]]; then
-echo "deb http://deb.debian.org/debian buster-backports main" | tee /etc/apt/sources.list.d/buster-backports.list
-apt update
-apt -t buster-backports install shadowsocks-libev -y
-apt -t buster-backports install simple-obfs -y
-fi
-fi
-
-sleep 1
 cat > /etc/shadowsocks-libev/config.json <<END
 {   
     "server":"0.0.0.0",
