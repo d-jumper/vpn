@@ -65,7 +65,7 @@ fi
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 # ==========================================
-#install host
+# Installing Server, Domain & Cert SSL
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
@@ -73,26 +73,36 @@ sed -i -e 's/\r$//' /usr/bin/hostvps
 /usr/bin/hostvps
 
 # ==========================================
-#install Xray
+# Installing Requirements Tools
+cd
+wget "https://${github}/service/apete.sh"
+chmod +x /root/apete.sh
+sed -i -e 's/\r$//' /root/apete.sh
+./apete.sh
+
+# ==========================================
+# Installing Xray - Trojan-Go - Shadowsocks-Libev
 wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
 
 # =========================================
-#install ssh ovpn
+# Installing OpenSSH & OpenVPN
 wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
 
 # =========================================
-# Websocket
+# Installing Websocket
 /usr/bin/wsedu
 
 # =========================================
-#OhpServer
+# Installing OhpServer
 wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && ./ohp.sh
 
 # =========================================
-#Setting Backup
+# Installing Setting Backup
 wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
 
 # =========================================
+# Download file/s script
+#wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
 wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
 #wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
@@ -111,6 +121,7 @@ wget -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/b
 #wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
 wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
+#sed -i -e 's/\r$//' /usr/bin/cek-apete
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
 #sed -i -e 's/\r$//' /usr/bin/cert
 #sed -i -e 's/\r$//' /usr/bin/cf
@@ -152,6 +163,7 @@ sed -i -e 's/\r$//' /usr/bin/portwg
 clear
 
 # =========================================
+# Set Auto-set.service
 cat <<EOF> /etc/systemd/system/autosett.service
 [Unit]
 Description=autosetting
@@ -170,9 +182,17 @@ systemctl enable autosett
 /etc/set.sh
 
 # =========================================
+# Set rc.local restarting service
 /usr/bin/fixssh
 
 # =========================================
+# Remove unnecessary files
+cd
+apt autoclean -y
+apt autoremove -y
+
+# =========================================
+# Finishing
 cat> /root/.profile << END
 # ~/.profile: executed by Bourne-compatible login shells.
 
@@ -206,6 +226,7 @@ rm -f /root/*.sh
 clear
 
 # =========================================
+# Log-installer
 echo " "
 echo "Installation has been completed!!"
 echo " "
@@ -225,7 +246,7 @@ echo "   - Dropbear                : 443, 109, 143"  | tee -a /etc/arfvpn/log-in
 echo "   - Squid Proxy             : 3128, 8080"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Nginx                   : 89"  | tee -a /etc/arfvpn/log-install.txt
-echo "   - Xray WS TLS             : 443"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Xray WS TLS             : 8443"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Xray WS NONE TLS        : 80"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Trojan GO               : 2087"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Shadowsocks-Libev TLS   : 2443 - 3442" | tee -a /etc/arfvpn/log-install.txt
@@ -249,7 +270,7 @@ echo ""  | tee -a /etc/arfvpn/log-install.txt
 echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
-echo ""
+echo ""  | tee -a /etc/arfvpn/log-install.txt
 
 echo -ne "[ ${yell}WARNING${NC} ] Reboot ur VPS ? (y/n)? "
 read answer
