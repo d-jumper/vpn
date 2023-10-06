@@ -128,7 +128,7 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
 
 # install dropbear
-#apt -y install dropbear
+apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109"/g' /etc/default/dropbear
@@ -138,13 +138,13 @@ echo "/usr/sbin/nologin" >> /etc/shells
 
 # install squid
 cd
-#apt -y install squid3
+apt -y install squid3
 wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 sed -i $MYHOST /etc/squid/squid.conf
 
 # Install SSLH
-#apt -y install sslh
+apt -y install sslh
 rm -f /etc/default/sslh
 
 # Settings SSLH
@@ -152,7 +152,7 @@ cat > /etc/default/sslh <<-END
 RUN=yes
 
 DAEMON=/usr/sbin/sslh
-DAEMON_OPTS="--user sslh --listen 127.0.0.1:443 --ssl 127.0.0.1:443 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
+DAEMON_OPTS="--user sslh --listen 127.0.0.1:443 --ssl 127.0.0.1:777 --ssh 127.0.0.1:109 --openvpn 127.0.0.1:1194 --http 127.0.0.1:8880 --pidfile /var/run/sslh/sslh.pid -n"
 END
 
 # Restart Service SSLH
