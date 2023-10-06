@@ -22,21 +22,9 @@ uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
 IP=$(cat ${arfvpn}/IP)
 
-apt install neofetch -y
-apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
-apt install socat cron bash-completion ntpdate -y
-ntpdate 0.id.pool.ntp.org
-apt -y install chrony
-timedatectl set-ntp true
-systemctl enable chronyd && systemctl restart chronyd
-systemctl enable chrony && systemctl restart chrony
-timedatectl set-timezone Asia/Manila
-chronyc sourcestats -v
-chronyc tracking -v
-date
-sleep 5
 clear
-
+echo ""
+echo ""
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "$green          INSTALLING XRAY $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
