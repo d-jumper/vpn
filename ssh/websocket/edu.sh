@@ -23,8 +23,8 @@ chmod +x /usr/local/bin/ws-nontls
 # Installing Service
 cat > /etc/systemd/system/ws-nontls.service << END
 [Unit]
-Description=Python Proxy Mod By Gl33ch3r
-Documentation=https://t.me/Gonfreecs
+Description=Python Proxy
+Documentation=arfvpn.biz.id
 After=network.target nss-lookup.target
 
 [Service]
@@ -53,7 +53,7 @@ chmod +x /usr/local/bin/ws-ovpn
 cat > /etc/systemd/system/ws-ovpn.service << END
 [Unit]
 Description=Python Proxy
-Documentation=https://t.me/Gonfreecs
+Documentation=arfvpn.biz.id
 After=network.target nss-lookup.target
 
 [Service]
@@ -82,7 +82,7 @@ chmod +x /usr/local/bin/ws-tls
 cat > /etc/systemd/system/ws-tls.service << END
 [Unit]
 Description=Python Proxy
-Documentation=https://t.me/Gonfreecs
+Documentation=arfvpn.biz.id
 After=network.target nss-lookup.target
 
 [Service]

@@ -1,6 +1,6 @@
 [Unit]
 Description=Python Proxy Mod
-Documentation=https://t.me/Gonfreecs
+Documentation=arfvpn.biz.id
 After=network.target nss-lookup.target
 
 [Service]

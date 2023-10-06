@@ -13,7 +13,7 @@ LIGHT='\033[0;37m'
 clear
 #cek port dan tampilkan
 
-ws="$(cat ~/log-install.txt | grep -w "Websocket None TLS" | cut -d: -f2|sed 's/ //g')"
+ws="$(cat /etc/arfvpn/log-install.txt | grep -w "Websocket None TLS" | cut -d: -f2|sed 's/ //g')"
 
 #input port untuk pengganti
 echo -e "======================================"
@@ -32,7 +32,7 @@ if [[ -z $cek ]]; then
 
 #ganti port layanan
 sed -i "s/$ws/$ws2/g" /etc/default/sslh
-sed -i "s/   - Websocket None TLS      : $ws/   - Websocket None TLS      : $ws2/g" /root/log-install.txt
+sed -i "s/   - Websocket None TLS      : $ws/   - Websocket None TLS      : $ws2/g" /etc/arfvpn/log-install.txt
 
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $ws -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $ws -j ACCEPT
