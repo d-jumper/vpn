@@ -15,8 +15,8 @@ source /etc/os-release
 arfvpn="/etc/arfvpn"
 ipvps="/var/lib/arfvpn"
 SUB=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-DOMAIN=d-jumper.me
-SUB_DOMAIN=${SUB}.arfvpn.${DOMAIN}
+DOMAIN=arfvpn.biz.id
+SUB_DOMAIN=${SUB}.${DOMAIN}
 CF_ID=arief.prsty@gmail.com
 CF_KEY=3a3ac5ccc9e764de9129fbbb177c161b9dfbd
 set -euo pipefail
