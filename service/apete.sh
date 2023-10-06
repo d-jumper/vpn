@@ -96,10 +96,6 @@ apt install libssl1.0-dev -y
 apt install dos2unix -y
 apt-get --reinstall --fix-missing install bzip2 gzip screen iftop htop -y
 
-apt -y install dropbear
-apt -y install squid3
-apt -y install sslh
-
 # Install Requirements Tools OpenVPN dan Easy-RSA
 apt install openvpn easy-rsa unzip -y
 apt install iptables iptables-persistent -y
