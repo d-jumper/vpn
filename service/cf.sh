@@ -14,9 +14,9 @@ LIGHT='\033[0;37m'
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 ipvps="/var/lib/arfvpn"
+SUB=$(</dev/urandom tr -dc a-z0-9 | head -c4)
 DOMAIN=d-jumper.me
-sub=$(</dev/urandom tr -dc a-z0-9 | head -c4)
-SUB_DOMAIN=${sub}.arfvpn.${DOMAIN}
+SUB_DOMAIN=${SUB}.arfvpn.${DOMAIN}
 CF_ID=arief.prsty@gmail.com
 CF_KEY=3a3ac5ccc9e764de9129fbbb177c161b9dfbd
 set -euo pipefail
@@ -24,7 +24,7 @@ mkdir -p ${arfvpn}
 mkdir -p ${ipvps}
 echo "IP=" >> ${ipvps}/ipvps.conf
 IP=$(cat ${arfvpn}/IP);
-
+clear
 #echo "Updating DNS for ${SUB_DOMAIN}..."
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
@@ -50,7 +50,7 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
      -H "Content-Type: application/json" \
      --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
 
-#WILD_DOMAIN="*.$sub"
+#WILD_DOMAIN="*.$SUB"
 #set -euo pipefail
 #echo ""
 #echo "Updating DNS for ${WILD_DOMAIN}..."
@@ -77,7 +77,7 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 #     -H "X-Auth-Key: ${CF_KEY}" \
 #     -H "Content-Type: application/json" \
 #     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-echo "Your Sub-Domain has been created : ${SUB_DOMAIN}"
+echo "Your SUB-DOMAIN has been created : ${SUB_DOMAIN}"
 sleep 5
 echo "${SUB_DOMAIN}" > ${arfvpn}/domain
 echo "${SUB_DOMAIN}" > ${arfvpn}/scdomain

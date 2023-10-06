@@ -14,11 +14,11 @@ source /etc/os-release
 cd /root
 arfvpn="/etc/arfvpn"
 nginx="/etc/nginx"
-domain=$(cat ${arfvpn}/domain)
-DOMAIN3="s/${domain}/domainxxx/g";
-vps="/home/arfvps/public_html"
+arfvps="/home/arfvps/public_html"
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
+domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";
+DOMAIN3="s/${domain}/domainxxx/g";
 MYIP=$(cat $arfvpn/IP)
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$domain/g";
@@ -29,28 +29,29 @@ echo -e "$green        UPDATE / RENEW DOMAIN SERVER $NC"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 date
 sleep 5
+
+systemctl stop nginx
+cd
 sed -i $DOMAIN3 ${nginx}/sites-available/${domain}.conf
 /usr/bin/hostvps
 cd ${nginx}
-systemctl stop nginx
 mkdir -p $arfvpn/backup/
 cp ${nginx}/sites-available/*.conf $arfvpn/backup/${domain}.conf
 rm ${nginx}/sites-enabled/*
 rm ${nginx}/sites-available/*
-mkdir -p ${vps}/
-cd ${vps}
-chown -R www-data:www-data ${vps}
-chmod -R g+rw ${vps}
-chmod +x /home/
-chmod +x /home/arfvps/
-chmod +x ${vps}/
-wget -O ${vps}/index.html "${github}/nginx/index.html"
-
-cd ${nginx}
 cp $arfvpn/backup/${domain}.conf ${nginx}/sites-available/${domain}.conf
 sed -i $DOMAIN2 ${nginx}/sites-available/${domain}.conf
 rm -rvf $arfvpn/backup/${domain}.conf
 sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
+
+mkdir -p ${arfvps}/
+cd ${arfvps}
+wget -O ${arfvps}/index.html "https://${github}/nginx/index.html"
+chown -R www-data:www-data ${arfvps}
+chmod -R g+rw ${arfvps}
+chmod +x /home/
+chmod +x /home/arfvps/
+chmod +x ${arfvps}/
 
 /usr/bin/cert
 
@@ -59,6 +60,7 @@ systemctl start nginx
 systemctl restart nginx
 sudo nginx -t && sudo systemctl reload nginx
 sleep 5
+
 echo " Re-installing Squid ..."
 systemctl stop squid
 rm -rvf /etc/squid/squid.conf

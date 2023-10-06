@@ -95,7 +95,7 @@ read -rp "Input ur domain / sub-domain : " -e domain
     Nothing input for domain!
     Then a random sub-domain will be created"
     sleep 2
-    
+    rm /usr/bin/cf
     wget -O /usr/bin/cf "https://${github}/service/cf.sh"
     chmod +x /usr/bin/cf
     sed -i -e 's/\r$//' /usr/bin/cf

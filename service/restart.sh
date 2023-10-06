@@ -57,15 +57,11 @@ systemctl restart ws-tls >/dev/null 2>&1
 echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
 sleep 15
 systemctl daemon-reload >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Daemon Reload "
 systemctl restart ws-tls >/dev/null 2>&1
 systemctl restart ws-nontls >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Websocket "
 systemctl restart ws-ovpn >/dev/null 2>&1
 systemctl restart ssh-ohp >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart OpenVPN "
 systemctl restart dropbear-ohp >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart Dropbear "
 systemctl restart openvpn-ohp >/dev/null 2>&1
 /etc/init.d/ssh restart >/dev/null 2>&1
 /etc/init.d/dropbear restart >/dev/null 2>&1
@@ -75,11 +71,10 @@ systemctl restart openvpn-ohp >/dev/null 2>&1
 /etc/init.d/fail2ban restart >/dev/null 2>&1
 /etc/init.d/cron restart >/dev/null 2>&1
 /etc/init.d/nginx restart >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Restart all.service "
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000 >/dev/null 2>&1
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000 >/dev/null 2>&1
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000 >/dev/null 2>&1
-echo -e "[ ${GREEN}ok${NC} ] Setting BADVPN.UDPGW "
+echo -e "[ ${GREEN}ok${NC} ] Restarting all.service ..."
 echo ""
 echo "      All Service/s Successfully Restarted         "
 echo ""
