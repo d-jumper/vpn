@@ -65,8 +65,4 @@ chmod +x /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cert
 /usr/bin/cert
 
-systemctl enable nginx
-systemctl start nginx
-systemctl restart nginx
-sudo nginx -t && sudo systemctl reload nginx
 sleep 5
