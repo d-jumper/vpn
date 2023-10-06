@@ -17,15 +17,13 @@ MYISP=$(curl -s ipinfo.io/org/);
 MYIP=$(curl -s https://ipinfo.io/ip/);
 DOMAIN=$(cat $arfvpn/domain);
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
-export DEBIAN_FRONTEND=noninteractive
 MYIP2="s/xxxxxxxxx/$MYIP/g";
-NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 source /etc/os-release
+export DEBIAN_FRONTEND=noninteractive
 ver=$VERSION_ID
+NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 
-# Install OpenVPN dan Easy-RSA
-apt install openvpn easy-rsa unzip -y
-apt install openssl iptables iptables-persistent -y
+cd
 mkdir -p /etc/openvpn/server/easy-rsa/
 mkdir -p /etc/openvpn/client/
 #mkdir -p /etc/arfvpn/cert/
