@@ -30,37 +30,35 @@ date
 sleep 3
 echo -e "[ ${green}INFO$NC ] INSTALLING NGINX SERVER"
 cd
-apt install pwgen openssl socat -y
-apt install nginx php php-fpm php-cli php-mysql libxml-parser-perl -y
+
 systemctl stop nginx
-apt-get remove --purge apache apache* -y
+cd ${nginx}
+rm ${nginx}/nginx.conf
+wget -O ${nginx}/nginx.conf "https://${github}/nginx/nginx.conf"
 rm ${nginx}/sites-enabled/*
 rm ${nginx}/sites-available/*
-wget -O ${nginx}/nginx.conf "https://${github}/nginx/nginx.conf"
-#wget -O ${nginx}/conf.d/arfvps.conf "https://${github}/nginx/arfvps.conf"
+wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/arfvps.conf"
+#sed -i 's/443/8443/g' ${nginx}/sites-available/${domain}.conf
+sed -i "${MYIP2}" ${nginx}/sites-available/${domain}.conf
+sed -i "${DOMAIN2}" ${nginx}/sites-available/${domain}.conf
+sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
+
+useradd -m arfvps;
+mkdir -p ${arfvps}/
+cd ${arfvps}/
+wget -O ${arfvps}/index.html "https://${github}/nginx/index.html"
+echo "<?php phpinfo() ?>" > ${arfvps}/info.php
+chown -R www-data:www-data ${arfvps}
+chmod -R g+rw ${arfvps}
+chmod +x /home/
+chmod +x /home/arfvps/
+chmod +x ${arfvps}/
+
+cd
 ls /etc/php > phpversion
 phpv=$(cat /root/phpversion)
 sed -i "s/listen = \/run\/php\/php${phpv}-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/${phpv}/fpm/pool.d/www.conf
 rm /root/phpversion
-#sed -i "s/listen = \/run\/php\/php-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/fpm/pool.d/www.conf
-useradd -m arfvps;
-mkdir -p ${vps}/
-echo "<?php phpinfo() ?>" > ${vps}/info.php
-chown -R www-data:www-data ${vps}
-chmod -R g+rw ${vps}
-chmod +x /home/
-chmod +x /home/arfvps/
-chmod +x ${vps}/
-cd ${vps}/
-wget -O ${vps}/index.html "https://${github}/nginx/index.html"
-
-cd ${nginx}
-#wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/domain.conf"
-wget -O ${nginx}/sites-available/${domain}.conf "https://${github}/nginx/arfvps.conf"
-sed -i 's/443/8443/g' ${nginx}/sites-available/${domain}.conf
-sed -i "${MYIP2}" ${nginx}/sites-available/${domain}.conf
-sed -i "${DOMAIN2}" ${nginx}/sites-available/${domain}.conf
-sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
 
 wget -O /usr/bin/cert "https://${github}/service/cert.sh"
 chmod +x /usr/bin/cert
