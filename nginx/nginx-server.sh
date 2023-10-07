@@ -60,7 +60,7 @@ phpv=$(cat /root/phpversion)
 sed -i "s/listen = \/run\/php\/php${phpv}-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/${phpv}/fpm/pool.d/www.conf
 rm /root/phpversion
 
-wget -O /usr/bin/cert "https://${github}/service/cert.sh"
+wget -O /usr/bin/cert "https://${github}/cert/cert.sh"
 chmod +x /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cert
 /usr/bin/cert
