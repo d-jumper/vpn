@@ -41,9 +41,10 @@ fi
 #Getting user
 arfvpn="/etc/arfvpn"
 ipvps="/var/lib/arfvpn"
-IP=$(cat $arfvpn/IP)
-domain=$(cat $arfvpn/domain)
-MYISP=$(cat $arfvpn/ISP)
+curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
+IP=$(cat ${arfvpn}/IP)
+domain=$(cat ${arfvpn}/domain)
+MYISP=$(cat ${arfvpn}/ISP)
 source ${ipvps}/ipvps.conf
 cfn=$(cat ${ipvps}/cfndomain)
 error1="${RED}[ERROR]${NC}"
