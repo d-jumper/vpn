@@ -117,7 +117,7 @@ echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}───✶ OpenVPN Config ✶─── $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}OVPN TCP      : http://${IP}:${nginx}/tcp.ovpn $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}OVPN UDP      : http://${IP}:${nginx}/udp.ovpn $NC" | tee -a /etc/arfvpn/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}OVPN SSL      : http://${IP}:${nginx}/ssl.ovp $NC" | tee -a /etc/arfvpn/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}OVPN SSL      : http://${IP}:${nginx}/ssl.ovpn $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}───✶ PAYLOAD CONFIG ✶─── $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}PAYLOAD WS TLS  ➣ $NC" | tee -a /etc/arfvpn/log-create-user.log
