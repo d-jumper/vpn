@@ -253,7 +253,7 @@ echo "   - Shadowsocks-Libev TLS   : 2443 - 3442" | tee -a /etc/arfvpn/log-insta
 echo "   - Shadowsocks-Libev NTLS  : 3443 - 4442" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 echo "   >>> Server Information & Other Features"  | tee -a /etc/arfvpn/log-install.txt
-echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Timezone                : Asia/Jakarta (GMT +7 WIB)"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Fail2Ban                : [ON]"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Dflate                  : [ON]"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - IPtables                : [ON]"  | tee -a /etc/arfvpn/log-install.txt
