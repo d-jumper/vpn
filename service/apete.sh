@@ -14,6 +14,7 @@ source /etc/os-release
 OS=$ID
 ver=$VERSION_ID
 
+echo -e "[ ${green}INFO$NC ] Removing unnecessary files ..."
 # Update, Upgrade dist & Remove unnecessary files
 apt update -y
 apt upgrade -y
@@ -26,6 +27,7 @@ apt-get remove --purge samba* -y
 apt-get remove --purge bind9* -y
 apt-get remove --purge sendmail* -y
 
+echo -e "[ ${green}INFO$NC ] Installing Requirements Tools Xray ..."
 # Install Requirements Tools XRAY
 apt install neofetch -y
 apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
@@ -33,17 +35,29 @@ apt -y install vnstat
 apt -y install fail2ban
 apt -y install cron
 apt install bash-completion ntpdate -y
-ntpdate 0.id.pool.ntp.org
 apt -y install chrony
+
+echo -e "[ ${green}INFO$NC ] Set Time GMT +7 WIB ..."
+# set time GMT +7
+ntpdate 0.id.pool.ntp.org
 timedatectl set-ntp true
+timedatectl set-timezone Asia/Jakarta
+ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+
+echo -e "[ ${green}INFO$NC ] Disable IPv6 ..."
+# disable ipv6
+echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
+sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
+
+echo -e "[ ${green}INFO$NC ] Set Chrony ..."
 systemctl enable chronyd && systemctl restart chronyd
 systemctl enable chrony && systemctl restart chrony
-timedatectl set-timezone Asia/Jakarta
 chronyc sourcestats -v
 chronyc tracking -v
 date
 sleep 5
 
+echo -e "[ ${green}INFO$NC ] Installing Requirements Tools Shadowsocks-libev ..."
 # Install Requirements Shadowsocks-libev 
 apt-get install --no-install-recommends build-essential autoconf libtool libssl-dev libpcre3-dev libev-dev asciidoc xmlto automake -y
 if [[ $OS == 'ubuntu' ]]; then
@@ -65,10 +79,15 @@ apt -t buster-backports install simple-obfs -y
 fi
 fi
 
+echo -e "[ ${green}INFO$NC ] Installing Requirements Tools Nginx Server ..."
 # Install Requirements Tools Nginx
 apt install pwgen openssl socat -y
 apt install nginx php php-fpm php-cli php-mysql libxml-parser-perl -y
 
+echo -e "[ ${green}INFO$NC ] Installing Requirements Tools OpenSSH & OpenVPN ..."
+# Install Requirements Tools OpenVPN dan Easy-RSA
+apt install openvpn easy-rsa unzip -y
+apt install iptables iptables-persistent -y
 # Install Requirements Tools SSHVPN
 apt install ruby -y
 apt install python -y
@@ -95,9 +114,5 @@ apt install zlib1g-dev -y
 apt install libssl1.0-dev -y
 apt install dos2unix -y
 apt-get --reinstall --fix-missing install bzip2 gzip screen iftop htop -y
-
-# Install Requirements Tools OpenVPN dan Easy-RSA
-apt install openvpn easy-rsa unzip -y
-apt install iptables iptables-persistent -y
 
 clear

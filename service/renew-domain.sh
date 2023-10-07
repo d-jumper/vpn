@@ -31,10 +31,11 @@ date
 sleep 5
 
 systemctl stop nginx
+systemctl stop squid
 cd
 sed -i $DOMAIN3 ${nginx}/sites-available/${domain}.conf
+sed -i $DOMAIN3 /etc/squid/squid.conf
 /usr/bin/hostvps
-cd ${nginx}
 mkdir -p $arfvpn/backup/
 cp ${nginx}/sites-available/*.conf $arfvpn/backup/${domain}.conf
 rm ${nginx}/sites-enabled/*
@@ -62,12 +63,15 @@ sudo nginx -t && sudo systemctl reload nginx
 sleep 5
 
 echo " Re-installing Squid ..."
-systemctl stop squid
-rm -rvf /etc/squid/squid.conf
-wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
-sed -i $MYIP2 /etc/squid/squid.conf
-sed -i $MYHOST /etc/squid/squid.conf
+#systemctl stop squid
+#cp /etc/squid/squid.conf $arfvpn/backup/squid.conf
+#rm /etc/squid/squid.conf
+#cp $arfvpn/backup/squid.conf /etc/squid/squid.conf
+#wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
+sed -i $DOMAIN2 /etc/squid/squid.conf
+#rm $arfvpn/backup/squid.conf
 systemctl start squid
+
 /usr/bin/fixssh
 
 echo -e "[ ${green}INFO$NC ] Update / Renew Domain Server Successfully!"
