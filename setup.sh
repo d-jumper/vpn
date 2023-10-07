@@ -206,17 +206,26 @@ mesg n || true
 
 menu
 END
-#echo "clear" >> .profile
-#echo "neofetch" >> .profile
 chmod 644 /root/.profile
 
-history -c
-# Set Cron Reboot VPS Every At 00:00 Mid-Night
-if ! grep -q '/usr/bin/clearlog && reboot' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /usr/bin/clearlog && reboot") | crontab;fi
-# Set Cron Check & Delete Expired User & restart service Every At 00:10
-if ! grep -q '/usr/bin/xp && /usr/bin/restart' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 0 * * * /usr/bin/xp && /usr/bin/restart") | crontab;fi
-#if ! grep -q '/usr/bin/xpssh' /var/spool/cron/crontabs/root;then (crontab -l;echo "10 3 * * * /usr/bin/xpssh") | crontab;fi
+cat > /etc/arfvpn/cron-vpn << END
+#!/bin/bash
+# Set Cron Reboot VPS
+# Set Auto Delete User Expired
+# Every At 00:00 Mid-Night
+/usr/bin/clearlog >/dev/null 2>&1
+sleep 5
+/usr/bin/xp >/dev/null 2>&1
+sleep 5
+/sbin/reboot
+echo " cron successfully :" > /etc/arfvpn/log-cron.log
+date >> /etc/arfvpn/log-cron.log
+exit
+END
+chmod +x /etc/arfvpn/cron-vpn
+if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /etc/arfvpn/cron-vpn") | crontab;fi
 /etc/init.d/cron start
+/etc/init.d/cron restart
 /etc/init.d/cron reload
 
 history -c
