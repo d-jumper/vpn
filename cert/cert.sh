@@ -25,11 +25,10 @@ rm -rvf ${arfvpn}/cert/ca.crt ${arfvpn}/cert/ca.key ${arfvpn}/cert/dh.pem
 mkdir -p ${arfvpn}/cert/
 rm -rvf /root/.acme.sh
 mkdir -p /root/.acme.sh/
-#curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-wget "https://${github}/cert/acme.sh.zip"
-unzip acme.sh.zip
-rm -rvf /root/acme.sh.zip
-cd /root/.acme.sh/
+curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+#wget "https://${github}/cert/acme.sh.zip"
+#unzip acme.sh.zip
+#rm -rvf /root/acme.sh.zip
 chmod +x /root/.acme.sh/acme.sh
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
