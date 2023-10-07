@@ -101,7 +101,7 @@ echo -e "[ ${green}INFO$NC ] Update New Script ..."
 sleep 1
 wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
+wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
