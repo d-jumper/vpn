@@ -241,7 +241,7 @@ echo "   - Websocket Ovpn          : 2086"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OHP SSH                 : 8181"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OHP Dropbear            : 8282"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - OHP OpenVPN             : 8383"  | tee -a /etc/arfvpn/log-install.txt
-echo "   - Stunnel5                : 445, 777, 990"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Stunnel5                : 443, 445, 777"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Dropbear                : 443, 109, 143"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Squid Proxy             : 3128, 8080"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Badvpn                  : 7100, 7200, 7300"  | tee -a /etc/arfvpn/log-install.txt
