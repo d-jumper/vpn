@@ -105,7 +105,7 @@ wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
 wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-#wget -O /usr/bin/cert "https://${github}/service/cert.sh" && chmod +x /usr/bin/cert
+#wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 #wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
 #wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
@@ -253,7 +253,7 @@ echo "   - Shadowsocks-Libev TLS   : 2443 - 3442" | tee -a /etc/arfvpn/log-insta
 echo "   - Shadowsocks-Libev NTLS  : 3443 - 4442" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 echo "   >>> Server Information & Other Features"  | tee -a /etc/arfvpn/log-install.txt
-#echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Timezone                : Asia/Jakarta (GMT +7)"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Fail2Ban                : [ON]"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - Dflate                  : [ON]"  | tee -a /etc/arfvpn/log-install.txt
 echo "   - IPtables                : [ON]"  | tee -a /etc/arfvpn/log-install.txt
@@ -265,7 +265,7 @@ echo "   - Restore Data" | tee -a /etc/arfvpn/log-install.txt
 echo "   - Auto Delete Expired Account" | tee -a /etc/arfvpn/log-install.txt
 echo "   - Full Orders For Various Services" | tee -a /etc/arfvpn/log-install.txt
 echo "   - White Label" | tee -a /etc/arfvpn/log-install.txt
-echo "   - Installation Log --> /root/log-install.txt"  | tee -a /etc/arfvpn/log-install.txt
+echo "   - Installation Log --> /etc/arfvpn/log-install.txt"  | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
