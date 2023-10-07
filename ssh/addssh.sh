@@ -42,9 +42,10 @@ fi
 #Getting user
 arfvpn="/etc/arfvpn"
 ipvps="/var/lib/arfvpn"
-IP=$(cat $arfvpn/IP)
-domain=$(cat $arfvpn/domain)
-MYISP=$(cat $arfvpn/ISP)
+curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
+IP=$(cat ${arfvpn}/IP)
+domain=$(cat ${arfvpn}/domain)
+MYISP=$(cat ${arfvpn}/ISP)
 source ${ipvps}/ipvps.conf
 cfn=$(cat ${ipvps}/cfndomain)
 error1="${RED}[ERROR]${NC}"
@@ -140,7 +141,7 @@ echo -e "  ${RED}•${NC} ${CYAN}───────────────�
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "${NC}${CYAN}              ───✶ Created - Expired ✶─── $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Created           : ${hariini} $NC" | tee -a /etc/arfvpn/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Expired On        : ${exp} $NC" | tee -a /etc/arfvpn/log-create-user.log
+echo -e "  ${RED}•${NC} ${CYAN}Expired On        : ${expi} $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
