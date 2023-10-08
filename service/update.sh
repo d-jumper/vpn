@@ -353,6 +353,6 @@ echo -e ""
 sleep 2
 
 #read -p "Press [Enter] to return to the menu or CTRL+C to exit"
-echo -p "   ${LIGHT}Press ${NC}[ Enter ]${LIGHT} to ${NC}Restart-Service${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "   ${LIGHT}Press ${NC}[ Enter ]${LIGHT} to ${NC}Restart-Service${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 restart
