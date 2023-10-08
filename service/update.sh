@@ -352,5 +352,6 @@ echo -e " ${OK} Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
 
-read -p "Press [Enter] to return to the menu or CTRL+C to exit"
+#read -p "Press [Enter] to return to the menu or CTRL+C to exit"
+read -p "Press [Enter] to Restart-Service or CTRL+C to exit"
 restart
