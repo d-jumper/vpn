@@ -32,7 +32,7 @@ touch $HOME/fim
  ) > /dev/null 2>&1 &
  tput civis
 # Start
-echo -ne "     Processing ${NC}${LIGHT}- [${NC}"
+echo -ne "     ${YELLOW}Processing ${NC}${LIGHT}- [${NC}"
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "${TYBLUE}>${NC}"
@@ -44,7 +44,7 @@ while true; do
    tput cuu1
    tput dl1
    # Finish
-   echo -ne "           Done ${NC}${LIGHT}- [${NC}"
+   echo -ne "           ${YELLOW}Done ${NC}${LIGHT}- [${NC}"
 done
 echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
 tput cnorm
