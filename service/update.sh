@@ -13,11 +13,11 @@ NC='\033[0m'
 
 # Export Banner Status Information
 EROR="[${RED} EROR ${NC}]"
-INFO="[${YELLOW} INFO ${NC}]"
+INFO="[${LIGHT} INFO ${NC}]"
 OK="[${LIGHT} OK ! ${NC}]"
 CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
-SEND="[${YELLOW} SEND ${NC}]"
+SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 #########################################################
 
@@ -352,7 +352,8 @@ echo -e " ${OK} Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
 
+echo ""
 #read -p "Press [Enter] to return to the menu or CTRL+C to exit"
-echo -e "   ${LIGHT}Press ${NC}[ Enter ]${LIGHT} to ${NC}Restart-Service${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${YELLOW}Restart-Service${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 restart
