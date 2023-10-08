@@ -1,22 +1,61 @@
 #!/bin/bash
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-clear
+#########################################################
+# Export Colour
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+TYBLUE='\e[1;36m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+NC='\033[0m'
 
+# Export Banner Status Information
+EROR="[${RED} EROR ${NC}]"
+INFO="[${YELLOW} INFO ${NC}]"
+OK="[${LIGHT} OK ! ${NC}]"
+CEKLIST="[${LIGHT}✔${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
+SEND="[${YELLOW} SEND ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne " Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${TYBLUE}>${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "       Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
-cd /usr/bin
 
-echo -e "[ ${green}INFO$NC ] Removing old file ..."
-sleep 1
+#########################################################
+remove_script () {
 rm -rvf /etc/arfvpn/Version
 rm -rvf /usr/bin/cek-bandwidth
 rm -rvf /usr/bin/cert
@@ -95,10 +134,10 @@ rm -rvf /usr/bin/addss
 rm -rvf /usr/bin/cekss
 rm -rvf /usr/bin/delss
 rm -rvf /usr/bin/renewss
-clear
+}
 
-echo -e "[ ${green}INFO$NC ] Update New Script ..."
-sleep 1
+#########################################################
+update_script () {
 wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
 wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
@@ -292,9 +331,26 @@ sed -i -e 's/\r$//' /bin/add-trgo
 sed -i -e 's/\r$//' /bin/cek-trgo
 sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
-clear
+}
 
-echo -e "[ ${green}INFO$NC ] Update Successfully!"
-echo ""
-read -n 1 -s -r -p "Press any key to Restart service"
+#########################################################
+echo -e " ${INFO} Update Script VPS ..."
+echo -e ""
+sleep 2
+
+echo -e "Removing Old Script"
+arfvpn_bar 'remove_script'
+echo -e ""
+sleep 2
+
+echo -e "Update New Script"
+arfvpn_bar 'update_script'
+echo -e ""
+sleep 2
+
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
+
+read -p "Press [Enter] to return to the menu or CTRL+C to exit"
 restart
