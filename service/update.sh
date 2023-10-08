@@ -32,7 +32,7 @@ touch $HOME/fim
  ) > /dev/null 2>&1 &
  tput civis
 # Start
-echo -ne " Processing ${NC}${LIGHT}- [${NC}"
+echo -ne "     Processing ${NC}${LIGHT}- [${NC}"
 while true; do
    for((i=0; i<18; i++)); do
    echo -ne "${TYBLUE}>${NC}"
@@ -44,7 +44,7 @@ while true; do
    tput cuu1
    tput dl1
    # Finish
-   echo -ne "       Done ${NC}${LIGHT}- [${NC}"
+   echo -ne "           Done ${NC}${LIGHT}- [${NC}"
 done
 echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
 tput cnorm
@@ -338,12 +338,12 @@ echo -e " ${INFO} Update Script VPS ..."
 echo -e ""
 sleep 2
 
-echo -e "Removing Old Script"
+echo -e " ${LIGHT}- ${NC}Removing Old Script"
 arfvpn_bar 'remove_script'
 echo -e ""
 sleep 2
 
-echo -e "Update New Script"
+echo -e " ${LIGHT}- ${NC}Updating New Script"
 arfvpn_bar 'update_script'
 echo -e ""
 sleep 2
