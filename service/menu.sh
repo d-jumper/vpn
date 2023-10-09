@@ -1,36 +1,37 @@
 #!/bin/bash
-#########################
+#########################################################
+# Exporting Language to UTF-8
+LC_ALL='en_US.UTF-8'
+LANG='en_US.UTF-8'
+LANGUAGE='en_US.UTF-8'
+LC_CTYPE='en_US.utf8'
 
-# // Exporting Language to UTF-8
-export LC_ALL='en_US.UTF-8'
-export LANG='en_US.UTF-8'
-export LANGUAGE='en_US.UTF-8'
-export LC_CTYPE='en_US.utf8'
+# Export Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+TYBLUE='\e[1;36m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+NC='\033[0m'
 
-# // Export Color & Information
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export YELLOW='\033[0;33m'
-export BLUE='\033[0;34m'
-export PURPLE='\033[0;35m'
-export CYAN='\033[0;36m'
-export LIGHT='\033[0;37m'
-export NC='\033[0m'
+# Export Align
+BOLD="\e[1m"
+WARNING="${RED}\e[5m"
+UNDERLINE="\e[4m"
 
-# // Export Banner Status Information
-export EROR="[${RED} EROR ${NC}]"
-export INFO="[${YELLOW} INFO ${NC}]"
-export OKEY="[${GREEN} OKEY ${NC}]"
-export PENDING="[${YELLOW} PENDING ${NC}]"
-export SEND="[${YELLOW} SEND ${NC}]"
-export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+# Export Banner Status Information
+EROR="[${RED} EROR ${NC}]"
+INFO="[${LIGHT} INFO ${NC}]"
+OK="[${LIGHT} OK ! ${NC}]"
+CEKLIST="[${LIGHT}✔${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
+SEND="[${GREEN} SEND ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
-# / letssgoooo
-
-# // Export Align
-export BOLD="\e[1m"
-export WARNING="${RED}\e[5m"
-export UNDERLINE="\e[4m"
+#########################################################
 
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
@@ -88,11 +89,11 @@ echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "                   ⇱ \e[32;1mTunnel/s Menu\e[0m ⇲ "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e "    ${BICyan}[${BIWhite}01${BICyan}]${RED} •${NC} ${CYAN}SSH/OVPN     $NC  ${BICyan}[${BIWhite}04${BICyan}]${RED} • ${NC}${CYAN}TROJAN-WS/GO $NC"
+echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}SSH/OVPN     $NC  ${CYAN}[${LIGHT}04${CYAN}]${RED} • ${NC}${CYAN}TROJAN-WS/GO $NC"
 
-echo -e "    ${BICyan}[${BIWhite}02${BICyan}]${RED} •${NC} ${CYAN}XRAY - VMESS $NC  ${BICyan}[${BIWhite}05${BICyan}]${RED} • ${NC}${CYAN}SHADOWSOCK-OBFS$NC"
+echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}XRAY - VMESS $NC  ${CYAN}[${LIGHT}05${CYAN}]${RED} • ${NC}${CYAN}SHADOWSOCK-OBFS$NC"
 
-echo -e "    ${BICyan}[${BIWhite}03${BICyan}]${RED} •${NC} ${CYAN}XRAY - VLESS $NC"
+echo -e "    ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}XRAY - VLESS $NC"
 
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo""
@@ -100,13 +101,13 @@ echo -e "\033[0;34m┌───────────────────�
 echo -e "                   ⇱ \e[32;1mMenu Service/s\e[0m ⇲ "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 
-echo -e "    ${BICyan}[${BIWhite}06${BICyan}]${RED} •${NC} ${CYAN}SETTING/s    $NC  ${BICyan}[${BIWhite}10${BICyan}]${RED} • ${NC}${CYAN}CEK BANDWIDTH $NC"
+echo -e "    ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}SETTING/s    $NC  ${CYAN}[${LIGHT}10${CYAN}]${RED} • ${NC}${CYAN}CEK BANDWIDTH $NC"
 
-echo -e "    ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}UPDATE-XRAY  $NC  ${BICyan}[${BIWhite}11${BICyan}]${RED} • ${NC}${CYAN}CEK RUNNING SERVICE $NC"
+echo -e "    ${CYAN}[${LIGHT}07${CYAN}]${RED} •${NC} ${CYAN}UPDATE-XRAY  $NC  ${CYAN}[${LIGHT}11${CYAN}]${RED} • ${NC}${CYAN}CEK RUNNING SERVICE $NC"
 
-echo -e "    ${BICyan}[${BIWhite}08${BICyan}]${RED} •${NC} ${CYAN}UPDATE-SCRIPT$NC  ${BICyan}[${BIWhite}12${BICyan}]${RED} • ${NC}${CYAN}RESTART SERVICE$NC"
+echo -e "    ${CYAN}[${LIGHT}08${CYAN}]${RED} •${NC} ${CYAN}UPDATE-SCRIPT$NC  ${CYAN}[${LIGHT}12${CYAN}]${RED} • ${NC}${CYAN}RESTART SERVICE$NC"
 
-echo -e "    ${BICyan}[${BIWhite}09${BICyan}]${RED} •${NC} ${CYAN}BACKUP       $NC  ${BICyan}[${BIWhite}13${BICyan}]${RED} • ${NC}${CYAN}INSTALL-WEBMIN$NC"
+echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}BACKUP       $NC  ${CYAN}[${LIGHT}13${CYAN}]${RED} • ${NC}${CYAN}INSTALL-WEBMIN$NC"
 
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
@@ -114,9 +115,9 @@ echo -e "\033[0;34m┌───────────────────�
 echo -e "                       ⇱ \e[32;1mAbout\e[0m ⇲ "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 
-echo -e "    ${BICyan}[${BIWhite}14${BICyan}]${RED} •${NC} ${CYAN}INFO-SCRIPT  $NC  ${BICyan}[${BIWhite}xx${BICyan}]${RED} • ${NC}${CYAN}CLOSE MENU   $NC"
+echo -e "    ${CYAN}[${LIGHT}14${CYAN}]${RED} •${NC} ${CYAN}INFO-SCRIPT  $NC  ${CYAN}[${LIGHT}xx${CYAN}]${RED} • ${NC}${CYAN}CLOSE MENU   $NC"
 
-echo -e "    ${BICyan}[${BIWhite}15${BICyan}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC"
+echo -e "    ${CYAN}[${LIGHT}15${CYAN}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC"
 
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""

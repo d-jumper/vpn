@@ -1,41 +1,61 @@
 #!/bin/bash
-#########################
-# // Export Color & Information
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export YELLOW='\033[0;33m'
-export BLUE='\033[0;34m'
-export PURPLE='\033[0;35m'
-export CYAN='\033[0;36m'
-export LIGHT='\033[0;37m'
-export NC='\033[0m'
+#########################################################
+# Export Color
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+TYBLUE='\e[1;36m'
+CYAN='\033[0;36m'
+LIGHT='\033[0;37m'
+NC='\033[0m'
 
-# // Export Banner Status Information
-export EROR="[${RED} EROR ${NC}]"
-export INFO="[${YELLOW} INFO ${NC}]"
-export OKEY="[${GREEN} OKEY ${NC}]"
-export PENDING="[${YELLOW} PENDING ${NC}]"
-export SEND="[${YELLOW} SEND ${NC}]"
-export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+# Export Align
+BOLD="\e[1m"
+WARNING="${RED}\e[5m"
+UNDERLINE="\e[4m"
 
-# // Export Align
-export BOLD="\e[1m"
-export WARNING="${RED}\e[5m"
-export UNDERLINE="\e[4m"
+# Export Banner Status Information
+EROR="[${RED} EROR ${NC}]"
+INFO="[${LIGHT} INFO ${NC}]"
+OK="[${LIGHT} OK ! ${NC}]"
+CEKLIST="[${LIGHT}✔${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
+SEND="[${GREEN} SEND ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
 
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${YELLOW}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${TYBLUE}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${YELLOW}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
 
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
-
-# ==========================================
+#########################################################
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
@@ -44,7 +64,9 @@ nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
 success="${GREEN}[SUCCESS]${NC}"
 
-# ==========================================
+
+#########################################################
+hostvps_server () {
 cd /root
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
@@ -55,10 +77,11 @@ if [ "$(systemd-detect-virt)" == "openvz" ]; then
 		echo "OpenVZ is not supported"
 		exit 1
 fi
-# ==========================================
+
+#########################################################
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
-# ==========================================
+#########################################################
 rm -rvf $arfvpn/IP
 rm -rvf $arfvpn/ISP
 rm -rvf $arfvpn/domain
@@ -79,16 +102,21 @@ mkdir -p $xray
 mkdir -p $trgo
 mkdir -p $nginx
 
-# ==========================================
+#########################################################
 curl -s ipinfo.io/org/ > ${arfvpn}/ISP
 curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
+}
 clear
 echo ""
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green      Add Domain for Server VPN $NC"
+echo -e "     Add Domain for Server VPN"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo " "
-echo -e "[ ${green}INFO$NC ]* BLANK INPUT FOR RANDOM SUB-DOMAIN ! "
+echo -e " ${LIGHT}- ${NC}Creating Directory VPN Server"
+arfvpn_bar 'hostvps_server'
+echo -e ""
+sleep 2
+echo -e "${INFO}${LIGHT}* ${NC} ${RED}Blank Input For Random Sub-domain ! ${NC}"
 read -rp "Input ur domain / sub-domain : " -e domain
     if [ -z ${domain} ]; then
     echo -e "
@@ -108,4 +136,4 @@ read -rp "Input ur domain / sub-domain : " -e domain
     fi
     sleep 1
 
-# ==========================================
+#########################################################
