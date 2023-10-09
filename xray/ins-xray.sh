@@ -1,15 +1,96 @@
 #!/bin/bash
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+#########################################################
+# Export Color
+BIBlack='\033[1;90m'      # Black
+BIRed='\033[1;91m'        # Red
+BIGreen='\033[1;92m'      # Green
+BIYellow='\033[1;93m'     # Yellow
+BIBlue='\033[1;94m'       # Blue
+BIPurple='\033[1;95m'     # Purple
+BICyan='\033[1;96m'       # Cyan
+BIWhite='\033[1;97m'      # White
+UWhite='\033[4;37m'       # White
+On_IPurple='\033[0;105m'  #
+On_IRed='\033[0;101m'
+IBlack='\033[0;90m'       # Black
+IRed='\033[0;91m'         # Red
+IGreen='\033[0;92m'       # Green
+IYellow='\033[0;93m'      # Yellow
+IBlue='\033[0;94m'        # Blue
+IPurple='\033[0;95m'      # Purple
+ICyan='\033[0;96m'        # Cyan
+IWhite='\033[0;97m'       # White
+BINC='\e[0m'
 
+RED='\033[0;31m'      # RED 1
+RED2='\e[1;31m'       # RED 2
+GREEN='\033[0;32m'   # GREEN 1
+GREEN2='\e[1;32m'    # GREEN 2
+YELLOW='\e[32;1m'    # YELLOW
+ORANGE='\033[0;33m' # ORANGE
+PURPLE='\033[0;35m'  # PURPLE
+BLUE='\033[0;34m'     # BLUE 1
+TYBLUE='\e[1;36m'     # BLUE 2
+CYAN='\033[0;36m'     # CYAN
+LIGHT='\033[0;37m'    # LIGHT
+NC='\033[0m'           # NC
+
+bl='\e[36;1m'
+rd='\e[31;1m'
+mg='\e[0;95m'
+blu='\e[34m'
+op='\e[35m'
+or='\033[1;33m'
+color1='\e[031;1m'
+color2='\e[34;1m'
+green_mix() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red_mix() { echo -e "\\033[31;1m${*}\\033[0m"; }
+
+# Export Align
+BOLD="\e[1m"
+WARNING="${RED}\e[5m"
+UNDERLINE="\e[4m"
+
+# Export Banner Status Information
+EROR="[${RED} EROR ${NC}]"
+INFO="[${LIGHT} INFO ${NC}]"
+OK="[${LIGHT} OK ! ${NC}]"
+CEKLIST="[${LIGHT}✔${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
+SEND="[${GREEN} SEND ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+
+#########################################################
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${TYBLUE}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
@@ -22,11 +103,12 @@ uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
 IP=$(cat ${arfvpn}/IP)
 
+#########################################################
 clear
 echo ""
 echo ""
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green          INSTALLING XRAY $NC"
+echo -e "          INSTALLING XRAY"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 date
 sleep 2
@@ -57,6 +139,7 @@ chmod +x nginx-server.sh
 sed -i -e 's/\r$//' nginx-server.sh
 ./nginx-server.sh
 
+xray_onfig () {
 # Random Port Xray
 trojan=$((RANDOM + 10000))
 vless=$((RANDOM + 10000))
@@ -69,7 +152,7 @@ vmesschat=$((RANDOM + 10000))
 trojangrpc=$((RANDOM + 10000))
 
 # xray config
-echo -e "[ ${green}INFO$NC ] MEMBUAT CONFIG XRAY"
+echo -e "${INFO} MEMBUAT CONFIG XRAY"
 sleep 1
 cat > /etc/xray/config.json << END
 {
@@ -269,7 +352,6 @@ cat > /etc/xray/config.json << END
           }
         }
      }
-#tambahconfig
   ],
   "outbounds": [
     {
@@ -344,7 +426,6 @@ cat > /etc/xray/config.json << END
 }
 END
 
-
 rm -rf /etc/systemd/system/xray.service.d
 cat <<EOF> /etc/systemd/system/xray.service
 Description=Xray Service
@@ -366,7 +447,6 @@ WantedBy=multi-user.target
 
 EOF
 
-
 cat > /etc/systemd/system/runn.service <<EOF
 [Unit]
 Description=xxxXxXrayXxXxxx
@@ -382,6 +462,9 @@ Restart=on-abort
 WantedBy=multi-user.target
 EOF
 
+}
+
+set_ws () {
 sed -i '$ ilocation /' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i{' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ itry_files $uri $uri/ /index.html;' /etc/nginx/sites-available/${domain}.conf
@@ -485,7 +568,9 @@ sed -i '$ igrpc_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;' /etc/ng
 sed -i '$ igrpc_set_header Host \$http_host;' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ igrpc_pass grpc://127.0.0.1:'"${trojangrpc}"';' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i}' /etc/nginx/sites-available/${domain}.conf
+}
 
+update_script () {
 wget -q -O /usr/bin/menu-vmess "https://${github}/xray/vmess/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
 wget -q -O /usr/bin/add-vm "https://${github}/xray/vmess/add-vm.sh" && chmod +x /usr/bin/add-vm
 wget -q -O /usr/bin/cek-vm "https://${github}/xray/vmess/cek-vm.sh" && chmod +x /usr/bin/cek-vm
@@ -523,6 +608,35 @@ sed -i -e 's/\r$//' /usr/bin/add-tr
 sed -i -e 's/\r$//' /usr/bin/cek-tr
 sed -i -e 's/\r$//' /usr/bin/del-tr
 sed -i -e 's/\r$//' /usr/bin/renew-tr
+}
+
+#########################################################
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING XRAY$NC"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+sleep 
+
+echo -e " ${LIGHT}- ${NC}Make Xray Config"
+arfvpn_bar 'xray_onfig'
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Set Xray Websocket"
+arfvpn_bar 'set_ws'
+echo -e ""
+sleep 2
+2
+
+echo -e " ${LIGHT}- ${NC}Updating New Script"
+arfvpn_bar 'update_script'
+echo -e ""
+sleep 2
+
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
 
 #Instal Trojan-GO
 wget https://${github}/trojan-go/trojan-go.sh && chmod +x trojan-go.sh && sed -i -e 's/\r$//' trojan-go.sh && ./trojan-go.sh
@@ -548,4 +662,4 @@ systemctl restart xray
 systemctl restart trojan-go
 systemctl restart shadowsocks-libev.service
 
-echo -e "[ ${green}INFO$NC ] INSTALLING XRAY SUCCESSFULLY !!!"
+echo -e "${INFO} INSTALLING XRAY SUCCESSFULLY !!!"
