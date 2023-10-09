@@ -1,5 +1,11 @@
 #!/bin/bash
 #########################################################
+# Exporting Language to UTF-8
+LC_ALL='en_US.UTF-8'
+LANG='en_US.UTF-8'
+LANGUAGE='en_US.UTF-8'
+LC_CTYPE='en_US.utf8'
+
 # Export Color
 BIBlack='\033[1;90m'      # Black
 BIRed='\033[1;91m'        # Red
@@ -26,7 +32,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -56,9 +62,9 @@ EROR="[${RED} EROR ${NC}]"
 INFO="[${LIGHT} INFO ${NC}]"
 OK="[${LIGHT} OK ! ${NC}]"
 CEKLIST="[${LIGHT}✔${NC}]"
-PENDING="[${YELLOW} PENDING ${NC}]"
+PENDING="[${ORANGE} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
-RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+RECEIVE="[${ORANGE} RECEIVE ${NC}]"
 
 #########################################################
 arfvpn_bar () {
@@ -231,7 +237,7 @@ fi
 # STATUS SERVER
 nginx=$( systemctl status nginx | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $nginx == "running" ]]; then
- status_nginx="${GREEN}ACTIVE${NC}"
+ status_nginx="${STABILO}ACTIVE${NC}"
 else
  status_nginx="${RED}FAILED${NC}"
 fi
@@ -243,44 +249,44 @@ tipeprosesor="$(awk -F ': | @' '/model name|Processor|^cpu model|chip type|^cpu 
 clear
 
 echo -e ""
+echo -e "${CYAN}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                   ⇱ ${STABILO}Informasi VPS${NC} ⇲ "
+echo -e "${CYAN}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "  ❇️ ${STABILO} Sever Uptime${NC}     : $( uptime -p  | cut -d " " -f 2-10000 ) "
+echo -e "  ❇️ ${STABILO} Current Time${NC}     : $( date -d "0 days" +"%d-%m-%Y | %X" ) "
+echo -e "  ❇️ ${STABILO} Operating System${NC} : $( cat /etc/os-release | grep -w PRETTY_NAME | sed 's/PRETTY_NAME//g' | sed 's/=//g' | sed 's/"//g' ) ( $( uname -m) ) "
+echo -e "  ❇️ ${STABILO} Processor${NC}        : $tipeprosesor"
+echo -e "  ❇️ ${STABILO} Current Domain${NC}   : ${Server_HOST} "
+echo -e "  ❇️ ${STABILO} Server IP${NC}        : ${Server_IP} "
+echo -e "  ❇️ ${STABILO} Current Isp Name${NC} : ${Server_ISP} "
+echo -e "  ❇️ ${STABILO} Time Reboot VPS${NC}  : 00:00 ( Jam 12 Mid-Night ) "
+echo -e "  ❇️ ${STABILO} Script Auther${NC}    : ${Script_AUTHER} "
+echo -e "  ❇️ ${STABILO} Script Version${NC}   : ${Script_Mode}_${Script_Version} "
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[39;1;92m              ⇱ Sytem Information ⇲             \E[0m"
+echo -e "             ⇱ ${STABILO}Service Information${NC} ⇲"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "  ❇️ \e[32;1m Sever Uptime\e[0m     ${NC}: $( uptime -p  | cut -d " " -f 2-10000 ) "
-echo -e "  ❇️ \e[32;1m Current Time\e[0m     ${NC}: $( date -d "0 days" +"%d-%m-%Y | %X" ) "
-echo -e "  ❇️ \e[32;1m Operating System\e[0m ${NC}: $( cat /etc/os-release | grep -w PRETTY_NAME | sed 's/PRETTY_NAME//g' | sed 's/=//g' | sed 's/"//g' ) ( $( uname -m) ) "
-echo -e "  ❇️ \e[32;1m Processor\e[0m        ${NC}: $tipeprosesor"
-echo -e "  ❇️ \e[32;1m Current Domain\e[0m   ${NC}: ${Server_HOST} "
-echo -e "  ❇️ \e[32;1m Server IP\e[0m        ${NC}: ${Server_IP} "
-echo -e "  ❇️ \e[32;1m Current Isp Name\e[0m ${NC}: ${Server_ISP} "
-echo -e "  ❇️ \e[32;1m Time Reboot VPS\e[0m  ${NC}: 00${NC}:00 ( Jam 12 Mid-Night ) "
-echo -e "  ❇️ \e[32;1m Script Auther\e[0m    ${NC}: ${Script_AUTHER} "
-echo -e "  ❇️ \e[32;1m Script Version\e[0m   ${NC}: ${Script_Mode}_${Script_Version} "
-echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[39;1;92m             ⇱ Service Information ⇲             \E[0m"
-echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "❇️ ${LIGHT}FAIL2BAN                ${NC}:$status_fail2ban"
-echo -e "❇️ ${LIGHT}CRONS                   ${NC}:$status_cron"
-echo -e "❇️ ${LIGHT}VNSTAT                  ${NC}:$status_vnstat"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}FAIL2BAN                ${NC}:$status_fail2ban"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}CRONS                   ${NC}:$status_cron"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}VNSTAT                  ${NC}:$status_vnstat"
 echo ""
-echo -e "  🟢🟡🔴  ${LIGHT}SERVER STATUS     ${NC}:    ${status_nginx}  🔴🟡🟢"
+echo -e "      🟢🟡🔴  ${ORANGE}SERVER STATUS${NC}     :    ${status_nginx}  🔴🟡🟢"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "\E[39;1;92m             ⇱ Tunnel Information ⇲             \E[0m"
+echo -e "             ⇱ ${STABILO}Tunnel Information${NC} ⇲"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
-echo -e "❇️ ${LIGHT}OPENSSH                 ${NC}:$status_ssh"
-echo -e "❇️ ${LIGHT}WEBSOCKET TLS           ${NC}:$status_sshwstls"
-echo -e "❇️ ${LIGHT}WEBSOCKET NTLS          ${NC}:$status_sshws"
-echo -e "❇️ ${LIGHT}OPENVPN                 ${NC}:$status_openohp"
-echo -e "❇️ ${LIGHT}STUNNEL5                ${NC}:$status_stunnel5"
-echo -e "❇️ ${LIGHT}SQUID                   ${NC}:$status_squid"
-echo -e "❇️ ${LIGHT}DROPBEAR                ${NC}:$status_beruangjatuh"
-echo -e "❇️ ${LIGHT}XRAY                    ${NC}:$status_xray"
-echo -e "❇️ ${LIGHT}TROJAN GO               ${NC}:$status_trojan_go"
-echo -e "❇️ ${LIGHT}SHADOWSOCKS OBFS        ${NC}:$status_ss_obfs"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}OPENSSH                 ${NC}:$status_ssh"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}WEBSOCKET TLS           ${NC}:$status_sshwstls"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}WEBSOCKET NTLS          ${NC}:$status_sshws"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}OPENVPN                 ${NC}:$status_openohp"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}STUNNEL5                ${NC}:$status_stunnel5"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}SQUID                   ${NC}:$status_squid"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}DROPBEAR                ${NC}:$status_beruangjatuh"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}XRAY                    ${NC}:$status_xray"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}TROJAN GO               ${NC}:$status_trojan_go"
+echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}SHADOWSOCKS OBFS        ${NC}:$status_ss_obfs"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo ""
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${YELLOW}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
 menu

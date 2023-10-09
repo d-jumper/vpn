@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -94,30 +94,20 @@ tput cnorm
 clear
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""      "           BANDWITH MONITOR " | lolcat
+echo -e "           ${STABILO}BANDWITH MONITOR ${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e "${GREEN}"
-echo -e "     1 ⸩   Lihat Total Bandwith Tersisa"
-
-echo -e "     2 ⸩   Tabel Penggunaan Setiap 5 Menit"
-
-echo -e "     3 ⸩   Tabel Penggunaan Setiap Jam"
-
-echo -e "     4 ⸩   Tabel Penggunaan Setiap Hari"
-
-echo -e "     5 ⸩   Tabel Penggunaan Setiap Bulan"
-
-echo -e "     6 ⸩   Tabel Penggunaan Setiap Tahun"
-
-echo -e "     7 ⸩   Tabel Penggunaan Tertinggi"
-
-echo -e "     8 ⸩   Statistik Penggunaan Setiap Jam"
-
-echo -e "     9 ⸩   Lihat Penggunaan Aktif Saat Ini"
-
-echo -e "    10 ⸩   Lihat Trafik Penggunaan Aktif Saat Ini [5s]"
-
-echo -e "     x ⸩   Menu"
+echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Lihat Total Bandwith Tersisa${NC}"
+echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Tabel Penggunaan Setiap 5 Menit${NC}"
+echo -e "    ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Tabel Penggunaan Setiap Jam${NC}"
+echo -e "    ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Tabel Penggunaan Setiap Hari${NC}"
+echo -e "    ${CYAN}[${LIGHT}05${CYAN}]${RED} •${NC} ${CYAN}Tabel Penggunaan Setiap Bulan${NC}"
+echo -e "    ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}Tabel Penggunaan Setiap Tahun${NC}"
+echo -e "    ${CYAN}[${LIGHT}07${CYAN}]${RED} •${NC} ${CYAN}Tabel Penggunaan Tertinggi${NC}"
+echo -e "    ${CYAN}[${LIGHT}08${CYAN}]${RED} •${NC} ${CYAN}Statistik Penggunaan Setiap Jam${NC}"
+echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}Lihat Penggunaan Aktif Saat Ini${NC}"
+echo -e "    ${CYAN}[${LIGHT}10${CYAN}]${RED} •${NC} ${CYAN}Lihat Trafik Penggunaan Aktif Saat Ini [5s]${NC}"
+echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Menu${NC}"
 echo -e "${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e "${GREEN}"
@@ -127,7 +117,7 @@ echo -e "${NC}"
 case $noo in
 1)
 echo -e "${CYAN}======================================${NC}"
-echo -e "    TOTAL BANDWITH SERVER TERSISA" | lolcat
+echo -e "    ${STABILO}TOTAL BANDWITH SERVER TERSISA${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -135,12 +125,12 @@ vnstat
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 2)
 echo -e "${CYAN}======================================${NC}"
-echo -e "  PENGGUNAAN BANDWITH SETIAP 5 MENIT" | lolcat
+echo -e "  ${STABILO}PENGGUNAAN BANDWITH SETIAP 5 MENIT${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -148,12 +138,12 @@ vnstat -5
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 3)
 echo -e "${CYAN}======================================${NC}"
-echo -e "    PENGGUNAAN BANDWITH SETIAP JAM" | lolcat
+echo -e "    ${STABILO}PENGGUNAAN BANDWITH SETIAP JAM${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -161,12 +151,12 @@ vnstat -h
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 4)
 echo -e "${CYAN}======================================${NC}"
-echo -e "   PENGGUNAAN BANDWITH SETIAP HARI" | lolcat
+echo -e "   ${STABILO}PENGGUNAAN BANDWITH SETIAP HARI${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -174,12 +164,12 @@ vnstat -d
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 5)
 echo -e "${CYAN}======================================${NC}"
-echo -e "   PENGGUNAAN BANDWITH SETIAP BULAN" | lolcat
+echo -e "   ${STABILO}PENGGUNAAN BANDWITH SETIAP BULAN${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -187,12 +177,12 @@ vnstat -m
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 6)
 echo -e "${CYAN}======================================${NC}"
-echo -e "   PENGGUNAAN BANDWITH SETIAP TAHUN" | lolcat
+echo -e "   ${STABILO}PENGGUNAAN BANDWITH SETIAP TAHUN${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -200,12 +190,12 @@ vnstat -y
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 7)
 echo -e "${CYAN}======================================${NC}"
-echo -e "    PENGGUNAAN BANDWITH TERTINGGI" | lolcat
+echo -e "    ${STABILO}PENGGUNAAN BANDWITH TERTINGGI${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -213,12 +203,12 @@ vnstat -t
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 8)
 echo -e "${CYAN}======================================${NC}"
-echo -e " GRAFIK BANDWITH TERPAKAI SETIAP JAM" | lolcat
+echo -e " ${STABILO}GRAFIK BANDWITH TERPAKAI SETIAP JAM${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -226,26 +216,26 @@ vnstat -hg
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 9)
 echo -e "${CYAN}======================================${NC}"
-echo -e "  LIVE PENGGUNAAN BANDWITH SAAT INI" | lolcat
+echo -e "  ${STABILO}LIVE PENGGUNAAN BANDWITH SAAT INI${NC}"
 echo -e "${CYAN}======================================${NC}"
-echo -e " ${GREEN}CTRL+C Untuk Berhenti!${NC}"
+echo -e " ${RED}CTRL+C Untuk Berhenti!${NC}"
 echo -e ""
 
 vnstat -l
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 10)
 echo -e "${CYAN}======================================${NC}"
-echo -e "   LIVE TRAFIK PENGGUNAAN BANDWITH " | lolcat
+echo -e "   ${STABILO}LIVE TRAFIK PENGGUNAAN BANDWITH${NC}"
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
 
@@ -253,7 +243,7 @@ vnstat -tr
 
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
-echo -e ""| lolcat
+echo -e ""
 ;;
 
 x)
@@ -263,10 +253,10 @@ menu
 
 *)
 sleep 1
-echo -e "${red}Nomor Yang Anda Masukkan Salah!${NC}"
+echo -e "${RED}Nomor Yang Anda Masukkan Salah!${NC}"
 ;;
 esac
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${YELLOW}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
 menu
