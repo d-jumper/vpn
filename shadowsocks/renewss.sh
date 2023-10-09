@@ -159,7 +159,6 @@ clear
         fi
             
     clear
-    renew_ss () {
     exp=$(grep -wE "^#ss# ${user}" "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -171,12 +170,7 @@ clear
     service cron restart
     systemctl restart shadowsocks-libev-server@${user}-tls.service
     systemctl restart shadowsocks-libev-server@${user}-http.service
-    }
 
-echo -e " ${LIGHT}- ${NC}Renew User Shadowsocks"
-arfvpn_bar 'renew_ss'
-echo -e ""
-sleep 2
 clear
    
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"

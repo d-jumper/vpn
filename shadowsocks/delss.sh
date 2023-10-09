@@ -158,6 +158,7 @@ systemctl stop shadowsocks-libev-server@${user}-tls.service
 systemctl stop shadowsocks-libev-server@${user}-http.service
 rm -f "/etc/shadowsocks-libev/${user}-tls.json"
 rm -f "/etc/shadowsocks-libev/${user}-http.json"
+}
 
 echo -e " ${LIGHT}- ${NC}Deleting User Shadowsocks"
 arfvpn_bar 'dell_ss'
@@ -172,5 +173,7 @@ clear
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo ""
-    read -n 1 -s -r -p "Press any key to back on menu"
-    menu
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+menu
