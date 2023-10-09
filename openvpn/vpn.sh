@@ -1,17 +1,61 @@
 #!/bin/bash
-# 
-# ==========================================
-# Color
+#########################################################
+# Export Color
 RED='\033[0;31m'
-NC='\033[0m'
 GREEN='\033[0;32m'
-ORANGE='\033[0;33m'
+YELLOW='\033[0;33m'
 BLUE='\033[0;34m'
 PURPLE='\033[0;35m'
+TYBLUE='\e[1;36m'
 CYAN='\033[0;36m'
 LIGHT='\033[0;37m'
-# ==========================================
+NC='\033[0m'
 
+# Export Align
+BOLD="\e[1m"
+WARNING="${RED}\e[5m"
+UNDERLINE="\e[4m"
+
+# Export Banner Status Information
+EROR="[${RED} EROR ${NC}]"
+INFO="[${LIGHT} INFO ${NC}]"
+OK="[${LIGHT} OK ! ${NC}]"
+CEKLIST="[${LIGHT}✔${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
+SEND="[${GREEN} SEND ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${YELLOW}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${TYBLUE}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${YELLOW}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
 arfvpn="/etc/arfvpn"
 MYISP=$(curl -s ipinfo.io/org/);
 MYIP=$(curl -s https://ipinfo.io/ip/);
@@ -23,6 +67,7 @@ export DEBIAN_FRONTEND=noninteractive
 ver=$VERSION_ID
 NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 
+vpn_dir () {
 cd
 mkdir -p /etc/openvpn/server/easy-rsa/
 mkdir -p /etc/openvpn/client/
@@ -83,7 +128,9 @@ echo 1 >> /proc/sys/net/ipv4/ip_forward
 #sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf
 sysctl -p
+}
 
+config_ovpn () {
 # Buat config client TCP 1194
 rm -rvf /etc/openvpn/client/tcp.ovpn
 cat > /etc/openvpn/client/tcp.ovpn <<-END
@@ -141,7 +188,9 @@ cd
 /etc/init.d/openvpn restart
 systemctl enable --now openvpn-server@server-tcp
 systemctl enable --now openvpn-server@server-udp
+}
 
+config_copy () {
 # masukkan certificatenya ke dalam config client TCP 1194
 echo '<ca>' >> /etc/openvpn/client/tcp.ovpn
 cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/tcp.ovpn
@@ -172,7 +221,28 @@ chmod +x /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
+}
 
-# Delete script
-history -c
-rm -f /root/vpn.sh
+#########################################################
+echo -e " ${INFO} Installing OpenVPN ..."
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Create OpenVPN Directory"
+arfvpn_bar 'vpn_dir'
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Create Config OpenVPN"
+arfvpn_bar 'config_ovpn'
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Create Config OpenVPN"
+arfvpn_bar 'config_copy'
+echo -e ""
+sleep 2
+
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
