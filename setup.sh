@@ -1,44 +1,96 @@
 #!/bin/bash
-#########################
-# // Export Color & Information
-export RED='\033[0;31m'
-export GREEN='\033[0;32m'
-export YELLOW='\033[0;33m'
-export BLUE='\033[0;34m'
-export PURPLE='\033[0;35m'
-export CYAN='\033[0;36m'
-export LIGHT='\033[0;37m'
-export NC='\033[0m'
+#########################################################
+# Export Color
+BIBlack='\033[1;90m'      # Black
+BIRed='\033[1;91m'        # Red
+BIGreen='\033[1;92m'      # Green
+BIYellow='\033[1;93m'     # Yellow
+BIBlue='\033[1;94m'       # Blue
+BIPurple='\033[1;95m'     # Purple
+BICyan='\033[1;96m'       # Cyan
+BIWhite='\033[1;97m'      # White
+UWhite='\033[4;37m'       # White
+On_IPurple='\033[0;105m'  #
+On_IRed='\033[0;101m'
+IBlack='\033[0;90m'       # Black
+IRed='\033[0;91m'         # Red
+IGreen='\033[0;92m'       # Green
+IYellow='\033[0;93m'      # Yellow
+IBlue='\033[0;94m'        # Blue
+IPurple='\033[0;95m'      # Purple
+ICyan='\033[0;96m'        # Cyan
+IWhite='\033[0;97m'       # White
+BINC='\e[0m'
 
-# // Export Banner Status Information
-export EROR="[${RED} EROR ${NC}]"
-export INFO="[${YELLOW} INFO ${NC}]"
-export OKEY="[${GREEN} OKEY ${NC}]"
-export PENDING="[${YELLOW} PENDING ${NC}]"
-export SEND="[${YELLOW} SEND ${NC}]"
-export RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+RED='\033[0;31m'      # RED 1
+RED2='\e[1;31m'       # RED 2
+GREEN='\033[0;32m'   # GREEN 1
+GREEN2='\e[1;32m'    # GREEN 2
+YELLOW='\e[32;1m'    # YELLOW
+ORANGE='\033[0;33m' # ORANGE
+PURPLE='\033[0;35m'  # PURPLE
+BLUE='\033[0;34m'     # BLUE 1
+TYBLUE='\e[1;36m'     # BLUE 2
+CYAN='\033[0;36m'     # CYAN
+LIGHT='\033[0;37m'    # LIGHT
+NC='\033[0m'           # NC
 
-# // Export Align
-export BOLD="\e[1m"
-export WARNING="${RED}\e[5m"
-export UNDERLINE="\e[4m"
+bl='\e[36;1m'
+rd='\e[31;1m'
+mg='\e[0;95m'
+blu='\e[34m'
+op='\e[35m'
+or='\033[1;33m'
+color1='\e[031;1m'
+color2='\e[34;1m'
+green_mix() { echo -e "\\033[32;1m${*}\\033[0m"; }
+red_mix() { echo -e "\\033[31;1m${*}\\033[0m"; }
 
+# Export Align
+BOLD="\e[1m"
+WARNING="${RED}\e[5m"
+UNDERLINE="\e[4m"
 
-red='\e[1;31m'
-green='\e[0;32m'
-yell='\e[1;33m'
-tyblue='\e[1;36m'
-NC='\e[0m'
-purple() { echo -e "\\033[35;1m${*}\\033[0m"; }
-tyblue() { echo -e "\\033[36;1m${*}\\033[0m"; }
-yellow() { echo -e "\\033[33;1m${*}\\033[0m"; }
-green() { echo -e "\\033[32;1m${*}\\033[0m"; }
-red() { echo -e "\\033[31;1m${*}\\033[0m"; }
+# Export Banner Status Information
+EROR="[${RED} EROR ${NC}]"
+INFO="[${LIGHT} INFO ${NC}]"
+OK="[${LIGHT} OK ! ${NC}]"
+CEKLIST="[${LIGHT}✔${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
+SEND="[${GREEN} SEND ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
-# ==========================================
-secs_to_human() {
-    echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
+#########################################################
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${TYBLUE}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
 }
+
+#########################################################
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
@@ -49,8 +101,9 @@ nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
 success="${GREEN}[SUCCESS]${NC}"
 start=$(date +%s)
+github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
-# ==========================================
+#########################################################
 cd /root
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
@@ -61,10 +114,18 @@ if [ "$(systemd-detect-virt)" == "openvz" ]; then
 		echo "OpenVZ is not supported"
 		exit 1
 fi
-# ==========================================
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
+secs_to_human() {
+    echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
+}
 
-# ==========================================
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.2"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+date
+sleep 3
+#########################################################
 # Installing Server, Domain & Cert SSL
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
@@ -72,35 +133,55 @@ chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
 /usr/bin/hostvps
 
-# ==========================================
+#########################################################
 # Installing Requirements Tools
 cd
 wget "https://${github}/service/apete.sh"
 chmod +x /root/apete.sh
 sed -i -e 's/\r$//' /root/apete.sh
-./apete.sh
+/root/apete.sh
 
-# ==========================================
+#########################################################
 # Installing Xray - Trojan-Go - Shadowsocks-Libev
-wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray ./ins-xray.sh
+wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray /root/ins-xray.sh
 
-# =========================================
+#########################################################
 # Installing OpenSSH & OpenVPN
-wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-vpn ./ssh-vpn.sh
+wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-vpn /root/ssh-vpn.sh
 
-# =========================================
+#########################################################
 # Installing Websocket
 /usr/bin/wsedu
 
-# =========================================
+#########################################################
 # Installing OhpServer
-wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && ./ohp.sh
+wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && /root/ohp.sh
 
-# =========================================
+#########################################################
 # Installing Setting Backup
-wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && ./set-br.sh
+wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && /root/set-br.sh
 
-# =========================================
+#########################################################
+# Set Auto-set.service
+cat <<EOF> /etc/systemd/system/autosett.service
+[Unit]
+Description=autosetting
+Documentation=https://t.me/arfprsty
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /etc/set.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable autosett
+/etc/set.sh
+
+#########################################################
+update_script () {
 # Download file/s script
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
 wget -O /etc/arfvpn/Version "https://${github}/service/Version"
@@ -160,54 +241,18 @@ sed -i -e 's/\r$//' /usr/bin/portsstp
 sed -i -e 's/\r$//' /usr/bin/porttrojan
 sed -i -e 's/\r$//' /usr/bin/portvlm
 sed -i -e 's/\r$//' /usr/bin/portwg
-clear
+}
 
-# =========================================
-# Set Auto-set.service
-cat <<EOF> /etc/systemd/system/autosett.service
-[Unit]
-Description=autosetting
-Documentation=https://t.me/arfprsty
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /etc/set.sh
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl enable autosett
-/etc/set.sh
-
-# =========================================
-# Set rc.local restarting service
-/usr/bin/fixssh
-
-# =========================================
+#########################################################
+remove_unnecessary () {
 # Remove unnecessary files
 cd
 apt autoclean -y
 apt autoremove -y
+}
 
-# =========================================
-# Finishing
-cat> /root/.profile << END
-# ~/.profile: executed by Bourne-compatible login shells.
-
-if [ "$BASH" ]; then
-  if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-  fi
-fi
-
-mesg n || true
-
-menu
-END
-chmod 644 /root/.profile
-
+#########################################################
+set_cron () {
 cat > /etc/arfvpn/cron-vpn << END
 #!/bin/bash
 # Set Cron Reboot VPS
@@ -227,14 +272,69 @@ if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab 
 /etc/init.d/cron start
 /etc/init.d/cron restart
 /etc/init.d/cron reload
+}
 
+#########################################################
+finishing () {
+# Finishing
+cat> /root/.profile << END
+# ~/.profile: executed by Bourne-compatible login shells.
+
+if [ "$BASH" ]; then
+  if [ -f ~/.bashrc ]; then
+    . ~/.bashrc
+  fi
+fi
+
+mesg n || true
+
+menu
+END
+chmod 644 /root/.profile
 history -c
 echo "unset HISTFILE" >> /etc/profile
 echo "1.2" > /home/ver
 rm -f /root/*.sh
+}
+
+#########################################################
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.2"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Updating New Script"
+arfvpn_bar 'update_script'
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Removing Unnecessary Files"
+arfvpn_bar 'remove_unnecessary'
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Set Cron to VPS"
+arfvpn_bar 'set_cron'
+echo -e ""
+sleep 2
+
+echo -e " ${LIGHT}- ${NC}Finishing Installer"
+arfvpn_bar 'finishing'
+echo -e ""
+sleep 2
+
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
+
+#########################################################
+# Set rc.local restarting service
+/usr/bin/fixssh
 clear
 
-# =========================================
+#########################################################
 # Log-installer
 echo " "
 echo "Installation has been completed!!"
@@ -281,7 +381,9 @@ echo ""  | tee -a /etc/arfvpn/log-install.txt
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 
-echo -ne "[ ${yell}WARNING${NC} ] Reboot ur VPS ? (y/n)? "
+echo -e " ${OK} Installation VPN Successfully !!! ${CEKLIST}"
+echo -e ""
+echo -e "     ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
