@@ -158,7 +158,7 @@ clear
     echo -e " "
         fi
             
-    clear
+    renew_ss () {
     exp=$(grep -wE "^#ss# ${user}" "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -170,9 +170,13 @@ clear
     service cron restart
     systemctl restart shadowsocks-libev-server@${user}-tls.service
     systemctl restart shadowsocks-libev-server@${user}-http.service
-
-clear
-   
+    }
+    
+    clear
+    echo -e " Renew Shadowsocks Account"
+    arfvpn_bar 'renew_ss'
+    
+    clear
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -184,7 +188,7 @@ clear
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo ""
     
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
-clear
-menu
+    echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Shadowsocks Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+    read -p ""
+    clear
+    menu-ss

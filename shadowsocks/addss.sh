@@ -156,9 +156,9 @@ until [[ ${user} =~ ^[a-zA-Z0-9_]+$ && ${CLIENT_EXISTS} == '0' ]]; do
     echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
     echo -e " "
 
-clear
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 exp=`date -d "$masaaktif days" +"%Y-%m-%d"`
+add_ss () {
 cat > /etc/shadowsocks-libev/${user}-tls.json<<END
 {   
     "server":"0.0.0.0",
@@ -206,8 +206,13 @@ echo -e "#ss# ${user} ${exp}
 port_tls $tls
 port_http $http">>"/etc/shadowsocks-libev/akun.conf"
 service cron restart
-clear
+}
 
+clear
+echo -e " Add Account Shadowsocks-Libev"
+arfvpn_bar 'add_ss'
+
+clear
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}" | tee -a /etc/arfvpn/log-create-user.log
