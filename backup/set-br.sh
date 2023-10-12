@@ -94,6 +94,11 @@ tput cnorm
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING BACKUP"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+
 set_wonder () {
 curl https://rclone.org/install.sh | bash
 printf "q\n" | rclone config
@@ -161,5 +166,8 @@ echo -e " ${LIGHT}- ${NC}Installing Script Back-Up"
 arfvpn_bar 'set_script'
 echo -e ""
 sleep 2
+
+echo -e " ${OK} Installing Backup Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
 cd
-clear
