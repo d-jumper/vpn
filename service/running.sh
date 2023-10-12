@@ -1,11 +1,5 @@
 #!/bin/bash
 #########################################################
-# Exporting Language to UTF-8
-LC_ALL='en_US.UTF-8'
-LANG='en_US.UTF-8'
-LANGUAGE='en_US.UTF-8'
-LC_CTYPE='en_US.utf8'
-
 # Export Color
 BIBlack='\033[1;90m'      # Black
 BIRed='\033[1;91m'        # Red
@@ -62,9 +56,9 @@ EROR="[${RED} EROR ${NC}]"
 INFO="[${LIGHT} INFO ${NC}]"
 OK="[${LIGHT} OK ! ${NC}]"
 CEKLIST="[${LIGHT}✔${NC}]"
-PENDING="[${ORANGE} PENDING ${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
-RECEIVE="[${ORANGE} RECEIVE ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
 #########################################################
 arfvpn_bar () {
@@ -85,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -147,91 +141,91 @@ vnstat_service=$(/etc/init.d/vnstat status | grep Active | awk '{print $3}' | cu
 if [[ $xray_status == "running" ]]; then 
    status_xray=" ${OK} Running ${CEKLIST}"
 else
-   status_xray=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_xray=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE TROJAN GO
 if [[ $trgo_status == "active" ]]; then
   status_trojan_go=" ${OK} Running ${CEKLIST}${NC}"
 else
-  status_trojan_go=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+  status_trojan_go=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE SHADOWSOCKS OBFS
 if [[ $ss_obfs == "active" ]]; then
   status_ss_obfs=" ${OK} Running ${CEKLIST}${NC}"
 else
-  status_ss_obfs=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+  status_ss_obfs=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE OPENVPN
 if [[ $status_ohq == "active" ]]; then
   status_openohp=" ${OK} Running ${CEKLIST}"
 else
-  status_openohp=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+  status_openohp=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  SSH 
 if [[ $ssh_service == "running" ]]; then 
    status_ssh=" ${OK} Running ${CEKLIST}"
 else
-   status_ssh=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_ssh=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  SSH WS
 if [[ $sshws == "running" ]]; then 
    status_sshws=" ${OK} Running ${CEKLIST}"
 else
-   status_sshws=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_sshws=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  SSH WS/TLS
 if [[ $sshwstls == "running" ]]; then 
    status_sshwstls=" ${OK} Running ${CEKLIST}"
 else
-   status_sshwstls=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_sshwstls=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  SQUID 
 if [[ $squid_service == "running" ]]; then 
    status_squid=" ${OK} Running ${CEKLIST}"
 else
-   status_squid=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_squid=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  VNSTAT 
 if [[ $vnstat_service == "running" ]]; then 
    status_vnstat=" ${OK} Running ${CEKLIST}"
 else
-   status_vnstat=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_vnstat=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  CRONS 
 if [[ $cron_service == "running" ]]; then 
    status_cron=" ${OK} Running ${CEKLIST}"
 else
-   status_cron=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_cron=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE  FAIL2BAN 
 if [[ $fail2ban_service == "running" ]]; then 
    status_fail2ban=" ${OK} Running ${CEKLIST}"
 else
-   status_fail2ban=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_fail2ban=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE DROPBEAR
 if [[ $dropbear_status == "running" ]]; then 
    status_beruangjatuh=" ${OK} Running ${CEKLIST}"
 else
-   status_beruangjatuh=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_beruangjatuh=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVICE STUNNEL
 if [[ $stunnel5_service == "running" ]]; then 
    status_stunnel5=" ${OK} Running ${CEKLIST}"
 else
-   status_stunnel5=" ${ERROR}${RED} Not Running${NC} ( Error )${NC}"
+   status_stunnel5=" ${EROR}${RED} Not Running${NC} ( Error )${NC}"
 fi
 
 # STATUS SERVER

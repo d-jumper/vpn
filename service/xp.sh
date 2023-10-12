@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -61,12 +61,42 @@ SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
 #########################################################
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${LIGHT}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 trgo="/etc/arfvpn/trojan-go"
 
 #########################################################
-clear
+
 #----- Auto Remove SSH
 hariini=`date +%d-%m-%Y`
 cat /etc/shadow | cut -d: -f1,8 | sed /:$/d > /tmp/expirelist.txt
@@ -99,7 +129,7 @@ echo -e "${NC}${CYAN}Username $username that are expired at $tgl $bulantahun rem
 userdel $username
 fi
 done
-clear
+echo "${OK} Auto Delete User Expired SSH & OpenVPN Successfully ! ${CEKLIS}" > /etc/arfvpn/cron-log.log
 
 #----- Auto Remove Vmess
 data=( `cat ${xray}/config.json | grep '^#vm#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -115,7 +145,7 @@ sed -i "/^#vm# ${user} ${exp}/,/^},{/d" ${xray}/config.json
 rm -f ${xray}/${user}-tls.json ${xray}/${user}-none.json
 fi
 done
-clear
+echo "${OK} Auto Delete User Expired Xray Vmess-WS Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
 
 #----- Auto Remove Vless
 data=( `cat ${xray}/config.json | grep '^#vl#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -130,7 +160,7 @@ if [[ "${exp2}" -le "0" ]]; then
 sed -i "/^#vl# ${user} ${exp}/,/^},{/d" ${xray}/config.json
 fi
 done
-clear
+echo "${OK} Auto Delete User Expired Xray Vless-WS Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
 
 #----- Auto Remove Trojan
 data=( `cat ${xray}/config.json | grep '^#tr#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -145,7 +175,7 @@ if [[ "${exp2}" -le "0" ]]; then
 sed -i "/^#tr# ${user} ${exp}/,/^},{/d" ${xray}/config.json
 fi
 done
-clear
+echo "${OK} Auto Delete User Expired Xray Trojan-WS Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
 
 #----- Auto Remove Trojan-GO
 data=( `cat ${trgo}/akun.conf | grep '^#trgo#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -161,7 +191,7 @@ sed -i "/^#trgo# ${user} ${exp}/d" ${trgo}/akun.conf
 sed -i '/^,"'"${user}"'"$/d' ${trgo}/config.json
 fi
 done
-clear
+echo "${OK} Auto Delete User Expired Trojan-Go Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
 
 #----- Auto Remove Shadowsocks
 data=( `cat /etc/shadowsocks-libev/akun.conf | grep '^#ss#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -181,4 +211,4 @@ rm -f "/etc/shadowsocks-libev/${user}-tls.json"
 rm -f "/etc/shadowsocks-libev/${user}-http.json"
 fi
 done
-clear
+echo "${OK} Auto Delete User Expired Shadowsocks Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log

@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -96,6 +96,10 @@ OS=$ID
 ver=$VERSION_ID
 
 #########################################################
+echo -e " ${INFO} Installing Requirements Tools VPN ..."
+echo -e ""
+sleep 2
+
 remove_unnecessary () {
 # Update, Upgrade dist & Remove unnecessary files
 apt update -y
@@ -109,6 +113,11 @@ apt-get remove --purge samba* -y
 apt-get remove --purge bind9* -y
 apt-get remove --purge sendmail* -y
 }
+echo -e " ${LIGHT}- ${NC}Update, Upgrade Dist & Remove unnecessary files"
+arfvpn_bar 'remove_unnecessary'
+echo -e ""
+sleep 2
+
 
 install_xray () {
 # Install Requirements Tools XRAY
@@ -120,6 +129,10 @@ apt -y install cron
 apt install bash-completion ntpdate -y
 apt -y install chrony
 }
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools XRAY"
+arfvpn_bar 'install_xray'
+echo -e ""
+sleep 2
 
 set_time () {
 # Set Time GMT +7 WIB
@@ -128,12 +141,20 @@ timedatectl set-ntp true
 timedatectl set-timezone Asia/Jakarta
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 }
+echo -e " ${LIGHT}- ${NC}Set Time GMT +7 WIB"
+arfvpn_bar 'set_time'
+echo -e ""
+sleep 2
 
 disable_ipv6 () {
 # disable ipv6
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 }
+echo -e " ${LIGHT}- ${NC}Disable IPV6"
+arfvpn_bar 'disable_ipv6'
+echo -e ""
+sleep 2
 
 set_chrony () {
 systemctl enable chronyd && systemctl restart chronyd
@@ -141,6 +162,10 @@ systemctl enable chrony && systemctl restart chrony
 chronyc sourcestats -v
 chronyc tracking -v
 }
+echo -e " ${LIGHT}- ${NC}Set Chrony"
+arfvpn_bar 'set_chrony'
+echo -e ""
+sleep 2
 
 install_ss () {
 # Install Requirements Shadowsocks-libev 
@@ -164,12 +189,20 @@ apt -t buster-backports install simple-obfs -y
 fi
 fi
 }
+echo -e " ${LIGHT}- ${NC}Installing Requirements Shadowsocks-libev"
+arfvpn_bar 'install_ss'
+echo -e ""
+sleep 2
 
 install_nginx () {
 # Install Requirements Tools Nginx
 apt install pwgen openssl socat -y
 apt install nginx php php-fpm php-cli php-mysql libxml-parser-perl -y
 }
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools Nginx"
+arfvpn_bar 'install_nginx'
+echo -e ""
+sleep 2
 
 install_ssh_ovpn () {
 # Install Requirements Tools OpenVPN dan Easy-RSA
@@ -202,47 +235,6 @@ apt install libssl1.0-dev -y
 apt install dos2unix -y
 apt-get --reinstall --fix-missing install bzip2 gzip screen iftop htop -y
 }
-
-#########################################################
-echo -e " ${INFO} Installing Requirements Tools VPN ..."
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Update, Upgrade Dist & Remove unnecessary files"
-arfvpn_bar 'remove_unnecessary'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Installing Requirements Tools XRAY"
-arfvpn_bar 'install_xray'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Set Time GMT +7 WIB"
-arfvpn_bar 'set_time'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Disable IPV6"
-arfvpn_bar 'disable_ipv6'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Set Chrony"
-arfvpn_bar 'set_chrony'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Installing Requirements Shadowsocks-libev"
-arfvpn_bar 'install_ss'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Installing Requirements Tools Nginx"
-arfvpn_bar 'install_nginx'
-echo -e ""
-sleep 2
-
 echo -e " ${LIGHT}- ${NC}Installing Install Requirements Tools OpenSSH & OpenVPN"
 arfvpn_bar 'install_ssh_ovpn'
 echo -e ""

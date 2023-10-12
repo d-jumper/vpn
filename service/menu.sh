@@ -103,9 +103,9 @@ else
 fi
 clear
 
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "                   ⇱ ${STABILO}Informasi VPS${NC} ⇲ "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e "  ❇️ ${STABILO} Sever Uptime${NC}     : $( uptime -p  | cut -d " " -f 2-10000 ) "
 echo -e "  ❇️ ${STABILO} Current Time${NC}     : $( date -d "0 days" +"%d-%m-%Y | %X" ) "
 echo -e "  ❇️ ${STABILO} Operating System${NC} : $( cat /etc/os-release | grep -w PRETTY_NAME | sed 's/PRETTY_NAME//g' | sed 's/=//g' | sed 's/"//g' ) ( $( uname -m) ) "
@@ -119,31 +119,31 @@ echo -e "  ❇️ ${STABILO} Script Version${NC}   : ${Script_Mode}_${Script_Ver
 echo -e ""
 echo -e "      🟢🟡🔴  ${ORANGE}SERVER STATUS${NC}     :    ${status_nginx}  🔴🟡🟢"
 echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "                   ⇱ ${STABILO}Tunnel/s Menu${NC} ⇲ "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}SSH/OVPN     $NC  ${CYAN}[${LIGHT}04${CYAN}]${RED} • ${NC}${CYAN}TROJAN-WS/GO $NC"
 echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}XRAY - VMESS $NC  ${CYAN}[${LIGHT}05${CYAN}]${RED} • ${NC}${CYAN}SHADOWSOCK-OBFS$NC"
 echo -e "    ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}XRAY - VLESS $NC"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo""
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "                   ⇱ ${STABILO}Menu Service/s${NC} ⇲ "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e "    ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}SETTING/s    $NC  ${CYAN}[${LIGHT}10${CYAN}]${RED} • ${NC}${CYAN}CEK BANDWIDTH $NC"
 echo -e "    ${CYAN}[${LIGHT}07${CYAN}]${RED} •${NC} ${CYAN}UPDATE-XRAY  $NC  ${CYAN}[${LIGHT}11${CYAN}]${RED} • ${NC}${CYAN}CEK RUNNING SERVICE $NC"
 echo -e "    ${CYAN}[${LIGHT}08${CYAN}]${RED} •${NC} ${CYAN}UPDATE-SCRIPT$NC  ${CYAN}[${LIGHT}12${CYAN}]${RED} • ${NC}${CYAN}RESTART SERVICE$NC"
 echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}BACKUP       $NC  ${CYAN}[${LIGHT}13${CYAN}]${RED} • ${NC}${CYAN}INSTALL-WEBMIN$NC"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "                       ⇱ ${STABILO}About${NC} ⇲ "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e "    ${CYAN}[${LIGHT}14${CYAN}]${RED} •${NC} ${CYAN}INFO-SCRIPT  $NC  ${CYAN}[${LIGHT}xx${CYAN}]${RED} • ${NC}${CYAN}CLOSE MENU   $NC"
 echo -e "    ${CYAN}[${LIGHT}15${CYAN}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC"
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 read -p "                    Select Menu : " menu
@@ -237,7 +237,7 @@ exit
 
 *)
 clear
-echo " ${ERROR}${RED}Command not found! ${NC}"
+echo " ${EROR}${RED}Command not found! ${NC}"
 sleep 3
 menu
 ;;

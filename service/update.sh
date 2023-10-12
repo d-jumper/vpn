@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1

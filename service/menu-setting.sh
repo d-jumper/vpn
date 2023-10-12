@@ -125,7 +125,7 @@ menu
 ;;
 *)
 clear
-echo " Command not found! "
+echo " ${EROR}${RED}Command not found! ${NC}"
 sleep 3
 menu-setting
 ;;

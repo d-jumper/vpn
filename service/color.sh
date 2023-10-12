@@ -91,45 +91,30 @@ tput cnorm
 }
 
 #########################################################
-now_version=$(xray --version | grep 'Xray' | cut -d ' ' -f 2 | sort)
-lastest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
-
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          XRAY CORE UPDATE"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo ""
-sleep 2
-
-update_xray () {
-if [[ ${now_version} == ${lastest_version} ]]; then
-echo -e " Your Xray is Lastest Version!"
-echo -e " Your Xray Version is :"
-echo -e " Xray v${lastest_version}"
-sleep 2
-else
-echo -e " Your Xray is old version"
-sleep 1
-echo -e " Auto Update Xray ..."
-sleep 2
-mkdir -p /etc/arfvpn/backup/xray/
-cp /etc/xray/config.json /etc/arfvpn/backup/xray/
-bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version ${lastest_version}
-sleep 2
-cp /etc/arfvpn/backup/xray/config.json /etc/xray/
-chmod +x /etc/xray/config.json
-#systemctl daemon-reload >/dev/null 2>&1
-#systemctl restart xray >/dev/null 2>&1
-sleep 2
-fi
+update_pkgs () {
+apt update
+apt upgrade -y
 }
 
-echo -e " ${LIGHT}- ${NC}Update Xray"
-arfvpn_bar 'update_xray'
+#########################################################
+echo -e " ${INFO} Update Package Dist ..."
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully Update XRAY!!! ${CEKLIST}"
-echo -e " Xray Version : v${lastest_version}"
-echo -e " Reboot your Server"
+echo -e " ${LIGHT}- ${NC}Removing Old Script"
+arfvpn_bar 'update_pkgs'
+echo -e ""
 sleep 2
+
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
+
+echo ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+history -c
+clear
+menu
+
+#########################################################
