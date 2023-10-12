@@ -155,7 +155,6 @@ clear
 #sleep 5
 fi
 
-exp="$(chage -l ${user} | grep "Account expires" | awk -F": " '{print $2}')"
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 expi=`date -d "${hari} days" +"%Y-%m-%d"`
 add_ssh () {

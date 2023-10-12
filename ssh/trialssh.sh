@@ -147,7 +147,6 @@ clear
 #expi=`date -d "$hari days" +"%Y-%m-%d"`
 #echo -e "${pass}\n${pass}\n"|passwd ${user} &> /dev/null
 
-exp="$(chage -l ${user} | grep "Account expires" | awk -F": " '{print $2}')"
 hariini=`date -d "0 days" +"%Y-%m-%d"`
 expi=`date -d "${hari} days" +"%Y-%m-%d"`
 add_trial () {
