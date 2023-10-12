@@ -110,7 +110,8 @@ echo ""
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "          INSTALLING XRAY"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-date
+#date
+echo -e ""
 sleep 2
 domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
@@ -134,23 +135,28 @@ echo -e ""
 sleep 2
 
 # Install Xray Core << Every >> Lastest Version
-xray_core () {
+now_version=$(xray --version | grep 'Xray' | cut -d ' ' -f 2 | sort)
+lastest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+install_xray () {
 cd
 wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh"
 chmod +x /usr/bin/update-xray
 sed -i -e 's/\r$//' /usr/bin/update-xray
+bash -c "$(curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh)" @ install -u www-data --version ${lastest_version}
 }
 echo -e " ${LIGHT}- ${NC}Installing Core Xray"
-arfvpn_bar 'xray_core'
+arfvpn_bar 'install_xray'
 echo -e ""
 sleep 2
-clear
-/usr/bin/update-xray
+
+echo -e " ${OK} Installing Core Xray Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
 
 # NGINX-SERVER
 set_nginx () {
 cd
-wget https://${github}/nginx/nginx-server.sh
+wget "https://${github}/nginx/nginx-server.sh"
 chmod +x nginx-server.sh
 sed -i -e 's/\r$//' nginx-server.sh
 }
@@ -172,10 +178,14 @@ kuotahabis=$((RANDOM + 10000))
 vmessgrpc=$((RANDOM + 10000))
 vmesschat=$((RANDOM + 10000))
 trojangrpc=$((RANDOM + 10000))
+clear
 
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING XRAY"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 # xray config
+echo -e ""
 xray_config () {
-echo -e "${INFO} MEMBUAT CONFIG XRAY"
 sleep 1
 cat > /etc/xray/config.json << END
 {
@@ -450,7 +460,7 @@ cat > /etc/xray/config.json << END
 END
 }
 clear
-echo -e " ${LIGHT}- ${NC}Create Xray Config"
+echo -e " ${LIGHT}- ${NC}Make Xray Config"
 arfvpn_bar 'xray_config'
 echo -e ""
 sleep 2
@@ -702,11 +712,15 @@ systemctl restart trojan-go
 systemctl restart shadowsocks-libev.service
 }
 clear
-echo -e " ${LIGHT}- ${NC}Finishing"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING XRAY"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Finishing Installing Xray"
 arfvpn_bar 'set_finishing'
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e " ${OK} Installing Xray Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
