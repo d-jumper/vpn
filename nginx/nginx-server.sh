@@ -98,10 +98,10 @@ chmod +x ${arfvps}/
 }
 
 #########################################################
+phpv=$(cat /root/phpversion)
 php_v () {
 cd
 ls /etc/php > phpversion
-phpv=$(cat /root/phpversion)
 sed -i "s/listen = \/run\/php\/php${phpv}-fpm.sock/listen = 127.0.0.1:9000/g" /etc/php/${phpv}/fpm/pool.d/www.conf
 rm /root/phpversion
 }
