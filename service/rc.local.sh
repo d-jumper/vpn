@@ -144,7 +144,7 @@ systemctl start rc-local.service
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          CREATE NEW RC.LOCAL"
+echo -e "             RC.LOCAL"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Create New Rc.Local"

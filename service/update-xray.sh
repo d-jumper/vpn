@@ -96,7 +96,7 @@ lastest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases 
 clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          XRAY CORE UPDATE"
+echo -e "         XRAY CORE UPDATE"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 update_xray () {
