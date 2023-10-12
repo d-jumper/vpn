@@ -95,7 +95,7 @@ github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING WEBSOCKET"
+echo -e "       INSTALLING WEBSOCKET"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 
