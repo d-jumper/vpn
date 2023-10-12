@@ -99,7 +99,7 @@ DOMAIN=$(cat $arfvpn/domain)
 clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING OHP SERVER"
+echo -e "       INSTALLING OHP SERVER"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 sleep 2

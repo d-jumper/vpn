@@ -104,7 +104,7 @@ NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 
 #########################################################
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING OPEN-VPN"
+echo -e "        INSTALLING OPEN-VPN"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 sleep 2
