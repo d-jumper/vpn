@@ -103,7 +103,7 @@ github="https://raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SHADOWSOCKS"
+echo -e "   INSTALLING SHADOWSOCKS-LIBEV"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 #Server konfigurasi
 echo -e ""
