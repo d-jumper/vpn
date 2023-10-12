@@ -61,36 +61,6 @@ SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
 #########################################################
-arfvpn_bar () {
-comando[0]="$1"
-comando[1]="$2"
- (
-[[ -e $HOME/fim ]] && rm $HOME/fim
-${comando[0]} -y > /dev/null 2>&1
-${comando[1]} -y > /dev/null 2>&1
-touch $HOME/fim
- ) > /dev/null 2>&1 &
- tput civis
-# Start
-echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
-while true; do
-   for((i=0; i<18; i++)); do
-   echo -ne "${TYBLUE}>${NC}"
-   sleep 0.1s
-   done
-   [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${LIGHT}]${NC}"
-   sleep 1s
-   tput cuu1
-   tput dl1
-   # Finish
-   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
-done
-echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
-tput cnorm
-}
-
-#########################################################
 source /etc/os-release
 arfvpn="/etc/arfvpn"
 ipvps="/var/lib/arfvpn"
@@ -159,7 +129,6 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 #     -H "X-Auth-Key: ${CF_KEY}" \
 #     -H "Content-Type: application/json" \
 #     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-}
 echo -e " ${INFO} Generate SUB-DOMAIN via Cloudflare ..."
 echo -e ""
 sleep 5
