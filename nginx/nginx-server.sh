@@ -165,6 +165,10 @@ chmod +x /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cert
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSL CERT"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Make a SSL CERT"
 arfvpn_bar 'set_ssl'
 echo -e ""
