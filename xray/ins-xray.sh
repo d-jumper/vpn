@@ -102,13 +102,13 @@ ver=$VERSION_ID
 uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
 IP=$(cat ${arfvpn}/IP)
-now_version=$(xray --version | grep 'Xray' | cut -d ' ' -f 2 | sort)
+#now_version=$(xray --version | grep 'Xray' | cut -d ' ' -f 2 | sort)
 lastest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 clear
 
 #########################################################
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING CORE XRAY"
+echo -e "       INSTALLING CORE XRAY"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 #date
 echo -e ""
@@ -160,7 +160,7 @@ sed -i -e 's/\r$//' nginx-server.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING NGINX"
+echo -e "      INSTALLING NGINX-SERVER"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 #date
 echo -e ""
@@ -695,7 +695,7 @@ sed -i -e 's/\r$//' trojan-go.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING TROJAN-GO"
+echo -e "       INSTALLING TROJAN-GO"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Trojan-GO"
@@ -714,7 +714,7 @@ sed -i -e 's/\r$//' shadowsocks.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SHADOWSOCKS-LIBEV"
+echo -e "   INSTALLING SHADOWSOCKS-LIBEV"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Shadowsocks-Libev"
