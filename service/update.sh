@@ -95,6 +95,10 @@ github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
 #########################################################
+echo -e " ${INFO} Update Script VPS ..."
+echo -e ""
+sleep 2
+
 remove_script () {
 rm -rvf /etc/arfvpn/Version
 rm -rvf /usr/bin/cek-bandwidth
@@ -175,6 +179,10 @@ rm -rvf /usr/bin/cekss
 rm -rvf /usr/bin/delss
 rm -rvf /usr/bin/renewss
 }
+echo -e " ${LIGHT}- ${NC}Removing Old Script"
+arfvpn_bar 'remove_script'
+echo -e ""
+sleep 2
 
 #########################################################
 update_script () {
@@ -372,17 +380,6 @@ sed -i -e 's/\r$//' /bin/cek-trgo
 sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
 }
-
-#########################################################
-echo -e " ${INFO} Update Script VPS ..."
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Removing Old Script"
-arfvpn_bar 'remove_script'
-echo -e ""
-sleep 2
-
 echo -e " ${LIGHT}- ${NC}Updating New Script"
 arfvpn_bar 'update_script'
 echo -e ""

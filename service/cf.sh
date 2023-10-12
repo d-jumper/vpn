@@ -138,3 +138,4 @@ sleep 5
 echo "${SUB_DOMAIN}" > ${arfvpn}/domain
 echo "${SUB_DOMAIN}" > ${arfvpn}/scdomain
 echo "IP=${SUB_DOMAIN}" > ${ipvps}/ipvps.conf
+clear

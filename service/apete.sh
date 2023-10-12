@@ -205,6 +205,9 @@ sleep 2
 
 install_ssh_ovpn () {
 # Install Requirements Tools SSHVPN
+# Install Requirements Tools OpenVPN dan Easy-RSA
+apt install openvpn easy-rsa unzip -y
+apt install iptables iptables-persistent -y
 apt install ruby -y
 apt install python -y
 apt install make -y
@@ -230,9 +233,6 @@ apt install zlib1g-dev -y
 apt install libssl1.0-dev -y
 apt install dos2unix -y
 apt-get --reinstall --fix-missing install bzip2 gzip screen iftop htop -y
-# Install Requirements Tools OpenVPN dan Easy-RSA
-apt install openvpn easy-rsa unzip -y
-apt install iptables iptables-persistent -y
 }
 echo -e " ${LIGHT}- ${NC}Installing Requirements Tools OpenSSH & OpenVPN"
 arfvpn_bar 'install_ssh_ovpn'
