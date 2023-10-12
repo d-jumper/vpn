@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -127,6 +127,10 @@ date
 sleep 3
 #########################################################
 # Installing Server, Domain & Cert SSL
+echo -e " ${LIGHT}- ${NC}Installing Server, Domain & Cert SSL"
+echo -e ""
+sleep 2
+cd
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
@@ -135,6 +139,9 @@ sed -i -e 's/\r$//' /usr/bin/hostvps
 
 #########################################################
 # Installing Requirements Tools
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
+echo -e ""
+sleep 2
 cd
 wget "https://${github}/service/apete.sh"
 chmod +x /root/apete.sh
@@ -143,26 +150,47 @@ sed -i -e 's/\r$//' /root/apete.sh
 
 #########################################################
 # Installing Xray - Trojan-Go - Shadowsocks-Libev
+echo -e " ${LIGHT}- ${NC}Installing Xray - Trojan-Go - Shadowsocks-Libev"
+echo -e ""
+sleep 2
+cd
 wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray /root/ins-xray.sh
 
 #########################################################
 # Installing OpenSSH & OpenVPN
+echo -e " ${LIGHT}- ${NC}Installing OpenSSH & OpenVPN"
+echo -e ""
+sleep 2
+cd
 wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-vpn /root/ssh-vpn.sh
 
 #########################################################
 # Installing Websocket
+echo -e " ${LIGHT}- ${NC}Installing Websocket"
+echo -e ""
+sleep 2
+cd
 /usr/bin/wsedu
 
 #########################################################
 # Installing OhpServer
+echo -e " ${LIGHT}- ${NC}Installing OhpServer"
+echo -e ""
+sleep 2
+cd
 wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && /root/ohp.sh
 
 #########################################################
 # Installing Setting Backup
+echo -e " ${LIGHT}- ${NC}Installing Setting Backup"
+echo -e ""
+sleep 2
+cd
 wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && /root/set-br.sh
 
 #########################################################
 # Set Auto-set.service
+set_set (){
 cat <<EOF> /etc/systemd/system/autosett.service
 [Unit]
 Description=autosetting
@@ -178,6 +206,12 @@ WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 systemctl enable autosett
+}
+echo -e " ${LIGHT}- ${NC}Auto-set.service"
+arfvpn_bar 'set_set'
+echo -e ""
+sleep 2
+cd
 /etc/set.sh
 
 #########################################################
@@ -242,6 +276,10 @@ sed -i -e 's/\r$//' /usr/bin/porttrojan
 sed -i -e 's/\r$//' /usr/bin/portvlm
 sed -i -e 's/\r$//' /usr/bin/portwg
 }
+echo -e " ${LIGHT}- ${NC}Updating New Script"
+arfvpn_bar 'update_script'
+echo -e ""
+sleep 2
 
 #########################################################
 remove_unnecessary () {
@@ -250,6 +288,10 @@ cd
 apt autoclean -y
 apt autoremove -y
 }
+echo -e " ${LIGHT}- ${NC}Removing Unnecessary Files"
+arfvpn_bar 'remove_unnecessary'
+echo -e ""
+sleep 2
 
 #########################################################
 set_cron () {
@@ -258,12 +300,12 @@ cat > /etc/arfvpn/cron-vpn << END
 # Set Cron Reboot VPS
 # Set Auto Delete User Expired
 # Every At 00:00 Mid-Night
-/usr/bin/clearlog >/dev/null 2>&1
+/usr/bin/clearlog
 sleep 5
-/usr/bin/xp >/dev/null 2>&1
+/usr/bin/xp
 sleep 5
 /sbin/reboot
-echo " cron successfully :" > /etc/arfvpn/log-cron.log
+echo "${OK} Auto Delete User Expired & Reboot Server Successfully${CEKLIS}" >> /etc/arfvpn/log-cron.log
 date >> /etc/arfvpn/log-cron.log
 exit
 END
@@ -273,6 +315,18 @@ if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab 
 /etc/init.d/cron restart
 /etc/init.d/cron reload
 }
+echo -e " ${LIGHT}- ${NC}Set Cron to VPS"
+arfvpn_bar 'set_cron'
+echo -e ""
+sleep 2
+
+#########################################################
+# Set rc.local restarting service
+echo -e " ${LIGHT}- ${NC}Set New rc-local.service"
+echo -e ""
+sleep 2
+cd
+/usr/bin/fixssh
 
 #########################################################
 finishing () {
@@ -287,58 +341,32 @@ if [ "$BASH" ]; then
 fi
 
 mesg n || true
-
+history -c
+clear
 menu
 END
 chmod 644 /root/.profile
-history -c
 echo "unset HISTFILE" >> /etc/profile
 echo "1.2" > /home/ver
 rm -f /root/*.sh
 }
-
-#########################################################
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.2"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Updating New Script"
-arfvpn_bar 'update_script'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Removing Unnecessary Files"
-arfvpn_bar 'remove_unnecessary'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Set Cron to VPS"
-arfvpn_bar 'set_cron'
-echo -e ""
-sleep 2
-
 echo -e " ${LIGHT}- ${NC}Finishing Installer"
 arfvpn_bar 'finishing'
 echo -e ""
 sleep 2
 
+echo -e ""
 echo -e " ${OK} Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
-
-#########################################################
-# Set rc.local restarting service
-/usr/bin/fixssh
+history -c
 clear
 
 #########################################################
 # Log-installer
-echo " "
-echo "Installation has been completed!!"
-echo " "
+echo " " | tee -a /etc/arfvpn/log-install.txt
+echo -e " ${OK} Installation VPN Successfully !!! ${CEKLIST}" | tee -a /etc/arfvpn/log-install.txt
+echo " " | tee -a /etc/arfvpn/log-install.txt
 echo "---------------------- Script Mod By ™D-JumPer™ ----------------------" | tee -a /etc/arfvpn/log-install.txt
 echo "" | tee -a /etc/arfvpn/log-install.txt
 echo "   >>> Service & Port"  | tee -a /etc/arfvpn/log-install.txt
@@ -381,7 +409,6 @@ echo ""  | tee -a /etc/arfvpn/log-install.txt
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 
-echo -e " ${OK} Installation VPN Successfully !!! ${CEKLIST}"
 echo -e ""
 echo -e "     ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
 read answer
