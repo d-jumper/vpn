@@ -94,14 +94,9 @@ tput cnorm
 arfvpn="/etc/arfvpn"
 domain=$(cat $arfvpn/domain)
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
+clear
 
 # ==========================================
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSL CERT"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-sleep 2
-
 installing_cert () {
 ## make a cert
 cd
@@ -122,6 +117,11 @@ chmod +x /root/.acme.sh/acme.sh
 sudo openssl dhparam -out ${arfvpn}/cert/dh.pem 2048
 sleep 3
 }
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSL CERT"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Make a SSL CERT"
 arfvpn_bar 'installing_cert'
 echo -e ""
