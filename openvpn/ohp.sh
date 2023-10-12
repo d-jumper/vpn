@@ -97,7 +97,10 @@ MYIP=$(cat $arfvpn/IP)
 MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
 clear
-echo -e " ${INFO} Setup OHP SERVER ..."
+
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING OHP SERVER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 sleep 2
 
@@ -109,7 +112,7 @@ chmod +x ohpserver
 cp ohpserver /usr/local/bin/ohpserver
 /bin/rm -rf ohpserver*
 }
-echo -e " ${LIGHT}- ${NC}Download File's OHP"
+echo -e " ${LIGHT}- ${NC}Installing OHP Server"
 arfvpn_bar 'download_ohp'
 echo -e ""
 sleep 2
@@ -192,9 +195,10 @@ arfvpn_bar 'config_ohp'
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e " ${OK} Installing OHP-SERVER Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
+
 #------------------------------
 printf 'INSTALLATION COMPLETED !\n'
 sleep 0.5

@@ -103,12 +103,16 @@ ver=$VERSION_ID
 NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 
 #########################################################
-echo -e " ${INFO} Installing OpenVPN ..."
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING OPEN-VPN"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 sleep 2
 
 vpn_dir () {
 cd
+apt install openvpn easy-rsa unzip -y
+apt install iptables iptables-persistent -y
 mkdir -p /etc/openvpn/server/easy-rsa/
 mkdir -p /etc/openvpn/client/
 #mkdir -p /etc/arfvpn/cert/
@@ -275,7 +279,6 @@ arfvpn_bar 'config_copy'
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e " ${OK} Installing OpenVPNSuccessfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
-clear
