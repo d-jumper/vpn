@@ -91,9 +91,6 @@ tput cnorm
 }
 
 #########################################################
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
-
-# initializing var
 source /etc/os-release
 export DEBIAN_FRONTEND=noninteractive
 ver=$VERSION_ID
@@ -104,9 +101,11 @@ MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$DOMAIN/g";
-cd
+github="raw.githubusercontent.com/arfprsty810/vpn/main"
+clear
 
 set_pass () {
+cd
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 chmod +x /etc/pam.d/common-password
@@ -341,11 +340,17 @@ echo -e "Installing Stunnel 5"
 arfvpn_bar 'set_stunnel5'
 
 #OpenVPN
+set_ovpn () {
+cd
+wget https://${github}/openvpn/vpn.sh
+chmod +x vpn.sh
+}
 echo -e ""
 echo -e "Installing OpenVPN"
+arfvpn_bar 'set_ovpn'
 sleep 3
-cd
-wget https://${github}/openvpn/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
+clear
+./vpn.sh
 
 # install fail2ban
 #apt -y install fail2ban
@@ -372,6 +377,7 @@ echo '.....done'
 echo; echo 'Installation has completed.'
 echo 'Config file is at /usr/local/ddos/ddos.conf'
 }
+clear
 echo -e ""
 echo -e "Installing Ddos"
 arfvpn_bar 'set_ddos'
@@ -388,11 +394,17 @@ echo -e "Set Banner"
 arfvpn_bar 'set_banner'
 
 # Install BBR
+set_bbr () {
+cd
+wget https://${github}/ssh/archive/bbr.sh
+chmod +x bbr.sh
+}
 echo -e ""
 echo -e "Set Bbr"
+arfvpn_bar 'set_bbr'
 sleep 3
-cd
-wget https://${github}/ssh/archive/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+clear
+./bbr.sh
 
 # blockir torrent
 set_torrent () {
@@ -412,8 +424,9 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 }
+clear
 echo -e ""
-echo -e "Set Blockir Torrent"
+echo -e "Set Block Torrent"
 arfvpn_bar 'set_torrent'
 
 # download script
