@@ -120,7 +120,7 @@ secs_to_human() {
 
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.2"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 date
@@ -134,7 +134,7 @@ wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
 }
-clear
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Server, Domain & Cert SSL"
 arfvpn_bar 'set_host'
 echo -e ""
@@ -151,6 +151,10 @@ chmod +x /root/apete.sh
 sed -i -e 's/\r$//' /root/apete.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
 arfvpn_bar 'set_apete'
 echo -e ""
@@ -166,6 +170,10 @@ wget "https://${github}/xray/ins-xray.sh"
 chmod +x ins-xray.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Xray - Trojan-Go - Shadowsocks-Libev"
 arfvpn_bar 'set_aio'
 echo -e ""
@@ -181,6 +189,10 @@ wget "https://${github}/ssh/ssh-vpn.sh"
 chmod +x ssh-vpn.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing OpenSSH & OpenVPN"
 arfvpn_bar 'set_ssh'
 echo -e ""
@@ -195,6 +207,10 @@ cd
 apt update
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Websocket"
 arfvpn_bar 'set_websocket'
 echo -e ""
@@ -210,6 +226,10 @@ wget "https://${github}/openvpn/ohp.sh"
 chmod +x ohp.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing OhpServer"
 arfvpn_bar 'set_ohp'
 echo -e ""
@@ -225,6 +245,10 @@ wget "https://${github}/backup/set-br.sh"
 chmod +x set-br.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Setting Backup"
 arfvpn_bar 'set_br'
 echo -e ""
@@ -252,7 +276,7 @@ systemctl daemon-reload
 systemctl enable autosett
 }
 clear
-echo -e " ${LIGHT}- ${NC}Auto-set.service"
+echo -e " ${LIGHT}- ${NC}Installing Auto-set.service"
 arfvpn_bar 'set_set'
 echo -e ""
 sleep 2
@@ -261,6 +285,10 @@ clear
 /etc/set.sh
 
 #########################################################
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 update_script () {
 # Download file/s script
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
@@ -322,12 +350,10 @@ sed -i -e 's/\r$//' /usr/bin/porttrojan
 sed -i -e 's/\r$//' /usr/bin/portvlm
 sed -i -e 's/\r$//' /usr/bin/portwg
 }
-clear
-echo -e " ${LIGHT}- ${NC}Updating New Script"
+echo -e " ${LIGHT}- ${NC}Installing VPN Script"
 arfvpn_bar 'update_script'
 echo -e ""
 sleep 2
-clear
 
 #########################################################
 remove_unnecessary () {
@@ -336,12 +362,10 @@ cd
 apt autoclean -y
 apt autoremove -y
 }
-clear
 echo -e " ${LIGHT}- ${NC}Removing Unnecessary Files"
 arfvpn_bar 'remove_unnecessary'
 echo -e ""
 sleep 2
-clear
 
 #########################################################
 set_cron () {
@@ -366,12 +390,10 @@ if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab 
 /etc/init.d/cron restart
 /etc/init.d/cron reload
 }
-clear
 echo -e " ${LIGHT}- ${NC}Set Cron to VPS"
 arfvpn_bar 'set_cron'
 echo -e ""
 sleep 2
-clear
 
 #########################################################
 # Set rc.local restarting service
@@ -380,6 +402,10 @@ cd
 apt update
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Set New rc-local.service"
 arfvpn_bar 'set_rclocal'
 echo -e ""
@@ -410,13 +436,17 @@ echo "1.2" > /home/ver
 rm -f /root/*.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Finishing Installer"
 arfvpn_bar 'finishing'
 echo -e ""
 sleep 2
 
 echo -e ""
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e " ${OK} Setup VPN Successfully Installed !!! ${CEKLIST}"
 echo -e ""
 sleep 2
 history -c
