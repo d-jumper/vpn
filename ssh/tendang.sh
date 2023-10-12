@@ -1,6 +1,4 @@
 #!/bin/bash
-# Script by : Akbar Maulana
-#!/bin/bash
 clear
 MAX=1
 if [ -e "/var/log/auth.log" ]; then

@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -106,10 +106,16 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$DOMAIN/g";
 cd
 
+set_pass () {
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 chmod +x /etc/pam.d/common-password
+}
+echo -e ""
+echo -e "Set Password"
+arfvpn_bar 'set_pass'
 
+set_rclocal () {
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
 [Unit]
@@ -126,7 +132,6 @@ SysVStartPriority=99
 WantedBy=multi-user.target
 END
 
-# make /etc/rc.local
 cat > /etc/rc.local <<-END
 #!/bin/sh -e
 # rc.local
@@ -140,8 +145,13 @@ systemctl start rc-local.service
 
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
+}
+echo -e ""
+echo -e "Set Rc.Local"
+arfvpn_bar 'set_rclocal'
 
 # install badvpn
+set_badvpn () {
 cd
 #wget -O /usr/bin/badvpn-udpgw "https://${github}/ssh/archive/badvpn-udpgw64"
 wget -O /usr/bin/badvpn-udpgw "https://${github}/ssh/archive/newudpgw"
@@ -169,10 +179,14 @@ fi
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
+}
+echo -e ""
+echo -e "Set BadVpn UDPGW"
+arfvpn_bar 'set_badvpn'
 
 # setting port ssh
+set_port () {
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
-
 # install dropbear
 apt -y install dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
@@ -181,15 +195,25 @@ sed -i 's/DROPBEAR_EXTRA_ARGS=/DROPBEAR_EXTRA_ARGS="-p 109"/g' /etc/default/drop
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
+}
+echo -e ""
+echo -e "Set Port SSH & Dropbear"
+arfvpn_bar 'set_port'
 
 # install squid
+set_squid () {
 cd
 apt -y install squid3
 wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 sed -i $MYHOST /etc/squid/squid.conf
+}
+echo -e ""
+echo -e "Installing Squid Proxy"
+arfvpn_bar 'set_squid'
 
 # Install SSLH
+set_sslh () {
 apt -y install sslh
 rm -f /etc/default/sslh
 
@@ -207,8 +231,13 @@ systemctl restart sslh
 /etc/init.d/sslh restart
 /etc/init.d/sslh status
 /etc/init.d/sslh restart
+}
+echo -e ""
+echo -e "Installing SSLH"
+arfvpn_bar 'set_sslh'
 
 # setting vnstat
+set_vnstat () {
 #apt -y install vnstat
 /etc/init.d/vnstat restart
 #apt -y install libsqlite3-dev
@@ -224,8 +253,13 @@ systemctl enable vnstat
 /etc/init.d/vnstat restart
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
+}
+echo -e ""
+echo -e "Set Vnstat"
+arfvpn_bar 'set_vnstat'
 
 # install stunnel 5 
+set_stunnel5 () {
 cd /root/
 wget -q -O stunnel5.zip "https://${github}/ssh/stunnel5/stunnel5.zip"
 unzip -o stunnel5.zip
@@ -301,8 +335,15 @@ systemctl restart stunnel5
 /etc/init.d/stunnel5 restart
 /etc/init.d/stunnel5 status
 /etc/init.d/stunnel5 restart
+}
+echo -e ""
+echo -e "Installing Stunnel 5"
+arfvpn_bar 'set_stunnel5'
 
 #OpenVPN
+echo -e ""
+echo -e "Installing OpenVPN"
+sleep 3
 cd
 wget https://${github}/openvpn/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 
@@ -310,7 +351,9 @@ wget https://${github}/openvpn/vpn.sh &&  chmod +x vpn.sh && ./vpn.sh
 #apt -y install fail2ban
 
 # Instal DDOS Flate
+set_ddos () {
 rm -rvf /usr/local/ddos
+mkdir -p /usr/local/ddos
 echo; echo 'Installing DOS-Deflate 0.6'; echo
 echo; echo -n 'Downloading source files...'
 wget -q -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
@@ -328,19 +371,31 @@ if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (cront
 echo '.....done'
 echo; echo 'Installation has completed.'
 echo 'Config file is at /usr/local/ddos/ddos.conf'
+}
+echo -e ""
+echo -e "Installing Ddos"
+arfvpn_bar 'set_ddos'
 
 # banner /etc/issue.net
+set_banner () {
 echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
 sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dropbear
+# Ganti Banner
+wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
+}
+echo -e ""
+echo -e "Set Banner"
+arfvpn_bar 'set_banner'
 
 # Install BBR
+echo -e ""
+echo -e "Set Bbr"
+sleep 3
 cd
 wget https://${github}/ssh/archive/bbr.sh && chmod +x bbr.sh && ./bbr.sh
 
-# Ganti Banner
-wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
-
 # blockir torrent
+set_torrent () {
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
 iptables -A FORWARD -m string --string "announce_peer" --algo bm -j DROP
 iptables -A FORWARD -m string --string "find_node" --algo bm -j DROP
@@ -356,8 +411,13 @@ iptables-save >> /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
+}
+echo -e ""
+echo -e "Set Blockir Torrent"
+arfvpn_bar 'set_torrent'
 
 # download script
+set_script () {
 wget -O /usr/bin/addssh "https://${github}/ssh/addssh.sh"
 wget -O /usr/bin/autokill "https://${github}/ssh/autokill.sh"
 wget -O /usr/bin/ceklim "https://${github}/ssh/ceklim.sh"
@@ -435,8 +495,13 @@ chmod +x /usr/bin/portsshnontls
 sed -i -e 's/\r$//' /usr/bin/wsedu
 sed -i -e 's/\r$//' /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/portsshnontls
+}
+echo -e ""
+echo -e "Installing Script"
+arfvpn_bar 'set_script'
 
 # finishing
+set_finishing () {
 cd
 chown -R www-data:www-data /home/arfvps/public_html
 /etc/init.d/nginx restart
@@ -450,6 +515,13 @@ chown -R www-data:www-data /home/arfvps/public_html
 /etc/init.d/vnstat restart
 /etc/init.d/fail2ban restart
 /etc/init.d/squid restart
+}
+echo -e ""
+echo -e "Finishing"
+arfvpn_bar 'set_finishing'
 
-cd
-sleep 3
+echo -e ""
+echo -e ""
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
