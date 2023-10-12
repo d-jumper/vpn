@@ -92,6 +92,48 @@ tput cnorm
 
 #########################################################
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
+clear
+
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING WEBSOCKET"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+
+# Getting Proxy Template
+set_ws () {
+wget -q -O /usr/local/bin/ws-tls https://${github}/ssh/websocket/ws-tls.py
+chmod +x /usr/local/bin/ws-tls
+
+# Installing Service
+cat > /etc/systemd/system/ws-tls.service << END
+[Unit]
+Description=Python Proxy
+Documentation=arfvpn.biz.id
+After=network.target nss-lookup.target
+
+[Service]
+Type=simple
+User=root
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
+NoNewPrivileges=true
+ExecStart=/usr/bin/python -O /usr/local/bin/ws-tls 443
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+END
+
+systemctl daemon-reload
+systemctl enable ws-nontls
+systemctl restart ws-nontls
+systemctl enable ws-tls
+systemctl restart ws-tls
+}
+echo -e " ${LIGHT}- ${NC}Set Websocket TLS"
+arfvpn_bar 'set_ws'
+echo -e ""
+sleep 2
 
 # Getting Proxy Template
 set_wsnon () {
@@ -123,7 +165,7 @@ systemctl daemon-reload
 systemctl enable ws-nontls
 systemctl restart ws-nontls
 }
-echo -e " ${LIGHT}- ${NC}Set Websocket Non-TLS"
+echo -e " ${LIGHT}- ${NC}Set Websocket None-TLS"
 arfvpn_bar 'set_wsnon'
 echo -e ""
 sleep 2
@@ -163,38 +205,6 @@ arfvpn_bar 'set_wsovpn'
 echo -e ""
 sleep 2
 
-# Getting Proxy Template
-set_ws () {
-wget -q -O /usr/local/bin/ws-tls https://${github}/ssh/websocket/ws-tls.py
-chmod +x /usr/local/bin/ws-tls
-
-# Installing Service
-cat > /etc/systemd/system/ws-tls.service << END
-[Unit]
-Description=Python Proxy
-Documentation=arfvpn.biz.id
-After=network.target nss-lookup.target
-
-[Service]
-Type=simple
-User=root
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-tls 443
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-END
-
-systemctl daemon-reload
-systemctl enable ws-nontls
-systemctl restart ws-nontls
-systemctl enable ws-tls
-systemctl restart ws-tls
-}
-echo -e " ${LIGHT}- ${NC}Set Websocket TLS"
-arfvpn_bar 'set_ws'
+echo -e " ${OK} Installing Websocket Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
