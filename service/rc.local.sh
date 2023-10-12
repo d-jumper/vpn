@@ -143,11 +143,15 @@ systemctl enable rc-local
 systemctl start rc-local.service
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          CREATE NEW RC.LOCAL"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Create New Rc.Local"
 arfvpn_bar 'rclocal'
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e " ${OK}RC.Local Successfully Replaced !!! ${CEKLIST}"
 echo -e ""
 sleep 2

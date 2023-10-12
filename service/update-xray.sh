@@ -93,6 +93,8 @@ tput cnorm
 #########################################################
 now_version=$(xray --version | grep 'Xray' | cut -d ' ' -f 2 | sort)
 lastest_version="$(curl -s https://api.github.com/repos/XTLS/Xray-core/releases | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+clear
+
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "          XRAY CORE UPDATE"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
