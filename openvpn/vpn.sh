@@ -112,6 +112,7 @@ sleep 2
 vpn_dir () {
 cd
 apt install openvpn easy-rsa unzip -y
+apt install iptables iptables-persistent -y
 mkdir -p /etc/openvpn/server/easy-rsa/
 mkdir -p /etc/openvpn/client/
 #mkdir -p /etc/arfvpn/cert/
