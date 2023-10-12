@@ -104,18 +104,16 @@ MYHOST="s/xxhostnamexx/$DOMAIN/g";
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSH"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-sleep 2
-
 set_pass () {
 cd
 # simple password minimal
 wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 chmod +x /etc/pam.d/common-password
 }
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSH"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e "Set Password"
 arfvpn_bar 'set_pass'
 echo -e ""
@@ -360,19 +358,16 @@ wget https://${github}/openvpn/vpn.sh
 chmod +x vpn.sh
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSH"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e "Installing OpenVPN"
 arfvpn_bar 'set_ovpn'
 echo -e ""
 sleep 2
 clear
 ./vpn.sh
-
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSH"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-sleep 2
 
 # Instal DDOS Flate
 set_ddos () {
@@ -391,6 +386,10 @@ cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSH"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e "Installing Ddos"
 arfvpn_bar 'set_ddos'
 echo -e ""
@@ -414,6 +413,11 @@ cd
 wget https://${github}/ssh/archive/bbr.sh
 chmod +x bbr.sh
 }
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSH"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e "Set Bbr"
 arfvpn_bar 'set_bbr'
 echo -e ""
@@ -421,11 +425,6 @@ sleep 2
 clear
 ./bbr.sh
 
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSH"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
 # blockir torrent
 set_torrent () {
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
@@ -445,6 +444,10 @@ netfilter-persistent save
 netfilter-persistent reload
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSH"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e "Set Block Torrent"
 arfvpn_bar 'set_torrent'
 echo -e ""
@@ -551,7 +554,7 @@ chown -R www-data:www-data /home/arfvps/public_html
 /etc/init.d/fail2ban restart
 /etc/init.d/squid restart
 }
-echo -e "Finishing"
+echo -e "Finishing Installer SSH"
 arfvpn_bar 'set_finishing'
 echo -e ""
 sleep 2
