@@ -106,7 +106,7 @@ clear
 
 #########################################################
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "         NGINX-SERVER INSTALLER"
+echo -e "      INSTALLING NGINX-SERVER"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 installing_nginx () {
@@ -166,7 +166,7 @@ sed -i -e 's/\r$//' /usr/bin/cert
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSL CERT"
+echo -e "        INSTALLING SSL CERT"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Make a SSL CERT"
