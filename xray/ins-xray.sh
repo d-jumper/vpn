@@ -144,6 +144,7 @@ echo -e " ${LIGHT}- ${NC}Installing Core Xray"
 arfvpn_bar 'xray_core'
 echo -e ""
 sleep 2
+clear
 /usr/bin/update-xray
 
 # NGINX-SERVER
@@ -153,10 +154,12 @@ wget https://${github}/nginx/nginx-server.sh
 chmod +x nginx-server.sh
 sed -i -e 's/\r$//' nginx-server.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Nginx-Server"
 arfvpn_bar 'set_nginx'
 echo -e ""
 sleep 2
+clear
 ./nginx-server.sh
 
 # Random Port Xray
@@ -446,6 +449,7 @@ cat > /etc/xray/config.json << END
 }
 END
 }
+clear
 echo -e " ${LIGHT}- ${NC}Create Xray Config"
 arfvpn_bar 'xray_config'
 echo -e ""
@@ -664,6 +668,7 @@ echo -e " ${LIGHT}- ${NC}Installing Trojan-GO"
 arfvpn_bar 'set_trgo'
 echo -e ""
 sleep 2
+clear
 ./trojan-go.sh
 
 #Instal Shadowsocks
@@ -673,10 +678,12 @@ wget https://${github}/shadowsocks/shadowsocks.sh
 chmod +x shadowsocks.sh
 sed -i -e 's/\r$//' shadowsocks.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Shadowsocks-Libev"
 arfvpn_bar 'set_ss'
 echo -e ""
 sleep 2
+clear
 ./shadowsocks.sh
 
 set_finishing () {
@@ -694,6 +701,7 @@ systemctl restart xray
 systemctl restart trojan-go
 systemctl restart shadowsocks-libev.service
 }
+clear
 echo -e " ${LIGHT}- ${NC}Finishing"
 arfvpn_bar 'set_finishing'
 echo -e ""
