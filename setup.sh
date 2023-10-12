@@ -127,66 +127,96 @@ date
 sleep 3
 #########################################################
 # Installing Server, Domain & Cert SSL
-echo -e " ${LIGHT}- ${NC}Installing Server, Domain & Cert SSL"
-echo -e ""
-sleep 2
+set_host () {
 cd
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
+}
+echo -e " ${LIGHT}- ${NC}Installing Server, Domain & Cert SSL"
+arfvpn_bar 'set_host'
+echo -e ""
+sleep 2
 /usr/bin/hostvps
 
 #########################################################
 # Installing Requirements Tools
-echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
-echo -e ""
-sleep 2
+set_apete () {
 cd
 wget "https://${github}/service/apete.sh"
 chmod +x /root/apete.sh
 sed -i -e 's/\r$//' /root/apete.sh
+}
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
+arfvpn_bar 'set_apete'
+echo -e ""
+sleep 2
 /root/apete.sh
 
 #########################################################
 # Installing Xray - Trojan-Go - Shadowsocks-Libev
+set_aio () {
+cd
+wget "https://${github}/xray/ins-xray.sh"
+chmod +x ins-xray.sh
+}
 echo -e " ${LIGHT}- ${NC}Installing Xray - Trojan-Go - Shadowsocks-Libev"
+arfvpn_bar 'set_aio'
 echo -e ""
 sleep 2
-cd
-wget "https://${github}/xray/ins-xray.sh" && chmod +x ins-xray.sh && screen -S xray /root/ins-xray.sh
+screen -S xray /root/ins-xray.sh
 
 #########################################################
 # Installing OpenSSH & OpenVPN
+set_ssh () {
+cd
+wget "https://${github}/ssh/ssh-vpn.sh"
+chmod +x ssh-vpn.sh
+}
 echo -e " ${LIGHT}- ${NC}Installing OpenSSH & OpenVPN"
+arfvpn_bar 'set_ssh'
 echo -e ""
 sleep 2
-cd
-wget "https://${github}/ssh/ssh-vpn.sh" && chmod +x ssh-vpn.sh && screen -S ssh-vpn /root/ssh-vpn.sh
+screen -S ssh-vpn /root/ssh-vpn.sh
 
 #########################################################
 # Installing Websocket
+set_websocket () {
+cd
+apt update
+}
 echo -e " ${LIGHT}- ${NC}Installing Websocket"
+arfvpn_bar 'set_websocket'
 echo -e ""
 sleep 2
-cd
 /usr/bin/wsedu
 
 #########################################################
 # Installing OhpServer
+set_ohp () {
+cd
+wget "https://${github}/openvpn/ohp.sh"
+chmod +x ohp.sh
+}
 echo -e " ${LIGHT}- ${NC}Installing OhpServer"
+arfvpn_bar 'set_ohp'
 echo -e ""
 sleep 2
-cd
-wget "https://${github}/openvpn/ohp.sh" && chmod +x ohp.sh && /root/ohp.sh
+/root/ohp.sh
 
 #########################################################
 # Installing Setting Backup
+set_br () {
+cd
+wget "https://${github}/backup/set-br.sh"
+chmod +x set-br.sh
+}
 echo -e " ${LIGHT}- ${NC}Installing Setting Backup"
+arfvpn_bar 'set_br'
 echo -e ""
 sleep 2
-cd
-wget "https://${github}/backup/set-br.sh" && chmod +x set-br.sh && /root/set-br.sh
+/root/set-br.sh
 
 #########################################################
 # Set Auto-set.service
@@ -305,7 +335,8 @@ sleep 5
 /usr/bin/xp
 sleep 5
 /sbin/reboot
-echo "${OK} Auto Delete User Expired & Reboot Server Successfully${CEKLIS}" >> /etc/arfvpn/log-cron.log
+echo -e "${OK} Auto Delete User Expired Successfully${CEKLIS}" >> /etc/arfvpn/log-cron.log
+echo -e "${OK} Auto Reboot Server Successfully${CEKLIS}" >> /etc/arfvpn/log-cron.log
 date >> /etc/arfvpn/log-cron.log
 exit
 END
@@ -322,10 +353,14 @@ sleep 2
 
 #########################################################
 # Set rc.local restarting service
+set_rclocal () {
+cd
+apt update
+}
 echo -e " ${LIGHT}- ${NC}Set New rc-local.service"
+arfvpn_bar 'set_rclocal'
 echo -e ""
 sleep 2
-cd
 /usr/bin/fixssh
 
 #########################################################
