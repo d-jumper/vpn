@@ -148,7 +148,7 @@ clear
     clear
     menu-trojan
 	    else
-	    history -c
+	history -c
 	clear
 	fi
     exp=$(grep -wE "^#tr# ${user}" "${xray}/config.json" | cut -d ' ' -f 3 | sort | uniq)

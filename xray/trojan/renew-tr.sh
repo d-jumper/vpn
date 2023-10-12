@@ -172,7 +172,7 @@ clear
     renewtr () {
     sed -i "/#tr# ${user}/c\#tr# ${user} ${exp4}" ${xray}/config.json
     }
-    echo -e " ${LIGHT}- ${NC}Renew User Teojan Websocket"
+    echo -e " ${LIGHT}- ${NC}Renew User Trojan Websocket"
     arfvpn_bar 'renewtr'
     # systemctl restart xray > /dev/null 2>&1
     history -c
