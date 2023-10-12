@@ -1,11 +1,5 @@
 #!/bin/bash
 #########################################################
-# Exporting Language to UTF-8
-LC_ALL='en_US.UTF-8'
-LANG='en_US.UTF-8'
-LANGUAGE='en_US.UTF-8'
-LC_CTYPE='en_US.utf8'
-
 # Export Color
 BIBlack='\033[1;90m'      # Black
 BIRed='\033[1;91m'        # Red
@@ -62,12 +56,11 @@ EROR="[${RED} EROR ${NC}]"
 INFO="[${LIGHT} INFO ${NC}]"
 OK="[${LIGHT} OK ! ${NC}]"
 CEKLIST="[${LIGHT}✔${NC}]"
-PENDING="[${ORANGE} PENDING ${NC}]"
+PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
-RECEIVE="[${ORANGE} RECEIVE ${NC}]"
+RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
 #########################################################
-
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
@@ -237,7 +230,7 @@ exit
 
 *)
 clear
-echo " ${EROR}${RED}Command not found! ${NC}"
+echo -e " ${EROR}${RED}Command not found! ${NC}"
 sleep 3
 menu
 ;;

@@ -113,11 +113,10 @@ apt-get remove --purge samba* -y
 apt-get remove --purge bind9* -y
 apt-get remove --purge sendmail* -y
 }
-echo -e " ${LIGHT}- ${NC}Update, Upgrade Dist & Remove unnecessary files"
+echo -e " ${LIGHT}- ${NC}Update - Upgrade Dist & Remove unnecessary files"
 arfvpn_bar 'remove_unnecessary'
 echo -e ""
 sleep 2
-
 
 install_xray () {
 # Install Requirements Tools XRAY
@@ -151,7 +150,7 @@ disable_ipv6 () {
 echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6
 sed -i '$ i\echo 1 > /proc/sys/net/ipv6/conf/all/disable_ipv6' /etc/rc.local
 }
-echo -e " ${LIGHT}- ${NC}Disable IPV6"
+echo -e " ${LIGHT}- ${NC}Set Disable IPV6"
 arfvpn_bar 'disable_ipv6'
 echo -e ""
 sleep 2
@@ -205,10 +204,7 @@ echo -e ""
 sleep 2
 
 install_ssh_ovpn () {
-# Install Requirements Tools OpenVPN dan Easy-RSA
 # Install Requirements Tools SSHVPN
-apt install openvpn easy-rsa unzip -y
-apt install iptables iptables-persistent -y
 apt install ruby -y
 apt install python -y
 apt install make -y
@@ -234,8 +230,11 @@ apt install zlib1g-dev -y
 apt install libssl1.0-dev -y
 apt install dos2unix -y
 apt-get --reinstall --fix-missing install bzip2 gzip screen iftop htop -y
+# Install Requirements Tools OpenVPN dan Easy-RSA
+apt install openvpn easy-rsa unzip -y
+apt install iptables iptables-persistent -y
 }
-echo -e " ${LIGHT}- ${NC}Installing Install Requirements Tools OpenSSH & OpenVPN"
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools OpenSSH & OpenVPN"
 arfvpn_bar 'install_ssh_ovpn'
 echo -e ""
 sleep 2
