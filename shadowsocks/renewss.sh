@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -158,7 +158,6 @@ clear
     echo -e " "
         fi
             
-    renew_ss () {
     exp=$(grep -wE "^#ss# ${user}" "/etc/shadowsocks-libev/akun.conf" | cut -d ' ' -f 3 | sort | uniq)
     now=$(date +%Y-%m-%d)
     d1=$(date -d "${exp}" +%s)
@@ -166,6 +165,7 @@ clear
     exp2=$(( (d1 - d2) / 86400 ))
     exp3=$((${exp2} + ${masaaktif}))
     exp4=`date -d "${exp3} days" +"%Y-%m-%d"`
+    renew_ss () {
     sed -i "s/#ss# ${user} ${exp}/#ss# ${user} ${exp4}/g" /etc/shadowsocks-libev/akun.conf
     service cron restart
     systemctl restart shadowsocks-libev-server@${user}-tls.service
@@ -175,8 +175,10 @@ clear
     clear
     echo -e " Renew Shadowsocks Account"
     arfvpn_bar 'renew_ss'
-    
+    sleep 2
+    history -c
     clear
+    
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
     echo -e "             ⇱ \e[32;1m✶ Renew Shadowsocks Account ✶\e[0m ⇲ ${NC}"
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
@@ -190,5 +192,6 @@ clear
     
     echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Shadowsocks Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
     read -p ""
+    history -c
     clear
     menu-ss

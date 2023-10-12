@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -196,23 +196,23 @@ systemctl enable shadowsocks-libev-server@${user}-tls.service
 systemctl start shadowsocks-libev-server@${user}-tls.service
 systemctl enable shadowsocks-libev-server@${user}-http.service
 systemctl start shadowsocks-libev-server@${user}-http.service
-
-tmp1=$(echo -n "${method}:${user}@${IP}:${tls}" | base64 -w0)
-tmp2=$(echo -n "${method}:${user}@${IP}:${http}" | base64 -w0)
-linkss1="ss://${tmp1}?plugin=obfs-local;obfs=tls;obfs-host=bing.com"
-linkss2="ss://${tmp2}?plugin=obfs-local;obfs=http;obfs-host=bing.com"
-
-echo -e "#ss# ${user} ${exp}
-port_tls $tls
-port_http $http">>"/etc/shadowsocks-libev/akun.conf"
-service cron restart
 }
 
 clear
 echo -e " Add Account Shadowsocks-Libev"
 arfvpn_bar 'add_ss'
-
+tmp1=$(echo -n "${method}:${user}@${IP}:${tls}" | base64 -w0)
+tmp2=$(echo -n "${method}:${user}@${IP}:${http}" | base64 -w0)
+linkss1="ss://${tmp1}?plugin=obfs-local;obfs=tls;obfs-host=bing.com"
+linkss2="ss://${tmp2}?plugin=obfs-local;obfs=http;obfs-host=bing.com"
+echo -e "#ss# ${user} ${exp}
+port_tls $tls
+port_http $http">>"/etc/shadowsocks-libev/akun.conf"
+service cron restart
+sleep 2
+history -c
 clear
+
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}" | tee -a /etc/arfvpn/log-create-user.log
@@ -246,5 +246,6 @@ echo "" | tee -a /etc/arfvpn/log-create-user.log
 echo "" | tee -a /etc/arfvpn/log-create-user.log 
 echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
 menu

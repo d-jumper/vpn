@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -163,6 +163,7 @@ rm -f "/etc/shadowsocks-libev/${user}-http.json"
 echo -e " ${LIGHT}- ${NC}Deleting User Shadowsocks"
 arfvpn_bar 'dell_ss'
 sleep 2
+history -c
 clear
 
     echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
@@ -175,5 +176,6 @@ clear
     echo ""
 echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
 menu

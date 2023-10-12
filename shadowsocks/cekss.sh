@@ -61,6 +61,36 @@ SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
 
 #########################################################
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${LIGHT}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
@@ -114,5 +144,6 @@ echo -e "${BLUE}└────────────────────�
 echo -e " "
 echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Shadowsocks Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
 menu-ss
