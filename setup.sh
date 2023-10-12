@@ -134,10 +134,12 @@ wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Server, Domain & Cert SSL"
 arfvpn_bar 'set_host'
 echo -e ""
 sleep 2
+clear
 /usr/bin/hostvps
 
 #########################################################
@@ -148,10 +150,12 @@ wget "https://${github}/service/apete.sh"
 chmod +x /root/apete.sh
 sed -i -e 's/\r$//' /root/apete.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
 arfvpn_bar 'set_apete'
 echo -e ""
 sleep 2
+clear
 /root/apete.sh
 
 #########################################################
@@ -161,10 +165,12 @@ cd
 wget "https://${github}/xray/ins-xray.sh"
 chmod +x ins-xray.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Xray - Trojan-Go - Shadowsocks-Libev"
 arfvpn_bar 'set_aio'
 echo -e ""
 sleep 2
+clear
 screen -S xray /root/ins-xray.sh
 
 #########################################################
@@ -174,10 +180,12 @@ cd
 wget "https://${github}/ssh/ssh-vpn.sh"
 chmod +x ssh-vpn.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing OpenSSH & OpenVPN"
 arfvpn_bar 'set_ssh'
 echo -e ""
 sleep 2
+clear
 screen -S ssh-vpn /root/ssh-vpn.sh
 
 #########################################################
@@ -186,10 +194,12 @@ set_websocket () {
 cd
 apt update
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Websocket"
 arfvpn_bar 'set_websocket'
 echo -e ""
 sleep 2
+clear
 /usr/bin/wsedu
 
 #########################################################
@@ -199,10 +209,12 @@ cd
 wget "https://${github}/openvpn/ohp.sh"
 chmod +x ohp.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing OhpServer"
 arfvpn_bar 'set_ohp'
 echo -e ""
 sleep 2
+clear
 /root/ohp.sh
 
 #########################################################
@@ -212,10 +224,12 @@ cd
 wget "https://${github}/backup/set-br.sh"
 chmod +x set-br.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Installing Setting Backup"
 arfvpn_bar 'set_br'
 echo -e ""
 sleep 2
+clear
 /root/set-br.sh
 
 #########################################################
@@ -237,11 +251,13 @@ EOF
 systemctl daemon-reload
 systemctl enable autosett
 }
+clear
 echo -e " ${LIGHT}- ${NC}Auto-set.service"
 arfvpn_bar 'set_set'
 echo -e ""
 sleep 2
 cd
+clear
 /etc/set.sh
 
 #########################################################
@@ -306,10 +322,12 @@ sed -i -e 's/\r$//' /usr/bin/porttrojan
 sed -i -e 's/\r$//' /usr/bin/portvlm
 sed -i -e 's/\r$//' /usr/bin/portwg
 }
+clear
 echo -e " ${LIGHT}- ${NC}Updating New Script"
 arfvpn_bar 'update_script'
 echo -e ""
 sleep 2
+clear
 
 #########################################################
 remove_unnecessary () {
@@ -318,10 +336,12 @@ cd
 apt autoclean -y
 apt autoremove -y
 }
+clear
 echo -e " ${LIGHT}- ${NC}Removing Unnecessary Files"
 arfvpn_bar 'remove_unnecessary'
 echo -e ""
 sleep 2
+clear
 
 #########################################################
 set_cron () {
@@ -346,10 +366,12 @@ if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab 
 /etc/init.d/cron restart
 /etc/init.d/cron reload
 }
+clear
 echo -e " ${LIGHT}- ${NC}Set Cron to VPS"
 arfvpn_bar 'set_cron'
 echo -e ""
 sleep 2
+clear
 
 #########################################################
 # Set rc.local restarting service
@@ -357,10 +379,12 @@ set_rclocal () {
 cd
 apt update
 }
+clear
 echo -e " ${LIGHT}- ${NC}Set New rc-local.service"
 arfvpn_bar 'set_rclocal'
 echo -e ""
 sleep 2
+clear
 /usr/bin/fixssh
 
 #########################################################
@@ -385,6 +409,7 @@ echo "unset HISTFILE" >> /etc/profile
 echo "1.2" > /home/ver
 rm -f /root/*.sh
 }
+clear
 echo -e " ${LIGHT}- ${NC}Finishing Installer"
 arfvpn_bar 'finishing'
 echo -e ""
@@ -445,7 +470,7 @@ secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 
 echo -e ""
-echo -e "     ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
+echo -e "  ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
