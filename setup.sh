@@ -131,6 +131,7 @@ set_host () {
 cd
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
+apt install iptables iptables-persistent -y
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
 }
@@ -478,7 +479,7 @@ echo -e "   ${RED}⋗${NC}${LIGHT} Xray WS NONE TLS        ${NC}:${ORANGE} 80 ${
 echo -e "   ${RED}⋗${NC}${LIGHT} Trojan GO               ${NC}:${ORANGE} 2087 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev TLS   ${NC}:${ORANGE} 2443 - 3442 ${NC} " | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev NTLS  ${NC}:${ORANGE} 3443 - 4442 ${NC} " | tee -a /etc/arfvpn/log-install.txt
-echo -e "  | tee -a /etc/arfvpn/log-install.txt
+echo -e ""| tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${TYBLUE}>>>${NC} ⇱ ${CYAN}Server Information & Other Features${NC} ⇲"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Timezone                ${NC}:${GREEN} Asia/Jakarta${NC} ${STABILO}(GMT +7 WIB)${NC}"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Fail2Ban                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
