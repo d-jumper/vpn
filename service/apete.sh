@@ -133,6 +133,24 @@ arfvpn_bar 'install_xray'
 echo -e ""
 sleep 2
 
+#OpenVPN
+set_ovpn () {
+cd
+wget https://${github}/openvpn/vpn.sh
+chmod +x vpn.sh
+}
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "        INSTALLING OPEN-VPN"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e "Installing OpenVPN"
+arfvpn_bar 'set_ovpn'
+echo -e ""
+sleep 2
+clear
+./vpn.sh
+
 set_time () {
 # Set Time GMT +7 WIB
 ntpdate 0.id.pool.ntp.org
@@ -140,6 +158,9 @@ timedatectl set-ntp true
 timedatectl set-timezone Asia/Jakarta
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 }
+clear
+echo -e " ${INFO} Installing Requirements Tools VPN ..."
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Set Time GMT +7 WIB"
 arfvpn_bar 'set_time'
 echo -e ""
