@@ -96,7 +96,9 @@ domain=$(cat $arfvpn/domain)
 github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 # ==========================================
-echo -e " ${INFO} Installing SSL CERT ..."
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING SSL CERT"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 sleep 2
 
@@ -140,7 +142,6 @@ arfvpn_bar 'set_cron'
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e " ${OK} Installing SSL Cert Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
-clear
