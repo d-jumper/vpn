@@ -106,7 +106,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "          INSTALLING SHADOWSOCKS"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 #Server konfigurasi
-echo -e "[ ${green}INFO$NC ] Installing Sahdowsocks-Libev"
+echo -e ""
 sleep 2
 config_ss () {
 cat > /etc/shadowsocks-libev/config.json <<END
@@ -157,7 +157,7 @@ sed -i -e 's/\r$//' /usr/bin/cekss
 sed -i -e 's/\r$//' /usr/bin/delss
 sed -i -e 's/\r$//' /usr/bin/renewss
 }
-echo -e " ${LIGHT}- ${NC}Download Script Shadowsocks-Libev"
+echo -e " ${LIGHT}- ${NC}Installing Script Shadowsocks-Libev"
 arfvpn_bar 'script_ss'
 echo -e ""
 sleep 2
@@ -177,3 +177,4 @@ sleep 2
 echo -e " ${OK} Installing Shadowsocks-Libev Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
+clear
