@@ -26,7 +26,7 @@ RED='\033[0;31m'      # RED 1
 RED2='\e[1;31m'       # RED 2
 GREEN='\033[0;32m'   # GREEN 1
 GREEN2='\e[1;32m'    # GREEN 2
-YELLOW='\e[32;1m'    # YELLOW
+STABILO='\e[32;1m'    # STABILO
 ORANGE='\033[0;33m' # ORANGE
 PURPLE='\033[0;35m'  # PURPLE
 BLUE='\033[0;34m'     # BLUE 1
@@ -79,7 +79,7 @@ while true; do
    sleep 0.1s
    done
    [[ -e $HOME/fim ]] && rm $HOME/fim && break
-   echo -e "${TYBLUE}]${NC}"
+   echo -e "${LIGHT}]${NC}"
    sleep 1s
    tput cuu1
    tput dl1
@@ -116,6 +116,8 @@ domainSock_dir="/run/xray";! [ -d $domainSock_dir ] && mkdir  $domainSock_dir
 chown www-data.www-data $domainSock_dir
 
 # Make Folder XRay
+xray_dir () {
+cd
 mkdir -p /usr/bin/xray
 mkdir -p ${xray}
 mkdir -p ${logxray}
@@ -125,21 +127,36 @@ touch ${logxray}/access.log
 touch ${logxray}/error.log
 touch ${logxray}/access2.log
 touch ${logxray}/error2.log
+}
+echo -e " ${LIGHT}- ${NC}Create Directory Xray"
+arfvpn_bar 'xray_dir'
+echo -e ""
+sleep 2
 
 # Install Xray Core << Every >> Lastest Version
+xray_core () {
+cd
 wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh"
 chmod +x /usr/bin/update-xray
 sed -i -e 's/\r$//' /usr/bin/update-xray
+echo -e " ${LIGHT}- ${NC}Installing Core Xray"
+arfvpn_bar 'xray_core'
+echo -e ""
+sleep 2
 /usr/bin/update-xray
 
 # NGINX-SERVER
+set_nginx () {
 cd
 wget https://${github}/nginx/nginx-server.sh
 chmod +x nginx-server.sh
 sed -i -e 's/\r$//' nginx-server.sh
+echo -e " ${LIGHT}- ${NC}Installing Nginx-Server"
+arfvpn_bar 'set_nginx'
+echo -e ""
+sleep 2
 ./nginx-server.sh
 
-xray_onfig () {
 # Random Port Xray
 trojan=$((RANDOM + 10000))
 vless=$((RANDOM + 10000))
@@ -152,6 +169,7 @@ vmesschat=$((RANDOM + 10000))
 trojangrpc=$((RANDOM + 10000))
 
 # xray config
+xray_config () {
 echo -e "${INFO} MEMBUAT CONFIG XRAY"
 sleep 1
 cat > /etc/xray/config.json << END
@@ -425,7 +443,13 @@ cat > /etc/xray/config.json << END
   }
 }
 END
+}
+echo -e " ${LIGHT}- ${NC}Create Xray Config"
+arfvpn_bar 'xray_config'
+echo -e ""
+sleep 2
 
+xray_service () {
 rm -rf /etc/systemd/system/xray.service.d
 cat <<EOF> /etc/systemd/system/xray.service
 Description=Xray Service
@@ -446,7 +470,13 @@ LimitNOFILE=1000000
 WantedBy=multi-user.target
 
 EOF
+}
+echo -e " ${LIGHT}- ${NC}Create Xray.service"
+arfvpn_bar 'xray_service'
+echo -e ""
+sleep 2
 
+runn_service () {
 cat > /etc/systemd/system/runn.service <<EOF
 [Unit]
 Description=xxxXxXrayXxXxxx
@@ -461,8 +491,11 @@ Restart=on-abort
 [Install]
 WantedBy=multi-user.target
 EOF
-
 }
+echo -e " ${LIGHT}- ${NC}Create Runn.service"
+arfvpn_bar 'runn_service'
+echo -e ""
+sleep 2
 
 set_ws () {
 sed -i '$ ilocation /' /etc/nginx/sites-available/${domain}.conf
@@ -569,6 +602,10 @@ sed -i '$ igrpc_set_header Host \$http_host;' /etc/nginx/sites-available/${domai
 sed -i '$ igrpc_pass grpc://127.0.0.1:'"${trojangrpc}"';' /etc/nginx/sites-available/${domain}.conf
 sed -i '$ i}' /etc/nginx/sites-available/${domain}.conf
 }
+echo -e " ${LIGHT}- ${NC}Set Websocket"
+arfvpn_bar 'set_ws'
+echo -e ""
+sleep 2
 
 update_script () {
 wget -q -O /usr/bin/menu-vmess "https://${github}/xray/vmess/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
@@ -609,45 +646,38 @@ sed -i -e 's/\r$//' /usr/bin/cek-tr
 sed -i -e 's/\r$//' /usr/bin/del-tr
 sed -i -e 's/\r$//' /usr/bin/renew-tr
 }
-
-#########################################################
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING XRAY$NC"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-sleep 
-
-echo -e " ${LIGHT}- ${NC}Make Xray Config"
-arfvpn_bar 'xray_onfig'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Set Xray Websocket"
-arfvpn_bar 'set_ws'
-echo -e ""
-sleep 2
-2
-
-echo -e " ${LIGHT}- ${NC}Updating New Script"
+echo -e " ${LIGHT}- ${NC}Installing Script Xray"
 arfvpn_bar 'update_script'
 echo -e ""
 sleep 2
 
-echo -e " ${OK} Successfully !!! ${CEKLIST}"
+#Instal Trojan-GO
+set_trgo () {
+cd
+wget https://${github}/trojan-go/trojan-go.sh
+chmod +x trojan-go.sh
+sed -i -e 's/\r$//' trojan-go.sh
+}
+echo -e " ${LIGHT}- ${NC}Installing Trojan-GO"
+arfvpn_bar 'set_trgo'
 echo -e ""
 sleep 2
-
-#Instal Trojan-GO
-wget https://${github}/trojan-go/trojan-go.sh && chmod +x trojan-go.sh && sed -i -e 's/\r$//' trojan-go.sh && ./trojan-go.sh
-
-sleep 2
+./trojan-go.sh
 
 #Instal Shadowsocks
-wget https://${github}/shadowsocks/shadowsocks.sh && chmod +x shadowsocks.sh && sed -i -e 's/\r$//' shadowsocks.sh && ./shadowsocks.sh
-
+set_ss () {
+cd
+wget https://${github}/shadowsocks/shadowsocks.sh
+chmod +x shadowsocks.sh
+sed -i -e 's/\r$//' shadowsocks.sh
+}
+echo -e " ${LIGHT}- ${NC}Installing Shadowsocks-Libev"
+arfvpn_bar 'set_ss'
+echo -e ""
 sleep 2
+./shadowsocks.sh
 
+set_finishing () {
 systemctl daemon-reload
 systemctl enable runn
 systemctl enable xray
@@ -661,5 +691,12 @@ systemctl restart runn
 systemctl restart xray
 systemctl restart trojan-go
 systemctl restart shadowsocks-libev.service
+}
+echo -e " ${LIGHT}- ${NC}Finishing"
+arfvpn_bar 'set_finishing'
+echo -e ""
+sleep 2
 
-echo -e "${INFO} INSTALLING XRAY SUCCESSFULLY !!!"
+echo -e " ${OK} Successfully !!! ${CEKLIST}"
+echo -e ""
+sleep 2
