@@ -101,7 +101,7 @@ domain=$(cat ${arfvpn}/domain)
 sleep 1
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING TROJAN-GO"
+echo -e "       INSTALLING TROJAN-GO"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 # Install Trojan Go
 echo -e ""
