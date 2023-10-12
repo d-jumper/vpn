@@ -102,6 +102,11 @@ export DEBIAN_FRONTEND=noninteractive
 ver=$VERSION_ID
 NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
 
+#########################################################
+echo -e " ${INFO} Installing OpenVPN ..."
+echo -e ""
+sleep 2
+
 vpn_dir () {
 cd
 mkdir -p /etc/openvpn/server/easy-rsa/
@@ -164,6 +169,10 @@ echo 1 >> /proc/sys/net/ipv4/ip_forward
 echo 'net.ipv4.ip_forward = 1' >> /etc/sysctl.conf
 sysctl -p
 }
+echo -e " ${LIGHT}- ${NC}Create OpenVPN Directory"
+arfvpn_bar 'vpn_dir'
+echo -e ""
+sleep 2
 
 config_ovpn () {
 # Buat config client TCP 1194
@@ -224,6 +233,10 @@ cd
 systemctl enable --now openvpn-server@server-tcp
 systemctl enable --now openvpn-server@server-udp
 }
+echo -e " ${LIGHT}- ${NC}Create Config OpenVPN"
+arfvpn_bar 'config_ovpn'
+echo -e ""
+sleep 2
 
 config_copy () {
 # masukkan certificatenya ke dalam config client TCP 1194
@@ -257,22 +270,6 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 }
-
-#########################################################
-echo -e " ${INFO} Installing OpenVPN ..."
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Create OpenVPN Directory"
-arfvpn_bar 'vpn_dir'
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Create Config OpenVPN"
-arfvpn_bar 'config_ovpn'
-echo -e ""
-sleep 2
-
 echo -e " ${LIGHT}- ${NC}Create Config OpenVPN"
 arfvpn_bar 'config_copy'
 echo -e ""
@@ -281,3 +278,4 @@ sleep 2
 echo -e " ${OK} Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
+clear

@@ -96,6 +96,10 @@ arfvpn="/etc/arfvpn"
 MYIP=$(cat $arfvpn/IP)
 MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
+clear
+echo -e " ${INFO} Setup OHP SERVER ..."
+echo -e ""
+sleep 2
 
 download_ohp () {
 # Download File Ohp
@@ -105,6 +109,10 @@ chmod +x ohpserver
 cp ohpserver /usr/local/bin/ohpserver
 /bin/rm -rf ohpserver*
 }
+echo -e " ${LIGHT}- ${NC}Download File's OHP"
+arfvpn_bar 'download_ohp'
+echo -e ""
+sleep 2
 
 # Installing Service
 # SSH OHP Port 8181
@@ -179,16 +187,6 @@ systemctl restart dropbear-ohp
 systemctl enable openvpn-ohp
 systemctl restart openvpn-ohp
 }
-
-echo -e " ${INFO} Setup OHP SERVER ..."
-echo -e ""
-sleep 2
-
-echo -e " ${LIGHT}- ${NC}Download File's OHP"
-arfvpn_bar 'download_ohp'
-echo -e ""
-sleep 2
-
 echo -e " ${LIGHT}- ${NC}Create Config OHP"
 arfvpn_bar 'config_ohp'
 echo -e ""
@@ -223,3 +221,4 @@ else
 fi
 sleep 0.5
 sleep 5
+clear
