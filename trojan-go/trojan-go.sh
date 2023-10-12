@@ -101,10 +101,10 @@ domain=$(cat ${arfvpn}/domain)
 sleep 1
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "$green          INSTALLING TROJAN-GO $NC"
+echo -e "          INSTALLING TROJAN-GO"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 # Install Trojan Go
-echo -e "[ ${green}INFO$NC ] INSTALLING TROJAN-GO"
+echo -e ""
 sleep 1
 latest_version="$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases" | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
 trojango_link="https://github.com/p4gefau1t/trojan-go/releases/download/v${latest_version}/trojan-go-linux-amd64.zip"
@@ -243,3 +243,4 @@ sleep 2
 echo -e " ${OK} Installing Trojan-go Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
+clear
