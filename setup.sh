@@ -130,9 +130,6 @@ sleep 3
 set_host () {
 cd
 apt install wget curl jq -y
-apt install iptables iptables-persistent -y
-mkdir -p /usr/bin/
-mkdir -p /home/
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
