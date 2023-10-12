@@ -94,6 +94,7 @@ tput cnorm
 source /etc/os-release
 OS=$ID
 ver=$VERSION_ID
+github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 #########################################################
 echo -e " ${INFO} Installing Requirements Tools VPN ..."
