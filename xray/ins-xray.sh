@@ -139,6 +139,7 @@ cd
 wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh"
 chmod +x /usr/bin/update-xray
 sed -i -e 's/\r$//' /usr/bin/update-xray
+}
 echo -e " ${LIGHT}- ${NC}Installing Core Xray"
 arfvpn_bar 'xray_core'
 echo -e ""
@@ -151,6 +152,7 @@ cd
 wget https://${github}/nginx/nginx-server.sh
 chmod +x nginx-server.sh
 sed -i -e 's/\r$//' nginx-server.sh
+}
 echo -e " ${LIGHT}- ${NC}Installing Nginx-Server"
 arfvpn_bar 'set_nginx'
 echo -e ""
