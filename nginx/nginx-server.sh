@@ -105,11 +105,10 @@ phpv=$(cat /root/phpversion)
 clear
 
 #########################################################
-echo -e " ${LIGHT}- ${NC}Installing Nginx Server"
-arfvpn_bar 'installing_nginx'
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "         NGINX-SERVER INSTALLER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-sleep 2
-
 installing_nginx () {
 systemctl stop nginx
 cd ${nginx}
@@ -123,8 +122,11 @@ sed -i "${MYIP2}" ${nginx}/sites-available/${domain}.conf
 sed -i "${DOMAIN2}" ${nginx}/sites-available/${domain}.conf
 sudo ln -s ${nginx}/sites-available/${domain}.conf ${nginx}/sites-enabled
 }
+echo -e " ${LIGHT}- ${NC}Set Nginx-Server"
+arfvpn_bar 'installing_nginx'
+echo -e ""
+sleep 2
 
-#########################################################
 user_root () {
 useradd -m arfvps;
 mkdir -p ${arfvps}/
@@ -142,7 +144,6 @@ arfvpn_bar 'user_root'
 echo -e ""
 sleep 2
 
-#########################################################
 php_v () {
 cd
 ls /etc/php > phpversion
@@ -154,10 +155,19 @@ arfvpn_bar 'php_v'
 echo -e ""
 sleep 2
 
-#########################################################
-echo -e " ${LIGHT}- ${NC}Make a SSL CERT"
+echo -e " ${OK} Installing Nginx-Server Successfully !!! ${CEKLIST}"
+echo -e ""
 sleep 2
+
+set_ssl () {
 wget -O /usr/bin/cert "https://${github}/cert/cert.sh"
 chmod +x /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cert
+}
+clear
+echo -e " ${LIGHT}- ${NC}Make a SSL CERT"
+arfvpn_bar 'set_ssl'
+echo -e ""
+sleep 2
+clear
 /usr/bin/cert
