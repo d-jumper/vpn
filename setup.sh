@@ -276,6 +276,10 @@ systemctl daemon-reload
 systemctl enable autosett
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Auto-set.service"
 arfvpn_bar 'set_set'
 echo -e ""
@@ -285,10 +289,24 @@ clear
 /etc/set.sh
 
 #########################################################
+# Set rc.local restarting service
+set_rclocal () {
+cd
+apt update
+}
+clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "                    AUTOSCRIPT VPN V.2.3"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
+echo -e " ${LIGHT}- ${NC}Set New rc-local.service"
+arfvpn_bar 'set_rclocal'
+echo -e ""
+sleep 2
+clear
+/usr/bin/fixssh
+
+#########################################################
 update_script () {
 # Download file/s script
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
@@ -350,6 +368,11 @@ sed -i -e 's/\r$//' /usr/bin/porttrojan
 sed -i -e 's/\r$//' /usr/bin/portvlm
 sed -i -e 's/\r$//' /usr/bin/portwg
 }
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing VPN Script"
 arfvpn_bar 'update_script'
 echo -e ""
@@ -396,24 +419,6 @@ echo -e ""
 sleep 2
 
 #########################################################
-# Set rc.local restarting service
-set_rclocal () {
-cd
-apt update
-}
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-echo -e " ${LIGHT}- ${NC}Set New rc-local.service"
-arfvpn_bar 'set_rclocal'
-echo -e ""
-sleep 2
-clear
-/usr/bin/fixssh
-
-#########################################################
 finishing () {
 # Finishing
 cat> /root/.profile << END
@@ -435,11 +440,6 @@ echo "unset HISTFILE" >> /etc/profile
 echo "1.2" > /home/ver
 rm -f /root/*.sh
 }
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
 echo -e " ${LIGHT}- ${NC}Finishing Installer"
 arfvpn_bar 'finishing'
 echo -e ""
@@ -500,7 +500,7 @@ secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo ""  | tee -a /etc/arfvpn/log-install.txt
 
 echo -e ""
-echo -e "  ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
+echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
