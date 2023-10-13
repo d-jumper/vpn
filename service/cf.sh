@@ -59,10 +59,52 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
-
 #########################################################
 source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
+
+#########################################################
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${LIGHT}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
 arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 ipvps="/var/lib/arfvpn"
 SUB=$(</dev/urandom tr -dc a-z0-9 | head -c4)
 DOMAIN=d-jumper.me
@@ -104,8 +146,8 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 
 #WILD_DOMAIN="*.$SUB"
 #set -euo pipefail
-#echo ""
-#echo "Updating DNS for ${WILD_DOMAIN}..."
+#echo -e ""
+#echo -e "Updating DNS for ${WILD_DOMAIN}..."
 #ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
 #     -H "X-Auth-Email: ${CF_ID}" \
 #     -H "X-Auth-Key: ${CF_KEY}" \
@@ -129,13 +171,13 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 #     -H "X-Auth-Key: ${CF_KEY}" \
 #     -H "Content-Type: application/json" \
 #     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-echo -e " ${INFO} Generate SUB-DOMAIN via Cloudflare ..."
+echo -e " ${INFO} Generate Random SUB-DOMAIN ..."
 echo -e ""
 sleep 5
 
 echo "Your SUB-DOMAIN has been created : ${SUB_DOMAIN}"
 sleep 5
-echo "${SUB_DOMAIN}" > ${arfvpn}/domain
-echo "${SUB_DOMAIN}" > ${arfvpn}/scdomain
-echo "IP=${SUB_DOMAIN}" > ${ipvps}/ipvps.conf
+echo -e "${SUB_DOMAIN}" > ${arfvpn}/domain
+echo -e "${SUB_DOMAIN}" > ${arfvpn}/scdomain
+echo -e "IP=${SUB_DOMAIN}" > ${ipvps}/ipvps.conf
 clear

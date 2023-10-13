@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -89,11 +103,11 @@ done
 echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
 tput cnorm
 }
+clear
 
 #########################################################
-clear
 cat /etc/arfvpn/log-install.txt
-echo ""
+echo -e ""
 restart_service () {
 sleep 15
 systemctl stop ws-tls >/dev/null 2>&1
@@ -138,7 +152,7 @@ arfvpn_bar 'restart_service'
 echo ""
 echo -e "${OK} All Service/s Successfully Restarted ${CEKLIST}"
 echo ""
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${YELLOW}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${ORANGE}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
 running

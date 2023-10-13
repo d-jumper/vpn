@@ -59,6 +59,18 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,6 +103,10 @@ tput cnorm
 }
 
 #########################################################
+arfvpn="/etc/arfvpn"
+github=$(cat $arfvpn/github)
+
+#########################################################
 clear
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
@@ -116,6 +132,7 @@ echo -e "${NC}"
 
 case $noo in
 1)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "    ${STABILO}TOTAL BANDWITH SERVER TERSISA${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -126,9 +143,15 @@ vnstat
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 2)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "  ${STABILO}PENGGUNAAN BANDWITH SETIAP 5 MENIT${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -139,9 +162,15 @@ vnstat -5
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 3)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "    ${STABILO}PENGGUNAAN BANDWITH SETIAP JAM${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -152,9 +181,15 @@ vnstat -h
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 4)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "   ${STABILO}PENGGUNAAN BANDWITH SETIAP HARI${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -165,9 +200,15 @@ vnstat -d
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 5)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "   ${STABILO}PENGGUNAAN BANDWITH SETIAP BULAN${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -178,9 +219,15 @@ vnstat -m
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 6)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "   ${STABILO}PENGGUNAAN BANDWITH SETIAP TAHUN${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -191,9 +238,15 @@ vnstat -y
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 7)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "    ${STABILO}PENGGUNAAN BANDWITH TERTINGGI${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -204,9 +257,15 @@ vnstat -t
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 8)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e " ${STABILO}GRAFIK BANDWITH TERPAKAI SETIAP JAM${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -217,9 +276,15 @@ vnstat -hg
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 9)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "  ${STABILO}LIVE PENGGUNAAN BANDWITH SAAT INI${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -231,9 +296,15 @@ vnstat -l
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 10)
+clear
 echo -e "${CYAN}======================================${NC}"
 echo -e "   ${STABILO}LIVE TRAFIK PENGGUNAAN BANDWITH${NC}"
 echo -e "${CYAN}======================================${NC}"
@@ -244,19 +315,23 @@ vnstat -tr
 echo -e ""
 echo -e "${CYAN}======================================${NC}"
 echo -e ""
+echo -e ""
+echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+cek-bandwith
 ;;
 
 x)
-sleep 1
+clear
+history -c
 menu
 ;;
 
 *)
-sleep 1
-echo -e "${RED}Nomor Yang Anda Masukkan Salah!${NC}"
+clear
+echo -e " ${EROR}${RED} Command not found! ${NC}"
+sleep 3
+cek-bandwith
 ;;
 esac
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
-clear
-menu

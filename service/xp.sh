@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -92,8 +106,12 @@ tput cnorm
 
 #########################################################
 arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 xray="/etc/xray"
 trgo="/etc/arfvpn/trojan-go"
+rm ${arfvpn}/log-cron.log
+touch ${arfvpn}/log-cron.log
+echo -e "Start"  | tee -a ${arfvpn}/log-cron.log
 
 #########################################################
 
@@ -129,7 +147,7 @@ echo -e "${NC}${CYAN}Username $username that are expired at $tgl $bulantahun rem
 userdel $username
 fi
 done
-echo "${OK} Auto Delete User Expired SSH & OpenVPN Successfully ! ${CEKLIS}" > /etc/arfvpn/cron-log.log
+echo -e "${SUCCESS} Auto Delete User Expired SSH & OpenVPN Successfully ! ${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
 
 #----- Auto Remove Vmess
 data=( `cat ${xray}/config.json | grep '^#vm#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -145,7 +163,7 @@ sed -i "/^#vm# ${user} ${exp}/,/^},{/d" ${xray}/config.json
 rm -f ${xray}/${user}-tls.json ${xray}/${user}-none.json
 fi
 done
-echo "${OK} Auto Delete User Expired Xray Vmess-WS Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
+echo -e "${SUCCESS} Auto Delete User Expired Xray Vmess-WS Successfully ! ${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
 
 #----- Auto Remove Vless
 data=( `cat ${xray}/config.json | grep '^#vl#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -160,7 +178,7 @@ if [[ "${exp2}" -le "0" ]]; then
 sed -i "/^#vl# ${user} ${exp}/,/^},{/d" ${xray}/config.json
 fi
 done
-echo "${OK} Auto Delete User Expired Xray Vless-WS Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
+echo -e "${SUCCESS} Auto Delete User Expired Xray Vless-WS Successfully ! ${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
 
 #----- Auto Remove Trojan
 data=( `cat ${xray}/config.json | grep '^#tr#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -175,7 +193,7 @@ if [[ "${exp2}" -le "0" ]]; then
 sed -i "/^#tr# ${user} ${exp}/,/^},{/d" ${xray}/config.json
 fi
 done
-echo "${OK} Auto Delete User Expired Xray Trojan-WS Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
+echo -e "${SUCCESS} Auto Delete User Expired Xray Trojan-WS Successfully ! ${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
 
 #----- Auto Remove Trojan-GO
 data=( `cat ${trgo}/akun.conf | grep '^#trgo#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -191,7 +209,7 @@ sed -i "/^#trgo# ${user} ${exp}/d" ${trgo}/akun.conf
 sed -i '/^,"'"${user}"'"$/d' ${trgo}/config.json
 fi
 done
-echo "${OK} Auto Delete User Expired Trojan-Go Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
+echo -e "${SUCCESS} Auto Delete User Expired Trojan-Go Successfully ! ${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
 
 #----- Auto Remove Shadowsocks
 data=( `cat /etc/shadowsocks-libev/akun.conf | grep '^#ss#' | cut -d ' ' -f 2 | sort | uniq`);
@@ -211,4 +229,4 @@ rm -f "/etc/shadowsocks-libev/${user}-tls.json"
 rm -f "/etc/shadowsocks-libev/${user}-http.json"
 fi
 done
-echo "${OK} Auto Delete User Expired Shadowsocks Successfully ! ${CEKLIS}" >> /etc/arfvpn/cron-log.log
+echo -e "${SUCCESS} Auto Delete User Expired Shadowsocks Successfully ! ${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log

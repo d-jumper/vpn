@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,7 +105,11 @@ tput cnorm
 }
 
 #########################################################
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
+arfvpn="/etc/arfvpn"
+rm -rvf ${arfvpn}/github
+touch ${arfvpn}/github
+echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
+github=$(cat ${arfvpn}/github)
 clear
 
 #########################################################
@@ -100,8 +118,8 @@ echo -e ""
 sleep 2
 
 remove_script () {
-rm -rvf /etc/arfvpn/Version
 rm -rvf /usr/bin/cek-bandwidth
+rm -rvf /etc/arfvpn/cron-vpn
 rm -rvf /usr/bin/cert
 rm -rvf /usr/bin/cf
 rm -rvf /usr/bin/cfnhost
@@ -115,6 +133,7 @@ rm -rvf /usr/bin/restart
 rm -rvf /usr/bin/running
 rm -rvf /usr/bin/update
 rm -rvf /usr/bin/update-xray
+rm -rvf /etc/arfvpn/Version
 rm -rvf /usr/bin/wbmn
 rm -rvf /usr/bin/xp
 
@@ -136,7 +155,6 @@ rm -rvf /usr/bin/renewssh
 rm -rvf /usr/bin/tendang
 rm -rvf /usr/bin/trialssh
 rm -rvf /usr/bin/expssh
-rm -rvf /usr/bin/about
 #rm -rvf bbr.sh && ./bbr.sh
 rm -rvf /usr/bin/clearlog
 rm -rvf /etc/issue.net
@@ -186,8 +204,8 @@ sleep 2
 
 #########################################################
 update_script () {
-wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
+wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod /etc/arfvpn/cron-vpn
 wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
@@ -202,9 +220,11 @@ wget -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr
 wget -O /usr/bin/speedtest "https://${github}/service/speedtest_cli.py" && chmod +x /usr/bin/speedtest
 wget -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/bin/update
 wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
+wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
+sed -i -e 's/\r$//' /etc/arfvpn/cron-vpn
 sed -i -e 's/\r$//' /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cf
 sed -i -e 's/\r$//' /usr/bin/cfnhost
@@ -277,7 +297,6 @@ sed -i -e 's/\r$//' /usr/bin/tendang
 sed -i -e 's/\r$//' /usr/bin/trialssh
 sed -i -e 's/\r$//' /usr/bin/expssh
 
-wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
 wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
@@ -287,7 +306,6 @@ wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
 wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
-chmod +x /usr/bin/about
 chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
@@ -297,7 +315,6 @@ chmod +x /usr/bin/ram
 chmod +x /etc/set.sh
 #chmod +x /etc/squid/squid.conf
 chmod +x /usr/bin/swapkvm
-sed -i -e 's/\r$//' /usr/bin/about
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
 sed -i -e 's/\r$//' /usr/bin/clearlog
 sed -i -e 's/\r$//' /usr/bin/issue.net
@@ -390,7 +407,14 @@ echo -e ""
 sleep 2
 
 echo ""
-#read -p "Press [Enter] to return to the menu or CTRL+C to exit"
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${YELLOW}Restart-Service${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
+echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${ORANGE}Restart-Service${NC}${LIGHT} or ${NC}[ N/n ]${LIGHT} to ${NC}${STABILO}Back to Menu${NC}"
+read answer
+if [ "$answer" == "${answer#[Yy]}" ] ;then
+sleep 2
+clear
+menu
+else
+sleep 2
+clear
 restart
+fi

@@ -59,6 +59,18 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,18 +103,14 @@ tput cnorm
 }
 
 #########################################################
-source /etc/os-release
+arfvpn="/etc/arfvpn"
+github=$(cat $arfvpn/github)
 OS=$ID
 ver=$VERSION_ID
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
 
 #########################################################
-echo -e " ${INFO} Installing Requirements Tools VPN ..."
-echo -e ""
-sleep 2
-
-remove_unnecessary () {
-# Update, Upgrade dist & Remove unnecessary files
+set_ovpn () {
+cd
 apt update -y
 apt upgrade -y
 apt dist-upgrade -y
@@ -113,30 +121,6 @@ apt-get remove --purge unscd -y
 apt-get remove --purge samba* -y
 apt-get remove --purge bind9* -y
 apt-get remove --purge sendmail* -y
-}
-echo -e " ${LIGHT}- ${NC}Update - Upgrade Dist & Remove unnecessary files"
-arfvpn_bar 'remove_unnecessary'
-echo -e ""
-sleep 2
-
-install_xray () {
-# Install Requirements Tools XRAY
-apt install neofetch -y
-apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
-apt -y install vnstat
-apt -y install fail2ban
-apt -y install cron
-apt install bash-completion ntpdate -y
-apt -y install chrony
-}
-echo -e " ${LIGHT}- ${NC}Installing Requirements Tools XRAY"
-arfvpn_bar 'install_xray'
-echo -e ""
-sleep 2
-
-#OpenVPN
-set_ovpn () {
-cd
 wget https://${github}/openvpn/vpn.sh
 chmod +x vpn.sh
 }
@@ -152,6 +136,26 @@ sleep 2
 clear
 ./vpn.sh
 
+install_xray () {
+# Install Requirements Tools XRAY
+apt install neofetch -y
+apt install curl socat xz-utils wget apt-transport-https gnupg gnupg2 gnupg1 dnsutils lsb-release -y 
+apt -y install vnstat
+apt -y install fail2ban
+apt -y install cron
+apt install bash-completion ntpdate -y
+apt -y install chrony
+}
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e " Installing Requirements Tools VPN"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools XRAY"
+arfvpn_bar 'install_xray'
+echo -e ""
+sleep 2
+
 set_time () {
 # Set Time GMT +7 WIB
 ntpdate 0.id.pool.ntp.org
@@ -159,9 +163,6 @@ timedatectl set-ntp true
 timedatectl set-timezone Asia/Jakarta
 ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 }
-clear
-echo -e " ${INFO} Installing Requirements Tools VPN ..."
-echo -e ""
 echo -e " ${LIGHT}- ${NC}Set Time GMT +7 WIB"
 arfvpn_bar 'set_time'
 echo -e ""

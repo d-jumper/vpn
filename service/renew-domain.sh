@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,12 +105,10 @@ tput cnorm
 }
 
 #########################################################
-source /etc/os-release
-cd /root
 arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 nginx="/etc/nginx"
 arfvps="/home/arfvps/public_html"
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
 domain=$(cat ${arfvpn}/domain)
 DOMAIN2="s/domainxxx/${domain}/g";
 DOMAIN3="s/${domain}/domainxxx/g";
@@ -104,20 +116,28 @@ MYIP=$(cat $arfvpn/IP)
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$domain/g";
 MYISP=$(cat $arfvpn/ISP)
+cd /root/
+clear
 
 #########################################################
-clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "    UPDATE / RENEW DOMAIN SERVER"
+echo -e "   UPDATE / RENEW DOMAIN SERVER"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 date
-sleep 5
+echo -e ""
 
+set_host () {
 systemctl stop nginx
 systemctl stop squid
 cd
 sed -i $DOMAIN3 ${nginx}/sites-available/${domain}.conf
 sed -i $DOMAIN3 /etc/squid/squid.conf
+}
+echo -e " ${LIGHT}- ${NC}Renew Domain"
+arfvpn_bar 'set_host'
+echo -e ""
+sleep 2
+clear
 /usr/bin/hostvps
 
 renew_nginx () {
@@ -140,10 +160,15 @@ chmod +x /home/arfvps/
 chmod +x ${arfvps}/
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "   UPDATE / RENEW DOMAIN SERVER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Renew Server"
 arfvpn_bar 'renew_nginx'
 echo -e ""
 sleep 2
+clear
 /usr/bin/cert
 
 renew_squid () {
@@ -157,12 +182,22 @@ sed -i $DOMAIN2 /etc/squid/squid.conf
 systemctl start squid
 }
 clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "   UPDATE / RENEW DOMAIN SERVER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${LIGHT}- ${NC}Renew Squid"
 arfvpn_bar 'renew_squid'
 echo -e ""
 sleep 2
+clear
 /usr/bin/fixssh
 
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "   UPDATE / RENEW DOMAIN SERVER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
 echo -e " ${OK} Renew Domain Successfully !!! ${CEKLIST}"
 echo -e ""
 echo -e "     ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
