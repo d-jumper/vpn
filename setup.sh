@@ -116,6 +116,8 @@ logtrgo="/var/log/arfvpn/trojan-go"
 nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
 start=$(date +%s)
+touch ${arfvpn}/github
+echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
 github=$(cat /etc/arfvpn/github)
 clear
 
