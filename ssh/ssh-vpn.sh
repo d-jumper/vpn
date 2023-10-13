@@ -118,6 +118,7 @@ MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$DOMAIN/g";
 clear
 
+#########################################################
 set_pass () {
 cd
 # simple password minimal
@@ -133,6 +134,7 @@ arfvpn_bar 'set_pass'
 echo -e ""
 sleep 2
 
+#########################################################
 set_rclocal () {
 # Edit file /etc/systemd/system/rc-local.service
 cat > /etc/systemd/system/rc-local.service <<-END
@@ -169,6 +171,7 @@ arfvpn_bar 'set_rclocal'
 echo -e ""
 sleep 2
 
+#########################################################
 # install badvpn
 set_badvpn () {
 cd
@@ -204,6 +207,7 @@ arfvpn_bar 'set_badvpn'
 echo -e ""
 sleep 2
 
+#########################################################
 # setting port ssh
 set_port () {
 sed -i 's/Port 22/Port 22/g' /etc/ssh/sshd_config
@@ -221,6 +225,7 @@ arfvpn_bar 'set_port'
 echo -e ""
 sleep 2
 
+#########################################################
 # install squid
 set_squid () {
 cd
@@ -234,6 +239,7 @@ arfvpn_bar 'set_squid'
 echo -e ""
 sleep 2
 
+#########################################################
 # Install SSLH
 set_sslh () {
 apt -y install sslh
@@ -259,6 +265,7 @@ arfvpn_bar 'set_sslh'
 echo -e ""
 sleep 2
 
+#########################################################
 # setting vnstat
 set_vnstat () {
 #apt -y install vnstat
@@ -282,6 +289,7 @@ arfvpn_bar 'set_vnstat'
 echo -e ""
 sleep 2
 
+#########################################################
 # install stunnel 5 
 set_stunnel5 () {
 cd /root/
@@ -365,6 +373,7 @@ arfvpn_bar 'set_stunnel5'
 echo -e ""
 sleep 2
 
+#########################################################
 # Instal DDOS Flate
 set_ddos () {
 rm -rvf /usr/local/ddos
@@ -383,16 +392,12 @@ cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 # Creating cron to run script every minute.....(Default setting)
 if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
 }
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSH"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Ddos"
 arfvpn_bar 'set_ddos'
 echo -e ""
 sleep 2
 
+#########################################################
 # banner /etc/issue.net
 set_banner () {
 echo "Banner /etc/issue.net" >>/etc/ssh/sshd_config
@@ -405,24 +410,7 @@ arfvpn_bar 'set_banner'
 echo -e ""
 sleep 2
 
-# Install BBR
-set_bbr () {
-cd
-wget https://${github}/ssh/archive/bbr.sh
-chmod +x bbr.sh
-}
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING BBR"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-echo -e " ${LIGHT}- ${NC}Set Bbr"
-arfvpn_bar 'set_bbr'
-echo -e ""
-sleep 2
-clear
-./bbr.sh
-
+#########################################################
 # blockir torrent
 set_torrent () {
 iptables -A FORWARD -m string --string "get_peers" --algo bm -j DROP
@@ -441,16 +429,12 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save
 netfilter-persistent reload
 }
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSH"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
 echo -e " ${LIGHT}- ${NC}Set Block Torrent"
 arfvpn_bar 'set_torrent'
 echo -e ""
 sleep 2
 
+#########################################################
 # download script
 set_script () {
 wget -O /usr/bin/addssh "https://${github}/ssh/addssh.sh"
@@ -533,6 +517,7 @@ arfvpn_bar 'set_script'
 echo -e ""
 sleep 2
 
+#########################################################
 # finishing
 set_finishing () {
 cd
@@ -558,3 +543,25 @@ echo -e ""
 echo -e " ${OK} Installing SSH & OVPN Successfully !!! ${CEKLIST}"
 echo -e ""
 sleep 2
+
+#########################################################
+# Install BBR
+set_bbr () {
+cd
+wget https://${github}/ssh/archive/bbr.sh
+chmod +x bbr.sh
+}
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "          INSTALLING BBR"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Set Bbr"
+arfvpn_bar 'set_bbr'
+echo -e ""
+sleep 2
+clear
+./bbr.sh
+clear
+
+#########################################################
