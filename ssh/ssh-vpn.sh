@@ -368,14 +368,16 @@ sleep 2
 # Instal DDOS Flate
 set_ddos () {
 rm -rvf /usr/local/ddos
+rm -rvf usr/local/sbin/ddos
 mkdir -p /usr/local/ddos/
-wget -q -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
-echo -n '.'
-wget -q -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
-echo -n '.'
-wget -q -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
-echo -n '.'
-wget -q -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
+wget -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
+wget -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
+wget -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
+wget -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
+#cd /usr/local/ddos/
+#wget http://${github}/ddos/ddos.zip
+#unzip -o ddos.zip
+#rm -rvf /usr/local/ddos/ddos.zip
 chmod 0755 /usr/local/ddos/ddos.sh
 cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 # Creating cron to run script every minute.....(Default setting)
@@ -485,7 +487,6 @@ sed -i -e 's/\r$//' /usr/bin/tendang
 sed -i -e 's/\r$//' /usr/bin/trialssh
 sed -i -e 's/\r$//' /usr/bin/expssh
 
-wget -O /usr/bin/about "https://${github}/ssh/archive/about.sh"
 #wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
@@ -495,7 +496,6 @@ wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
 wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
-chmod +x /usr/bin/about
 #chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
@@ -505,7 +505,6 @@ chmod +x /usr/bin/ram
 chmod +x /etc/set.sh
 #chmod +x /etc/squid/squid.conf
 chmod +x /usr/bin/swapkvm
-sed -i -e 's/\r$//' /usr/bin/about
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
 sed -i -e 's/\r$//' /usr/bin/clearlog
 #sed -i -e 's/\r$//' /usr/bin/issue.net
