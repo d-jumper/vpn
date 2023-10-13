@@ -119,7 +119,6 @@ rm -rvf ${arfvpn}/IP
 rm -rvf ${arfvpn}/ISP
 rm -rvf ${arfvpn}/domain
 rm -rvf ${arfvpn}/scdomain
-rm -rvf ${arfvpn}/github
 rm -rvf ${ipvps}/ipvps.conf
 rm -rvf ${ipvps}/cfndomain
 
@@ -128,7 +127,6 @@ touch ${arfvpn}/IP
 touch ${arfvpn}/ISP
 touch ${arfvpn}/domain
 touch ${arfvpn}/scdomain
-touch ${arfvpn}/github
 mkdir -p ${ipvps}
 touch ${ipvps}/ipvps.conf
 touch ${ipvps}/cfndomain
@@ -140,7 +138,6 @@ mkdir -p ${nginx}
 #########################################################
 curl -s ipinfo.io/org/ > ${arfvpn}/ISP
 curl -s https://ipinfo.io/ip/ > ${arfvpn}/IP
-echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
 }
 clear
 echo -e ""
