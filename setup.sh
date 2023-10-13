@@ -59,6 +59,21 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
+secs_to_human() {
+    echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
+}
 
 #########################################################
 arfvpn_bar () {
@@ -91,7 +106,6 @@ tput cnorm
 }
 
 #########################################################
-source /etc/os-release
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 logxray="/var/log/xray"
@@ -101,30 +115,16 @@ nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
 success="${GREEN}[SUCCESS]${NC}"
 start=$(date +%s)
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
+github=$(cat /etc/arfvpn/github)
+clear
 
 #########################################################
-cd /root
-# // Root Checking
-if [ "${EUID}" -ne 0 ]; then
-		echo -e "${EROR} Please Run This Script As Root User !"
-		exit 1
-fi
-if [ "$(systemd-detect-virt)" == "openvz" ]; then
-		echo "OpenVZ is not supported"
-		exit 1
-fi
-secs_to_human() {
-    echo "Installation time : $(( ${1} / 3600 )) hours $(( (${1} / 60) % 60 )) minute's $(( ${1} % 60 )) seconds"
-}
-
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 date
-sleep 3
 #########################################################
 # Installing Server, Domain & Cert SSL
 set_host () {
@@ -152,7 +152,7 @@ sed -i -e 's/\r$//' /root/apete.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
@@ -171,7 +171,7 @@ chmod +x ins-xray.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Xray - Trojan-Go - Shadowsocks-Libev"
@@ -190,7 +190,7 @@ chmod +x ssh-vpn.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing OpenSSH & OpenVPN"
@@ -277,7 +277,7 @@ systemctl enable autosett
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Auto-set.service"
@@ -370,7 +370,7 @@ sed -i -e 's/\r$//' /usr/bin/portwg
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.2.3"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing VPN Script"
@@ -394,18 +394,17 @@ sleep 2
 set_cron () {
 cat > /etc/arfvpn/cron-vpn << END
 #!/bin/bash
+#########################################################
 # Set Cron Reboot VPS
 # Set Auto Delete User Expired
 # Every At 00:00 Mid-Night
+#########################################################
 /usr/bin/clearlog
 sleep 5
 /usr/bin/xp
 sleep 5
 /sbin/reboot
-echo -e "${OK} Auto Delete User Expired Successfully${CEKLIS}" >> /etc/arfvpn/log-cron.log
-echo -e "${OK} Auto Reboot Server Successfully${CEKLIS}" >> /etc/arfvpn/log-cron.log
-date >> /etc/arfvpn/log-cron.log
-exit
+echo -e ""
 END
 chmod +x /etc/arfvpn/cron-vpn
 if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /etc/arfvpn/cron-vpn") | crontab;fi
@@ -455,7 +454,7 @@ clear
 #########################################################
 # Log-installer
 echo -e "" | tee -a /etc/arfvpn/log-install.txt
-echo -e " ${OK} Installation VPN Successfully !!! ${CEKLIST}" | tee -a /etc/arfvpn/log-install.txt
+echo -e " ${OK} ${LIGHT}Installation VPN Successfully !!!${NC} ${CEKLIST}" | tee -a /etc/arfvpn/log-install.txt
 echo -e "" | tee -a /etc/arfvpn/log-install.txt
 echo -e "${BLUE}┌─────────────────────${NC} ⇱ ${STABILO}Script Mod By ™D-JumPer™${NC} ⇲ ${BLUE}─────────────────────┐${NC}" | tee -a /etc/arfvpn/log-install.txt
 echo -e "" | tee -a /etc/arfvpn/log-install.txt
@@ -500,7 +499,7 @@ secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo -e ""  | tee -a /etc/arfvpn/log-install.txt
 
 echo -e ""
-echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
+echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
 exit 0
