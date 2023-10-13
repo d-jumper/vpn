@@ -447,7 +447,6 @@ wget -O /usr/bin/menu-ssh "https://${github}/ssh/menu-ssh.sh"
 wget -O /usr/bin/renewssh "https://${github}/ssh/renewssh.sh"
 wget -O /usr/bin/tendang "https://${github}/ssh/tendang.sh"
 wget -O /usr/bin/trialssh "https://${github}/ssh/trialssh.sh"
-wget -O /usr/bin/xpssh "https://${github}/ssh/xpssh.sh"
 chmod +x /usr/bin/addssh
 chmod +x /usr/bin/autokill
 chmod +x /usr/bin/ceklim
@@ -458,7 +457,6 @@ chmod +x /usr/bin/menu-ssh
 chmod +x /usr/bin/renewssh
 chmod +x /usr/bin/tendang
 chmod +x /usr/bin/trialssh
-chmod +x /usr/bin/expssh
 sed -i -e 's/\r$//' /usr/bin/addssh
 sed -i -e 's/\r$//' /usr/bin/autokill
 sed -i -e 's/\r$//' /usr/bin/ceklim
@@ -469,7 +467,6 @@ sed -i -e 's/\r$//' /usr/bin/menu-ssh
 sed -i -e 's/\r$//' /usr/bin/renewssh
 sed -i -e 's/\r$//' /usr/bin/tendang
 sed -i -e 's/\r$//' /usr/bin/trialssh
-sed -i -e 's/\r$//' /usr/bin/expssh
 
 #wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
