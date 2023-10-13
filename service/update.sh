@@ -155,6 +155,7 @@ rm -rvf /usr/bin/expssh
 #rm -rvf bbr.sh && ./bbr.sh
 rm -rvf /usr/bin/clearlog
 rm -rvf /etc/issue.net
+rm -rvf /home/arfvps/public_html/index.html
 #rm -rvf /etc/pam.d/common-password
 rm -rvf /usr/bin/ram
 rm -rvf /etc/set.sh
@@ -298,6 +299,7 @@ wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
 wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
+wget -O /home/arfvps/public_html/index.html "https://${github}/nginx/index.html"
 #wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
 wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
@@ -307,6 +309,11 @@ chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
 chmod +x /etc/issue.net
+chown -R www-data:www-data /home/arfvps/public_html
+chmod -R g+rw /home/arfvps/public_html
+chmod +x /home/
+chmod +x /home/arfvps/  
+chmod +x /home/arfvps/public_html/
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
 chmod +x /etc/set.sh
