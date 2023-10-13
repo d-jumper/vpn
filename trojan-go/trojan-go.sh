@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -92,22 +106,20 @@ tput cnorm
 
 #########################################################
 arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
 # set random uuid
 uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
-sleep 1
+latest_version="$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases" | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
+trojango_link="https://github.com/p4gefau1t/trojan-go/releases/download/v${latest_version}/trojan-go-linux-amd64.zip"
+clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "       INSTALLING TROJAN-GO"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-# Install Trojan Go
 echo -e ""
-sleep 1
-latest_version="$(curl -s "https://api.github.com/repos/p4gefau1t/trojan-go/releases" | grep tag_name | sed -E 's/.*"v(.*)".*/\1/' | head -n 1)"
-trojango_link="https://github.com/p4gefau1t/trojan-go/releases/download/v${latest_version}/trojan-go-linux-amd64.zip"
 
 dirtrgo () {
 mkdir -p "/usr/bin/trojan-go"
