@@ -120,13 +120,6 @@ github=$(cat /etc/arfvpn/github)
 clear
 
 #########################################################
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.3.0"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-date
-#########################################################
 # Installing Server, Domain & Cert SSL
 set_host () {
 cd
@@ -135,6 +128,11 @@ wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/hostvps
 }
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    AUTOSCRIPT VPN V.3.0"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+date
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Installing Server, Domain & Cert SSL"
 arfvpn_bar 'set_host'
@@ -258,42 +256,12 @@ clear
 /root/set-br.sh
 
 #########################################################
-# Set Auto-set.service
-set_set (){
-cat <<EOF> /etc/systemd/system/autosett.service
-[Unit]
-Description=autosetting
-Documentation=https://t.me/arfprsty
-
-[Service]
-Type=oneshot
-ExecStart=/bin/bash /etc/set.sh
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
-EOF
-systemctl daemon-reload
-systemctl enable autosett
-}
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "                    AUTOSCRIPT VPN V.3.0"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-echo -e " ${LIGHT}- ${NC}Installing Auto-set.service"
-arfvpn_bar 'set_set'
-echo -e ""
-sleep 2
-cd
-clear
-/etc/set.sh
-
-#########################################################
 # Set rc.local restarting service
 set_rclocal () {
 cd
-apt update
+wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh"
+chmod +x /usr/bin/fixssh
+sed -i -e 's/\r$//' /usr/bin/fixssh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -311,8 +279,8 @@ clear
 update_script () {
 # Download file/s script
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
-wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
+wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod +x /etc/arfvpn/cron-vpn
 #wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 #wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
@@ -320,17 +288,19 @@ wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr
 wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
 wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
 wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
-wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
+#wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
 wget -O /usr/bin/renew-domain "https://${github}/service/renew-domain.sh" && chmod +x /usr/bin/renew-domain
 wget -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr/bin/restart
 wget -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr/bin/running
 wget -O /usr/bin/speedtest "https://${github}/service/speedtest_cli.py" && chmod +x /usr/bin/speedtest
 wget -O /usr/bin/update "https://${github}/service/update.sh" && chmod +x /usr/bin/update
 #wget -O /usr/bin/update-xray "https://${github}/service/update-xray.sh" && chmod +x /usr/bin/update-xray
+wget -O /etc/arfvpn/Version "https://${github}/service/Version"
 wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin/wbmn
 wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
 #sed -i -e 's/\r$//' /usr/bin/cek-apete
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
+sed -i -e 's/\r$//' /etc/arfvpn/cron-vpn
 #sed -i -e 's/\r$//' /usr/bin/cert
 #sed -i -e 's/\r$//' /usr/bin/cf
 sed -i -e 's/\r$//' /usr/bin/cfnhost
@@ -338,7 +308,7 @@ sed -i -e 's/\r$//' /usr/bin/cfnhost
 sed -i -e 's/\r$//' /usr/bin/menu
 sed -i -e 's/\r$//' /usr/bin/menu-backup
 sed -i -e 's/\r$//' /usr/bin/menu-setting
-sed -i -e 's/\r$//' /usr/bin/fixssh
+#sed -i -e 's/\r$//' /usr/bin/fixssh
 sed -i -e 's/\r$//' /usr/bin/renew-domain
 sed -i -e 's/\r$//' /usr/bin/restart
 sed -i -e 's/\r$//' /usr/bin/running
@@ -374,7 +344,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "                    AUTOSCRIPT VPN V.3.0"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-echo -e " ${LIGHT}- ${NC}Installing VPN Script"
+echo -e " ${LIGHT}- ${NC}Installing Script VPN"
 arfvpn_bar 'update_script'
 echo -e ""
 sleep 2
@@ -392,22 +362,103 @@ echo -e ""
 sleep 2
 
 #########################################################
-set_cron () {
-cat > /etc/arfvpn/cron-vpn << END
-#!/bin/bash
-#########################################################
-# Set Cron Reboot VPS
-# Set Auto Delete User Expired
-# Every At 00:00 Mid-Night
-#########################################################
-/usr/bin/clearlog
-sleep 5
-/usr/bin/xp
-sleep 5
-/sbin/reboot
+set_restart (){
+sleep 2
+systemctl daemon-reload
+systemctl restart ws-tls
+systemctl restart ws-nontls
+systemctl restart ws-ovpn
+systemctl restart ssh-ohp
+systemctl restart dropbear-ohp
+systemctl restart openvpn-ohp
+/etc/init.d/ssh restart
+/etc/init.d/dropbear restart
+/etc/init.d/sslh restart
+/etc/init.d/stunnel5 restart
+/etc/init.d/openvpn restart
+/etc/init.d/fail2ban restart
+/etc/init.d/cron restart
+/etc/init.d/nginx restart
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
+}
+echo -e " ${LIGHT}- ${NC}Restart-Service"
+arfvpn_bar 'set_restart'
 echo -e ""
-END
-chmod +x /etc/arfvpn/cron-vpn
+sleep 2
+
+#########################################################
+# Set Auto-set.service
+auto_set_service (){
+cat <<EOF> /etc/systemd/system/autosett.service
+[Unit]
+Description=autosetting
+Documentation=https://t.me/arfprsty
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /etc/set.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable autosett
+}
+echo -e " ${LIGHT}- ${NC}Installing Auto-set.service"
+arfvpn_bar 'auto_set_service'
+echo -e ""
+sleep 2
+
+#########################################################
+fix_restart (){
+sleep 15
+systemctl stop ws-tls 
+pkill python
+systemctl stop sslh
+systemctl daemon-reload
+systemctl disable ws-tls
+systemctl disable sslh
+systemctl disable squid
+systemctl daemon-reload
+systemctl enable sslh
+systemctl enable squid
+systemctl enable ws-tls
+systemctl start sslh 
+systemctl start squid
+/etc/init.d/sslh start 
+/etc/init.d/sslh restart 
+systemctl start ws-tls
+systemctl restart ws-tls
+sleep 15
+systemctl daemon-reload
+systemctl restart ws-tls
+systemctl restart ws-nontls
+systemctl restart ws-ovpn
+systemctl restart ssh-ohp
+systemctl restart dropbear-ohp
+systemctl restart openvpn-ohp
+/etc/init.d/ssh restart
+/etc/init.d/dropbear restart
+/etc/init.d/sslh restart
+/etc/init.d/stunnel5 restart
+/etc/init.d/openvpn restart
+/etc/init.d/fail2ban restart
+/etc/init.d/cron restart
+/etc/init.d/nginx restart
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 1000
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 1000
+screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 1000
+}
+echo -e " ${LIGHT}- ${NC}Fix Restart-Service"
+arfvpn_bar 'fix_restart'
+echo -e ""
+sleep 2
+
+#########################################################
+set_cron () {
 if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /etc/arfvpn/cron-vpn") | crontab;fi
 /etc/init.d/cron start
 /etc/init.d/cron restart
