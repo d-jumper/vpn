@@ -59,6 +59,18 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,7 +103,8 @@ tput cnorm
 }
 
 #########################################################
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
+arfvpn="/etc/arfvpn"
+github=$(cat $arfvpn/github)
 clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
