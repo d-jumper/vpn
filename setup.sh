@@ -116,15 +116,16 @@ logtrgo="/var/log/arfvpn/trojan-go"
 nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
 start=$(date +%s)
-touch ${arfvpn}/github
-echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
-github=$(cat /etc/arfvpn/github)
+github=$(cat ${arfvpn}/github)
 clear
 
 #########################################################
 # Installing Server, Domain & Cert SSL
 set_host () {
 cd
+mkdir -p ${arfvpn}/
+touch ${arfvpn}/github
+echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
