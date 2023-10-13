@@ -59,6 +59,18 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -92,8 +104,8 @@ tput cnorm
 
 #########################################################
 arfvpn="/etc/arfvpn"
+github=$(cat $arfvpn/github)
 domain=$(cat $arfvpn/domain)
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
 # ==========================================
@@ -119,7 +131,7 @@ sleep 3
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSL CERT"
+echo -e "       INSTALLING SSL CERT"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 echo -e " ${LIGHT}- ${NC}Make a SSL CERT"
