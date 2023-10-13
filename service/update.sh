@@ -106,9 +106,6 @@ tput cnorm
 
 #########################################################
 arfvpn="/etc/arfvpn"
-rm -rvf ${arfvpn}/github
-touch ${arfvpn}/github
-echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
 github=$(cat ${arfvpn}/github)
 clear
 
