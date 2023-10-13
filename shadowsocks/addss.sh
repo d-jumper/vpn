@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,14 +105,8 @@ tput cnorm
 }
 
 #########################################################
-# // Root Checking
-if [ "${EUID}" -ne 0 ]; then
-		echo -e "${EROR} Please Run This Script As Root User !"
-		exit 1
-fi
-clear
-# ==========================================
 arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 IP=$(cat ${arfvpn}/IP)
 ISP=$(cat ${arfvpn}/ISP)
 DOMAIN=$(cat ${arfvpn}/domain)
@@ -199,7 +207,7 @@ systemctl start shadowsocks-libev-server@${user}-http.service
 }
 
 clear
-echo -e " Add Account Shadowsocks-Libev"
+echo -e " ${LIGHT}- ${NC}Add Account Shadowsocks-Libev"
 arfvpn_bar 'add_ss'
 tmp1=$(echo -n "${method}:${user}@${IP}:${tls}" | base64 -w0)
 tmp2=$(echo -n "${method}:${user}@${IP}:${http}" | base64 -w0)
