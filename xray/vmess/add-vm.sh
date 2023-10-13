@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,13 +105,8 @@ tput cnorm
 }
 
 #########################################################
-# // Root Checking
-if [ "${EUID}" -ne 0 ]; then
-		echo -e "${EROR} Please Run This Script As Root User !"
-		exit 1
-fi
-
 arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 xray="/etc/xray"
 uuid=$(cat /proc/sys/kernel/random/uuid)
 domain=$(cat ${arfvpn}/domain)
@@ -160,6 +169,11 @@ sed -i '/#vmessgrpc$/a\#vm# '"${user} ${exp}"'\
 },{"id": "'""${uuid}""'","alterId": '"0"',"email": "'""${user}""'"' ${xray}/config.json
 sed -i '/#vmesschat$/a\#vm# '"${user} ${exp}"'\
 },{"id": "'""${uuid}""'","alterId": '"0"',"email": "'""${user}""'"' ${xray}/config.json
+}
+echo -e " ${LIGHT}- ${NC}Add User Xray Vmess Websocket"
+arfvpn_bar 'addvm'
+sleep 2
+clear
 vmess1=`cat<<EOF
       {
       "v": "2",
@@ -250,9 +264,6 @@ kuota=`cat<<EOF
       "tls": "tls"
 }
 EOF`
-}
-echo -e " ${LIGHT}- ${NC}Add User Xray Vmess Websocket"
-arfvpn_bar 'addvm'
 vmess_base641=$( base64 -w 0 <<< ${vmess_json1})
 vmess_base642=$( base64 -w 0 <<< ${vmess_json2})
 vmess_base643=$( base64 -w 0 <<< ${vmess_json3})
