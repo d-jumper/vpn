@@ -59,6 +59,8 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
 #########################################################
 source /etc/os-release
 cd /root
@@ -113,7 +115,6 @@ trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
 nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
-success="${GREEN}[SUCCESS]${NC}"
 start=$(date +%s)
 github=$(cat /etc/arfvpn/github)
 clear
