@@ -59,13 +59,54 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
 
 #########################################################
+source /etc/os-release
+cd /root
 # // Root Checking
 if [ "${EUID}" -ne 0 ]; then
 		echo -e "${EROR} Please Run This Script As Root User !"
 		exit 1
 fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
+
+#########################################################
+arfvpn_bar () {
+comando[0]="$1"
+comando[1]="$2"
+ (
+[[ -e $HOME/fim ]] && rm $HOME/fim
+${comando[0]} -y > /dev/null 2>&1
+${comando[1]} -y > /dev/null 2>&1
+touch $HOME/fim
+ ) > /dev/null 2>&1 &
+ tput civis
+# Start
+echo -ne "     ${ORANGE}Processing ${NC}${LIGHT}- [${NC}"
+while true; do
+   for((i=0; i<18; i++)); do
+   echo -ne "${TYBLUE}>${NC}"
+   sleep 0.1s
+   done
+   [[ -e $HOME/fim ]] && rm $HOME/fim && break
+   echo -e "${LIGHT}]${NC}"
+   sleep 1s
+   tput cuu1
+   tput dl1
+   # Finish
+   echo -ne "           ${ORANGE}Done ${NC}${LIGHT}- [${NC}"
+done
+echo -e "${LIGHT}] -${NC}${LIGHT} OK !${NC}"
+tput cnorm
+}
+
+#########################################################
+arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 clear
 
 echo -e ""
@@ -117,7 +158,7 @@ menu
 ;;
 *)
 clear
-echo -e " ${EROR}${RED}Command not found! ${NC}"
+echo -e " ${EROR}${RED} Command not found! ${NC}"
 sleep 3
 menu-ssh
 ;;

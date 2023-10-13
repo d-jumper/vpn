@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,7 +105,8 @@ tput cnorm
 }
 
 #########################################################
-source /etc/os-release
+arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 export DEBIAN_FRONTEND=noninteractive
 ver=$VERSION_ID
 NET=$(ip -o $ANU -4 route show to default | awk '{print $5}');
@@ -101,7 +116,6 @@ MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
 MYIP2="s/xxxxxxxxx/$MYIP/g";
 MYHOST="s/xxhostnamexx/$DOMAIN/g";
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
 clear
 
 set_pass () {
@@ -114,7 +128,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "          INSTALLING SSH"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-echo -e "Set Password"
+echo -e " ${LIGHT}- ${NC}Set Password"
 arfvpn_bar 'set_pass'
 echo -e ""
 sleep 2
@@ -150,7 +164,7 @@ systemctl start rc-local.service
 # set locale
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 }
-echo -e "Set Rc.Local"
+echo -e " ${LIGHT}- ${NC}Set Rc.Local"
 arfvpn_bar 'set_rclocal'
 echo -e ""
 sleep 2
@@ -185,7 +199,7 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7100 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7200 --max-clients 500
 screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 }
-echo -e "Set BadVpn UDPGW"
+echo -e " ${LIGHT}- ${NC}Installing BadVpn UDPGW"
 arfvpn_bar 'set_badvpn'
 echo -e ""
 sleep 2
@@ -202,7 +216,7 @@ echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 /etc/init.d/dropbear restart
 }
-echo -e "Set Port SSH & Dropbear"
+echo -e " ${LIGHT}- ${NC}Set Port SSH & Dropbear"
 arfvpn_bar 'set_port'
 echo -e ""
 sleep 2
@@ -215,7 +229,7 @@ wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 sed -i $MYIP2 /etc/squid/squid.conf
 sed -i $MYHOST /etc/squid/squid.conf
 }
-echo -e "Installing Squid Proxy"
+echo -e " ${LIGHT}- ${NC}Installing Squid Proxy"
 arfvpn_bar 'set_squid'
 echo -e ""
 sleep 2
@@ -240,7 +254,7 @@ systemctl restart sslh
 /etc/init.d/sslh status
 /etc/init.d/sslh restart
 }
-echo -e "Installing SSLH"
+echo -e " ${LIGHT}- ${NC}Installing SSLH"
 arfvpn_bar 'set_sslh'
 echo -e ""
 sleep 2
@@ -263,7 +277,7 @@ systemctl enable vnstat
 rm -f /root/vnstat-2.6.tar.gz
 rm -rf /root/vnstat-2.6
 }
-echo -e "Set Vnstat"
+echo -e " ${LIGHT}- ${NC}Set Vnstat"
 arfvpn_bar 'set_vnstat'
 echo -e ""
 sleep 2
@@ -346,28 +360,10 @@ systemctl restart stunnel5
 /etc/init.d/stunnel5 status
 /etc/init.d/stunnel5 restart
 }
-echo -e "Installing Stunnel 5"
+echo -e " ${LIGHT}- ${NC}Installing Stunnel 5"
 arfvpn_bar 'set_stunnel5'
 echo -e ""
 sleep 2
-
-#OpenVPN
-set_ovpn () {
-cd
-wget https://${github}/openvpn/vpn.sh
-chmod +x vpn.sh
-}
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "        INSTALLING OPEN-VPN"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-echo -e "Installing OpenVPN"
-arfvpn_bar 'set_ovpn'
-echo -e ""
-sleep 2
-clear
-./vpn.sh
 
 # Instal DDOS Flate
 set_ddos () {
@@ -390,7 +386,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "          INSTALLING SSH"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-echo -e "Installing Ddos"
+echo -e " ${LIGHT}- ${NC}Installing Ddos"
 arfvpn_bar 'set_ddos'
 echo -e ""
 sleep 2
@@ -402,7 +398,7 @@ sed -i 's@DROPBEAR_BANNER=""@DROPBEAR_BANNER="/etc/issue.net"@g' /etc/default/dr
 # Ganti Banner
 wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
 }
-echo -e "Set Banner"
+echo -e " ${LIGHT}- ${NC}Set Banner"
 arfvpn_bar 'set_banner'
 echo -e ""
 sleep 2
@@ -415,10 +411,10 @@ chmod +x bbr.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "          INSTALLING SSH"
+echo -e "          INSTALLING BBR"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-echo -e "Set Bbr"
+echo -e " ${LIGHT}- ${NC}Set Bbr"
 arfvpn_bar 'set_bbr'
 echo -e ""
 sleep 2
@@ -448,7 +444,7 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e "          INSTALLING SSH"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
-echo -e "Set Block Torrent"
+echo -e " ${LIGHT}- ${NC}Set Block Torrent"
 arfvpn_bar 'set_torrent'
 echo -e ""
 sleep 2
@@ -533,7 +529,7 @@ sed -i -e 's/\r$//' /usr/bin/wsedu
 sed -i -e 's/\r$//' /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/portsshnontls
 }
-echo -e "Installing Script SSH"
+echo -e " ${LIGHT}- ${NC}Installing Script SSH"
 arfvpn_bar 'set_script'
 echo -e ""
 sleep 2
@@ -554,7 +550,7 @@ chown -R www-data:www-data /home/arfvps/public_html
 /etc/init.d/fail2ban restart
 /etc/init.d/squid restart
 }
-echo -e "Finishing Installer SSH"
+echo -e " ${LIGHT}- ${NC}Finishing Installing SSH"
 arfvpn_bar 'set_finishing'
 echo -e ""
 sleep 2
