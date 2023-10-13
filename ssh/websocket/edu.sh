@@ -59,6 +59,20 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,7 +105,8 @@ tput cnorm
 }
 
 #########################################################
-github="raw.githubusercontent.com/arfprsty810/vpn/main"
+arfvpn="/etc/arfvpn"
+github=$(cat ${arfvpn}/github)
 clear
 
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -99,9 +114,8 @@ echo -e "       INSTALLING WEBSOCKET"
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e ""
 
-# Getting Proxy Template
 set_ws () {
-wget -q -O /usr/local/bin/ws-tls https://${github}/ssh/websocket/ws-tls.py
+wget -q -O /usr/local/bin/ws-tls "https://${github}/ssh/websocket/ws-tls.py"
 chmod +x /usr/local/bin/ws-tls
 
 # Installing Service
@@ -135,10 +149,8 @@ arfvpn_bar 'set_ws'
 echo -e ""
 sleep 2
 
-# Getting Proxy Template
 set_wsnon () {
-wget -q -O /usr/local/bin/ws-nontls https://${github}/ssh/websocket/websocket.py
-#cp /root/myproject/websocket/websocket.py /usr/local/bin/ws-nontls
+wget -q -O /usr/local/bin/ws-nontls "https://${github}/ssh/websocket/websocket.py"
 chmod +x /usr/local/bin/ws-nontls
 
 # Installing Service
@@ -170,10 +182,8 @@ arfvpn_bar 'set_wsnon'
 echo -e ""
 sleep 2
 
-# Getting Proxy Template
 set_wsovpn () {
-wget -q -O /usr/local/bin/ws-ovpn https://${github}/ssh/websocket/ws-ovpn.py
-#cp /root/myproject/websocket/ws-ovpn.py /usr/local/bin/ws-ovpn
+wget -q -O /usr/local/bin/ws-ovpn "https://${github}/ssh/websocket/ws-ovpn.py"
 chmod +x /usr/local/bin/ws-ovpn
 
 # Installing Service
