@@ -59,6 +59,18 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+#########################################################
+source /etc/os-release
+cd /root
+# // Root Checking
+if [ "${EUID}" -ne 0 ]; then
+		echo -e "${EROR} Please Run This Script As Root User !"
+		exit 1
+fi
+if [ "$(systemd-detect-virt)" == "openvz" ]; then
+		echo "OpenVZ is not supported"
+		exit 1
+fi
 
 #########################################################
 arfvpn_bar () {
@@ -91,8 +103,8 @@ tput cnorm
 }
 
 #########################################################
-# Getting
 arfvpn="/etc/arfvpn"
+github=$(cat $arfvpn/github)
 MYIP=$(cat $arfvpn/IP)
 MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
@@ -106,7 +118,7 @@ sleep 2
 
 download_ohp () {
 # Download File Ohp
-wget "https://raw.githubusercontent.com/arfprsty810/vpn/main/openvpn/ohpserver-linux32.zip"
+wget "https://${github}/openvpn/ohpserver-linux32.zip"
 unzip ohpserver-linux32.zip
 chmod +x ohpserver
 cp ohpserver /usr/local/bin/ohpserver
