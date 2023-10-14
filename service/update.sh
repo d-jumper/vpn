@@ -203,7 +203,7 @@ sleep 2
 #########################################################
 update_script () {
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod /etc/arfvpn/cron-vpn
+wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod +x /etc/arfvpn/cron-vpn
 wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
