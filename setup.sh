@@ -283,15 +283,15 @@ update_script () {
 # Download file/s script
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
-wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod +x /etc/arfvpn/cron-vpn
+#wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod +x /etc/arfvpn/cron-vpn
 #wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 #wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
+#wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
 #wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
 wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
 wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
 wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
-#wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
 wget -O /usr/bin/renew-domain "https://${github}/service/renew-domain.sh" && chmod +x /usr/bin/renew-domain
 wget -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr/bin/restart
 wget -O /usr/bin/running "https://${github}/service/running.sh" && chmod +x /usr/bin/running
@@ -303,15 +303,15 @@ wget -O /usr/bin/wbmn "https://${github}/service/webmin.sh" && chmod +x /usr/bin
 wget -O /usr/bin/xp "https://${github}/service/xp.sh" && chmod +x /usr/bin/xp
 #sed -i -e 's/\r$//' /usr/bin/cek-apete
 sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
-sed -i -e 's/\r$//' /etc/arfvpn/cron-vpn
+#sed -i -e 's/\r$//' /etc/arfvpn/cron-vpn
 #sed -i -e 's/\r$//' /usr/bin/cert
 #sed -i -e 's/\r$//' /usr/bin/cf
 sed -i -e 's/\r$//' /usr/bin/cfnhost
+#sed -i -e 's/\r$//' /usr/bin/fixssh
 #sed -i -e 's/\r$//' /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/menu
 sed -i -e 's/\r$//' /usr/bin/menu-backup
 sed -i -e 's/\r$//' /usr/bin/menu-setting
-#sed -i -e 's/\r$//' /usr/bin/fixssh
 sed -i -e 's/\r$//' /usr/bin/renew-domain
 sed -i -e 's/\r$//' /usr/bin/restart
 sed -i -e 's/\r$//' /usr/bin/running
@@ -462,6 +462,9 @@ sleep 2
 
 #########################################################
 set_cron () {
+wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn"
+chmod +x /etc/arfvpn/cron-vpn
+sed -i -e 's/\r$//' /etc/arfvpn/cron-vpn
 if ! grep -q '/etc/arfvpn/cron-vpn' /var/spool/cron/crontabs/root;then (crontab -l;echo "0 0 * * * /etc/arfvpn/cron-vpn") | crontab;fi
 /etc/init.d/cron start
 /etc/init.d/cron restart
