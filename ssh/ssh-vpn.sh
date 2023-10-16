@@ -375,27 +375,27 @@ sleep 2
 
 #########################################################
 # Instal DDOS Flate
-set_ddos () {
-rm -rvf /usr/local/ddos
-rm -rvf usr/local/sbin/ddos
-mkdir -p /usr/local/ddos/
-wget -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
-wget -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
-wget -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
-wget -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
+#set_ddos () {
+#rm -rvf /usr/local/ddos
+#rm -rvf usr/local/sbin/ddos
+#mkdir -p /usr/local/ddos/
+#wget -O /usr/local/ddos/ddos.conf http://www.inetbase.com/scripts/ddos/ddos.conf
+#wget -O /usr/local/ddos/LICENSE http://www.inetbase.com/scripts/ddos/LICENSE
+#wget -O /usr/local/ddos/ignore.ip.list http://www.inetbase.com/scripts/ddos/ignore.ip.list
+#wget -O /usr/local/ddos/ddos.sh http://www.inetbase.com/scripts/ddos/ddos.sh
 #cd /usr/local/ddos/
 #wget http://${github}/ddos/ddos.zip
 #unzip -o ddos.zip
 #rm -rvf /usr/local/ddos/ddos.zip
-chmod 0755 /usr/local/ddos/ddos.sh
-cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
+#chmod 0755 /usr/local/ddos/ddos.sh
+#cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 # Creating cron to run script every minute.....(Default setting)
-if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
-}
-echo -e " ${LIGHT}- ${NC}Installing Ddos"
-arfvpn_bar 'set_ddos'
-echo -e ""
-sleep 2
+#if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
+$}
+#echo -e " ${LIGHT}- ${NC}Installing Ddos"
+#arfvpn_bar 'set_ddos'
+#echo -e ""
+#sleep 2
 
 #########################################################
 # banner /etc/issue.net

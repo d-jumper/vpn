@@ -186,7 +186,7 @@ echo -e "${NC}${CYAN}            ───✶ SSH & OpenVPN Account ✶───
 echo -e "  ${RED}•${NC} ${CYAN}Remarks           : ${user} $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}IP/Host           : ${IP} $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Domain            : ${domain} $NC" | tee -a /etc/arfvpn/log-create-user.log
-echo -e "  ${RED}•${NC} ${CYAN}Cfn               : ${cfn} $NC" | tee -a /etc/arfvpn/log-create-user.log
+#echo -e "  ${RED}•${NC} ${CYAN}Cfn               : ${cfn} $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Username          : ${user} $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "  ${RED}•${NC} ${CYAN}Password          : ${pass} $NC" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
