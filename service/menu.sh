@@ -141,9 +141,9 @@ echo -e "  ❇️ ${STABILO} Sever Uptime${NC}     : $( uptime -p  | cut -d " " 
 echo -e "  ❇️ ${STABILO} Current Time${NC}     : $( date -d "0 days" +"%d-%m-%Y | %X" ) "
 echo -e "  ❇️ ${STABILO} Operating System${NC} : $( cat /etc/os-release | grep -w PRETTY_NAME | sed 's/PRETTY_NAME//g' | sed 's/=//g' | sed 's/"//g' ) ( $( uname -m) ) "
 echo -e "  ❇️ ${STABILO} Processor${NC}        : $tipeprosesor"
+echo -e "  ❇️ ${STABILO} Current Isp Name${NC} : ${Server_ISP} "
 echo -e "  ❇️ ${STABILO} Current Domain${NC}   : ${Server_HOST} "
 echo -e "  ❇️ ${STABILO} Server IP${NC}        : ${Server_IP} "
-echo -e "  ❇️ ${STABILO} Current Isp Name${NC} : ${Server_ISP} "
 echo -e "  ❇️ ${STABILO} Time Reboot VPS${NC}  : 00:00 ( Mid Night GMT +7 WIB) "
 echo -e "  ❇️ ${STABILO} Script Auther${NC}    : ${Script_AUTHER} "
 echo -e "  ❇️ ${STABILO} Script Version${NC}   : ${Script_Mode}_${Script_Version} "
@@ -166,18 +166,19 @@ echo -e "${BLUE}└────────────────────�
 echo -e "    ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}SETTING/s    $NC  ${CYAN}[${LIGHT}10${CYAN}]${RED} • ${NC}${CYAN}CEK BANDWIDTH $NC"
 echo -e "    ${CYAN}[${LIGHT}07${CYAN}]${RED} •${NC} ${CYAN}UPDATE-XRAY  $NC  ${CYAN}[${LIGHT}11${CYAN}]${RED} • ${NC}${CYAN}CEK RUNNING SERVICE $NC"
 echo -e "    ${CYAN}[${LIGHT}08${CYAN}]${RED} •${NC} ${CYAN}UPDATE-SCRIPT$NC  ${CYAN}[${LIGHT}12${CYAN}]${RED} • ${NC}${CYAN}RESTART SERVICE$NC"
-echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}BACKUP       $NC  ${CYAN}[${LIGHT}13${CYAN}]${RED} • ${NC}${CYAN}INSTALL-WEBMIN$NC"
+echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC  ${CYAN}[${LIGHT}13${CYAN}]${RED} • ${NC}${CYAN}INSTALL-WEBMIN$NC"
+#echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}BACKUP       $NC  ${CYAN}[${LIGHT}13${CYAN}]${RED} • ${NC}${CYAN}INSTALL-WEBMIN$NC"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "                       ⇱ ${STABILO}About${NC} ⇲ "
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e "    ${CYAN}[${LIGHT}14${CYAN}]${RED} •${NC} ${CYAN}INFO-SCRIPT  $NC  ${CYAN}[${LIGHT}xx${CYAN}]${RED} • ${NC}${CYAN}CLOSE MENU   $NC"
-echo -e "    ${CYAN}[${LIGHT}15${CYAN}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC"
+#echo -e "    ${CYAN}[${LIGHT}15${CYAN}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
-read -p "                    Select Menu : " menu
+read -p "                    Select Menu [ 1-4 ] or [ x ] to Close Menu : " menu
 case $menu in
 
 1)
@@ -220,9 +221,14 @@ clear
 update
 ;;
 
+#9)
+#clear
+#menu-backup
+#;;
+
 9)
-clear
-menu-backup
+reboot
+exit
 ;;
 
 10)
