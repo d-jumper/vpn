@@ -246,22 +246,22 @@ clear
 
 #########################################################
 # Installing Setting Backup
-set_br () {
-cd
-wget "https://${github}/backup/set-br.sh"
-chmod +x set-br.sh
-}
-clear
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e "         INSTALLING BACKUP"
-echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
-echo -e ""
-echo -e " ${LIGHT}- ${NC}Installing Setting Backup"
-arfvpn_bar 'set_br'
-echo -e ""
-sleep 2
-clear
-/root/set-br.sh
+#set_br () {
+#cd
+#wget "https://${github}/backup/set-br.sh"
+#chmod +x set-br.sh
+#}
+#clear
+#echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+#echo -e "         INSTALLING BACKUP"
+#echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+#echo -e ""
+#echo -e " ${LIGHT}- ${NC}Installing Setting Backup"
+#arfvpn_bar 'set_br'
+#echo -e ""
+#sleep 2
+#clear
+#/root/set-br.sh
 
 #########################################################
 # Set rc.local restarting service
@@ -291,11 +291,11 @@ wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && c
 #wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod +x /etc/arfvpn/cron-vpn
 #wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 #wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
-wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
+#wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
 #wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
 #wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
 wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
-wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
+#wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
 wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
 wget -O /usr/bin/renew-domain "https://${github}/service/renew-domain.sh" && chmod +x /usr/bin/renew-domain
 wget -O /usr/bin/restart "https://${github}/service/restart.sh" && chmod +x /usr/bin/restart
@@ -311,11 +311,11 @@ sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
 #sed -i -e 's/\r$//' /etc/arfvpn/cron-vpn
 #sed -i -e 's/\r$//' /usr/bin/cert
 #sed -i -e 's/\r$//' /usr/bin/cf
-sed -i -e 's/\r$//' /usr/bin/cfnhost
+#sed -i -e 's/\r$//' /usr/bin/cfnhost
 #sed -i -e 's/\r$//' /usr/bin/fixssh
 #sed -i -e 's/\r$//' /usr/bin/hostvps
 sed -i -e 's/\r$//' /usr/bin/menu
-sed -i -e 's/\r$//' /usr/bin/menu-backup
+#sed -i -e 's/\r$//' /usr/bin/menu-backup
 sed -i -e 's/\r$//' /usr/bin/menu-setting
 sed -i -e 's/\r$//' /usr/bin/renew-domain
 sed -i -e 's/\r$//' /usr/bin/restart
@@ -544,13 +544,13 @@ echo -e ""| tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${TYBLUE}>>>${NC} ⇱ ${CYAN}Server Information & Other Features${NC} ⇲"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Timezone                ${NC}:${GREEN} Asia/Jakarta${NC} ${STABILO}(GMT +7 WIB)${NC}"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Fail2Ban                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Dflate                  ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
+#echo -e "   ${RED}⋗${NC}${LIGHT} Dflate                  ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} IPtables                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Auto-Reboot             ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} IPv6                    ${NC}:${RED} [OFF] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${ORANGE} Autoreboot ON${NC} ${STABILO}00.00 GMT +7 WIB${NC}" | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${ORANGE} Autobackup Data${NC}" | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${ORANGE} Restore Data${NC}" | tee -a /etc/arfvpn/log-install.txt
+#echo -e "   ${RED}⋗${NC}${ORANGE} Autobackup Data${NC}" | tee -a /etc/arfvpn/log-install.txt
+#echo -e "   ${RED}⋗${NC}${ORANGE} Restore Data${NC}" | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${ORANGE} Auto Delete Expired Account${NC}" | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${ORANGE} Full Orders For Various Services${NC}" | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${ORANGE} White Label${NC}" | tee -a /etc/arfvpn/log-install.txt
