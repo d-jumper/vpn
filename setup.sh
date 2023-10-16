@@ -149,8 +149,8 @@ clear
 set_apete () {
 cd
 wget "https://${github}/service/apete.sh"
-chmod +x /root/apete.sh
-sed -i -e 's/\r$//' /root/apete.sh
+chmod +x apete.sh
+sed -i -e 's/\r$//' apete.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -170,6 +170,7 @@ set_aio () {
 cd
 wget "https://${github}/xray/ins-xray.sh"
 chmod +x ins-xray.sh
+sed -i -e 's/\r$//' ins-xray.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -189,6 +190,7 @@ set_ssh () {
 cd
 wget "https://${github}/ssh/ssh-vpn.sh"
 chmod +x ssh-vpn.sh
+sed -i -e 's/\r$//' ssh-vpn.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -206,7 +208,9 @@ screen -S ssh-vpn /root/ssh-vpn.sh
 # Installing Websocket
 set_websocket () {
 cd
-apt update
+wget -O /usr/bin/sshws "https://${github}/ssh/websocket/edu.sh"
+chmod +x /usr/bin/sshws
+sed -i -e 's/\r$//' /usr/bin/sshws
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
@@ -218,7 +222,7 @@ arfvpn_bar 'set_websocket'
 echo -e ""
 sleep 2
 clear
-/usr/bin/wsedu
+/usr/bin/sshws
 
 #########################################################
 # Installing OhpServer
@@ -226,6 +230,7 @@ set_ohp () {
 cd
 wget "https://${github}/openvpn/ohp.sh"
 chmod +x ohp.sh
+sed -i -e 's/\r$//' ohp.sh
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
