@@ -151,18 +151,17 @@ rm -rvf /usr/bin/menu-ssh
 rm -rvf /usr/bin/renewssh
 rm -rvf /usr/bin/tendang
 rm -rvf /usr/bin/trialssh
-rm -rvf /usr/bin/expssh
 #rm -rvf bbr.sh && ./bbr.sh
 rm -rvf /usr/bin/clearlog
 rm -rvf /etc/issue.net
 rm -rvf /home/arfvps/public_html/index.html
 #rm -rvf /etc/pam.d/common-password
 rm -rvf /usr/bin/ram
-rm -rvf /etc/set.sh
+#rm -rvf /etc/set.sh
 #rm -rvf /etc/squid/squid.conf
 rm -rvf /usr/bin/swapkvm
-#rm -rvf /usr/bin/wsedu
 
+#rm -rvf /usr/bin/sshws
 rm -rvf /usr/bin/portsshws
 rm -rvf /usr/bin/portsshnontls
 
@@ -295,17 +294,17 @@ sed -i -e 's/\r$//' /usr/bin/tendang
 sed -i -e 's/\r$//' /usr/bin/trialssh
 sed -i -e 's/\r$//' /usr/bin/expssh
 
-wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
+#wget -O /usr/bin/badvpn-udpgw64 "https://${github}/ssh/archive/newudpgw"
 #wget -O /usr/bin/bbr "https://${github}/ssh/archive/bbr.sh"
 wget -O /usr/bin/clearlog "https://${github}/ssh/archive/clearlog.sh"
 wget -O /etc/issue.net "https://${github}/ssh/archive/issue.net"
 wget -O /home/arfvps/public_html/index.html "https://${github}/nginx/index.html"
 #wget -O /etc/pam.d/common-password "https://${github}/ssh/archive/password"
 wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
-wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
+#wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
-chmod +x /usr/bin/badvpn-udpgw64
+#chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
 chmod +x /etc/issue.net
@@ -316,7 +315,7 @@ chmod +x /home/arfvps/
 chmod +x /home/arfvps/public_html/
 #chmod +x /etc/pam.d/common-password
 chmod +x /usr/bin/ram
-chmod +x /etc/set.sh
+#chmod +x /etc/set.sh
 #chmod +x /etc/squid/squid.conf
 chmod +x /usr/bin/swapkvm
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
@@ -324,7 +323,7 @@ sed -i -e 's/\r$//' /usr/bin/clearlog
 sed -i -e 's/\r$//' /usr/bin/issue.net
 #sed -i -e 's/\r$//' /etc/pam.d/common-password
 sed -i -e 's/\r$//' /usr/bin/ram
-sed -i -e 's/\r$//' /etc/set.sh
+#sed -i -e 's/\r$//' /etc/set.sh
 #sed -i -e 's/\r$//' /etc/squid/squid.conf
 sed -i -e 's/\r$//' /usr/bin/swapkvm
 
@@ -332,13 +331,13 @@ sed -i -e 's/\r$//' /usr/bin/swapkvm
 #wget -O /etc/init.d/stunnel5 "https://${github}/ssh/archive/stunnel5.init"
 #chmod +x /etc/init.d/stunnel5
 
-#wget -O /usr/bin/wsedu "https://${github}/ssh/websocket/edu.sh"
+#wget -O /usr/bin/sshws "https://${github}/ssh/websocket/edu.sh"
 wget -O /usr/bin/portsshws "https://${github}/ssh/websocket/portsshws.sh"
 wget -O /usr/bin/portsshnontls "https://${github}/ssh/websocket/portsshnontls.sh"
-#chmod +x /usr/bin/wsedu
+#chmod +x /usr/bin/sshws
 chmod +x /usr/bin/portsshws
 chmod +x /usr/bin/portsshnontls
-#sed -i -e 's/\r$//' /usr/bin/wsedu
+#sed -i -e 's/\r$//' /usr/bin/sshws
 sed -i -e 's/\r$//' /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/portsshnontls
 
