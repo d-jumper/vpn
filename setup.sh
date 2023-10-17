@@ -284,8 +284,8 @@ clear
 /usr/bin/fixssh
 
 #########################################################
+# Installing Script
 update_script () {
-# Download file/s script
 #wget -O /etc/arfvpn/apete "https://${github}/service/apete.sh" && chmod +x /usr/bin/apete
 wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && chmod +x /usr/bin/cek-bandwidth
 #wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn" && chmod +x /etc/arfvpn/cron-vpn
@@ -358,8 +358,8 @@ echo -e ""
 sleep 2
 
 #########################################################
-remove_unnecessary () {
 # Remove unnecessary files
+remove_unnecessary () {
 cd
 apt autoclean -y
 apt autoremove -y
@@ -370,6 +370,7 @@ echo -e ""
 sleep 2
 
 #########################################################
+# Restart Service
 set_restart (){
 sleep 2
 systemctl daemon-reload
@@ -415,12 +416,13 @@ EOF
 systemctl daemon-reload
 systemctl enable autosett
 }
-echo -e " ${LIGHT}- ${NC}Installing Auto-set.service"
+echo -e " ${LIGHT}- ${NC}Installing Auto-Set.Service"
 arfvpn_bar 'auto_set_service'
 echo -e ""
 sleep 2
 
 #########################################################
+# Fix Restart Service
 fix_restart (){
 sleep 15
 systemctl stop ws-tls 
@@ -466,6 +468,7 @@ echo -e ""
 sleep 2
 
 #########################################################
+# Set Cronjob for VPS
 set_cron () {
 wget -O /etc/arfvpn/cron-vpn "https://${github}/service/cron-vpn"
 chmod +x /etc/arfvpn/cron-vpn
@@ -481,6 +484,7 @@ echo -e ""
 sleep 2
 
 #########################################################
+# Finish
 finishing () {
 # Finishing
 cat> /root/.profile << END
@@ -542,7 +546,7 @@ echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev TLS   ${NC}:${ORANGE} 2443 
 echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev NTLS  ${NC}:${ORANGE} 3443 - 4442 ${NC} " | tee -a /etc/arfvpn/log-install.txt
 echo -e ""| tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${TYBLUE}>>>${NC} ⇱ ${CYAN}Server Information & Other Features${NC} ⇲"  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Timezone                ${NC}:${GREEN} Asia/Jakarta${NC} ${STABILO}(GMT +7 WIB)${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Timezone                ${NC}:${GREEN} Asia/Jakarta${NC} ${STABILO}( GMT +7 WIB )${NC}"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Fail2Ban                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 #echo -e "   ${RED}⋗${NC}${LIGHT} Dflate                  ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} IPtables                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
@@ -560,12 +564,14 @@ echo -e "${BLUE}└────────────────────�
 echo -e ""  | tee -a /etc/arfvpn/log-install.txt
 secs_to_human "$(($(date +%s) - ${start}))" | tee -a /etc/arfvpn/log-install.txt
 echo -e ""  | tee -a /etc/arfvpn/log-install.txt
-
-echo -e ""
 echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
+history -c
+clear
 exit 0
 else
+history -c
+clear
 reboot
 fi
