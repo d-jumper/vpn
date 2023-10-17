@@ -116,38 +116,42 @@ echo -e "                   ⇱ ${STABILO}✶ Setting Menu ✶${NC}⇲ "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
 #echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Add Cloudfront Domaint $NC"
-echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH WS SSL/TLS $NC"
-echo -e "  ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH WS Non-TLS $NC"
-echo -e "  ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Change Port OVPN $NC"
-echo -e "  ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Set Limit Speed $NC"
-echo -e "  ${CYAN}[${LIGHT}05${CYAN}]${RED} •${NC} ${CYAN}Rennew Domain & Cert $NC"
-echo -e "  ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}Speed-Test $NC"
+#echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH WS SSL/TLS $NC"
+#echo -e "  ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH WS Non-TLS $NC"
+#echo -e "  ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Change Port OVPN $NC"
+echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port Tunnel/s Services $NC"
+echo -e "  ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Set Limit Speed $NC"
+echo -e "  ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Rennew Domain & Cert $NC"
+echo -e "  ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Speed-Test $NC"
 echo -e "  ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -p " ➣ Select Menu [ 1 - 6 ] or [ x ] to Back to Menu : " menu
+read -p " ➣ Select Menu [ 1 - 4 ] or [ x ] to Back to Menu : " menu
 echo -e ""
 case $menu in
 #1)
 #cfnhost
 #;;
+#1)
+#portsshws
+#;;
+#2)
+#portsshnontls
+#;;
+#3)
+#portopvn
+#;;
 1)
-portsshws
+changeport
 ;;
 2)
-portsshnontls
-;;
-3)
-portopvn
-;;
-4)
 limitspeed
 ;;
-5)
+3)
 renew-domain
 ;;
-6)
+4)
 clear
 speedtest
 sleep 3

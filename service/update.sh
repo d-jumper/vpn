@@ -136,13 +136,6 @@ rm -rvf /etc/arfvpn/Version
 rm -rvf /usr/bin/wbmn
 rm -rvf /usr/bin/xp
 
-rm -rvf /usr/bin/changeport
-rm -rvf /usr/bin/portovpn
-rm -rvf /usr/bin/portsquid
-rm -rvf /usr/bin/portsstp
-rm -rvf /usr/bin/porttrojan
-rm -rvf /usr/bin/portvlm
-rm -rvf /usr/bin/portwg
 rm -rvf /usr/bin/addssh
 rm -rvf /usr/bin/autokill
 rm -rvf /usr/bin/ceklim
@@ -153,6 +146,7 @@ rm -rvf /usr/bin/menu-ssh
 rm -rvf /usr/bin/renewssh
 rm -rvf /usr/bin/tendang
 rm -rvf /usr/bin/trialssh
+
 #rm -rvf bbr.sh && ./bbr.sh
 rm -rvf /usr/bin/clearlog
 rm -rvf /etc/issue.net
@@ -162,10 +156,16 @@ rm -rvf /usr/bin/ram
 #rm -rvf /etc/set.sh
 #rm -rvf /etc/squid/squid.conf
 rm -rvf /usr/bin/swapkvm
-
 #rm -rvf /usr/bin/sshws
+
+rm -rvf /usr/bin/changeport
+rm -rvf /usr/bin/portovpn
+rm -rvf /usr/bin/portsquid
+rm -rvf /usr/bin/porttrojan
+rm -rvf /usr/bin/portxrayws
 rm -rvf /usr/bin/portsshws
-rm -rvf /usr/bin/portsshnontls
+#rm -rvf /usr/bin/portsstp
+#rm -rvf /usr/bin/portwg
 
 rm -rvf /usr/bin/menu-vmess
 rm -rvf /usr/bin/add-vm
@@ -240,28 +240,6 @@ sed -i -e 's/\r$//' /usr/bin/update-xray
 sed -i -e 's/\r$//' /usr/bin/wbmn
 sed -i -e 's/\r$//' /usr/bin/xp
 
-wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
-wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
-wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh"
-wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
-wget -O /usr/bin/porttrojan "https://${github}/service/port/porttrojan.sh"
-wget -O /usr/bin/portvlm "https://${github}/service/port/portvlm.sh"
-wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh"
-chmod +x /usr/bin/changeport
-chmod +x /usr/bin/portovpn
-chmod +x /usr/bin/portsquid
-chmod +x /usr/bin/portsstp
-chmod +x /usr/bin/porttrojan
-chmod +x /usr/bin/portvlm
-chmod +x /usr/bin/portwg
-sed -i -e 's/\r$//' /usr/bin/changeport
-sed -i -e 's/\r$//' /usr/bin/portovpn
-sed -i -e 's/\r$//' /usr/bin/portsquid
-sed -i -e 's/\r$//' /usr/bin/portsstp
-sed -i -e 's/\r$//' /usr/bin/porttrojan
-sed -i -e 's/\r$//' /usr/bin/portvlm
-sed -i -e 's/\r$//' /usr/bin/portwg
-
 wget -O /usr/bin/addssh "https://${github}/ssh/addssh.sh"
 wget -O /usr/bin/autokill "https://${github}/ssh/autokill.sh"
 wget -O /usr/bin/ceklim "https://${github}/ssh/ceklim.sh"
@@ -272,7 +250,6 @@ wget -O /usr/bin/menu-ssh "https://${github}/ssh/menu-ssh.sh"
 wget -O /usr/bin/renewssh "https://${github}/ssh/renewssh.sh"
 wget -O /usr/bin/tendang "https://${github}/ssh/tendang.sh"
 wget -O /usr/bin/trialssh "https://${github}/ssh/trialssh.sh"
-wget -O /usr/bin/xpssh "https://${github}/ssh/xpssh.sh"
 chmod +x /usr/bin/addssh
 chmod +x /usr/bin/autokill
 chmod +x /usr/bin/ceklim
@@ -283,7 +260,6 @@ chmod +x /usr/bin/menu-ssh
 chmod +x /usr/bin/renewssh
 chmod +x /usr/bin/tendang
 chmod +x /usr/bin/trialssh
-chmod +x /usr/bin/expssh
 sed -i -e 's/\r$//' /usr/bin/addssh
 sed -i -e 's/\r$//' /usr/bin/autokill
 sed -i -e 's/\r$//' /usr/bin/ceklim
@@ -306,6 +282,7 @@ wget -O /usr/bin/ram "https://${github}/ssh/archive/ram.sh"
 #wget -O /etc/set.sh "https://${github}/ssh/archive/set.sh"
 #wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 wget -O /usr/bin/swapkvm "https://${github}/ssh/archive/swapkvm.sh"
+#wget -O /usr/bin/sshws "https://${github}/ssh/websocket/sshws.sh"
 #chmod +x /usr/bin/badvpn-udpgw64
 #chmod +x bbr.sh && ./bbr.sh
 chmod +x /usr/bin/clearlog
@@ -320,6 +297,7 @@ chmod +x /usr/bin/ram
 #chmod +x /etc/set.sh
 #chmod +x /etc/squid/squid.conf
 chmod +x /usr/bin/swapkvm
+#chmod +x /usr/bin/sshws
 #sed -i -e 's/\r$//' bbr.sh && ./bbr.sh
 sed -i -e 's/\r$//' /usr/bin/clearlog
 sed -i -e 's/\r$//' /usr/bin/issue.net
@@ -328,20 +306,36 @@ sed -i -e 's/\r$//' /usr/bin/ram
 #sed -i -e 's/\r$//' /etc/set.sh
 #sed -i -e 's/\r$//' /etc/squid/squid.conf
 sed -i -e 's/\r$//' /usr/bin/swapkvm
+#sed -i -e 's/\r$//' /usr/bin/sshws
 
 #wget -O stunnel5.zip "https://${github}/ssh/stunnel5/stunnel5.zip"
 #wget -O /etc/init.d/stunnel5 "https://${github}/ssh/archive/stunnel5.init"
 #chmod +x /etc/init.d/stunnel5
 
-#wget -O /usr/bin/sshws "https://${github}/ssh/websocket/edu.sh"
-wget -O /usr/bin/portsshws "https://${github}/ssh/websocket/portsshws.sh"
-wget -O /usr/bin/portsshnontls "https://${github}/ssh/websocket/portsshnontls.sh"
-#chmod +x /usr/bin/sshws
+wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
+wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
+wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh""
+wget -O /usr/bin/porttrojango "https://${github}/service/port/porttrojango.sh"
+wget -O /usr/bin/portxrayws "https://${github}/service/port/portxrayws.sh"
+wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
+#wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
+#wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh
+chmod +x /usr/bin/changeport
+chmod +x /usr/bin/portovpn
+chmod +x /usr/bin/portsquid
+chmod +x /usr/bin/porttrojan
+chmod +x /usr/bin/portxrayws
 chmod +x /usr/bin/portsshws
-chmod +x /usr/bin/portsshnontls
-#sed -i -e 's/\r$//' /usr/bin/sshws
+#chmod +x /usr/bin/portsstp
+#chmod +x /usr/bin/portwg
+sed -i -e 's/\r$//' /usr/bin/changeport
+sed -i -e 's/\r$//' /usr/bin/portovpn
+sed -i -e 's/\r$//' /usr/bin/portsquid
+sed -i -e 's/\r$//' /usr/bin/porttrojan
+sed -i -e 's/\r$//' /usr/bin/portxrayws
 sed -i -e 's/\r$//' /usr/bin/portsshws
-sed -i -e 's/\r$//' /usr/bin/portsshnontls
+#sed -i -e 's/\r$//' /usr/bin/portsstp
+#sed -i -e 's/\r$//' /usr/bin/portwg
 
 wget -q -O /usr/bin/menu-vmess "https://${github}/xray/vmess/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
 wget -q -O /usr/bin/add-vm "https://${github}/xray/vmess/add-vm.sh" && chmod +x /usr/bin/add-vm

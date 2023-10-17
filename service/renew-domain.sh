@@ -129,9 +129,11 @@ echo -e ""
 set_host () {
 systemctl stop nginx
 systemctl stop squid
+systemctl stop trojan-go
 cd
 sed -i $DOMAIN3 ${nginx}/sites-available/${domain}.conf
 sed -i $DOMAIN3 /etc/squid/squid.conf
+sed -i $DOMAIN3 /etc/arfvpn/trojan-go/config.json
 }
 echo -e " ${LIGHT}- ${NC}Renew Domain"
 arfvpn_bar 'set_host'
@@ -172,15 +174,11 @@ clear
 /usr/bin/cert
 
 renew_squid () {
-#systemctl stop squid
-#cp /etc/squid/squid.conf $arfvpn/backup/squid.conf
-#rm /etc/squid/squid.conf
-#cp $arfvpn/backup/squid.conf /etc/squid/squid.conf
-#wget -O /etc/squid/squid.conf "https://${github}/ssh/archive/squid3.conf"
 sed -i $DOMAIN2 /etc/squid/squid.conf
-#rm $arfvpn/backup/squid.conf
 systemctl start squid
+systemctl restart squid
 }
+
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
 echo -e "   UPDATE / RENEW DOMAIN SERVER"
@@ -191,6 +189,24 @@ arfvpn_bar 'renew_squid'
 echo -e ""
 sleep 2
 clear
+
+renew_trojango () {
+sed -i $DOMAIN2 /etc/arfvpn/trojan-go/config.json
+systemctl start trojan-go
+systemctl restart trojan-go
+}
+
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "   UPDATE / RENEW DOMAIN SERVER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Renew Trojan-Go"
+arfvpn_bar 'renew_trojango'
+echo -e ""
+sleep 2
+clear
+
 /usr/bin/fixssh
 
 clear
