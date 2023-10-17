@@ -111,51 +111,44 @@ clear
 
 echo -e ""
 echo -e ""
-echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                   ⇱ ${STABILO}✶ Setting Menu ✶${NC}⇲ "
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                    ⇱ ${STABILO}✶ Backup Menu ✶${NC} ⇲ "
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
-#echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Add Cloudfront Domaint $NC"
-echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH WS SSL/TLS $NC"
-echo -e "  ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH WS Non-TLS $NC"
-echo -e "  ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Change Port OVPN $NC"
-echo -e "  ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Set Limit Speed $NC"
-echo -e "  ${CYAN}[${LIGHT}05${CYAN}]${RED} •${NC} ${CYAN}Rennew Domain & Cert $NC"
-echo -e "  ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}Speed-Test $NC"
+echo -e "  ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Add or Change Email Received $NC"
+echo -e "  ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Email Sender $NC"
+echo -e "  ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Start Auto Backup $NC"
+echo -e "  ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Stop Auto Backup $NC"
+echo -e "  ${CYAN}[${LIGHT}05${CYAN}]${RED} •${NC} ${CYAN}Backup Manualy $NC"
+echo -e "  ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}Test Send Mail $NC"
+echo -e "  ${CYAN}[${LIGHT}07${CYAN}]${RED} •${NC} ${CYAN}Restore $NC"
 echo -e "  ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu $NC"
 echo -e ""
-echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -p " ➣ Select Menu [ 1 - 6 ] or [ x ] to Back to Menu : " menu
+read -p " ➣ Select Menu [ 1 - 7 ] or [ x ] to Back to Menu : " menu
 echo -e ""
 case $menu in
-#1)
-#cfnhost
-#;;
 1)
-portsshws
+addemail
 ;;
 2)
-portsshnontls
+changesend
 ;;
 3)
-portopvn
+startbackup
 ;;
 4)
-limitspeed
+stopbackup
 ;;
 5)
-renew-domain
+backup
 ;;
 6)
-clear
-speedtest
-sleep 3
-echo ""
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu-Setting${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
-clear
-menu
+testsend
+;;
+7)
+restore
 ;;
 x)
 clear
@@ -165,7 +158,7 @@ menu
 clear
 echo -e " ${EROR}${RED} Command not found! ${NC}"
 sleep 3
-menu-setting
+menu-backup
 ;;
 esac
 #

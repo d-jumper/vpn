@@ -177,8 +177,8 @@ echo -e "    ${CYAN}[${LIGHT}14${CYAN}]${RED} •${NC} ${CYAN}INFO-SCRIPT  $NC  
 #echo -e "    ${CYAN}[${LIGHT}15${CYAN}]${RED} •${NC} ${CYAN}REBOOT VPS   $NC"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-
-read -p "                    Select Menu [ 1-4 ] or [ x ] to Close Menu : " menu
+read -p " ➣  Select Menu [ 1 - 14 ] or [ x ] to Close Menu : " menu
+echo -e ""
 case $menu in
 
 1)
@@ -255,7 +255,7 @@ wbmn
 clear
 cat /etc/arfvpn/log-install.txt
 echo ""
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "   ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
 menu
