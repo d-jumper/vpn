@@ -126,7 +126,7 @@ echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}Bandwidth Live Usa
 echo -e "    ${CYAN}[${LIGHT}10${CYAN}]${RED} •${NC} ${CYAN}Bandwidth Live Usage Trafic [ 5s ]${NC}"
 echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu${NC}"
 echo -e "${NC}"
-echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 read -p " ➣ Select Menu [ 1 - 10 ] or [ x ] to Back to Menu : " menu
 echo -e ""
@@ -146,7 +146,6 @@ echo -e "${BLUE}└────────────────────�
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
 read -p ""
 clear
 cek-bandwidth
@@ -168,7 +167,6 @@ echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
-read -p ""
 clear
 cek-bandwidth
 ;;
@@ -188,7 +186,6 @@ echo -e "${BLUE}└────────────────────�
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
 read -p ""
 clear
 cek-bandwidth
@@ -210,7 +207,6 @@ echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
-read -p ""
 clear
 cek-bandwidth
 ;;
@@ -230,7 +226,6 @@ echo -e "${BLUE}└────────────────────�
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
 read -p ""
 clear
 cek-bandwidth
@@ -252,7 +247,6 @@ echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
-read -p ""
 clear
 cek-bandwidth
 ;;
@@ -272,7 +266,6 @@ echo -e "${BLUE}└────────────────────�
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
 read -p ""
 clear
 cek-bandwidth
@@ -294,7 +287,6 @@ echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
-read -p ""
 clear
 cek-bandwidth
 ;;
@@ -315,7 +307,6 @@ echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
-read -p ""
 clear
 cek-bandwidth
 ;;
@@ -335,7 +326,6 @@ echo -e "${BLUE}└────────────────────�
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
 read -p ""
 clear
 cek-bandwidth
