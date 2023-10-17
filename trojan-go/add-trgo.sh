@@ -197,9 +197,9 @@ echo -e "  ${RED}•${NC} ${CYAN}Expired On        : ${exp} $NC" | tee -a /etc/a
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/arfvpn/log-create-user.log
 echo "" | tee -a /etc/arfvpn/log-create-user.log
-echo "" | tee -a /etc/arfvpn/log-create-user.log 
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "" | tee -a /etc/arfvpn/log-create-user.log
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Trojan Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 history -c
 clear
-menu
+menu-trojan
