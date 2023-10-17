@@ -105,57 +105,81 @@ tput cnorm
 #########################################################
 arfvpn="/etc/arfvpn"
 github=$(cat $arfvpn/github)
-clear
+MYIP=$(cat $arfvpn/IP)
+MYISP=$(cat $arfvpn/ISP)
+DOMAIN=$(cat $arfvpn/domain)
 
-echo -e ""
+clear
+trgo="$(cat /etc/arfvpn/log-install.txt | grep -w "Trojan GO" | cut -d: -f2|sed 's/ //g')"
 echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "           ⇱ ${STABILO}Change Port Tunnel/s Services${NC} ⇲"
+echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH Websocket $NC"
-echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Port OpenVPN $NC"
-echo -e "    ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Change Port Xray Websocket$NC"
-echo -e "    ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Change Port Trojan-Go $NC"
-echo -e "    ${CYAN}[${LIGHT}05${CYAN}]${RED} •${NC} ${CYAN}Change Port Squid $NC"
-#echo -e "    ${CYAN}[${LIGHT}08${CYAN}]${RED} •${NC} ${CYAN}Change Port Wireguard $NC"
-#echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}Change Port SSTP $NC"
-echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu $NC"
+echo -e "  ${RED} •${NC} ${CYAN}Port Trojan-Go :${NC}${LIGHT} ${trgo}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -p " ➣  Select Menu [ 1 - 5 ] or [ x ] to Close Menu : " menu
-echo -e ""
-case $menu in
-1)
-portsshws
-;;
-2)
-portovpn
-;;
-3)
-portxrayws
-;;
-4)
-porttrojango
-;;
-5)
-portsquid
-;;
-#8)
-#portwg
-#;;
-#9)
-#portsstp
-#;;
-x)
+read -p "Change New Port for Trojan-Go : " trgo2
+sleep 2
+
+if [ -z ${trgo2} ]; then
+echo -e "${RED} Please Input New Port !${NC}"
+sleep 2
+exit 0
 clear
-menu
-;;
-*)
-clear
-echo -e " ${EROR}${RED} Command not found! ${NC}"
-sleep 3
 changeport
-;;
-esac
+fi
+
+cek=$(netstat -nutlp | grep -w ${trgo2})
+if [[ -z $cek ]]; then
+sleep 1
+else
+echo -e "${RED} Port ${trgo2} is used"
+sleep 2
+clear
+exit 0
+changeport
+fi
+
+set_port_trgo () {
+sed -i 's/${trgo}/${trgo2}/g' /etc/arfvpn/trojan-go/config.json
+sed -i 's/   - Trojan GO             : ${trgo}/   - Trojan GO             : ${trgo2}/g' /etc/arfvpn/log-install.txt
+iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${trgo} -j ACCEPT
+iptables -D INPUT -m state --state NEW -m udp -p udp --dport ${trgo} -j ACCEPT
+iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport ${trgo2} -j ACCEPT
+iptables -I INPUT -m state --state NEW -m udp -p udp --dport ${trgo2} -j ACCEPT
+iptables-save > /etc/iptables.up.rules
+iptables-restore -t < /etc/iptables.up.rules
+netfilter-persistent save > /dev/null
+netfilter-persistent reload > /dev/null
+systemctl restart xray.service > /dev/null
+}
+
+clear
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Change Port Trojan-Go$"
+arfvpn_bar 'set_port_trgo'
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+sleep 2
+clear
+
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
+echo -e "  ${RED} •${NC} ${CYAN}New Port Trojan-Go$ :${NC}${LIGHT} ${trgo2}$NC"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+sleep 2
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+exit 0
+changeport
