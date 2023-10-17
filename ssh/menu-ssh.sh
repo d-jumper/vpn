@@ -127,7 +127,7 @@ echo -e "  ${BICyan}[${BIWhite}xx${BICyan}]${RED} •${NC} ${CYAN}Back To Menu $
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -p " ➣ Select Menu [ 1 - 7 ] or [ x ] to Back to Menu : " menu
+read -p " ➣ Select Menu [ 1 - 8 ] or [ x ] to Back to Menu : " menu
 echo -e ""
 case $menu in
 1)
