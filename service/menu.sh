@@ -135,7 +135,7 @@ fi
 clear
 
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                   ⇱ ${STABILO}Informasi VPS${NC} ⇲ "
+echo -e "                 ⇱ ${STABILO}VPS Information${NC} ⇲ "
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e "  ❇️ ${STABILO} Sever Uptime${NC}     : $( uptime -p  | cut -d " " -f 2-10000 ) "
@@ -164,7 +164,7 @@ echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                  ⇱ ${STABILO}Menu Service/s${NC} ⇲"
+echo -e "                  ⇱ ${STABILO}Service/s Menu${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e "    ${CYAN}[${LIGHT}06${CYAN}]${RED} •${NC} ${CYAN}SETTING/s    $NC  ${CYAN}[${LIGHT}10${CYAN}]${RED} • ${NC}${CYAN}CEK BANDWIDTH $NC"
