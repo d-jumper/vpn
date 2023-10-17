@@ -119,17 +119,18 @@ echo -e "  ${BICyan}[${BIWhite}01${BICyan}]${RED} •${NC} ${CYAN}Add Account Vm
 echo -e "  ${BICyan}[${BIWhite}02${BICyan}]${RED} •${NC} ${CYAN}Delete Account Vmess $NC"
 echo -e "  ${BICyan}[${BIWhite}03${BICyan}]${RED} •${NC} ${CYAN}Renew Account Vmess $NC"
 echo -e "  ${BICyan}[${BIWhite}04${BICyan}]${RED} •${NC} ${CYAN}Cek User Login Vmess $NC"
-echo -e "  ${BICyan}[${BIWhite}05${BICyan}]${RED} •${NC} ${CYAN}Back to Menu $NC"
+echo -e "  ${BICyan}[${BIWhite}xx${BICyan}]${RED} •${NC} ${CYAN}Back to Menu $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-read -p " ➣ Select From Options [ 1 - 5 ] : " menu
+echo -e ""
+read -p " ➣ Select Menu [ 1 - 7 ] or [ x ] to Back to Menu : " menu
 echo -e ""
 case $menu in
 1) clear ; add-vm ;;
 2) clear ; del-vm ;;
 3) clear ; renew-vm ;;
 4) clear ; cek-vm ;;
-5) clear ; menu ;;
+x) clear ; menu ;;
 *)
 clear
 echo -e " ${EROR}${RED} Command not found! ${NC}"
