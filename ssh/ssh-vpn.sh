@@ -498,16 +498,6 @@ sed -i -e 's/\r$//' /usr/bin/swapkvm
 #wget -O stunnel5.zip "https://${github}/ssh/stunnel5/stunnel5.zip"
 #wget -O /etc/init.d/stunnel5 "https://${github}/ssh/archive/stunnel5.init"
 #chmod +x /etc/init.d/stunnel5
-
-#wget -O /usr/bin/sshws "https://${github}/ssh/websocket/edu.sh"
-wget -O /usr/bin/portsshws "https://${github}/ssh/websocket/portsshws.sh"
-wget -O /usr/bin/portsshnontls "https://${github}/ssh/websocket/portsshnontls.sh"
-#chmod +x /usr/bin/wsedu
-chmod +x /usr/bin/portsshws
-chmod +x /usr/bin/portsshnontls
-#sed -i -e 's/\r$//' /usr/bin/sshws
-sed -i -e 's/\r$//' /usr/bin/portsshws
-sed -i -e 's/\r$//' /usr/bin/portsshnontls
 }
 echo -e " ${LIGHT}- ${NC}Installing Script SSH"
 arfvpn_bar 'set_script'
