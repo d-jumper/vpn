@@ -123,10 +123,11 @@ echo -e "  ${BICyan}[${BIWhite}05${BICyan}]${RED} •${NC} ${CYAN}List Member SS
 echo -e "  ${BICyan}[${BIWhite}06${BICyan}]${RED} •${NC} ${CYAN}Delete SSH & OpenVpn Account $NC"
 echo -e "  ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}Set up Autokill SSH $NC"
 echo -e "  ${BICyan}[${BIWhite}08${BICyan}]${RED} •${NC} ${CYAN}Displays Users Multi Login $NC"
-echo -e "  ${BICyan}[${BIWhite}09${BICyan}]${RED} •${NC} ${CYAN}Back To Menu $NC"
+echo -e "  ${BICyan}[${BIWhite}xx${BICyan}]${RED} •${NC} ${CYAN}Back To Menu $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-read -p " ➣ Select From Options [ 1 - 9 ] : " menu
+echo -e ""
+read -p " ➣ Select Menu [ 1 - 7 ] or [ x ] to Back to Menu : " menu
 echo -e ""
 case $menu in
 1)
@@ -153,7 +154,8 @@ autokill
 8)
 ceklim
 ;;
-9)
+x)
+clear
 menu
 ;;
 *)

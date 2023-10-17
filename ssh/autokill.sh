@@ -133,11 +133,11 @@ echo -e "  ${BICyan}[${BIWhite}01${BICyan}]${RED} •${NC} ${CYAN}AutoKill After
 echo -e "  ${BICyan}[${BIWhite}02${BICyan}]${RED} •${NC} ${CYAN}AutoKill After 5 Minutes $NC"
 echo -e "  ${BICyan}[${BIWhite}03${BICyan}]${RED} •${NC} ${CYAN}AutoKill After 10 Minutes $NC"
 echo -e "  ${BICyan}[${BIWhite}04${BICyan}]${RED} •${NC} ${CYAN}Turn Off AutoKill/MultiLogin $NC"
-echo -e "  ${BICyan}[${BIWhite}05${BICyan}]${RED} •${NC} ${CYAN}Back to menu $NC"
+echo -e "  ${BICyan}[${BIWhite}xx${BICyan}]${RED} •${NC} ${CYAN}Back to menu $NC"
 echo -e " "
-echo -e "${NC}${CYAN}──────────────────────── $NC"
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -p "Select From Options [1-5] :  " AutoKill
+read -p " ➣ Select Menu [ 1 - 4 ] or [ x ] to Back to Menu : " AutoKill
 read -p "Multilogin Maximum Number Of Allowed: " max
 echo -e ""
 case $AutoKill in
@@ -157,10 +157,12 @@ echo -e "${NC}${CYAN}      Allowed MultiLogin : $max $NC"
 echo -e "${NC}${CYAN}      AutoKill Every     : 1 Minutes $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu-SSH${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to SSH Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
-menu-ssh  
+menu-ssh
 ;;
 2)
 echo -e ""
@@ -178,8 +180,10 @@ echo -e "${NC}${CYAN}      Allowed MultiLogin : $max $NC"
 echo -e "${NC}${CYAN}      AutoKill Every     : 5 Minutes $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu-SSH${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to SSH Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
 menu-ssh
 ;;
@@ -199,8 +203,10 @@ echo -e "${NC}${CYAN}      Allowed MultiLogin : $max $NC"
 echo -e "${NC}${CYAN}      AutoKill Every     : 10 Minutes $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu-SSH${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to SSH Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
 menu-ssh
 ;;
@@ -215,15 +221,23 @@ echo -e " "
 echo -e "${NC}${CYAN}      Auto Multi Login Turn off $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu-SSH${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to SSH Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
+history -c
 clear
 menu-ssh
 ;;
-5)
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu-SSH${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
+x)
 clear
-menu-ssh
+menu
 ;;
+
+*)
+clear
+echo -e " ${EROR}${RED} Command not found! ${NC}"
+sleep 3
+autokill
+;;
+
 esac

@@ -145,7 +145,7 @@ echo -e "${NC}${CYAN}Password : ${pass} $NC"
 echo -e "${NC}${CYAN}Expired (Days): $hari $NC"
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-sleep 5
+sleep 3
 clear
 
 #useradd --expiredate `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M ${user}
@@ -211,8 +211,8 @@ echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to SSH Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 history -c
 clear
-menu
+menu-ssh

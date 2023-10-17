@@ -137,6 +137,7 @@ read -p "Password : " pass
 read -p "Expired (Days): " hari
 echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+sleep 3
 clear
 
 cek="$(cat /etc/passwd | grep /bin/false | grep ${user} | cut -d: -f1 | sed 's/ //g')"
@@ -221,8 +222,8 @@ echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
 echo -e "" | tee -a /etc/arfvpn/log-create-user.log
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to SSH Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 history -c
 clear
-menu
+menu-ssh
