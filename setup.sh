@@ -208,7 +208,7 @@ screen -S ssh-vpn /root/ssh-vpn.sh
 # Installing Websocket
 set_websocket () {
 cd
-wget -O /usr/bin/sshws "https://${github}/ssh/websocket/edu.sh"
+wget -O /usr/bin/sshws "https://${github}/ssh/websocket/sshws.sh"
 chmod +x /usr/bin/sshws
 sed -i -e 's/\r$//' /usr/bin/sshws
 }
@@ -325,27 +325,34 @@ sed -i -e 's/\r$//' /usr/bin/update
 sed -i -e 's/\r$//' /usr/bin/wbmn
 sed -i -e 's/\r$//' /usr/bin/xp
 
+#wget -O /usr/bin/sshws "https://${github}/ssh/websocket/sshws.sh"
+#chmod +x /usr/bin/sshws
+#sed -i -e 's/\r$//' /usr/bin/sshws
+
 wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
 wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
-wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh"
-wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
-wget -O /usr/bin/porttrojan "https://${github}/service/port/porttrojan.sh"
-wget -O /usr/bin/portvlm "https://${github}/service/port/portvlm.sh"
-wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh"
+wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh""
+wget -O /usr/bin/porttrojango "https://${github}/service/port/porttrojango.sh"
+wget -O /usr/bin/portxrayws "https://${github}/service/port/portxrayws.sh"
+wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
+#wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
+#wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh
 chmod +x /usr/bin/changeport
 chmod +x /usr/bin/portovpn
 chmod +x /usr/bin/portsquid
-chmod +x /usr/bin/portsstp
 chmod +x /usr/bin/porttrojan
-chmod +x /usr/bin/portvlm
-chmod +x /usr/bin/portwg
+chmod +x /usr/bin/portxrayws
+chmod +x /usr/bin/portsshws
+#chmod +x /usr/bin/portsstp
+#chmod +x /usr/bin/portwg
 sed -i -e 's/\r$//' /usr/bin/changeport
 sed -i -e 's/\r$//' /usr/bin/portovpn
 sed -i -e 's/\r$//' /usr/bin/portsquid
-sed -i -e 's/\r$//' /usr/bin/portsstp
 sed -i -e 's/\r$//' /usr/bin/porttrojan
-sed -i -e 's/\r$//' /usr/bin/portvlm
-sed -i -e 's/\r$//' /usr/bin/portwg
+sed -i -e 's/\r$//' /usr/bin/portxrayws
+sed -i -e 's/\r$//' /usr/bin/portsshws
+#sed -i -e 's/\r$//' /usr/bin/portsstp
+#sed -i -e 's/\r$//' /usr/bin/portwg
 }
 clear
 echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
