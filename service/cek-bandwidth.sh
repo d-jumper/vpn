@@ -126,7 +126,7 @@ echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}Bandwidth Live Usa
 echo -e "    ${CYAN}[${LIGHT}10${CYAN}]${RED} •${NC} ${CYAN}Bandwidth Live Usage Trafic [ 5s ]${NC}"
 echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu${NC}"
 echo -e "${NC}"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 read -p " ➣ Select Menu [ 1 - 10 ] or [ x ] to Back to Menu : " menu
 echo -e ""
@@ -134,15 +134,15 @@ case $menu in
 1)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "         ⇱ ${STABILO}Total Remaining Server Bandwidth${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                       ⇱ ${STABILO}Total Remaining Server Bandwidth${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -155,15 +155,15 @@ cek-bandwidth
 2)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "       ⇱ ${STABILO}Bandwidth Usage Every 5 Minutes${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                     ⇱ ${STABILO}Bandwidth Usage Every 5 Minutes${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -5
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -176,15 +176,15 @@ cek-bandwidth
 3)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "            ⇱ ${STABILO}Bandwidth Usage Every Hours${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                          ⇱ ${STABILO}Bandwidth Usage Every Hours${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -h
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -197,15 +197,15 @@ cek-bandwidth
 4)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "             ⇱ ${STABILO}Bandwidth Usage Everyday${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                           ⇱ ${STABILO}Bandwidth Usage Everyday${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -d
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -218,15 +218,15 @@ cek-bandwidth
 5)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "            ⇱ ${STABILO}Bandwidth Usage Every Month${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                          ⇱ ${STABILO}Bandwidth Usage Every Month${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -m
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -239,15 +239,15 @@ cek-bandwidth
 6)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "       ⇱ ${STABILO}Bandwidth Usage Every Years${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                     ⇱ ${STABILO}Bandwidth Usage Every Years${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -y
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -260,15 +260,15 @@ cek-bandwidth
 7)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "              ⇱ ${STABILO}Bandwidth Live Highest${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                            ⇱ ${STABILO}Bandwidth Live Highest${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -t
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -281,15 +281,15 @@ cek-bandwidth
 8)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "           ⇱ ${STABILO}Bandwidth Graphic Every Hour${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                         ⇱ ${STABILO}Bandwidth Graphic Every Hour${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -hg
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -302,15 +302,15 @@ cek-bandwidth
 9)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "               ⇱ ${STABILO}Bandwidth Live Usage${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                             ⇱ ${STABILO}Bandwidth Live Usage${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -l
 
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
@@ -323,15 +323,15 @@ cek-bandwidth
 10)
 clear
 echo -e ""
-echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "     ⇱ ${STABILO}Bandwidth Live Usage Trafic [ 5s ]${NC} ⇲"
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────────────────────────────────┐${NC}"
+echo -e "                   ⇱ ${STABILO}Bandwidth Live Usage Trafic [ 5s ]${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 
 vnstat -tr
-
+     10/17/2023     6.48 GiB |    7.80 GiB |   14.28 GiB |    2.00 Mbit/s
 echo -e ""
-echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e "${BLUE}└─────────────────────────────────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Cek-Bandwidth Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
