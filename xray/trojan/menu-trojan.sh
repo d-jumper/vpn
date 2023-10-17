@@ -123,10 +123,11 @@ echo -e "  ${BICyan}[${BIWhite}05${BICyan}]${RED} •${NC} ${CYAN}Add Account Tr
 echo -e "  ${BICyan}[${BIWhite}06${BICyan}]${RED} •${NC} ${CYAN}Delete Account Trojan-GO $NC"
 echo -e "  ${BICyan}[${BIWhite}07${BICyan}]${RED} •${NC} ${CYAN}Renew Account Trojan-GO $NC"
 echo -e "  ${BICyan}[${BIWhite}08${BICyan}]${RED} •${NC} ${CYAN}Cek User Login Trojan-GO $NC"
-echo -e "  ${BICyan}[${BIWhite}09${BICyan}]${RED} •${NC} ${CYAN}Back to Menu $NC"
+echo -e "  ${BICyan}[${BIWhite}xx${BICyan}]${RED} •${NC} ${CYAN}Back to Menu $NC"
 echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
-read -p " ➣ Select From Options [ 1 - 9 ] : " menu
+echo -e ""
+read -p " ➣ Select Menu [ 1 - 7 ] or [ x ] to Back to Menu : " menu
 echo -e ""
 case $menu in
 1) clear ; add-tr ;;
@@ -137,7 +138,7 @@ case $menu in
 6) clear ; del-trgo ;;
 7) clear ; renew-trgo ;;
 8) clear ; cek-trgo ;;
-9) clear ; menu ;;
+x) clear ; menu ;;
 *)
 clear
 echo -e " ${EROR}${RED} Command not found! ${NC}"
