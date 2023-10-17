@@ -110,6 +110,11 @@ github=$(cat ${arfvpn}/github)
 clear
 
 #########################################################
+echo -e ""
+echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                ⇱ \e[32;1m✶ Update Script VPS ✶\e[0m ⇲"
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e " "
 echo -e " ${INFO} Update Script VPS ..."
 echo -e ""
 sleep 2
@@ -400,15 +405,15 @@ sed -i -e 's/\r$//' /bin/cek-trgo
 sed -i -e 's/\r$//' /bin/del-trgo
 sed -i -e 's/\r$//' /bin/renew-trgo
 }
+
 echo -e " ${LIGHT}- ${NC}Updating New Script"
 arfvpn_bar 'update_script'
 echo -e ""
-sleep 2
 
 echo -e " ${OK} Successfully !!! ${CEKLIST}"
-echo -e ""
-sleep 2
 
+echo -e ""
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo ""
 echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${ORANGE}Restart-Service${NC}${LIGHT} or ${NC}[ N/n ]${LIGHT} to ${NC}${STABILO}Back to Menu${NC}"
 read answer
