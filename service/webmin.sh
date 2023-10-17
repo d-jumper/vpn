@@ -123,7 +123,7 @@ fi
 clear
 echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                   ⇱ ${STABILO}Webmin Menu $sts${NC} ⇲ "
+echo -e "          ⇱ ${STABILO}Webmin Menu : $sts${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Install Webmin$NC"
@@ -156,7 +156,7 @@ sleep 2
 clear
 echo ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                   ⇱ ${STABILO}Webmin Service${NC} ⇲ "
+echo -e "                 ⇱ ${STABILO}Webmin Service/s${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e " ${SUCCESS}Webmin Suuccessfully Installed$NC"
@@ -184,7 +184,7 @@ sleep 2
 clear
 echo ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                   ⇱ ${STABILO}Webmin Service${NC} ⇲ "
+echo -e "                 ⇱ ${STABILO}Webmin Service/s${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e " ${SUCCESS}Webmin Suuccessfully Restarted$NC"
@@ -211,7 +211,7 @@ sleep 2
 clear
 echo ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
-echo -e "                   ⇱ ${STABILO}Webmin Service${NC} ⇲ "
+echo -e "                 ⇱ ${STABILO}Webmin Service/s${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 echo -e " ${SUCCESS}Webmin Suuccessfully Uninstalled$NC"
