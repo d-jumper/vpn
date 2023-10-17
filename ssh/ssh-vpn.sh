@@ -391,7 +391,7 @@ sleep 2
 #cp -s /usr/local/ddos/ddos.sh /usr/local/sbin/ddos
 # Creating cron to run script every minute.....(Default setting)
 #if ! grep -q '/usr/local/ddos/ddos.sh' /var/spool/cron/crontabs/root;then (crontab -l;echo "*/1 * * * * /usr/local/ddos/ddos.sh") | crontab;fi
-$}
+#}
 #echo -e " ${LIGHT}- ${NC}Installing Ddos"
 #arfvpn_bar 'set_ddos'
 #echo -e ""
