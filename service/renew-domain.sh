@@ -200,10 +200,14 @@ echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━�
 echo -e ""
 echo -e " ${OK} Renew Domain Successfully !!! ${CEKLIST}"
 echo -e ""
-echo -e "     ${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${YELLOW}Reboot-Server${NC}${LIGHT} or ${NC}${RED}[ N/n ]${NC} / ${RED}[ CTRL+C ]${NC}${LIGHT} to exit${NC}"
+echo -e "${LIGHT}Please write answer ${NC}[ Y/y ]${LIGHT} to ${NC}${ORANGE}Reboot-Server${NC}${LIGHT} or ${NC}[ N/n ]${LIGHT} to ${NC}${STABILO}Back to Menu${NC}"
 read answer
 if [ "$answer" == "${answer#[Yy]}" ] ;then
-exit 0
+sleep 2
+clear
+menu
 else
+sleep 2
+clear
 reboot
 fi

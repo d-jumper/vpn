@@ -152,7 +152,7 @@ arfvpn_bar 'restart_service'
 echo ""
 echo -e "${OK} All Service/s Successfully Restarted ${CEKLIST}"
 echo ""
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${ORANGE}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "   ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${ORANGE}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
 running

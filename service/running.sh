@@ -286,7 +286,7 @@ echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}TROJAN GO       
 echo -e "${CYAN}[${NC}❇️${CYAN}]${NC}${RED} •${NC} ${CYAN}SHADOWSOCKS OBFS        ${NC}:$status_ss_obfs"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m${NC}"
 echo ""
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "   ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
 menu

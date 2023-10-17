@@ -112,80 +112,128 @@ Green_font_prefix="\033[32m" && Red_font_prefix="\033[31m" && Green_background_p
 Info="${Green_font_prefix}[Installed]${Font_color_suffix}"
 Error="${Red_font_prefix}[Not Installed]${Font_color_suffix}"
 cek=$(netstat -ntlp | grep 10000 | awk '{print $7}' | cut -d'/' -f2)
-function install () {
 IP=$(wget -qO- ifconfig.co);
-echo " Adding Repositori Webmin"
+
+if [[ "$cek" = "perl" ]]; then
+sts="${Info}"
+else
+sts="${Error}"
+fi
+
+clear
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                   ⇱ ${STABILO}Webmin Menu $sts${NC} ⇲ "
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Install Webmin$NC"
+echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Restart Webmin$NC"
+echo -e "    ${CYAN}[${LIGHT}03${CYAN}]${RED} •${NC} ${CYAN}Uninstall Webmin$NC"
+echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu$NC"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+read -p " ➣  Select Menu [ 1 - 3 ] or [ x ] to Back to Menu : " menu
+case $menu in
+
+1)
+set_install () {
 sh -c 'echo "deb http://download.webmin.com/download/repository sarge contrib" > /etc/apt/sources.list.d/webmin.list'
 apt install gnupg gnupg1 gnupg2 -y
 wget http://www.webmin.com/jcameron-key.asc
 apt-key add jcameron-key.asc
-echo " Start Install Webmin"
-clear
 sleep 0.5
 apt update > /dev/null 2>&1
 apt install webmin -y
 sed -i 's/ssl=1/ssl=0/g' /etc/webmin/miniserv.conf
 /etc/init.d/webmin restart
 rm -f /root/jcameron-key.asc
+}
+clear
+echo -e " ${LIGHT}- ${NC}Installing Webmin"
+arfvpn_bar 'set_install'
+sleep 2
 clear
 echo ""
-echo "======================="
-echo "  Done Install Webmin  "
-echo "======================="
-echo "http://$IP:10000"
-echo "======================="
-echo "Script By LamVpn"
-}
-function restart () {
-echo " Restarting Webmin"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                   ⇱ ${STABILO}Webmin Service${NC} ⇲ "
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e " ${SUCCESS}Webmin Suuccessfully Installed$NC"
+echo -e ""
+echo -e " ${LIGHT}Webmin Access :$NC"
+echo -e " ${LIGHT}http://$IP:10000$NC"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Webmin Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+wbmn
+;;
+
+2)
+set_restart () {
 sleep 0.5
 service webmin restart > /dev/null 2>&1
-echo " Start Uninstall Webmin"
+}
+clear
+echo -e " ${LIGHT}- ${NC}Restarting Webmin"
+arfvpn_bar 'set_restart'
+sleep 2
 clear
 echo ""
-echo "======================="
-echo "  Done Restart Webmin  "
-echo "======================="
-echo "Script By LamVpn"
-}
-function uninstall () {
-echo " Removing Repositori Webmin"
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                   ⇱ ${STABILO}Webmin Service${NC} ⇲ "
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e " ${SUCCESS}Webmin Suuccessfully Restarted$NC"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Webmin Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+wbmn
+;;
+
+3)
+set_uninstall () {
 rm -f /etc/apt/sources.list.d/webmin.list
 apt update > /dev/null 2>&1
-echo " Start Uninstall Webmin"
-clear
 sleep 0.5
 apt autoremove --purge webmin -y > /dev/null 2>&1
+}
+clear
+echo -e " ${LIGHT}- ${NC}Uninstalling Webmin"
+arfvpn_bar 'set_uninstall'
+sleep 2
 clear
 echo ""
-echo "========================="
-echo "  Done Uninstall Webmin  "
-echo "========================="
-echo "Script By LamVpn"
-}
-if [[ "$cek" = "perl" ]]; then
-sts="${Info}"
-else
-sts="${Error}"
-fi
-clear
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "                   ⇱ ${STABILO}Webmin Service${NC} ⇲ "
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-echo -e "================================"
-echo -e "   Webmin Menu $sts        "
-echo -e "================================"
-echo -e "1.Install Webmin"
-echo -e "2.Restart Webmin"
-echo -e "3.Uninstall Webmin"
-echo -e "================================"
-read -rp "Please Enter The Correct Number : " -e num
-if [[ "$num" = "1" ]]; then
-install
-elif [[ "$num" = "2" ]]; then
-restart
-elif [[ "$num" = "3" ]]; then
-uninstall
-else
+echo -e " ${SUCCESS}Webmin Suuccessfully Uninstalled$NC"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Webmin Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 clear
-echo " You Entered The Wrong Number"
+wbmn
+;;
+
+x)
+clear
 menu
-fi
+;;
+
+*)
+clear
+echo -e " ${EROR}${RED} Command not found! ${NC}"
+sleep 3
+wbmn
+;;
+
+esac
