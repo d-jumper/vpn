@@ -185,8 +185,8 @@ clear
     echo -e " "
     echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
     echo ""
-echo -e "     ${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Shadowsocks Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 history -c
 clear
-menu
+menu-ss
