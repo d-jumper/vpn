@@ -141,6 +141,7 @@ read -p " ➣ Select Menu [ 1 - 4 ] or [ x ] to Back to Menu : " AutoKill
 case $AutoKill in
 
 1)
+clear
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
@@ -151,18 +152,22 @@ echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 sleep 2
 clear
-echo -e ""
-sleep 1
-clear
+
+set_1min () {
 echo > /etc/cron.d/tendang
 echo "# Autokill" >>/etc/cron.d/tendang
 echo "*/1 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+}
+echo -e " ${LIGHT}- ${NC}Set AutoKill"
+arfvpn_bar 'set_1min'
+sleep 2
+clear
+
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e " "
-read -p "Multilogin Maximum Number Of Allowed: " max
 echo -e "${NC}${CYAN}      Allowed MultiLogin : $max $NC"
 echo -e "${NC}${CYAN}      AutoKill Every     : 1 Minutes $NC"
 echo -e ""
@@ -175,6 +180,7 @@ clear
 menu-ssh
 ;;
 2)
+clear
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
@@ -185,12 +191,17 @@ echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 sleep 2
 clear
-echo -e ""
-sleep 1
-clear
+
+set_5min () {
 echo > /etc/cron.d/tendang
 echo "# Autokill" >>/etc/cron.d/tendang
 echo "*/5 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+}
+echo -e " ${LIGHT}- ${NC}Set AutoKill"
+arfvpn_bar 'set_5min'
+sleep 2
+clear
+
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
@@ -208,6 +219,7 @@ clear
 menu-ssh
 ;;
 3)
+clear
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
@@ -218,12 +230,17 @@ echo -e ""
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 sleep 2
 clear
-echo -e ""
-sleep 1
-clear
+
+set_10min () {
 echo > /etc/cron.d/tendang
 echo "# Autokill" >>/etc/cron.d/tendang
 echo "*/10 * * * *  root /usr/bin/tendang $max" >>/etc/cron.d/tendang
+}
+echo -e " ${LIGHT}- ${NC}Set AutoKill"
+arfvpn_bar 'set_10min'
+sleep 2
+clear
+
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
