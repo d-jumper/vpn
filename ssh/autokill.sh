@@ -138,9 +138,15 @@ echo -e " "
 echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 read -p " ➣ Select Menu [ 1 - 4 ] or [ x ] to Back to Menu : " AutoKill
+
+if [ "$AutoKill" == "${AutoKill#[x]}" ] ;then
 read -p "Multilogin Maximum Number Of Allowed: " max
-echo -e ""
+else
+clear
+autokill
+fi
 case $AutoKill in
+
 1)
 echo -e ""
 sleep 1
