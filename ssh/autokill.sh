@@ -253,7 +253,21 @@ autokill
 
 4)
 clear
+set_off () {
 echo > /etc/cron.d/tendang
+}
+echo -e ""
+echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+echo -e " "
+echo -e " ${LIGHT}- ${NC}Set Turn off Auto Kill"
+arfvpn_bar 'set_off'
+echo -e ""
+echo -e "\033[0;34m└─────────────────────────────────────────────────────┘${NC}"
+sleep 2
+clear
+
 echo -e ""
 echo -e "\033[0;34m┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "          ⇱ \e[32;1m✶ Auto Kill SSH & OpenVPN Account ✶\e[0m ⇲ ${NC}"
