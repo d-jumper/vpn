@@ -151,23 +151,43 @@ read -p "Change New Port for Xray Websocket TLS : " tls1
 sleep 2
 
 if [ -z $tls1 ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portxrayws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "        ⇱ ${STABILO}Change Port Xray Websocket TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
 cek=$(netstat -nutlp | grep -w $tls1)
 if [[ -z $cek ]]; then
 else
-echo -e "${RED} Port ${tls1} is used"
-sleep 2
 clear
-portxrayws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "        ⇱ ${STABILO}Change Port Xray Websocket TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${tls1} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port_tls () {
 systemctl stop nginx > /dev/null
+systemctl stop runn > /dev/null 2>&1
+systemctl stop xray > /dev/null 2>&1
+systemctl stop xray.service > /dev/null
 #sed -i 's/$tls/$tls1/g' /etc/xray/config.json
 sed -i 's/${tls} ssl;/${tls1} ssl;/g' /etc/nginx/sites-available/*${DOMAIN}.conf
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $tls -j ACCEPT
@@ -180,6 +200,8 @@ netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
 systemctl restart xray.service > /dev/null
 systemctl restart nginx > /dev/null
+systemctl restart runn > /dev/null 2>&1
+systemctl restart xray > /dev/null 2>&1
 }
 
 clear
@@ -273,23 +295,43 @@ read -p "Change New Port for Xray Websocket None TLS : " none1
 sleep 2
 
 if [ -z $none1 ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portxrayws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "   ⇱ ${STABILO}Change Port Xray Websocket None TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
 cek=$(netstat -nutlp | grep -w $none1)
 if [[ -z $cek ]]; then
 else
-echo -e "${RED} Port ${none1} is used"
-sleep 2
 clear
-portxrayws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "   ⇱ ${STABILO}Change Port Xray Websocket None TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${none1} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port_none () {
 systemctl stop nginx > /dev/null
+systemctl stop runn > /dev/null 2>&1
+systemctl stop xray > /dev/null 2>&1
+systemctl stop xray.service > /dev/null
 #sed -i 's/$none/$none1/g' /etc/xray/config.json
 sed -i 's/${none} ssl;/${none1} ssl;/g' /etc/nginx/sites-available/*${DOMAIN}.conf
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $none -j ACCEPT
@@ -302,6 +344,8 @@ netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
 systemctl restart xray.service > /dev/null
 systemctl restart nginx > /dev/null
+systemctl restart runn > /dev/null 2>&1
+systemctl restart xray > /dev/null 2>&1
 }
 
 clear

@@ -148,24 +148,39 @@ echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
 read -p "Change New Port for OpenVPN TCP : " vpn
-sleep 2
 
 if [ -z $vpn ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portovpn
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "            ⇱ ${STABILO}Change Port OpenVPN TCP${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
-clear
 cek=$(netstat -nutlp | grep -w $vpn)
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${vpn} is used"
-sleep 2
 clear
-portovpn
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "            ⇱ ${STABILO}Change Port OpenVPN TCP${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${vpn} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_ovpn_tcp () {
@@ -213,9 +228,13 @@ echo '<ca>' >> /etc/openvpn/client/tcp.ovpn
 cat /etc/openvpn/client/ca.crt >> /etc/openvpn/client/tcp.ovpn
 echo '</ca>' >> /etc/openvpn/client/tcp.ovpn
 cp /etc/openvpn/client/tcp.ovpn /home/arfvps/public_html/tcp.ovpn
+systemctl stop stunnel5
+sed -i 's/connect = 127.0.0.1:$ovpn/connect = 127.0.0.1:$vpn/g' /etc/stunnel5/stunnel5.conf
+systemctl start stunnel5
 systemctl disable --now openvpn-server@server-tcp > /dev/null
 systemctl enable --now openvpn-server@server-tcp > /dev/null
-sed -i 's/connect = 127.0.0.1:$ovpn/connect = 127.0.0.1:$vpn/g' /etc/stunnel5/stunnel5.conf
+systemctl start --now openvpn-server@server-tcp > /dev/null
+systemctl restart --now openvpn-server@server-tcp > /dev/null
 }
 
 clear
@@ -308,21 +327,37 @@ read -p "Change New Port for OpenVPN UDP: " vpn
 sleep 2
 
 if [ -z $vpn ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portovpn
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "            ⇱ ${STABILO}Change Port OpenVPN UDP${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
-clear
 cek=$(netstat -nutlp | grep -w $vpn)
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${vpn} is used"
-sleep 2
 clear
-portovpn
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "            ⇱ ${STABILO}Change Port OpenVPN UDP${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${vpn} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_ovpn_udp () {
@@ -373,6 +408,8 @@ echo '</ca>' >> /etc/openvpn/client/udp.ovpn
 cp /etc/openvpn/client/udp.ovpn /home/arfvps/public_html/udp.ovpn
 systemctl disable --now openvpn-server@server-udp > /dev/null
 systemctl enable --now openvpn-server@server-udp > /dev/null
+systemctl start --now openvpn-server@server-udp > /dev/null
+systemctl restart --now openvpn-server@server-udp > /dev/null
 }
 
 clear

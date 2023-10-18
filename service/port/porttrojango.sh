@@ -134,23 +134,41 @@ read -p "Change New Port for Trojan-Go : " trgo2
 sleep 2
 
 if [ -z ${trgo2} ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-changeport
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
 cek=$(netstat -nutlp | grep -w ${trgo2})
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${trgo2} is used"
-sleep 2
 clear
-changeport
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${trgo2} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port_trgo () {
+systemctl stop trojan-go
 sed -i 's/${trgo}/${trgo2}/g' /etc/arfvpn/trojan-go/config.json
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${trgo} -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport ${trgo} -j ACCEPT
@@ -160,7 +178,7 @@ iptables-save >> /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
-systemctl restart xray.service > /dev/null
+systemctl restart trojan-go
 }
 
 clear
@@ -169,7 +187,7 @@ echo -e "${BLUE}┌────────────────────�
 echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-echo -e " ${LIGHT}- ${NC}Change Port Trojan-Go$"
+echo -e " ${LIGHT}- ${NC}Change Port Trojan-Go"
 arfvpn_bar 'set_port_trgo'
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"

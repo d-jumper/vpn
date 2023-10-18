@@ -150,10 +150,18 @@ read -p "Change New Port for SSH Websocket TLS : " ws2
 sleep 2
 
 if [ -z ${ws2} ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portsshws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "           ⇱ ${STABILO}Change Port SSH Websocket TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
 clear
@@ -161,13 +169,25 @@ cek=$(netstat -nutlp | grep -w ${ws2})
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${ws2} is used"
-sleep 2
 clear
-portsshws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "           ⇱ ${STABILO}Change Port SSH Websocket TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${ws2} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port () {
+/etc/init.d/sslh stop > /dev/null
+/etc/init.d/ws-tls stop > /dev/null
+systemctl stop stunnel5 > /dev/null
 sed -i 's/127.0.0.1:${ws}/127.0.0.1:${ws2}/g' /etc/default/sslh
 sed -i 's/connect = 127.0.0.1:${ws}/connect = 127.0.0.1:${ws2}/g' /etc/stunnel5/stunnel5.conf
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${ws} -j ACCEPT
@@ -179,9 +199,10 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
 sed -i 's/${ws}/${ws2}/g' /etc/systemd/system/ws-tls.service
-systemctl daemon-reload
-systemctl restart sslh
+systemctl daemon-reload > /dev/null
+systemctl restart sslh > /dev/null
 systemctl restart ws-tls > /dev/null
+systemctl restart stunnel5 > /dev/null
 }
 
 clear
@@ -274,10 +295,18 @@ read -p "Change New Port for SSH Websocket None TLS : " wsntls2
 sleep 2
 
 if [ -z ${wsntls2} ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portsshws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "        ⇱ ${STABILO}Change Port SSH Websocket None TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
 clear
@@ -285,13 +314,25 @@ cek=$(netstat -nutlp | grep -w ${wsntls2})
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${wsntls2} is used"
-sleep 2
 clear
-portsshws
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "        ⇱ ${STABILO}Change Port SSH Websocket None TLS${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Port ${wsntls2} already used !"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port_ntls () {
+/etc/init.d/sslh stop > /dev/null
+/etc/init.d/ws-nontls stop > /dev/null
+systemctl stop stunnel5 > /dev/null
 sed -i 's/127.0.0.1:${wsntls}/127.0.0.1:${wsntls2}/g' /etc/default/sslh
 iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport ${wsntls} -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport ${wsntls} -j ACCEPT
@@ -302,9 +343,10 @@ iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
 sed -i 's/${wsntls}/${wsntls2}/g' /etc/systemd/system/ws-nontls.service
-systemctl daemon-reload
-systemctl restart sslh
+systemctl daemon-reload > /dev/null
+systemctl restart sslh > /dev/null
 systemctl restart ws-nontls > /dev/null
+systemctl restart stunnel5 > /dev/null
 }
 clear
 echo -e ""

@@ -151,24 +151,41 @@ read -p "Change New Port for Squid Proxy : " squid
 sleep 2
 
 if [ -z $squid ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portsquid
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
-clear
 cek=$(netstat -nutlp | grep -w $squid)
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${squid} is used"
-sleep 2
 clear
-portsquid
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${RED} Port ${squid} already used"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port_squid () {
+systemctl stop squid
 sed -i 's/$sqd/$squid/g' /etc/squid/squid.conf
 /etc/init.d/squid restart > /dev/null
 }
@@ -263,24 +280,41 @@ read -p "Change New Port for Squid Proxy : " squid
 sleep 2
 
 if [ -z $squid ]; then
-echo -e "${RED} Please Input New Port !${NC}"
-sleep 2
 clear
-portsquid
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${WARNING} Your nothing Input Port !${NC}"
+echo -e "${WARNING} Please Input New Port !${NC}"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+exit
 fi
 
-clear
 cek=$(netstat -nutlp | grep -w $squid)
 if [[ -z $cek ]]; then
 sleep 1
 else
-echo -e "${RED} Port ${squid} is used"
-sleep 2
 clear
-portsquid
+echo -e ""
+echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
+echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${RED} Port ${squid} already used"
+echo -e "${WARNING} Are your'e sure?"
+echo -e ""
+echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Continue${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
 fi
 
 set_port_squid2 () {
+systemctl stop squid
 sed -i 's/$sqd2/$squid/g' /etc/squid/squid.conf
 /etc/init.d/squid restart > /dev/null
 }
