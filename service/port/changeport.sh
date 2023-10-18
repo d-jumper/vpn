@@ -108,7 +108,6 @@ github=$(cat $arfvpn/github)
 clear
 
 echo -e ""
-echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "           ⇱ ${STABILO}Change Port Tunnel/s Services${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"

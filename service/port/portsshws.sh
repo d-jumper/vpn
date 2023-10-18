@@ -109,7 +109,7 @@ arfvpn="/etc/arfvpn"
 github=$(cat ${arfvpn}/github)
 ovpn="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 ovpn2="$(netstat -nlpu | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-ws="$(cat /etc/arfvpn/log-install.txt | grep -w "Installation time :" | cut -d: -f2|sed 's/ //g')"
+ws="$(cat /etc/arfvpn/log-install.txt | grep -w "Websocket TLS" | cut -d: -f2|sed 's/ //g')"
 wsntls="$(cat /etc/arfvpn/log-install.txt | grep -w "Websocket None TLS" | cut -d: -f2|sed 's/ //g')"
 sqd="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}' | head -n1)"
 sqd2="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}' | tail -n1)"
@@ -136,6 +136,7 @@ echo -e ""
 case $menu in
 
 1)
+clear
 echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "           ⇱ ${STABILO}Change Port SSH Websocket TLS${NC} ⇲"
