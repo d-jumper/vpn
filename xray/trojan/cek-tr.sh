@@ -145,7 +145,8 @@ lastlogin=$(cat ${logxray}/access.log | grep -w "${akun}" | tail -n 500 | cut -d
 
 echo -e "  ${RED}•${NC} ${CYAN}Info Login : $NC"
 echo -e "${NC} ${CYAN}User : ${akun} $NC";
-echo -e "${NC} ${CYAN}Ip Login : ${jum} $NC";
+echo -e "${NC} ${CYAN}Ip Login :$NC";
+echo -e "${NC}${CYAN}${jum} $NC";
 echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
 echo -e "${NC}${CYAN}──────────────────── $NC"
 
