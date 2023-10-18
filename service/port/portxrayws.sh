@@ -429,7 +429,7 @@ changeport
 ;;
 
 x)
-exit
+clear
 changeport
 ;;
 
