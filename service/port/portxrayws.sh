@@ -170,6 +170,7 @@ fi
 
 cek=$(netstat -nutlp | grep -w $tls1)
 if [[ -z $cek ]]; then
+sleep 1
 else
 clear
 echo -e ""
@@ -314,6 +315,7 @@ fi
 
 cek=$(netstat -nutlp | grep -w $none1)
 if [[ -z $cek ]]; then
+sleep 1
 else
 clear
 echo -e ""
