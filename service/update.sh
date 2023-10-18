@@ -161,7 +161,7 @@ rm -rvf /usr/bin/swapkvm
 rm -rvf /usr/bin/changeport
 rm -rvf /usr/bin/portovpn
 rm -rvf /usr/bin/portsquid
-rm -rvf /usr/bin/porttrojan
+rm -rvf /usr/bin/porttrojango
 rm -rvf /usr/bin/portxrayws
 rm -rvf /usr/bin/portsshws
 #rm -rvf /usr/bin/portsstp
@@ -314,7 +314,7 @@ sed -i -e 's/\r$//' /usr/bin/swapkvm
 
 wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
 wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
-wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh""
+wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh"
 wget -O /usr/bin/porttrojango "https://${github}/service/port/porttrojango.sh"
 wget -O /usr/bin/portxrayws "https://${github}/service/port/portxrayws.sh"
 wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
@@ -323,7 +323,7 @@ wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
 chmod +x /usr/bin/changeport
 chmod +x /usr/bin/portovpn
 chmod +x /usr/bin/portsquid
-chmod +x /usr/bin/porttrojan
+chmod +x /usr/bin/porttrojango
 chmod +x /usr/bin/portxrayws
 chmod +x /usr/bin/portsshws
 #chmod +x /usr/bin/portsstp
@@ -331,7 +331,7 @@ chmod +x /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/changeport
 sed -i -e 's/\r$//' /usr/bin/portovpn
 sed -i -e 's/\r$//' /usr/bin/portsquid
-sed -i -e 's/\r$//' /usr/bin/porttrojan
+sed -i -e 's/\r$//' /usr/bin/porttrojango
 sed -i -e 's/\r$//' /usr/bin/portxrayws
 sed -i -e 's/\r$//' /usr/bin/portsshws
 #sed -i -e 's/\r$//' /usr/bin/portsstp
