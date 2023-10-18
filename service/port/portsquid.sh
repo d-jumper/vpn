@@ -108,16 +108,19 @@ github=$(cat $arfvpn/github)
 MYIP=$(cat $arfvpn/IP)
 MYISP=$(cat $arfvpn/ISP)
 DOMAIN=$(cat $arfvpn/domain)
+mkdir -p /etc/arfvpn/backup/
+rm  /etc/arfvpn/backup/log-install.txt
+cp /etc/arfvpn/log-install.txt /etc/arfvpn/backup/log-install.txt
 ovpn="$(netstat -nlpt | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
 ovpn2="$(netstat -nlpu | grep -i openvpn | grep -i 0.0.0.0 | awk '{print $4}' | cut -d: -f2)"
-ws="$(cat /etc/arfvpn/log-install.txt | grep -w "Websocket TLS" | cut -d: -f2|sed 's/ //g')"
-wsntls="$(cat /etc/arfvpn/log-install.txt | grep -w "Websocket None TLS" | cut -d: -f2|sed 's/ //g')"
 sqd="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}' | head -n1)"
 sqd2="$(cat /etc/squid/squid.conf | grep -i http_port | awk '{print $2}' | tail -n1)"
-trgo="$(cat /etc/arfvpn/log-install.txt | grep -w "Trojan GO" | cut -d: -f2|sed 's/ //g')"
-tls="$(cat /etc/arfvpn/log-install.txt | grep -w "Xray WS TLS" | cut -d: -f2|sed 's/ //g')"
-none="$(cat /etc/arfvpn/log-install.txt | grep -w "Xray WS NONE TLS" | cut -d: -f2|sed 's/ //g')"
-setinstall="$(cat /etc/arfvpn/log-install.txt | grep -w "Installation time :" | cut -d: -f2)"
+ws="$(cat /etc/arfvpn/backup/log-install.txt | grep -w "Websocket TLS" | cut -d: -f2|sed 's/ //g')"
+wsntls="$(cat /etc/arfvpn/backup/log-install.txt | grep -w "Websocket None TLS" | cut -d: -f2|sed 's/ //g')"
+trgo="$(cat /etc/arfvpn/backup/log-install.txt | grep -w "Trojan GO" | cut -d: -f2|sed 's/ //g')"
+tls="$(cat /etc/arfvpn/backup/log-install.txt | grep -w "Xray WS TLS" | cut -d: -f2|sed 's/ //g')"
+none="$(cat /etc/arfvpn/backup/log-install.txt | grep -w "Xray WS NONE TLS" | cut -d: -f2|sed 's/ //g')"
+setinstall="$(cat /etc/arfvpn/backup/log-install.txt | grep -w "Installation time :" | cut -d: -f2)"
 echo -e "Installation time :${setinstall}" > /root/log-install
 clear
 
