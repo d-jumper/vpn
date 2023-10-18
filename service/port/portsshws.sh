@@ -115,8 +115,8 @@ echo -e "${BLUE}┌────────────────────�
 echo -e "               ⇱ ${STABILO}Change Port SSH Websocket${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port Websocket TLS $NC"
-echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Port Websocket None TLS $NC"
+echo -e "    ${CYAN}[${LIGHT}01${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH Websocket TLS $NC"
+echo -e "    ${CYAN}[${LIGHT}02${CYAN}]${RED} •${NC} ${CYAN}Change Port SSH Websocket None TLS $NC"
 echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu $NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -126,6 +126,7 @@ echo -e ""
 case $menu in
 
 1)
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "           ⇱ ${STABILO}Change Port SSH Websocket TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -140,7 +141,6 @@ sleep 2
 if [ -z ${ws2} ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -153,7 +153,6 @@ else
 echo -e "${RED} Port ${ws2} is used"
 sleep 2
 clear
-exit 0
 changeport
 fi
 
@@ -176,6 +175,7 @@ systemctl restart ws-tls > /dev/null
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "           ⇱ ${STABILO}Change Port SSH Websocket TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -187,6 +187,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "           ⇱ ${STABILO}Change Port SSH Websocket TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -196,11 +197,15 @@ echo -e "  ${RED} •${NC} ${CYAN}New Port SSH Websocket TLS :${NC}${LIGHT} ${ws
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-sleep 2
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
 2)
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "        ⇱ ${STABILO}Change Port SSH Websocket None TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -215,7 +220,6 @@ sleep 2
 if [ -z ${wsntls2} ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -228,7 +232,6 @@ else
 echo -e "${RED} Port ${wsntls2} is used"
 sleep 2
 clear
-exit 0
 changeport
 fi
 
@@ -251,6 +254,7 @@ systemctl restart ws-nontls > /dev/null
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "        ⇱ ${STABILO}Change Port SSH Websocket None TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -262,6 +266,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "        ⇱ ${STABILO}Change Port SSH Websocket None TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -270,11 +275,23 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port SSH Websocket None TLS :${NC}${LIGHT} ${wsntls2}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
-;;
-esac
-
+echo -e ""
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
-exit 0
 changeport
+;;
+
+x)
+clear
+menu
+;;
+
+*)
+clear
+echo -e " ${EROR}${RED} Command not found! ${NC}"
+sleep 3
+changeport
+;;
+
+esac

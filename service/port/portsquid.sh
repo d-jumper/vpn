@@ -143,7 +143,6 @@ sleep 2
 if [ -z $squid ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -155,7 +154,6 @@ sleep 1
 else
 echo -e "${RED} Port ${squid} is used"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -167,6 +165,7 @@ sed -i 's/$sqd/$squid/g' /etc/arfvpn/log-install.txt
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -178,6 +177,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -186,6 +186,11 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port Squid Proxy :${NC}${LIGHT} ${squid}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
 2)
@@ -205,7 +210,6 @@ sleep 2
 if [ -z $squid ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -217,7 +221,6 @@ sleep 1
 else
 echo -e "${RED} Port ${squid} is used"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -229,6 +232,7 @@ sed -i 's/$sqd2/$squid/g' /etc/arfvpn/log-install.txt
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -240,6 +244,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "               ⇱ ${STABILO}Change Port Squid Proxy${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -248,9 +253,14 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port Squid Proxy :${NC}${LIGHT} ${squid}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
-3)
+x)
 clear
 exit
 menu
@@ -264,9 +274,3 @@ changeport
 ;;
 
 esac
-sleep 2
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
-exit 0
-clear
-changeport

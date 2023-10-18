@@ -210,6 +210,7 @@ sed -i 's/$ovpn/$vpn/g" /etc/stunnel/stunnel.conf
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "            ⇱ ${STABILO}Change Port OpenVPN TCP${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -221,6 +222,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "            ⇱ ${STABILO}Change Port OpenVPN TCP${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -229,6 +231,11 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port OpenVPN TCP :${NC}${LIGHT} ${vpn}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
 2)
@@ -315,6 +322,7 @@ sed -i 's/   - OpenVPN                 : TCP $ovpn, UDP $ovpn2, SSL 990/   - Ope
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "            ⇱ ${STABILO}Change Port OpenVPN UDP${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -326,6 +334,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "            ⇱ ${STABILO}Change Port OpenVPN UDP${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -334,9 +343,14 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port OpenVPN UDP :${NC}${LIGHT} ${vpn}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
-3)
+x)
 clear
 menu
 ;;
@@ -349,9 +363,3 @@ changeport
 ;;
 
 esac
-echo -e ""
-sleep 2
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
-clear
-changeport

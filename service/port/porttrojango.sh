@@ -126,7 +126,6 @@ sleep 2
 if [ -z ${trgo2} ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -138,7 +137,6 @@ else
 echo -e "${RED} Port ${trgo2} is used"
 sleep 2
 clear
-exit 0
 changeport
 fi
 
@@ -157,6 +155,7 @@ systemctl restart xray.service > /dev/null
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -168,6 +167,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "               ⇱ ${STABILO}Change Port Trojan-Go${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -177,9 +177,7 @@ echo -e "  ${RED} •${NC} ${CYAN}New Port Trojan-Go$ :${NC}${LIGHT} ${trgo2}$NC
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-sleep 2
 echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
 read -p ""
 clear
-exit 0
 changeport

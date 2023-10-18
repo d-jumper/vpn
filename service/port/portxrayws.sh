@@ -145,7 +145,6 @@ sleep 2
 if [ -z $tls1 ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -155,7 +154,6 @@ if [[ -z $cek ]]; then
 else
 echo -e "${RED} Port ${tls1} is used"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -167,7 +165,7 @@ iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $tls -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $tls -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $tls1 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport $tls1 -j ACCEPT
-iptables-save > /etc/iptables.up.rules
+iptables-save >> /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
@@ -175,6 +173,7 @@ systemctl restart xray.service > /dev/null
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "        ⇱ ${STABILO}Change Port Xray Websocket TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -186,6 +185,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "        ⇱ ${STABILO}Change Port Xray Websocket TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -194,6 +194,11 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port Xray Websocket TLS :${NC}${LIGHT} ${vpn}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
 2)
@@ -214,7 +219,6 @@ sleep 2
 if [ -z $none1 ]; then
 echo -e "${RED} Please Input New Port !${NC}"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -224,7 +228,6 @@ if [[ -z $cek ]]; then
 else
 echo -e "${RED} Port ${none1} is used"
 sleep 2
-exit 0
 clear
 changeport
 fi
@@ -236,7 +239,7 @@ iptables -D INPUT -m state --state NEW -m tcp -p tcp --dport $none -j ACCEPT
 iptables -D INPUT -m state --state NEW -m udp -p udp --dport $none -j ACCEPT
 iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport $none1 -j ACCEPT
 iptables -I INPUT -m state --state NEW -m udp -p udp --dport $none1 -j ACCEPT
-iptables-save > /etc/iptables.up.rules
+iptables-save >> /etc/iptables.up.rules
 iptables-restore -t < /etc/iptables.up.rules
 netfilter-persistent save > /dev/null
 netfilter-persistent reload > /dev/null
@@ -244,6 +247,7 @@ systemctl restart xray.service > /dev/null
 }
 
 clear
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "   ⇱ ${STABILO}Change Port Xray Websocket None TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -255,6 +259,7 @@ echo -e "${BLUE}└────────────────────�
 sleep 2
 clear
 
+echo -e ""
 echo -e "${BLUE}┌─────────────────────────────────────────────────────┐${NC}"
 echo -e "   ⇱ ${STABILO}Change Port Xray Websocket None TLS${NC} ⇲"
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
@@ -263,9 +268,14 @@ echo -e "  ${SUCCESS}${NC}${LIGHT}Port Successfully Changed !$NC"
 echo -e "  ${RED} •${NC} ${CYAN}New Port Xray Websocket None TLS :${NC}${LIGHT} ${none1}$NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
+echo -e ""
+echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
+read -p ""
+clear
+changeport
 ;;
 
-3)
+x)
 exit
 menu
 ;;
@@ -278,10 +288,3 @@ changeport
 ;;
 
 esac
-echo -e ""
-sleep 2
-echo -e "${LIGHT}Press ${NC}[ ENTER ]${LIGHT} to ${NC}${BIYellow}Back to Changeport-Menu${NC}${LIGHT} or ${NC}${RED}CTRL+C${NC}${LIGHT} to exit${NC}"
-read -p ""
-exit 0
-clear
-changeport
