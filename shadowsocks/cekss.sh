@@ -126,8 +126,10 @@ jum=$(netstat -anp | grep ESTABLISHED | grep obfs-server | cut -d ':' -f 2 | gre
 if [[ -z "${jum}" ]]; then
 echo > /dev/null
 else
-echo -e "  ${RED}•${NC} ${CYAN}${akun} - ${port} $NC"
-echo -e "${NC} ${CYAN}${jum} $NC";
+echo -e "${NC} ${CYAN}User : ${akun} - ${port} $NC";
+echo -e "${NC} ${CYAN}Ip Login :$NC";
+echo -e "${NC}${CYAN}${jum} $NC";
+#echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
 echo -e "${NC}${CYAN}──────────────────── $NC"
 fi
 x=$(( "$x" + 1 ))
@@ -142,11 +144,17 @@ for akun in "${data[@]}"
 do
 port=$(cat /etc/shadowsocks-libev/akun.conf | grep '^port_http' | cut -d ' ' -f 2 | tr '\n' ' ' | awk '{print $'"$x"'}')
 jum=$(netstat -anp | grep ESTABLISHED | grep obfs-server | cut -d ':' -f 2 | grep -w ${port} | awk '{print $2}' | sort | uniq | nl)
+
 if [[ -z "${jum}" ]]; then
 echo > /dev/null
 else
 echo -e "  ${RED}•${NC} ${CYAN}${akun} - ${port} $NC"
 echo -e "${NC} ${CYAN}${jum} $NC";
+
+echo -e "${NC} ${CYAN}User : ${akun} - ${port} $NC";
+echo -e "${NC} ${CYAN}Ip Login :$NC";
+echo -e "${NC}${CYAN}${jum} $NC";
+#echo -e "${NC} ${CYAN}Last Login : ${lastlogin} $NC";
 echo -e "${NC}${CYAN}──────────────────── $NC"
 fi
 x=$(( "$x" + 1 ))
