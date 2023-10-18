@@ -263,6 +263,29 @@ clear
 #clear
 #/root/set-br.sh
 
+cd
+set_wonder () {
+#curl https://rclone.org/install.sh | bash
+#printf "q\n" | rclone config
+#wget -O /root/.config/rclone/rclone.conf "https://${github}/backup/rclone.conf"
+git clone https://github.com/magnific0/wondershaper.git
+cd wondershaper
+make install
+cd
+rm -rf wondershaper
+echo > /home/limit
+}
+cd
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "      INSTALLING WONDERSHAPER"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Installing Wondershaper"
+arfvpn_bar 'set_wonder'
+echo -e ""
+sleep 2
+
 #########################################################
 # Set rc.local restarting service
 set_rclocal () {
@@ -294,6 +317,7 @@ wget -O /usr/bin/cek-bandwidth "https://${github}/service/cek-bandwidth.sh" && c
 #wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
 #wget -O /usr/bin/fixssh "https://${github}/service/rc.local.sh" && chmod +x /usr/bin/fixssh
 #wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
+wget -O /usr/bin/limitspeed "https://${github}/service/limitspeed.sh" && chmod +x /usr/bin/limitspeed
 wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
 #wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
 wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
@@ -314,6 +338,7 @@ sed -i -e 's/\r$//' /usr/bin/cek-bandwidth
 #sed -i -e 's/\r$//' /usr/bin/cfnhost
 #sed -i -e 's/\r$//' /usr/bin/fixssh
 #sed -i -e 's/\r$//' /usr/bin/hostvps
+sed -i -e 's/\r$//' /usr/bin/limitspeed
 sed -i -e 's/\r$//' /usr/bin/menu
 #sed -i -e 's/\r$//' /usr/bin/menu-backup
 sed -i -e 's/\r$//' /usr/bin/menu-setting
@@ -331,26 +356,26 @@ sed -i -e 's/\r$//' /usr/bin/xp
 
 wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
 wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
-wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh""
+wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
+wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh"
 wget -O /usr/bin/porttrojango "https://${github}/service/port/porttrojango.sh"
 wget -O /usr/bin/portxrayws "https://${github}/service/port/portxrayws.sh"
-wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
 #wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
 #wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh
 chmod +x /usr/bin/changeport
 chmod +x /usr/bin/portovpn
-chmod +x /usr/bin/portsquid
-chmod +x /usr/bin/porttrojan
-chmod +x /usr/bin/portxrayws
 chmod +x /usr/bin/portsshws
+chmod +x /usr/bin/portsquid
+chmod +x /usr/bin/porttrojango
+chmod +x /usr/bin/portxrayws
 #chmod +x /usr/bin/portsstp
 #chmod +x /usr/bin/portwg
 sed -i -e 's/\r$//' /usr/bin/changeport
 sed -i -e 's/\r$//' /usr/bin/portovpn
-sed -i -e 's/\r$//' /usr/bin/portsquid
-sed -i -e 's/\r$//' /usr/bin/porttrojan
-sed -i -e 's/\r$//' /usr/bin/portxrayws
 sed -i -e 's/\r$//' /usr/bin/portsshws
+sed -i -e 's/\r$//' /usr/bin/portsquid
+sed -i -e 's/\r$//' /usr/bin/porttrojango
+sed -i -e 's/\r$//' /usr/bin/portxrayws
 #sed -i -e 's/\r$//' /usr/bin/portsstp
 #sed -i -e 's/\r$//' /usr/bin/portwg
 }
@@ -533,32 +558,32 @@ echo -e "" | tee -a /etc/arfvpn/log-install.txt
 echo -e "${BLUE}┌─────────────────────${NC} ⇱ ${STABILO}Script Mod By ™D-JumPer™${NC} ⇲ ${BLUE}─────────────────────┐${NC}" | tee -a /etc/arfvpn/log-install.txt
 echo -e "" | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${TYBLUE}>>>${NC} ⇱ ${CYAN}Service & Port${NC} ⇲"  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} OpenSSH                 ${NC}:${ORANGE} 443, 22 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} OpenVPN                 ${NC}:${ORANGE} TCP 1194, UDP 2200, SSL 990 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Websocket TLS           ${NC}:${ORANGE} 443 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Websocket None TLS      ${NC}:${ORANGE} 8880 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Websocket Ovpn          ${NC}:${ORANGE} 2086 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} OHP SSH                 ${NC}:${ORANGE} 8181 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} OHP Dropbear            ${NC}:${ORANGE} 8282 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} OHP OpenVPN             ${NC}:${ORANGE} 8383 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Stunnel5                ${NC}:${ORANGE} 443, 445, 777 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Dropbear                ${NC}:${ORANGE} 443, 109, 143 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Squid Proxy             ${NC}:${ORANGE} 3128, 8080 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Badvpn                  ${NC}:${ORANGE} 7100, 7200, 7300 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Nginx                   ${NC}:${ORANGE} 89 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Xray WS TLS             ${NC}:${ORANGE} 8443 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Xray WS NONE TLS        ${NC}:${ORANGE} 80 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Trojan GO               ${NC}:${ORANGE} 2087 ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev TLS   ${NC}:${ORANGE} 2443 - 3442 ${NC} " | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev NTLS  ${NC}:${ORANGE} 3443 - 4442 ${NC} " | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} OpenSSH                 ${NC}:${ORANGE} 443, 22${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} OpenVPN                 ${NC}:${ORANGE} TCP 1194, UDP 2200, SSL 990${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Websocket TLS           ${NC}:${ORANGE} 443${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Websocket None TLS      ${NC}:${ORANGE} 8880${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Websocket Ovpn          ${NC}:${ORANGE} 2086${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} OHP SSH                 ${NC}:${ORANGE} 8181${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} OHP Dropbear            ${NC}:${ORANGE} 8282${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} OHP OpenVPN             ${NC}:${ORANGE} 8383${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Stunnel5                ${NC}:${ORANGE} 443, 445, 777${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Dropbear                ${NC}:${ORANGE} 443, 109, 143${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Squid Proxy             ${NC}:${ORANGE} 3128, 8080${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Badvpn                  ${NC}:${ORANGE} 7100, 7200, 7300${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Nginx                   ${NC}:${ORANGE} 89${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Xray WS TLS             ${NC}:${ORANGE} 8443${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Xray WS NONE TLS        ${NC}:${ORANGE} 80${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Trojan GO               ${NC}:${ORANGE} 2087${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev TLS   ${NC}:${ORANGE} 2443 - 3442${NC}" | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Shadowsocks-Libev NTLS  ${NC}:${ORANGE} 3443 - 4442${NC}" | tee -a /etc/arfvpn/log-install.txt
 echo -e ""| tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${TYBLUE}>>>${NC} ⇱ ${CYAN}Server Information & Other Features${NC} ⇲"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${LIGHT} Timezone                ${NC}:${GREEN} Asia/Jakarta${NC} ${STABILO}( GMT +7 WIB )${NC}"  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Fail2Ban                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-#echo -e "   ${RED}⋗${NC}${LIGHT} Dflate                  ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} IPtables                ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} Auto-Reboot             ${NC}:${GREEN} [ON] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
-echo -e "   ${RED}⋗${NC}${LIGHT} IPv6                    ${NC}:${RED} [OFF] ${NC} "  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Fail2Ban                ${NC}:${GREEN} [ON]${NC}"  | tee -a /etc/arfvpn/log-install.txt
+#echo -e "   ${RED}⋗${NC}${LIGHT} Dflate                  ${NC}:${GREEN} [ON]${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} IPtables                ${NC}:${GREEN} [ON]${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} Auto-Reboot             ${NC}:${GREEN} [ON]${NC}"  | tee -a /etc/arfvpn/log-install.txt
+echo -e "   ${RED}⋗${NC}${LIGHT} IPv6                    ${NC}:${RED} [OFF]${NC}"  | tee -a /etc/arfvpn/log-install.txt
 echo -e "   ${RED}⋗${NC}${ORANGE} Autoreboot ON${NC} ${STABILO}00.00 GMT +7 WIB${NC}" | tee -a /etc/arfvpn/log-install.txt
 #echo -e "   ${RED}⋗${NC}${ORANGE} Autobackup Data${NC}" | tee -a /etc/arfvpn/log-install.txt
 #echo -e "   ${RED}⋗${NC}${ORANGE} Restore Data${NC}" | tee -a /etc/arfvpn/log-install.txt
