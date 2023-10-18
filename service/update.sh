@@ -123,6 +123,7 @@ rm -rvf /usr/bin/cert
 rm -rvf /usr/bin/cf
 #rm -rvf /usr/bin/cfnhost
 rm -rvf /usr/bin/hostvps
+rm -rvf /usr/bin/limitspeed
 rm -rvf /usr/bin/menu
 #rm -rvf /usr/bin/menu-backup
 rm -rvf /usr/bin/menu-setting
@@ -209,6 +210,7 @@ wget -O /usr/bin/cert "https://${github}/cert/cert.sh" && chmod +x /usr/bin/cert
 wget -O /usr/bin/cf "https://${github}/service/cf.sh" && chmod +x /usr/bin/cf
 #wget -O /usr/bin/cfnhost "https://${github}/service/cfnhost.sh" && chmod +x /usr/bin/cfnhost
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh" && chmod +x /usr/bin/hostvps
+wget -O /usr/bin/limitspeed "https://${github}/service/limitspeed.sh" && chmod +x /usr/bin/limitspeed
 wget -O /usr/bin/menu "https://${github}/service/menu.sh" && chmod +x /usr/bin/menu
 #wget -O /usr/bin/menu-backup "https://${github}/service/menu-backup.sh" && chmod +x /usr/bin/menu-backup
 wget -O /usr/bin/menu-setting "https://${github}/service/menu-setting.sh" && chmod +x /usr/bin/menu-setting
@@ -228,6 +230,7 @@ sed -i -e 's/\r$//' /usr/bin/cert
 sed -i -e 's/\r$//' /usr/bin/cf
 #sed -i -e 's/\r$//' /usr/bin/cfnhost
 sed -i -e 's/\r$//' /usr/bin/hostvps
+sed -i -e 's/\r$//' /usr/bin/limitspeed
 sed -i -e 's/\r$//' /usr/bin/menu
 #sed -i -e 's/\r$//' /usr/bin/menu-backup
 sed -i -e 's/\r$//' /usr/bin/menu-setting
@@ -314,29 +317,30 @@ sed -i -e 's/\r$//' /usr/bin/swapkvm
 
 wget -O /usr/bin/changeport "https://${github}/service/port/changeport.sh"
 wget -O /usr/bin/portovpn "https://${github}/service/port/portovpn.sh"
+wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
 wget -O /usr/bin/portsquid "https://${github}/service/port/portsquid.sh"
 wget -O /usr/bin/porttrojango "https://${github}/service/port/porttrojango.sh"
 wget -O /usr/bin/portxrayws "https://${github}/service/port/portxrayws.sh"
-wget -O /usr/bin/portsshws "https://${github}/service/port/portsshws.sh"
 #wget -O /usr/bin/portsstp "https://${github}/service/port/portsstp.sh"
 #wget -O /usr/bin/portwg "https://${github}/service/port/portwg.sh
 chmod +x /usr/bin/changeport
 chmod +x /usr/bin/portovpn
+chmod +x /usr/bin/portsshws
 chmod +x /usr/bin/portsquid
 chmod +x /usr/bin/porttrojango
 chmod +x /usr/bin/portxrayws
-chmod +x /usr/bin/portsshws
 #chmod +x /usr/bin/portsstp
 #chmod +x /usr/bin/portwg
 sed -i -e 's/\r$//' /usr/bin/changeport
 sed -i -e 's/\r$//' /usr/bin/portovpn
+sed -i -e 's/\r$//' /usr/bin/portsshws
 sed -i -e 's/\r$//' /usr/bin/portsquid
 sed -i -e 's/\r$//' /usr/bin/porttrojango
 sed -i -e 's/\r$//' /usr/bin/portxrayws
-sed -i -e 's/\r$//' /usr/bin/portsshws
 #sed -i -e 's/\r$//' /usr/bin/portsstp
 #sed -i -e 's/\r$//' /usr/bin/portwg
 
+#vmess
 wget -q -O /usr/bin/menu-vmess "https://${github}/xray/vmess/menu-vmess.sh" && chmod +x /usr/bin/menu-vmess
 wget -q -O /usr/bin/add-vm "https://${github}/xray/vmess/add-vm.sh" && chmod +x /usr/bin/add-vm
 wget -q -O /usr/bin/cek-vm "https://${github}/xray/vmess/cek-vm.sh" && chmod +x /usr/bin/cek-vm
