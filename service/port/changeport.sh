@@ -120,11 +120,11 @@ echo -e "    ${CYAN}[${LIGHT}04${CYAN}]${RED} •${NC} ${CYAN}Change Port Trojan
 echo -e "    ${CYAN}[${LIGHT}05${CYAN}]${RED} •${NC} ${CYAN}Change Port Squid $NC"
 #echo -e "    ${CYAN}[${LIGHT}08${CYAN}]${RED} •${NC} ${CYAN}Change Port Wireguard $NC"
 #echo -e "    ${CYAN}[${LIGHT}09${CYAN}]${RED} •${NC} ${CYAN}Change Port SSTP $NC"
-echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Menu $NC"
+echo -e "    ${CYAN}[${LIGHT}xx${CYAN}]${RED} •${NC} ${CYAN}Back To Setting Menu $NC"
 echo -e ""
 echo -e "${BLUE}└─────────────────────────────────────────────────────┘${NC}"
 echo -e ""
-read -p " ➣  Select Menu [ 1 - 5 ] or [ x ] to Close Menu : " menu
+read -p " ➣  Select Menu [ 1 - 5 ] or [ x ] to Back to Setting Menu : " menu
 echo -e ""
 case $menu in
 1)
@@ -150,7 +150,7 @@ portsquid
 #;;
 x)
 clear
-menu
+menu-setting
 ;;
 *)
 clear
