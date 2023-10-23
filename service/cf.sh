@@ -59,6 +59,7 @@ CEKLIST="[${LIGHT}✔${NC}]"
 PENDING="[${YELLOW} PENDING ${NC}]"
 SEND="[${GREEN} SEND ${NC}]"
 RECEIVE="[${YELLOW} RECEIVE ${NC}]"
+
 #########################################################
 source /etc/os-release
 cd /root
@@ -104,22 +105,43 @@ tput cnorm
 
 #########################################################
 arfvpn="/etc/arfvpn"
-github=$(cat ${arfvpn}/github)
 ipvps="/var/lib/arfvpn"
 SUB=$(</dev/urandom tr -dc a-z0-9 | head -c4)
+IP=$(cat ${arfvpn}/IP);
 DOMAIN=d-jumper.me
 SUB_DOMAIN=${SUB}.arfvpn.${DOMAIN}
 CF_ID=arief.prsty@gmail.com
 CF_KEY=3a3ac5ccc9e764de9129fbbb177c161b9dfbd
-set -euo pipefail
-mkdir -p ${arfvpn}
-mkdir -p ${ipvps}
-echo "IP=" >> ${ipvps}/ipvps.conf
-IP=$(cat ${arfvpn}/IP);
 clear
 
 #########################################################
-#echo "Updating DNS for ${SUB_DOMAIN}..."
+# Generating Sub-Domain
+set_cf () {
+set -euo pipefail
+mkdir -p ${arfvpn}/
+mkdir -p ${ipvps}/
+touch ${arfvpn}/domain
+touch ${arfvpn}/scdomain
+touch ${ipvps}/ipvps.conf
+echo -e "${SUB_DOMAIN}" > ${arfvpn}/domain
+echo -e "${SUB_DOMAIN}" > ${arfvpn}/scdomain
+echo -e "IP=${SUB_DOMAIN}" > ${ipvps}/ipvps.conf
+}
+echo -e ""
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "    GENEREATE RANDOM SUB-DOMAIN"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Generating Random Sub-Domain"
+arfvpn_bar 'set_cf'
+echo -e ""
+
+#########################################################
+# Updating DNS SUB-DOMAIN
+set_dns () {
+sleep 2
+}
+echo -e " ${LIGHT}- ${NC}Updating DNS for ${SUB_DOMAIN}..."
 ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
      -H "X-Auth-Email: ${CF_ID}" \
      -H "X-Auth-Key: ${CF_KEY}" \
@@ -143,11 +165,15 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
      -H "X-Auth-Key: ${CF_KEY}" \
      -H "Content-Type: application/json" \
      --data '{"type":"A","name":"'${SUB_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
+arfvpn_bar 'set_dns'
 
+#########################################################
+# Updating DNS WILD-DOMAIN
 #WILD_DOMAIN="*.$SUB"
 #set -euo pipefail
 #echo -e ""
 #echo -e "Updating DNS for ${WILD_DOMAIN}..."
+
 #ZONE=$(curl -sLX GET "https://api.cloudflare.com/client/v4/zones?name=${DOMAIN}&status=active" \
 #     -H "X-Auth-Email: ${CF_ID}" \
 #     -H "X-Auth-Key: ${CF_KEY}" \
@@ -171,13 +197,13 @@ RESULT=$(curl -sLX PUT "https://api.cloudflare.com/client/v4/zones/${ZONE}/dns_r
 #     -H "X-Auth-Key: ${CF_KEY}" \
 #     -H "Content-Type: application/json" \
 #     --data '{"type":"A","name":"'${WILD_DOMAIN}'","content":"'${IP}'","ttl":120,"proxied":false}')
-echo -e " ${INFO} Generate Random SUB-DOMAIN ..."
+
+#########################################################
+# Finish
+echo -e ""
+echo -e " ${INFO} Your SUB-DOMAIN has been Generated : ${SUB_DOMAIN}"
+echo -e ""
+echo -e " ${OK} Successfully Generated SUB-DOMAIN ${CEKLIST}"
 echo -e ""
 sleep 5
-
-echo "Your SUB-DOMAIN has been created : ${SUB_DOMAIN}"
-sleep 5
-echo -e "${SUB_DOMAIN}" > ${arfvpn}/domain
-echo -e "${SUB_DOMAIN}" > ${arfvpn}/scdomain
-echo -e "IP=${SUB_DOMAIN}" > ${ipvps}/ipvps.conf
 clear
