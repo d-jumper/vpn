@@ -1,0 +1,20 @@
+#!/bin/bash
+#########################################################
+# Set Cron Reboot VPS
+# Set Auto Delete User Expired
+# Every At 00:00 Mid-Night
+#########################################################
+LIGHT='\033[0;37m'    # LIGHT
+NC='\033[0m'           # NC
+CEKLIST="[${LIGHT}✔${NC}]"
+SUCCESS="[${LIGHT} ✔ SUCCESS ✔ ${NC}]"
+#########################################################
+/usr/bin/clearlog
+sleep 5
+/usr/bin/xp
+sleep 5
+echo -e "${SUCCESS} Auto Delete User Expired Successfully${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
+echo -e "${SUCCESS} Auto Reboot Server Successfully${CEKLIST}"  | tee -a /etc/arfvpn/log-cron.log
+date  | tee -a /etc/arfvpn/log-cron.log
+/sbin/reboot
+echo -e ""
