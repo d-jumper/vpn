@@ -122,7 +122,7 @@ curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
 #curl https://raw.githubusercontent.com/arfprsty810/acme.sh/main/acme.sh -o /root/.acme.sh/acme.sh
 chmod +x /root/.acme.sh/acme.sh
 #git clone https://${acme}.git
-cd ./acme.sh
+#cd ./acme.sh
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue --force -d ${domain} --standalone -k ec-256
