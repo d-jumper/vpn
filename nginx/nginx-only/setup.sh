@@ -141,6 +141,26 @@ clear
 /usr/bin/hostvps
 
 #########################################################
+# Installing Requirements Tools
+set_apete () {
+cd
+wget "https://${github}/service/apete.sh"
+chmod +x apete.sh
+sed -i -e 's/\r$//' apete.sh
+}
+clear
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e "                    NGINX BUILDER V.1.0"
+echo -e "\e[33m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\033[0m"
+echo -e ""
+echo -e " ${LIGHT}- ${NC}Installing Requirements Tools"
+arfvpn_bar 'set_apete'
+echo -e ""
+sleep 2
+clear
+/root/apete.sh
+
+#########################################################
 # NGINX-SERVER
 set_nginx () {
 cd
