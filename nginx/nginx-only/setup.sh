@@ -112,7 +112,6 @@ arfvpn="/etc/arfvpn"
 nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
 start=$(date +%s)
-github=$(cat ${arfvpn}/github)
 clear
 
 #########################################################
@@ -122,6 +121,7 @@ cd
 mkdir -p ${arfvpn}/
 touch ${arfvpn}/github
 echo -e "raw.githubusercontent.com/arfprsty810/vpn/main/nginx/nginx-only" > ${arfvpn}/github
+github=$(cat ${arfvpn}/github)
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
