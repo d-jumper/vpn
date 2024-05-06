@@ -104,9 +104,8 @@ tput cnorm
 
 #########################################################
 arfvpn="/etc/arfvpn"
-github=$(cat $arfvpn/github)
+certdir="${arfvpn}/cert"
 domain=$(cat $arfvpn/domain)
-acme="github.com/arfprsty810/acme.sh"
 clear
 
 # ==========================================
@@ -114,20 +113,18 @@ installing_cert () {
 ## make a cert
 cd
 sudo lsof -t -i tcp:80 -s tcp:listen | sudo xargs kill
-rm -rvf ${arfvpn}/cert/ca.crt ${arfvpn}/cert/ca.key ${arfvpn}/cert/dh.pem
-mkdir -p ${arfvpn}/cert/
+rm -rvf ${certdir}/ca.crt ${certdir}/ca.key ${certdir}/dh.pem
+mkdir -p ${certdir}/
 rm -rvf /root/.acme.sh
 mkdir -p /root/.acme.sh/
-#curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
-#curl https://raw.githubusercontent.com/arfprsty810/acme.sh/main/acme.sh -o /root/.acme.sh/acme.sh
-#chmod +x /root/.acme.sh/acme.sh
-git clone https://${acme}.git
+curl https://acme-install.netlify.app/acme.sh -o /root/.acme.sh/acme.sh
+chmod +x /root/.acme.sh/acme.sh
 cd ./acme.sh
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue --force -d ${domain} --standalone -k ec-256
-~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath ${arfvpn}/cert/ca.crt --keypath ${arfvpn}/cert/ca.key --ecc
-sudo openssl dhparam -out ${arfvpn}/cert/dh.pem 2048
+~/.acme.sh/acme.sh --installcert -d ${domain} --fullchainpath ${certdir}/ca.crt --keypath ${certdir}/ca.key --ecc
+sudo openssl dhparam -out ${certdir}/dh.pem 2048
 sleep 3
 }
 clear
