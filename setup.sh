@@ -108,6 +108,7 @@ tput cnorm
 }
 
 #########################################################
+start=$(date +%s)
 arfvpn="/etc/arfvpn"
 xray="/etc/xray"
 logxray="/var/log/xray"
@@ -115,7 +116,9 @@ trgo="/etc/arfvpn/trojan-go"
 logtrgo="/var/log/arfvpn/trojan-go"
 nginx="/etc/nginx"
 ipvps="/var/lib/arfvpn"
-start=$(date +%s)
+mkdir -p ${arfvpn}/
+touch ${arfvpn}/github
+echo -e "raw.githubusercontent.com/d-jumper/vpn/main" > ${arfvpn}/github
 github=$(cat ${arfvpn}/github)
 clear
 
@@ -123,9 +126,6 @@ clear
 # Installing Server, Domain & Cert SSL
 set_host () {
 cd
-mkdir -p ${arfvpn}/
-touch ${arfvpn}/github
-echo -e "raw.githubusercontent.com/arfprsty810/vpn/main" > ${arfvpn}/github
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
 chmod +x /usr/bin/hostvps
