@@ -120,7 +120,7 @@ set_host () {
 cd
 mkdir -p ${arfvpn}/
 touch ${arfvpn}/github
-echo -e "raw.githubusercontent.com/arfprsty810/vpn/main/nginx/nginx-only" > ${arfvpn}/github
+echo -e "raw.githubusercontent.com/d-jumper/vpn/main/nginx/nginx-only" > ${arfvpn}/github
 github=$(cat ${arfvpn}/github)
 apt install wget curl jq -y
 wget -O /usr/bin/hostvps "https://${github}/service/hostvps.sh"
